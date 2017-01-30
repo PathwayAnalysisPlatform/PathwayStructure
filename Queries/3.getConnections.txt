@@ -1,0 +1,63 @@
+// Proteins sharing a complex
+// restricted by the uniprot IDs
+// replace both instances of {placeholder} with the list of uniprot IDs
+MATCH (re:ReferenceEntity)<-[:referenceEntity]-(:EntityWithAccessionedSequence)
+      <-[:hasComponent*..6]-(:Complex)-[:hasComponent*..6]->
+      (:EntityWithAccessionedSequence)-[:referenceEntity]->(re2:ReferenceEntity)
+WHERE re.identifier IN {placeholder}
+  AND re2.identifier IN {placeholder}
+RETURN DISTINCT re.identifier AS proteinA, re2.identifier AS proteinB
+
+// ProteinA is input, ProteinB is output
+// replace instances of {startprotein} and {accessions} with the list of uniprot IDs
+// replace instance of {reactions} with the list of reactions we are looking for (see 2.getReactions.txt for queries and 2.getReactions.R for R code obtaining a list.)
+MATCH (a:ReferenceEntity{identifier:{startprotein}}) <-[:referenceEntity]- (:EntityWithAccessionedSequence) <-[:hasComponent|hasMember|hasCandidate|repeatedUnit| input*]- (r:Reaction) -[:hasComponent|hasMember|hasCandidate|repeatedUnit| output*]-> (:EntityWithAccessionedSequence) -[:referenceEntity]-> (b:ReferenceEntity)
+WHERE r.stId IN {reactions}
+  AND b.identifier IN {accessions}
+RETURN DISTINCT a.identifier AS proteinA, b.identifier AS proteinB"
+
+// ProteinA is input, ProteinB is regulation
+// replace instances of {startprotein} and {accessions} with the list of uniprot IDs
+// replace instance of {reactions} with the list of reactions we are looking for (see 2.getReactions.txt for queries and 2.getReactions.R for R code obtaining a list.)
+MATCH (a:ReferenceEntity{identifier:{startprotein}}) <-[:referenceEntity]- (:EntityWithAccessionedSequence) <-[:hasComponent|hasMember|hasCandidate|repeatedUnit| input*]- (r:Reaction) -[:hasComponent|hasMember|hasCandidate|repeatedUnit| regulatedBy|regulator*]-> (:EntityWithAccessionedSequence) -[:referenceEntity]-> (b:ReferenceEntity)
+WHERE r.stId IN {reactions}
+AND b.identifier IN {accessions}
+RETURN DISTINCT a.identifier AS proteinA, b.identifier AS proteinB
+
+// ProteinA is input, ProteinB is catalyst activity
+// replace instances of {startprotein} and {accessions} with the list of uniprot IDs
+// replace instance of {reactions} with the list of reactions we are looking for (see 2.getReactions.txt for queries and 2.getReactions.R for R code obtaining a list.)
+MATCH (a:ReferenceEntity{identifier:{startprotein}}) <-[:referenceEntity]- (:EntityWithAccessionedSequence) <-[:hasComponent|hasMember|hasCandidate|repeatedUnit| input*]- (r:Reaction) -[:hasComponent|hasMember|hasCandidate|repeatedUnit| catalystActivity|physicalEntity*]-> (:EntityWithAccessionedSequence) -[:referenceEntity]-> (b:ReferenceEntity)
+WHERE r.stId IN {reactions}
+AND b.identifier IN {accessions}
+RETURN DISTINCT a.identifier AS proteinA, b.identifier AS proteinB
+
+
+// ProteinA is regulation, ProteinB is output
+// replace instances of {startprotein} and {accessions} with the list of uniprot IDs
+// replace instance of {reactions} with the list of reactions we are looking for (see 2.getReactions.txt for queries and 2.getReactions.R for R code obtaining a list.)
+MATCH (a:ReferenceEntity{identifier:{startprotein}}) <-[:referenceEntity]- (:EntityWithAccessionedSequence) <-[:hasComponent|hasMember|hasCandidate|repeatedUnit| regulatedBy|regulator*]- (r:Reaction) -[:hasComponent|hasMember|hasCandidate|repeatedUnit| output*]-> (:EntityWithAccessionedSequence) -[:referenceEntity]-> (b:ReferenceEntity)
+WHERE r.stId IN {reactions}
+AND b.identifier IN {accessions}
+RETURN DISTINCT a.identifier AS proteinA, b.identifier AS proteinB
+
+
+
+// ProteinA is catalyst activity, ProteinB is output
+// replace instances of {startprotein} and {accessions} with the list of uniprot IDs
+// replace instance of {reactions} with the list of reactions we are looking for (see 2.getReactions.txt for queries and 2.getReactions.R for R code obtaining a list.)
+MATCH (a:ReferenceEntity{identifier:{startprotein}}) <-[:referenceEntity]- (:EntityWithAccessionedSequence) <-[:hasComponent|hasMember|hasCandidate|repeatedUnit| catalystActivity|physicalEntity*]- (r:Reaction) -[:hasComponent|hasMember|hasCandidate|repeatedUnit| output*]-> (:EntityWithAccessionedSequence) -[:referenceEntity]-> (b:ReferenceEntity)
+WHERE r.stId IN {reactions}
+AND b.identifier IN {accessions}
+RETURN DISTINCT a.identifier AS proteinA, b.identifier AS proteinB
+
+
+
+// ProteinA is regulation, ProteinB is catalyst
+// replace instances of {startprotein} and {accessions} with the list of uniprot IDs
+// replace instance of {reactions} with the list of reactions we are looking for (see 2.getReactions.txt for queries and 2.getReactions.R for R code obtaining a list.)
+MATCH (a:ReferenceEntity{identifier:{startprotein}}) <-[:referenceEntity]- (:EntityWithAccessionedSequence) <-[:hasComponent|hasMember|hasCandidate|repeatedUnit| regulator*]- (r:Reaction) -[:hasComponent|hasMember|hasCandidate|repeatedUnit| physicalEntity*]-> (:EntityWithAccessionedSequence) -[:referenceEntity]-> (b:ReferenceEntity)
+WHERE r.stId IN {reactions}
+AND b.identifier IN {accessions}
+RETURN DISTINCT a.identifier AS proteinA, b.identifier AS proteinB
+

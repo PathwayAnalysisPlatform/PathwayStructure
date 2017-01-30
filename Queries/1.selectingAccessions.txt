@@ -1,0 +1,11 @@
+// how many times is each accession number for uniprot found in reactome
+// Do for each uniprot accession sequence: (replace {a} with the uniprot accession sequence)
+MATCH (re:ReferenceEntity{identifier:{a}})
+RETURN COUNT(re)
+
+
+// how many EntityWithAccessionedSequence things are there for each uniprot ID
+// Do for each uniprot accession sequence: (replace {a} with the uniprot accession sequence)
+MATCH (ewas:EntityWithAccessionedSequence)-[:referenceEntity]->(:ReferenceEntity{identifier:{a}})
+RETURN COUNT(ewas)
+

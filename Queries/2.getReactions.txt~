@@ -1,0 +1,8 @@
+### Step 1: Get all the reactions with a catalyst
+## restrict reactions and ewas to Homo sapiens
+## CatalystActivity does not have a speciesName
+MATCH (r:Reaction)-[:input|output|requiredInputComponent]->(ewas:EntityWithAccessionedSequence)
+WHERE (r)-[:catalystActivity]->(:CatalystActivity)
+  AND r.speciesName = 'Homo sapiens'
+  AND ewas.speciesName = 'Homo sapiens'
+RETURN DISTINCT r.stId

@@ -1,0 +1,23 @@
+// Step 1: Get all the reactions with a catalyst.
+// Restrict reactions and ewas to Homo sapiens. CatalystActivity does not have a speciesName
+MATCH (r:Reaction)-[:input|output|requiredInputComponent]->(ewas:EntityWithAccessionedSequence)
+WHERE (r)-[:catalystActivity]->(:CatalystActivity)
+  AND r.speciesName = 'Homo sapiens'
+  AND ewas.speciesName = 'Homo sapiens'
+RETURN DISTINCT r.stId
+
+// Get all reactions without catalyst
+MATCH (r:Reaction)-[:input|output|requiredInputComponent]->(ewas:EntityWithAccessionedSequence)
+WHERE NOT (r)-[:catalystActivity]->(:CatalystActivity)
+  AND r.speciesName = 'Homo sapiens'
+  AND ewas.speciesName = 'Homo sapiens'
+RETURN DISTINCT r.stId
+
+// From all the reactions without catalyst, get all binding reactions
+// Or what we hope are binding reactions...
+// => reactions with more than 1 input
+// Replace {placeholder} with the list of stId s from the previous query
+MATCH ()<-[:input]-(r:Reaction)-[:input]->()
+WHERE r.stId IN {placeholder}
+RETURN DISTINCT r.stId
+
