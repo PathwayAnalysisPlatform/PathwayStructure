@@ -1,4 +1,4 @@
-#Cypher queries to extract data from Reactome Neo4j database
+#Cypher queries to extract data from Reactome in Neo4j
 
 ## Get the reactions for a given Pathway
 ~~~~
