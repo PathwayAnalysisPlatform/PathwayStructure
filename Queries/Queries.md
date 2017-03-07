@@ -37,7 +37,9 @@ RETURN pR.stId as PrecedingReaction, pR.displayName as PRName, rle.stId as Succe
 INPUT: List of reaction stIds
 OUTPUT: List of physicalEntities with their role in the reaction
 ~~~~
-MATCH (rle:ReactionLikeEvent)-[role:input|output|catalystActivity|physicalEntity|regulatedBy|regulator|hasComponent|hasMember|hasCandidate*]->(pe:PhysicalEntity)
+MATCH (rle:ReactionLikeEvent)-[role:input|output|catalystActivity|physicalEntity|regulatedBy|regulator|hasComponent|hasMember|hasCandidate|repeatedUnit*]->(pe:PhysicalEntity)
 WHERE rle.stId in ["R-HSA-5246693", "R-HSA-195251", "R-HSA-5229343", "R-HSA-195304", "R-HSA-195318", "R-HSA-195287"]
 RETURN DISTINCT rle.stId AS Reaction, pe.stId as Participant, extract(x IN role | type(x)) as Role, pe.displayName AS DisplayName
 ~~~~
+
+
