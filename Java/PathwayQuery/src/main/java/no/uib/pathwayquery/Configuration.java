@@ -8,7 +8,7 @@ public class Configuration {
 
     //General configuration
     public static boolean allProteome = true;
-    public static int maxNumProt = 2000;
+    public static int maxNumProt = 21000;   //The graph will ask for memory to accomodate this number of proteins. Then it has to be as accurate as possible.
     public static String configPath = "./Config.txt";
     public static String inputListFile = "./src/main/resources/input/uniprotList.txt";      //Input to create a json graph
     
@@ -34,12 +34,12 @@ public class Configuration {
         //General Neighbors
     //public static boolean pn = false; // Physical Entities belong to the same Pathway
     
-        //Complex/Set neighbors
+        //Complex/Set neighbors. These are bidirectional relations.
     public static boolean cn = true; // Physical Entities belong to the same Complex
     public static boolean ds = true; // Physical Entities belong to the same DefinedSet
     public static boolean os = true; // Physical Entities belong to the same OpenSet
     public static boolean cs = true; // Physical Entities belong to the same CandidateSet
-        //Reaction neighbors
+        //Reaction neighbors. These are not bidirectional relations.
     public static boolean io = false; // p1 is Input and p2 is output
     public static boolean ci = false; // p1 is catalystActivity and p2 is input
     public static boolean co = false; // p1 is catalystActivity and p2 is output

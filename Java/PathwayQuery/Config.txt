@@ -1,6 +1,6 @@
 //General configuration
 allProteome=false
-inputListFile=./src/main/resources/input/listBjorn.csv
+//inputListFile=./src/main/resources/input/listBjorn.csv
 maxNumProt=21000
 
 //Database access
@@ -25,6 +25,6 @@ topLevelPathwayNeighbors=false
 pathwayNeighbors=false
 
 //Results
-outputGraphFileType=json
-outputGraphFilePath=C:/Users/Francisco/Documents/PhD UiB/Projects/ProteinsExplorer/public/resources/
+outputGraphFileType=sif
+outputGraphFilePath=.
 outputFileName=ProteomeReactions

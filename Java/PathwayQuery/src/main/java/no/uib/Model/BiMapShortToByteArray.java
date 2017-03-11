@@ -1,35 +1,34 @@
 package no.uib.Model;
 
 import gnu.trove.map.hash.TObjectShortHashMap;
-import java.util.ArrayList;
 
 /**
  *
  * @author Luis Francisco Hernández Sánchez
  */
-public class BiMapShort {
+public class BiMapShortToByteArray {
     
     //<short, byte[]>
 
-    public ArrayList<byte[]> numberToCharacters;
+    public byte[][] numberToCharacters;
     private TObjectShortHashMap<byte[]> charactersToNumber;
 
-    public BiMapShort() {
-        numberToCharacters = new ArrayList<>();
+    public BiMapShortToByteArray() {
+        numberToCharacters = new byte[21000][];
         charactersToNumber = new TObjectShortHashMap<>();
     }
 
-    public BiMapShort(int numElements) {
+    public BiMapShortToByteArray(int numElements) {
 
         // Calculate the initial capacity so that it never has to resize the ArrayList
         int initialCapacity = (int) (numElements * 1.4);
 
-        numberToCharacters = new ArrayList<>(numElements);
+        numberToCharacters = new byte[numElements][];
         charactersToNumber = new TObjectShortHashMap<>(initialCapacity);
     }
 
     public void put(short num, byte[] id) {
-        numberToCharacters.add(num, id);
+        numberToCharacters[num] = id;
         charactersToNumber.put(id, num);
     }
 
@@ -38,11 +37,11 @@ public class BiMapShort {
     }
 
     public byte[] getId(short num) {
-        return numberToCharacters.get(num);
+        return numberToCharacters[num];
     }
 
     public String getStringId(short num) {
-        return new String(numberToCharacters.get(num));
+        return new String(numberToCharacters[num]);
     }
 
 }

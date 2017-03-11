@@ -9,7 +9,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import no.uib.DB.ConnectionNeo4j;
 import no.uib.DB.ReactomeAccess;
-import no.uib.Model.BiMapShort;
 import no.uib.Model.GraphAdjListEdgeTypes;
 import org.neo4j.driver.v1.AuthTokens;
 import org.neo4j.driver.v1.GraphDatabase;
@@ -20,42 +19,26 @@ import org.neo4j.driver.v1.GraphDatabase;
  */
 public class ProteinGraphExtractor {
 
-    public static byte[][] proteins;
     public static short totalNumProt;
-    private static GraphAdjListEdgeTypes G;
+    public static GraphAdjListEdgeTypes G;
 
     public static void main(String args[]) throws IOException {
 
         // Load configuration
         initialize();
+        
+        // Initialize graph
+         // In this part I don't know how many proteins are required, then it is set to the maximum capacity
+        G = new GraphAdjListEdgeTypes(Configuration.maxNumProt);
 
         //Get the list of proteins
         if (Configuration.allProteome) {
-            UniprotAccess.getUniprotProteome(); //Get from the online website
+            UniprotAccess.getUniprotProteome(); //Get from the online website. This also gets the real number of proteins requested in the variable totalNumProt
         } else {
             ProteinGraphExtractor.getProteinList();
         }
-
-        //Print the list
-//        for (int I = 0; I < proteins.length && proteins[I] != null; I++) {
-//            String id = new String(proteins[I]);
-//            System.out.println(id);
-//        }
-
-        // Initialize graph
-        G = new GraphAdjListEdgeTypes(totalNumProt);
         
-        G.verticesMapping = new BiMapShort(totalNumProt);
-        for (short I = 0; I < proteins.length && proteins[I] != null; I++) {
-            verticesMap.put((short)I, proteins[I]);
-            String id = new String(proteins[I]);
-            System.out.println("Number --> Id: " + verticesMap.getId((short)I));
-            System.out.println("Number --> String Id: " + verticesMap.getStringId((short)I));
-            System.out.println("Id --> Number: " + verticesMap.getNum(proteins[I]));
-        }
-        
-        
-        
+        G.numVertices = totalNumProt;
 
         // Gather reaction neighbors
         //Get reactions where the proteins play a role
@@ -69,7 +52,7 @@ public class ProteinGraphExtractor {
         }
         
         //Write the file
-        G.writeSifGraph(Configuration.outputGraphFilePath + "/" + Configuration.outputFileName + ".sif");
+        G.writeGraphToFile();
     }
 
     private static void getProteinList() {
@@ -80,8 +63,8 @@ public class ProteinGraphExtractor {
             input = new BufferedReader(new FileReader(Configuration.inputListFile));
             for (String id; (id = input.readLine()) != null && index < Configuration.maxNumProt;) {
                 if (id.length() <= 6) {
-                    ProteinGraphExtractor.proteins[ProteinGraphExtractor.totalNumProt] = id.getBytes();
-                    ProteinGraphExtractor.totalNumProt++;
+                    ProteinGraphExtractor.G.verticesMapping.put(ProteinGraphExtractor.totalNumProt, id.getBytes());
+                        ProteinGraphExtractor.totalNumProt++;
                 }
             }
         } catch (FileNotFoundException ex) {
@@ -149,7 +132,6 @@ public class ProteinGraphExtractor {
                 }
             }
 
-            proteins = new byte[21000][];
             ConnectionNeo4j.driver = GraphDatabase.driver(ConnectionNeo4j.host, AuthTokens.basic(ConnectionNeo4j.username, ConnectionNeo4j.password));
 
             totalNumProt = 0;
