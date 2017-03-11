@@ -1,0 +1,21 @@
+Pathway,Reaction,ReactionName
+R-HSA-195253,R-HSA-4649028,TLE forms non-functional complexes with AES
+R-HSA-195253,R-HSA-5334050,TCF7L2/TCF7L1 bind CTBP1 to repress WNT target genes
+R-HSA-195253,R-HSA-4641231,TLE recruits HDAC1 to WNT promoters
+R-HSA-195253,R-HSA-4641229,TLE oligomerizes
+R-HSA-195253,R-HSA-5229348,Transcription of canonical WNT targets is repressed by the TLE:HDAC and TCF/CTBP complexes
+R-HSA-195253,R-HSA-5246693,APC is K63-polyubiquitinated
+R-HSA-195253,R-HSA-5251557,Expression of AMER1 gene
+R-HSA-195253,R-HSA-5251555,Expression of AXIN1 gene
+R-HSA-195253,R-HSA-195280,Dissociation of beta-catenin from Axin and association of beta catenin with phospho-(20 aa) APC in the detruction complex
+R-HSA-195253,R-HSA-195251,Assembly of the destruction complex
+R-HSA-195253,R-HSA-5229343,AXIN is phosphorylated in the destruction complex
+R-HSA-195253,R-HSA-2130286,Multi-ubiquitination of phospho-beta-catenin by RBX1:SCF(beta-TrCP1)
+R-HSA-195253,R-HSA-2130282,Degradation of ubiquitinated beta catenin by the proteasome
+R-HSA-195253,R-HSA-195304,Association of beta-catenin with the destruction complex
+R-HSA-195253,R-HSA-195275,Phosphorylation of APC component of the destruction complex
+R-HSA-195253,R-HSA-195283,"Phosphorylation of phospho- (Ser45, Thr41) beta-catenin  at Ser37 by GSK-3"
+R-HSA-195253,R-HSA-195318,Phosphorylation of beta-catenin at Ser45 by CK1 alpha
+R-HSA-195253,R-HSA-195287,Phosphorylation of phospho-(Ser45 ) at Thr 41 by GSK-3
+R-HSA-195253,R-HSA-195300,"Phosphorylation of phospho-(Ser45,Thr41,Ser37) at Ser33 by GSK-3"
+R-HSA-195253,R-HSA-2130279,Association of beta-catenin with the RBX1:SCF(beta-TrCP1) ubiquitin ligase complex
