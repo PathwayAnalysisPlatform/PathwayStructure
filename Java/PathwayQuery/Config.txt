@@ -1,6 +1,6 @@
 //General configuration
 allProteome=false
-inputListFile=./src/main/resources/input/listBjorn.csv
+//inputListFile=./src/main/resources/input/listBjorn.csv
 maxNumProt=21000
 
 //Database access
@@ -17,10 +17,10 @@ onlyOrderedEdges=false
 showMissingProteins=false
 
 //Edges
-cn=true
-ds=true
+cn=false
+ds=false
 os=true
-cs=true
+cs=false
 io=false
 ci=false
 co=false

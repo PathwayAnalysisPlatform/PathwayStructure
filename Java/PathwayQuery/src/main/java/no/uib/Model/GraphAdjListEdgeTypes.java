@@ -31,7 +31,7 @@ public class GraphAdjListEdgeTypes {
     public GraphAdjListEdgeTypes(int numVertices) {
 
         this.adjacencyList = (ArrayList<AdjacentNeighbor>[]) new ArrayList[numVertices];
-        for(int I = 0; I < numVertices; I++){
+        for (int I = 0; I < numVertices; I++) {
             adjacencyList[I] = new ArrayList<>();
         }
 
@@ -96,8 +96,8 @@ public class GraphAdjListEdgeTypes {
         AdjacentNeighbor n = new AdjacentNeighbor(dNum, t);
         adjacencyList[s].add(n);
     }
-    
-    public boolean containsVertex(String id){
+
+    public boolean containsVertex(String id) {
         return verticesMapping.containsId(id);
     }
 
@@ -119,9 +119,25 @@ public class GraphAdjListEdgeTypes {
     public void writeSifGraph() {
 
         try (FileWriter arch = new FileWriter(Configuration.outputGraphFilePath + "/" + Configuration.outputFileName + "/" + Configuration.outputGraphFilePath)) {
-            for (short I = 0; I < this.numVertices; I++) {
-                for (AdjacentNeighbor n : this.adjacencyList[I]) {
-                    arch.write(verticesMapping.getId(I) + " " + edgesMapping.getId(n.getType()) + " " + verticesMapping.getId(n.getNum()) + "\n");
+            for (short I = 0; I < this.numVertices; I++) {          //Iterate over all vertices
+                String id = verticesMapping.getId(I);
+                for (EdgeTypes t : EdgeTypes.values()) {            //Go through every edge type to print the grouped in one row of the file
+                    boolean foundOne = false;
+                    for (AdjacentNeighbor n : this.adjacencyList[I]) {  //Iterate over all the neighbours of the current vertex
+                        if (edgesMapping.getId(n.getType()).equals(t.toString())) {
+                            String nId = verticesMapping.getId(n.getNum());
+                            if (id.compareTo(nId) <= 0) {            //Allow only relations to vertices with higher lexicographical Id. Halves the number of edges.
+                                if (!foundOne) {                    //Raise flag that there are neighbors if this type
+                                    foundOne = true;
+                                    arch.write(id + " " + t.toString());
+                                }
+                                arch.write(" " + nId);
+                            }
+                        }
+                    }
+                    if (foundOne) {
+                        arch.write("\n");
+                    }
                 }
             }
         } catch (FileNotFoundException ex) {

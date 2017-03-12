@@ -55,7 +55,7 @@ public class ReactomeAccess {
     public static void getComplexOrSetNeighbors() {
         //Iterate over the proteins in the Graph
         for (short I = 0; I < G.numVertices; I++) {
-//            if (!G.verticesMapping.getId(I).equals("P22681")) {
+//            if (!G.verticesMapping.getId(I).equals("P31749")) {
 //                continue;
 //            }
             System.out.println("Getting neighbours of: " + I + " " + G.verticesMapping.getId(I));
@@ -74,8 +74,37 @@ public class ReactomeAccess {
         List<AdjacentNeighbor> neighboursList = new ArrayList<AdjacentNeighbor>();
         try (Session session = ConnectionNeo4j.driver.session(); Transaction tx = session.beginTransaction()) {
             String query = "MATCH (re:ReferenceEntity{identifier:{id}})<-[:referenceEntity]-(p:EntityWithAccessionedSequence)<-[:hasComponent|hasMember|hasCandidate|repeatedUnit*]-(e)-[:hasComponent|hasMember|hasCandidate|repeatedUnit*]->(nE:EntityWithAccessionedSequence)-[:referenceEntity]->(nP:ReferenceEntity)\n"
-                    + "WHERE ANY (l IN labels(e) WHERE l IN ['Complex', 'DefinedSet', 'CandidateSet', 'EntitySet'])\n"
-                    + "RETURN DISTINCT last(labels(e)) as role, nP.identifier as id";
+                    + "WHERE ANY (l IN labels(e) WHERE l IN [";
+            boolean setOne = false;
+            if (Configuration.cn) {
+                if (setOne) {
+                    query += ", ";
+                }
+                query += "'Complex'";
+                setOne = true;
+            }
+            if (Configuration.ds) {
+                if (setOne) {
+                    query += ", ";
+                }
+                query += "'DefinedSet'";
+                setOne = true;
+            }
+            if (Configuration.cs) {
+                if (setOne) {
+                    query += ", ";
+                }
+                query += "'CandidateSet'";
+                setOne = true;
+            }
+            if (Configuration.os) {
+                if (setOne) {
+                    query += ", ";
+                }
+                query += "'OpenSet'";
+                setOne = true;
+            }
+            query += "]) RETURN DISTINCT last(labels(e)) as role, nP.identifier as id";
             StatementResult result = tx.run(query, Values.parameters("id", id));
             List<Record> records = result.list();
             for (Record r : records) {
@@ -109,9 +138,8 @@ public class ReactomeAccess {
                     byte tByte = G.edgesMapping.getNum(GraphAdjListEdgeTypes.EdgeTypes.valueOf(t).toString());
                     //System.out.println(tByte + " " + nShort);
                     neighboursList.add(new AdjacentNeighbor(nShort, tByte));
-                }
-                else{
-                    System.out.println("Vertex " +  n + " not found in list.");
+                } else {
+                    System.out.println("Vertex " + n + " not found in list.");
                 }
             }
         }
