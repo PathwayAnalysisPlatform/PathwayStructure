@@ -20,14 +20,14 @@ public class UniprotAccess {
     private static final String UNIPROT_SERVER = "http://www.uniprot.org/";
     private static final Logger LOG = Logger.getAnonymousLogger();
 
-    
     /**
-     *  Query Uniprot online to get the full list of curated proteins in human.
-     *  Also fills the protein list of the graph using the reference in {@link ProteinGraphExtractor} 
-     * 
+     * Query Uniprot online to get the full list of curated proteins in human.
+     * Also fills the protein list of the graph using the reference in
+     * {@link ProteinGraphExtractor}
+     *
      * @param tool
      * @param params
-     * @throws Exception 
+     * @throws Exception
      */
     private static void run(String tool, ParameterNameValue[] params)
             throws Exception {
@@ -85,7 +85,7 @@ public class UniprotAccess {
                     cont++;
                     col = 0;
                     if (id.length() <= 6) {
-                        ProteinGraphExtractor.G.verticesMapping.put(ProteinGraphExtractor.totalNumProt, id.getBytes());
+                        ProteinGraphExtractor.G.verticesMapping.put(ProteinGraphExtractor.totalNumProt, id);
                         ProteinGraphExtractor.totalNumProt++;
                     }
                     id = "";

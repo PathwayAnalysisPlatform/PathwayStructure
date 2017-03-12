@@ -6,42 +6,41 @@ import gnu.trove.map.hash.TObjectShortHashMap;
  *
  * @author Luis Francisco Hernández Sánchez
  */
-public class BiMapShortToByteArray {
+public class BiMapShortString {
     
     //<short, byte[]>
 
-    public byte[][] numberToCharacters;
-    private TObjectShortHashMap<byte[]> charactersToNumber;
+    public String[] numberToCharacters;
+    private TObjectShortHashMap<String> charactersToNumber;
 
-    public BiMapShortToByteArray() {
-        numberToCharacters = new byte[21000][];
+    public BiMapShortString() {
+        numberToCharacters = new String[21000];
         charactersToNumber = new TObjectShortHashMap<>();
     }
 
-    public BiMapShortToByteArray(int numElements) {
+    public BiMapShortString(int numElements) {
 
         // Calculate the initial capacity so that it never has to resize the ArrayList
         int initialCapacity = (int) (numElements * 1.4);
 
-        numberToCharacters = new byte[numElements][];
+        numberToCharacters = new String[numElements];
         charactersToNumber = new TObjectShortHashMap<>(initialCapacity);
     }
 
-    public void put(short num, byte[] id) {
+    public void put(short num, String id) {
         numberToCharacters[num] = id;
         charactersToNumber.put(id, num);
     }
 
-    public short getNum(byte[] id) {
+    public short getNum(String id) {
         return charactersToNumber.get(id);
     }
 
-    public byte[] getId(short num) {
+    public String getId(short num) {
         return numberToCharacters[num];
     }
 
-    public String getStringId(short num) {
-        return new String(numberToCharacters[num]);
+    public boolean containsId(String id){
+        return charactersToNumber.contains(id);
     }
-
 }

@@ -26,9 +26,9 @@ public class ProteinGraphExtractor {
 
         // Load configuration
         initialize();
-        
+
         // Initialize graph
-         // In this part I don't know how many proteins are required, then it is set to the maximum capacity
+        // In this part I don't know how many proteins are required, then it is set to the maximum capacity
         G = new GraphAdjListEdgeTypes(Configuration.maxNumProt);
 
         //Get the list of proteins
@@ -37,20 +37,20 @@ public class ProteinGraphExtractor {
         } else {
             ProteinGraphExtractor.getProteinList();
         }
-        
+
         G.numVertices = totalNumProt;
 
         // Gather reaction neighbors
         //Get reactions where the proteins play a role
         if (Configuration.io || Configuration.ci || Configuration.co || Configuration.ri || Configuration.ro) {
-            ReactomeAccess.getReactionNeighbors();
+            //ReactomeAccess.getReactionNeighbors();
         }
 
         // Gather Complex and Entity neighbors
         if (Configuration.cn || Configuration.ds || Configuration.cs || Configuration.os) {
             ReactomeAccess.getComplexOrSetNeighbors();
         }
-        
+
         //Write the file
         G.writeGraphToFile();
     }
@@ -63,8 +63,8 @@ public class ProteinGraphExtractor {
             input = new BufferedReader(new FileReader(Configuration.inputListFile));
             for (String id; (id = input.readLine()) != null && index < Configuration.maxNumProt;) {
                 if (id.length() <= 6) {
-                    ProteinGraphExtractor.G.verticesMapping.put(ProteinGraphExtractor.totalNumProt, id.getBytes());
-                        ProteinGraphExtractor.totalNumProt++;
+                    ProteinGraphExtractor.G.verticesMapping.put(ProteinGraphExtractor.totalNumProt, id);
+                    ProteinGraphExtractor.totalNumProt++;
                 }
             }
         } catch (FileNotFoundException ex) {
@@ -129,6 +129,24 @@ public class ProteinGraphExtractor {
                     Configuration.outputGraphFilePath = parts[1].replace("\\", "/");
                 } else if (parts[0].equals("outputFileName")) {
                     Configuration.outputFileName = parts[1];
+                } else if (parts[0].equals("cn")) {
+                    Configuration.cn = Boolean.valueOf(parts[1]);
+                } else if (parts[0].equals("ds")) {
+                    Configuration.ds = Boolean.valueOf(parts[1]);
+                } else if (parts[0].equals("os")) {
+                    Configuration.os = Boolean.valueOf(parts[1]);
+                } else if (parts[0].equals("cs")) {
+                    Configuration.cs = Boolean.valueOf(parts[1]);
+                } else if (parts[0].equals("io")) {
+                    Configuration.io = Boolean.valueOf(parts[1]);
+                } else if (parts[0].equals("ci")) {
+                    Configuration.ci = Boolean.valueOf(parts[1]);
+                } else if (parts[0].equals("co")) {
+                    Configuration.co = Boolean.valueOf(parts[1]);
+                } else if (parts[0].equals("ri")) {
+                    Configuration.ri = Boolean.valueOf(parts[1]);
+                } else if (parts[0].equals("ro")) {
+                    Configuration.ro = Boolean.valueOf(parts[1]);
                 }
             }
 
