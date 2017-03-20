@@ -19,13 +19,13 @@ showMissingProteins=false
 //Edges
 cn=false
 ds=false
-os=true
+os=false
 cs=false
-io=false
-ci=false
-co=false
-ri=false
-ro=false
+io=true
+ci=true
+co=true
+ri=true
+ro=true
 
 reactionNeighbors=true
 complexNeighbors=true

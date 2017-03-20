@@ -11,6 +11,7 @@ public class Configuration {
     public static int maxNumProt = 21000;   //The graph will ask for memory to accomodate this number of proteins. Then it has to be as accurate as possible.
     public static String configPath = "./Config.txt";
     public static String inputListFile = "./src/main/resources/input/uniprotList.txt";      //Input to create a json graph
+    public static String reactionsFile = "./Reactions.txt";
     
     //Input configuration
     public static Boolean ignoreMisformatedRows = true;

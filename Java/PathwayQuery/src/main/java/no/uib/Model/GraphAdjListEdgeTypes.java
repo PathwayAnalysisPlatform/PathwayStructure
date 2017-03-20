@@ -4,6 +4,8 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import no.uib.pathwayquery.Configuration;
@@ -21,7 +23,7 @@ public class GraphAdjListEdgeTypes {
     public BiMapByteString edgesMapping;
     public short numVertices;
 
-    ArrayList<AdjacentNeighbor>[] adjacencyList;
+    HashSet<AdjacentNeighbor>[] adjacencyList;
 
     /**
      * Create a new empty Graph
@@ -30,9 +32,9 @@ public class GraphAdjListEdgeTypes {
      */
     public GraphAdjListEdgeTypes(int numVertices) {
 
-        this.adjacencyList = (ArrayList<AdjacentNeighbor>[]) new ArrayList[numVertices];
+        this.adjacencyList = (HashSet<AdjacentNeighbor>[]) new HashSet[numVertices];
         for (int I = 0; I < numVertices; I++) {
-            adjacencyList[I] = new ArrayList<>();
+            adjacencyList[I] = new HashSet<>();
         }
 
         this.verticesMapping = new BiMapShortString(numVertices);
@@ -68,6 +70,11 @@ public class GraphAdjListEdgeTypes {
         short dNum = verticesMapping.getNum(d);
         byte t = edgesMapping.getNum(type.toString());
         AdjacentNeighbor n = new AdjacentNeighbor(dNum, t);
+        for (AdjacentNeighbor savedNeighbor : adjacencyList[sNum]) {    //Check if the neighbour is already in the set
+            if (savedNeighbor.equals(n)) {
+                return;
+            }
+        }
         adjacencyList[sNum].add(n);
     }
 
@@ -107,7 +114,7 @@ public class GraphAdjListEdgeTypes {
      * @param s
      * @return List<Integer> a list of indices of vertices.
      */
-    public ArrayList<AdjacentNeighbor> getNeighbors(String s) {
+    public HashSet<AdjacentNeighbor> getNeighbors(String s) {
         short sNum = verticesMapping.getNum(s);
         return adjacencyList[sNum];
     }
@@ -124,15 +131,19 @@ public class GraphAdjListEdgeTypes {
                 for (EdgeTypes t : EdgeTypes.values()) {            //Go through every edge type to print the grouped in one row of the file
                     boolean foundOne = false;
                     for (AdjacentNeighbor n : this.adjacencyList[I]) {  //Iterate over all the neighbours of the current vertex
-                        if (edgesMapping.getId(n.getType()).equals(t.toString())) {
+                        String nType = edgesMapping.getId(n.getType());
+                        if (nType.equals(t.toString())) {       //If it is of the type of neighbours that will be printed in this row.
                             String nId = verticesMapping.getId(n.getNum());
-                            if (id.compareTo(nId) <= 0) {            //Allow only relations to vertices with higher lexicographical Id. Halves the number of edges.
-                                if (!foundOne) {                    //Raise flag that there are neighbors if this type
-                                    foundOne = true;
-                                    arch.write(id + " " + t.toString());
+                            if (id.compareTo(nId) <= 0) {       //Allow only relations to vertices with higher lexicographical Id. Halves the number of edges.
+                                if (nType.equals("cn") || nType.equals("ds") || nType.equals("os") || nType.equals("cs")) {   //Only applies for complex or set neighbours       
+                                    continue;
                                 }
-                                arch.write(" " + nId);
                             }
+                            if (!foundOne) {                    //Raise flag that there are neighbors if this type
+                                foundOne = true;
+                                arch.write(id + " " + t.toString());
+                            }
+                            arch.write(" " + nId);
                         }
                     }
                     if (foundOne) {

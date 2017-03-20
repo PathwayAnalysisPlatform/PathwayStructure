@@ -46,7 +46,7 @@
 
 - The graph is implemented as an Adjacency List.
     - The graph uses vertex numbers, not the protein ids.
-    - The adjacency list is an array of lists of shorts: LinkedList<short>[] group = (LinkedList<short>[])new LinkedList[4];
+    - For the case when the edges have no type: the adjacency list is an array of lists of shorts: LinkedList<short>[] group = (LinkedList<short>[])new LinkedList[4];
     Every neighbor is stored as a short int, which occupies less space than another string.
     - This is because shorts occupy 2 bytes of memory and the String 36 bytes.
     - For the adjacency list of vertices. The main list should be an array or an ArrayList if it is not possible.
@@ -55,8 +55,9 @@
     - The initial size will accomodate 33% more capacity. 
     - The initial load
     - The space needed for the references in the ArrayList is smaller.
-    - The list of neighbors of a vertex is implemented as a LinkedList since the number of neighbors is not known. It takes O(1) to add new elements and O(n) to traverse. There is never resizing because of initial size overflow.
+    - The list of neighbors of a vertex is implemented as an ArrayList too. Even when the number of neighbors is not known and the LinkList takes O(1) to add new elements and O(n) to traverse and there is never resizing because of initial size overflow. The size occupied by elements of a LinkedList is huge compared to the elements of the ArrayList.
     * The heap memory has to be considered. Usually objects are allocated in 8 bytes blocks. Then objects have sizes multiples of 8.
+    * For the case when the edges have different types:
 
 # Stages of the program
 

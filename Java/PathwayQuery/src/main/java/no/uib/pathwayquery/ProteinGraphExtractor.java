@@ -22,6 +22,12 @@ public class ProteinGraphExtractor {
     public static short totalNumProt;
     public static GraphAdjListEdgeTypes G;
 
+    /**
+     * This is the starting point of the whole extractor project.
+     * 
+     * @param args
+     * @throws IOException 
+     */
     public static void main(String args[]) throws IOException {
 
         // Load configuration
@@ -43,7 +49,7 @@ public class ProteinGraphExtractor {
         // Gather reaction neighbors
         //Get reactions where the proteins play a role
         if (Configuration.io || Configuration.ci || Configuration.co || Configuration.ri || Configuration.ro) {
-            //ReactomeAccess.getReactionNeighbors();
+            ReactomeAccess.getReactionNeighbors();
         }
 
         // Gather Complex and Entity neighbors
@@ -55,6 +61,14 @@ public class ProteinGraphExtractor {
         G.writeGraphToFile();
     }
 
+    /**
+     * Reads the list from the specified file in the configuration.
+     * This method executes when the "allProteome" variable is false.
+     * The file containing the list is specified in the configuration variable "inputListFile".
+     * The number of proteins read is also influenced by the configuration variable "maxNumProt".
+     * If the file contains less proteins that "maxNumProt" then all the proteins of the file are considered.
+     * If the file contains more proteins than "maxNumProt" then only the first "maxNumProt" proteins of the file will be used.
+     */
     private static void getProteinList() {
         int index = 0;
         BufferedReader input;
@@ -74,6 +88,15 @@ public class ProteinGraphExtractor {
         }
     }
 
+    /**
+     * Loads the configuration variables and initializes the driver to connect to Reactome in Neo4j.
+     * Opens the configuration file located in the same folder as the executable of the program.
+     * Reads the desired values for the configuration variables.
+     * If a configuration variable is not present in the configuration file, then it remains with the default value.
+     * 
+     * 
+     * @return {int} If the execution ended successfully returns 0. Otherwise returns 1. 
+     */
     private static int initialize() {
 
         try {
