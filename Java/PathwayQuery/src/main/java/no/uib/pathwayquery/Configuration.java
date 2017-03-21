@@ -56,7 +56,7 @@ public class Configuration {
     public static boolean pathwayNeighbors = false;
     
         //Results
-    public static GraphType outputGraphFileType = GraphType.json;
+    public static GraphType outputGraphFileType = GraphType.sif;
     public static String outputGraphFilePath = ".";
     public static String outputFileName = "ProteomeInteractions";
 

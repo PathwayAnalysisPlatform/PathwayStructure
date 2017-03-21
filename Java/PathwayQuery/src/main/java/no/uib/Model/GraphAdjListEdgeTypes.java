@@ -125,7 +125,7 @@ public class GraphAdjListEdgeTypes {
      */
     public void writeSifGraph() {
 
-        try (FileWriter arch = new FileWriter(Configuration.outputGraphFilePath + "/" + Configuration.outputFileName + "/" + Configuration.outputGraphFilePath)) {
+        try (FileWriter arch = new FileWriter(Configuration.outputGraphFilePath + "/" + Configuration.outputFileName + "/" + Configuration.outputGraphFileType.toString())) {
             for (short I = 0; I < this.numVertices; I++) {          //Iterate over all vertices
                 String id = verticesMapping.getId(I);
                 for (EdgeTypes t : EdgeTypes.values()) {            //Go through every edge type to print the grouped in one row of the file
