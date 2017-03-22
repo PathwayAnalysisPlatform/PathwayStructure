@@ -50,3 +50,4 @@ vignettes/*.pdf
 hs_err_pid*
 /target/
 *.sif
+*.txt

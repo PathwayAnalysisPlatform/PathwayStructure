@@ -31,6 +31,7 @@ public class ProteinGraphExtractor {
     public static void main(String args[]) throws IOException {
 
         // Load configuration
+        System.out.println("Initializing graph extractor...");
         initialize();
 
         // Initialize graph
