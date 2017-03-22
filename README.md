@@ -10,6 +10,8 @@ There are queries performed in R and Java. These are located in the respective f
 
 The program that performs the queries is a single executable ".jar" file that that creates a graph of protein interactions in a resulting ".sif" file, where the vertices are proteins and the edges are interactions between proteins. The graph represents the whole proteome available in Reactome or the interactions of a set of proteins. s
 
+For more information check out the [Wiki pages](https://github.com/bramburger/PathwayProjectQueries/wiki).
+
 ### Set up
 
 * Make sure java is installed as stated [here.](https://www.java.com/en/download/help/version_manual.xml)
