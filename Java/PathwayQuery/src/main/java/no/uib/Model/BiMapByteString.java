@@ -6,7 +6,7 @@ import gnu.trove.map.hash.TObjectByteHashMap;
  *
  * @author Luis Francisco Hernández Sánchez
  */
-public class BiMapByteString {
+public class BiMapByteString { 
     
     //<byte, byte[]>
 

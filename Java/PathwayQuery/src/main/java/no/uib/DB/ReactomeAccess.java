@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -33,15 +34,15 @@ public class ReactomeAccess {
      * graph. The graph G must me initialised already in
      * {@link ProteinGraphExtractor}
      */
-    public static void getComplexOrSetNeighbors() {
+    public static void getComplexOrSetNeighbors() throws UnsupportedEncodingException {
         //Iterate over the proteins in the Graph
         for (short I = 0; I < G.numVertices; I++) {
 //            if (!G.verticesMapping.getId(I).equals("P31749")) {
 //                continue;
 //            }
-            System.out.println("Getting neighbours of: " + I + " " + G.verticesMapping.getId(I));
+            System.out.println("Getting neighbours of: " + I + " " + G.verticesMapping.getString(I));
 
-            for (AdjacentNeighbor n : queryComplexOrSetNeighbours(G.verticesMapping.getId(I))) {
+            for (AdjacentNeighbor n : queryComplexOrSetNeighbours(G.verticesMapping.getString(I))) {
                 G.addEdge(I, n);
             }
         }
@@ -51,7 +52,7 @@ public class ReactomeAccess {
      * Makes a query to neo4j to get the complex and set neighbours of a
      * specific protein.
      */
-    private static List<AdjacentNeighbor> queryComplexOrSetNeighbours(String id) {
+    private static List<AdjacentNeighbor> queryComplexOrSetNeighbours(String id) throws UnsupportedEncodingException {
         List<AdjacentNeighbor> neighboursList = new ArrayList<AdjacentNeighbor>();
         try (Session session = ConnectionNeo4j.driver.session(); Transaction tx = session.beginTransaction()) {
             String query = "MATCH (re:ReferenceEntity{identifier:{id}})<-[:referenceEntity]-(p:EntityWithAccessionedSequence)<-[:hasComponent|hasMember|hasCandidate|repeatedUnit*]-(e)-[:hasComponent|hasMember|hasCandidate|repeatedUnit*]->(nE:EntityWithAccessionedSequence)-[:referenceEntity]->(nP:ReferenceEntity)\n"
@@ -115,8 +116,8 @@ public class ReactomeAccess {
                 }
                 //System.out.println(t + " " + n);
                 if (G.containsVertex(n)) {
-                    short nShort = G.verticesMapping.getNum(n);
-                    byte tByte = G.edgesMapping.getNum(GraphAdjListEdgeTypes.EdgeTypes.valueOf(t).toString());
+                    short nShort = G.verticesMapping.getShort(n);
+                    byte tByte = G.edgesMapping.getByte(GraphAdjListEdgeTypes.EdgeTypes.valueOf(t).toString());
                     //System.out.println(tByte + " " + nShort);
                     neighboursList.add(new AdjacentNeighbor(nShort, tByte));
                 } else {
@@ -379,7 +380,7 @@ public class ReactomeAccess {
 
     }
 
-    private static boolean checkReactionIsCompatible(Reaction r) {
+    private static boolean checkReactionIsCompatible(Reaction r) throws UnsupportedEncodingException {
         int foundParticipants = 0;
         for (String p : r.getParticipants()) {
             if (G.containsVertex(p)) {

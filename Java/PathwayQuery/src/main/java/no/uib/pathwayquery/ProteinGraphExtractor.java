@@ -45,6 +45,14 @@ public class ProteinGraphExtractor {
             ProteinGraphExtractor.getProteinList();
         }
 
+        //        Verify the contents of the verticesMapping
+//        for (short I = 0; I < G.verticesMapping.size() && I < 10; I++) {
+//            String vertexString = G.verticesMapping.getString(I);
+//            short vertexShort = G.verticesMapping.getShort(vertexString);
+//            System.out.println("short --> string: " + vertexShort + " --> " + vertexString);
+//            System.out.println("string --> short: " + vertexString + " --> " + vertexShort);
+//        }
+        
         G.numVertices = totalNumProt;
 
         // Gather reaction neighbors
@@ -102,7 +110,7 @@ public class ProteinGraphExtractor {
 
         try {
             //Read and set configuration values from file
-            BufferedReader configBR = new BufferedReader(new FileReader(Configuration.configGraphPath));
+            BufferedReader configBR = new BufferedReader(new FileReader(Configuration.configPath));
 
             //For every valid variable found in the config.txt file, the variable value gets updated
             String line;
@@ -125,8 +133,8 @@ public class ProteinGraphExtractor {
                     Configuration.inputListFile = parts[1].replace("\\", "/");
                 } else if (parts[0].equals("unitType")) {
                     Configuration.unitType = Configuration.ProteinType.valueOf(parts[1]);
-                } else if (parts[0].equals("configGraphPath")) {
-                    Configuration.configGraphPath = parts[1].replace("\\", "/");
+                } else if (parts[0].equals("configPath")) {
+                    Configuration.configPath = parts[1].replace("\\", "/");
                 } else if (parts[0].equals("maxNumProt")) {
                     Configuration.maxNumProt = Integer.valueOf(parts[1]);
                 } else if (parts[0].equals("onlyNeighborsInList")) {
@@ -135,18 +143,6 @@ public class ProteinGraphExtractor {
                     Configuration.onlyOrderedEdges = Boolean.valueOf(parts[1]);
                 } else if (parts[0].equals("showMissingProteins")) {
                     Configuration.showMissingProteins = Boolean.valueOf(parts[1]);
-                } else if (parts[0].equals("reactionNeighbors")) {
-                    Configuration.reactionNeighbors = Boolean.valueOf(parts[1]);
-                } else if (parts[0].equals("complexNeighbors")) {
-                    Configuration.complexNeighbors = Boolean.valueOf(parts[1]);
-                } else if (parts[0].equals("entityNeighbors")) {
-                    Configuration.entityNeighbors = Boolean.valueOf(parts[1]);
-                } else if (parts[0].equals("candidateNeighbors")) {
-                    Configuration.candidateNeighbors = Boolean.valueOf(parts[1]);
-                } else if (parts[0].equals("topLevelPathwayNeighbors")) {
-                    Configuration.topLevelPathwayNeighbors = Boolean.valueOf(parts[1]);
-                } else if (parts[0].equals("pathwayNeighbors")) {
-                    Configuration.pathwayNeighbors = Boolean.valueOf(parts[1]);
                 } else if (parts[0].equals("outputGraphFileType")) {
                     Configuration.outputGraphFileType = Configuration.GraphType.valueOf(parts[1]);
                 } else if (parts[0].equals("outputGraphFilePath")) {
