@@ -1,6 +1,6 @@
 package no.uib.DB;
 
-import no.uib.pathwayquery.Configuration;
+import no.uib.pathwayquery.Conf;
 import org.neo4j.driver.v1.AuthTokens;
 import org.neo4j.driver.v1.Driver;
 import org.neo4j.driver.v1.GraphDatabase;
@@ -14,5 +14,5 @@ public class ConnectionNeo4j {
     public static String username = "neo4j";
     public static String password = "neo4j2";
     
-    public static Driver driver = GraphDatabase.driver(Configuration.host, AuthTokens.basic(Configuration.username, Configuration.password));
+    public static Driver driver = GraphDatabase.driver(Conf.strMap.get(Conf.strVars.host.toString()), AuthTokens.basic(Conf.strMap.get(Conf.strVars.username.toString()), Conf.strMap.get(Conf.strVars.password.toString())));
 }

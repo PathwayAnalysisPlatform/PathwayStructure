@@ -1,7 +1,8 @@
 //General configuration
+version=2
 allProteome=false
 //inputListFile=./src/main/resources/input/listBjorn.csv
-maxNumProt=21000
+maxNumVertices=45000
 
 //Database access
 host=bolt://localhost
@@ -26,6 +27,19 @@ ci=true
 co=true
 ri=true
 ro=true
+
+//Vertical edges
+Cp=true
+Sp=true
+CC=true
+SC=true
+Cs=true
+SS=true
+Rp=true
+RC=true
+RS=true
+PR=true
+PP=true
 
 reactionNeighbors=true
 complexNeighbors=true

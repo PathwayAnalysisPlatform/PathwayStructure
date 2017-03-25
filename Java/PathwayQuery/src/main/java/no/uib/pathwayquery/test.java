@@ -15,38 +15,14 @@
  */
 package no.uib.pathwayquery;
 
-import java.io.UnsupportedEncodingException;
-import no.uib.Model.BiMapShortToByteArray;
-
 /**
  *
  * @author Luis Francisco Hernández Sánchez
  */
 public class test {
 
-    public static void main(String args[]) throws UnsupportedEncodingException {
-        BiMapShortToByteArray map;
-        map = new BiMapShortToByteArray(12);
-
-        map.put("P00519");
-        map.put("P31749");
-        map.put("P31749");
-        map.put("P11274");
-        map.put("P22681");
-        map.put("P16220");
-        map.put("P46109");
-        map.put("P27361");
-        map.put("Q9UQC2");
-        map.put("Q15759");
-        map.put("O15530");
-        map.put("P62753");
-
-        short sho = map.getShort("P11274");
-        String str = map.getString(sho);
-        System.out.println(sho);
-        System.out.println(str);
-        System.out.println(map.containsId(str));
-
+    public static void main(String args[]) {
 
     }
+
 }

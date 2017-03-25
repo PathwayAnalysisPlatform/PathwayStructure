@@ -5,13 +5,15 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import no.uib.DB.ConnectionNeo4j;
 import no.uib.DB.ReactomeAccess;
-import no.uib.Model.GraphAdjListEdgeTypes;
+import no.uib.Model.GraphReactome;
 import org.neo4j.driver.v1.AuthTokens;
 import org.neo4j.driver.v1.GraphDatabase;
+import org.neo4j.driver.v1.Record;
 
 /**
  *
@@ -19,14 +21,13 @@ import org.neo4j.driver.v1.GraphDatabase;
  */
 public class ProteinGraphExtractor {
 
-    public static short totalNumProt;
-    public static GraphAdjListEdgeTypes G;
+    public static GraphReactome G;
 
     /**
      * This is the starting point of the whole extractor project.
-     * 
+     *
      * @param args
-     * @throws IOException 
+     * @throws IOException
      */
     public static void main(String args[]) throws IOException {
 
@@ -36,14 +37,26 @@ public class ProteinGraphExtractor {
 
         // Initialize graph
         // In this part I don't know how many proteins are required, then it is set to the maximum capacity
-        G = new GraphAdjListEdgeTypes(Configuration.maxNumProt);
-
-        //Get the list of proteins
-        if (Configuration.allProteome) {
-            UniprotAccess.getUniprotProteome(); //Get from the online website. This also gets the real number of proteins requested in the variable totalNumProt
+        G = new GraphReactome(Conf.intMap.get(Conf.intVars.maxNumVertices.toString()));
+        
+        System.out.println(G.getNumVertices());
+        
+        // Get complexes, sets, reactions and pathways
+        for(Conf.EntityType t : Conf.EntityType.values()){
+            List<Record> records = ReactomeAccess.getVerticesByType(t);
+            G.addAllVertices(records);
+        }
+        
+        System.out.println(G.getNumVertices());
+        
+        //Get the proteins
+        if (Conf.boolMap.get(Conf.boolVars.allProteome.toString())) {
+            UniprotAccess.getUniProtProteome(); //Get from the online website. This also gets the real number of proteins requested in the variable totalNumProt
         } else {
             ProteinGraphExtractor.getProteinList();
         }
+        
+        System.out.println(G.getNumVertices());
 
         //        Verify the contents of the verticesMapping
 //        for (short I = 0; I < G.verticesMapping.size() && I < 10; I++) {
@@ -52,18 +65,37 @@ public class ProteinGraphExtractor {
 //            System.out.println("short --> string: " + vertexShort + " --> " + vertexString);
 //            System.out.println("string --> short: " + vertexString + " --> " + vertexShort);
 //        }
-        
-        G.numVertices = totalNumProt;
 
-        // Gather reaction neighbors
-        //Get reactions where the proteins play a role
-        if (Configuration.io || Configuration.ci || Configuration.co || Configuration.ri || Configuration.ro) {
-            ReactomeAccess.getReactionNeighbors();
-        }
+        /**
+         * ************* If execution version 1 *******************
+         */
+        if (Conf.intMap.get(Conf.intVars.version.toString()) == 1) {
+            // Gather reaction neighbors
+            //Get reactions where the proteins play a role
+            if (Conf.boolMap.get(Conf.EdgeType.InputToOutput.toString()) 
+                    || Conf.boolMap.get(Conf.EdgeType.CatalystToInput.toString()) 
+                    || Conf.boolMap.get(Conf.EdgeType.CatalystToOutput.toString())
+                    || Conf.boolMap.get(Conf.EdgeType.RegulatorToInput.toString())
+                    || Conf.boolMap.get(Conf.EdgeType.RegulatorToOutput.toString())) {
+                ReactomeAccess.getReactionNeighbors();
+            }
 
-        // Gather Complex and Entity neighbors
-        if (Configuration.cn || Configuration.ds || Configuration.cs || Configuration.os) {
-            ReactomeAccess.getComplexOrSetNeighbors();
+            // Gather ComplexNeighbor and Entity neighbors
+            if (Conf.boolMap.get(Conf.EdgeType.ComplexNeighbor.toString()) 
+                    || Conf.boolMap.get(Conf.EdgeType.DefinedSetNeighbor.toString()) 
+                    || Conf.boolMap.get(Conf.EdgeType.CandidateSetNeighbor.toString()) 
+                    || Conf.boolMap.get(Conf.EdgeType.OpenSetNeighbor.toString())) {
+                ReactomeAccess.getComplexOrSetNeighbors();
+            }
+        } /**
+         * ************* If execution version 2 *******************
+         */
+        else if (Conf.intMap.get(Conf.intVars.version.toString()) == 2) {
+            for (Conf.EdgeType t : Conf.EdgeType.values()) {
+                if (Conf.boolMap.get(t.toString())) {
+                    G.addAllEdges(ReactomeAccess.getEdgesByType(t), t);
+                }
+            }
         }
 
         //Write the file
@@ -71,23 +103,23 @@ public class ProteinGraphExtractor {
     }
 
     /**
-     * Reads the list from the specified file in the configuration.
-     * This method executes when the "allProteome" variable is false.
-     * The file containing the list is specified in the configuration variable "inputListFile".
-     * The number of proteins read is also influenced by the configuration variable "maxNumProt".
-     * If the file contains less proteins that "maxNumProt" then all the proteins of the file are considered.
-     * If the file contains more proteins than "maxNumProt" then only the first "maxNumProt" proteins of the file will be used.
+     * Reads the list from the specified file in the configuration. This method
+ executes when the "allProteome" variable is false. The file containing
+ the list is specified in the configuration variable "inputListFile". The
+ number of proteins read is also influenced by the configuration variable
+ "maxNumVertices". If the file contains less proteins that "maxNumVertices" then
+ all the proteins of the file are considered. If the file contains more
+ proteins than "maxNumVertices" then only the first "maxNumVertices" proteins of
+ the file will be used.
      */
     private static void getProteinList() {
         int index = 0;
         BufferedReader input;
         try {
-            totalNumProt = 0;
-            input = new BufferedReader(new FileReader(Configuration.inputListFile));
-            for (String id; (id = input.readLine()) != null && index < Configuration.maxNumProt;) {
+            input = new BufferedReader(new FileReader(Conf.strMap.get(Conf.strVars.inputListFile.toString())));
+            for (String id; (id = input.readLine()) != null && index < Conf.intMap.get(Conf.intVars.maxNumVertices.toString());) {
                 if (id.length() <= 6) {
-                    ProteinGraphExtractor.G.verticesMapping.put(ProteinGraphExtractor.totalNumProt, id);
-                    ProteinGraphExtractor.totalNumProt++;
+                    ProteinGraphExtractor.G.addVertex(id);
                 }
             }
         } catch (FileNotFoundException ex) {
@@ -98,19 +130,25 @@ public class ProteinGraphExtractor {
     }
 
     /**
-     * Loads the configuration variables and initializes the driver to connect to Reactome in Neo4j.
-     * Opens the configuration file located in the same folder as the executable of the program.
-     * Reads the desired values for the configuration variables.
-     * If a configuration variable is not present in the configuration file, then it remains with the default value.
-     * 
-     * 
-     * @return {int} If the execution ended successfully returns 0. Otherwise returns 1. 
+     * Loads the configuration variables and initializes the driver to connect
+     * to Reactome in Neo4j. Opens the configuration file located in the same
+     * folder as the executable of the program. Reads the desired values for the
+     * configuration variables. If a configuration variable is not present in
+     * the configuration file, then it remains with the default value.
+     *
+     *
+     * @return {int} If the execution ended successfully returns 0. Otherwise
+     * returns 1.
      */
     private static int initialize() {
 
         try {
+            Conf.setDefaultValues();
+            
             //Read and set configuration values from file
-            BufferedReader configBR = new BufferedReader(new FileReader(Configuration.configPath));
+            BufferedReader configBR = new BufferedReader(new FileReader(Conf.strMap.get(Conf.strVars.configPath.toString())));
+
+            
 
             //For every valid variable found in the config.txt file, the variable value gets updated
             String line;
@@ -125,62 +163,21 @@ public class ProteinGraphExtractor {
                     continue;
                 }
                 String[] parts = line.split("=");
-                if (parts[0].equals("verboseConsole")) {
-                    Configuration.verboseConsole = Boolean.valueOf(parts[1]);
-                } else if (parts[0].equals("allProteome")) {
-                    Configuration.allProteome = Boolean.valueOf(parts[1]);
-                } else if (parts[0].equals("inputListFile")) {
-                    Configuration.inputListFile = parts[1].replace("\\", "/");
-                } else if (parts[0].equals("unitType")) {
-                    Configuration.unitType = Configuration.ProteinType.valueOf(parts[1]);
-                } else if (parts[0].equals("configPath")) {
-                    Configuration.configPath = parts[1].replace("\\", "/");
-                } else if (parts[0].equals("maxNumProt")) {
-                    Configuration.maxNumProt = Integer.valueOf(parts[1]);
-                } else if (parts[0].equals("onlyNeighborsInList")) {
-                    Configuration.onlyNeighborsInList = Boolean.valueOf(parts[1]);
-                } else if (parts[0].equals("onlyOrderedEdges")) {
-                    Configuration.onlyOrderedEdges = Boolean.valueOf(parts[1]);
-                } else if (parts[0].equals("showMissingProteins")) {
-                    Configuration.showMissingProteins = Boolean.valueOf(parts[1]);
-                } else if (parts[0].equals("outputGraphFileType")) {
-                    Configuration.outputGraphFileType = Configuration.GraphType.valueOf(parts[1]);
-                } else if (parts[0].equals("outputGraphFilePath")) {
-                    Configuration.outputGraphFilePath = parts[1].replace("\\", "/");
-                } else if (parts[0].equals("outputFileName")) {
-                    Configuration.outputFileName = parts[1];
-                } else if (parts[0].equals("cn")) {
-                    Configuration.cn = Boolean.valueOf(parts[1]);
-                } else if (parts[0].equals("ds")) {
-                    Configuration.ds = Boolean.valueOf(parts[1]);
-                } else if (parts[0].equals("os")) {
-                    Configuration.os = Boolean.valueOf(parts[1]);
-                } else if (parts[0].equals("cs")) {
-                    Configuration.cs = Boolean.valueOf(parts[1]);
-                } else if (parts[0].equals("io")) {
-                    Configuration.io = Boolean.valueOf(parts[1]);
-                } else if (parts[0].equals("ci")) {
-                    Configuration.ci = Boolean.valueOf(parts[1]);
-                } else if (parts[0].equals("co")) {
-                    Configuration.co = Boolean.valueOf(parts[1]);
-                } else if (parts[0].equals("ri")) {
-                    Configuration.ri = Boolean.valueOf(parts[1]);
-                } else if (parts[0].equals("ro")) {
-                    Configuration.ro = Boolean.valueOf(parts[1]);
+                if (Conf.contains(parts[0])) {
+                    Conf.setValue(parts[0], parts[1]);
                 }
             }
 
             ConnectionNeo4j.driver = GraphDatabase.driver(ConnectionNeo4j.host, AuthTokens.basic(ConnectionNeo4j.username, ConnectionNeo4j.password));
 
-            totalNumProt = 0;
         } catch (FileNotFoundException ex) {
-            System.out.println("Configuration file not found at: " + Configuration.configPath);
+            System.out.println("Configuration file not found at: " + Conf.strMap.get(Conf.strVars.configPath.toString()));
             Logger
                     .getLogger(ProteinGraphExtractor.class
                             .getName()).log(Level.SEVERE, null, ex);
             return 1;
         } catch (IOException ex) {
-            System.out.println("Not possible to read the configuration file: " + Configuration.configPath);
+            System.out.println("Not possible to read the configuration file: " + Conf.strMap.get(Conf.strVars.configPath.toString()));
             Logger
                     .getLogger(ProteinGraphExtractor.class
                             .getName()).log(Level.SEVERE, null, ex);
