@@ -38,24 +38,26 @@ public class ProteinGraphExtractor {
         // Initialize graph
         // In this part I don't know how many proteins are required, then it is set to the maximum capacity
         G = new GraphReactome(Conf.intMap.get(Conf.intVars.maxNumVertices.toString()));
-        
+
         System.out.println(G.getNumVertices());
-        
+
         // Get complexes, sets, reactions and pathways
-        for(Conf.EntityType t : Conf.EntityType.values()){
+        for (Conf.EntityType t : Conf.EntityType.values()) {
+            System.out.println("Getting " + t.toString() + " vertices...");
             List<Record> records = ReactomeAccess.getVerticesByType(t);
+            System.out.println("Found " + (records != null ? records.size() : 0) + " vertices...");
             G.addAllVertices(records);
         }
-        
+
         System.out.println(G.getNumVertices());
-        
+
         //Get the proteins
         if (Conf.boolMap.get(Conf.boolVars.allProteome.toString())) {
             UniprotAccess.getUniProtProteome(); //Get from the online website. This also gets the real number of proteins requested in the variable totalNumProt
         } else {
             ProteinGraphExtractor.getProteinList();
         }
-        
+
         System.out.println(G.getNumVertices());
 
         //        Verify the contents of the verticesMapping
@@ -65,36 +67,40 @@ public class ProteinGraphExtractor {
 //            System.out.println("short --> string: " + vertexShort + " --> " + vertexString);
 //            System.out.println("string --> short: " + vertexString + " --> " + vertexShort);
 //        }
-
         /**
-         * ************* If execution version 1 *******************
+         * ************* Horizontal edges *******************
          */
-        if (Conf.intMap.get(Conf.intVars.version.toString()) == 1) {
-            // Gather reaction neighbors
-            //Get reactions where the proteins play a role
-            if (Conf.boolMap.get(Conf.EdgeType.InputToOutput.toString()) 
-                    || Conf.boolMap.get(Conf.EdgeType.CatalystToInput.toString()) 
-                    || Conf.boolMap.get(Conf.EdgeType.CatalystToOutput.toString())
-                    || Conf.boolMap.get(Conf.EdgeType.RegulatorToInput.toString())
-                    || Conf.boolMap.get(Conf.EdgeType.RegulatorToOutput.toString())) {
-                ReactomeAccess.getReactionNeighbors();
-            }
+        // Gather reaction neighbors
+        //Get reactions where the proteins play a role
+        System.out.println("Getting horizontal edges...");
+        System.out.println("Getting reaction interactions...");
+        if (Conf.boolMap.get(Conf.EdgeType.InputToOutput.toString())
+                || Conf.boolMap.get(Conf.EdgeType.CatalystToInput.toString())
+                || Conf.boolMap.get(Conf.EdgeType.CatalystToOutput.toString())
+                || Conf.boolMap.get(Conf.EdgeType.RegulatorToInput.toString())
+                || Conf.boolMap.get(Conf.EdgeType.RegulatorToOutput.toString())) {
+            ReactomeAccess.getReactionNeighbors();
+        }
 
-            // Gather ComplexNeighbor and Entity neighbors
-            if (Conf.boolMap.get(Conf.EdgeType.ComplexNeighbor.toString()) 
-                    || Conf.boolMap.get(Conf.EdgeType.DefinedSetNeighbor.toString()) 
-                    || Conf.boolMap.get(Conf.EdgeType.CandidateSetNeighbor.toString()) 
-                    || Conf.boolMap.get(Conf.EdgeType.OpenSetNeighbor.toString())) {
-                ReactomeAccess.getComplexOrSetNeighbors();
-            }
-        } /**
-         * ************* If execution version 2 *******************
+        // Gather ComplexNeighbor and Entity neighbors
+        System.out.println("Getting complex or set neighbors...");
+        if (Conf.boolMap.get(Conf.EdgeType.ComplexNeighbor.toString())
+                || Conf.boolMap.get(Conf.EdgeType.DefinedSetNeighbor.toString())
+                || Conf.boolMap.get(Conf.EdgeType.CandidateSetNeighbor.toString())
+                || Conf.boolMap.get(Conf.EdgeType.OpenSetNeighbor.toString())) {
+            ReactomeAccess.getComplexOrSetNeighbors();
+        }
+        /**
+         * ************* Vertical edges *******************
          */
-        else if (Conf.intMap.get(Conf.intVars.version.toString()) == 2) {
-            for (Conf.EdgeType t : Conf.EdgeType.values()) {
-                if (Conf.boolMap.get(t.toString())) {
-                    G.addAllEdges(ReactomeAccess.getEdgesByType(t), t);
-                }
+        System.out.println("Getting vertical edges...");
+        for (Conf.EdgeType t : Conf.EdgeType.values()) {
+            if (Conf.boolMap.get(t.toString())) {
+                System.out.println("Getting " + t.toString() + " edges...");
+                List<Record> records = ReactomeAccess.getEdgesByType(t);
+                System.out.println("Found " + (records != null ? records.size() : 0) + " edges.");
+                G.addAllEdges(records, t);
+
             }
         }
 
@@ -104,13 +110,13 @@ public class ProteinGraphExtractor {
 
     /**
      * Reads the list from the specified file in the configuration. This method
- executes when the "allProteome" variable is false. The file containing
- the list is specified in the configuration variable "inputListFile". The
- number of proteins read is also influenced by the configuration variable
- "maxNumVertices". If the file contains less proteins that "maxNumVertices" then
- all the proteins of the file are considered. If the file contains more
- proteins than "maxNumVertices" then only the first "maxNumVertices" proteins of
- the file will be used.
+     * executes when the "allProteome" variable is false. The file containing
+     * the list is specified in the configuration variable "inputListFile". The
+     * number of proteins read is also influenced by the configuration variable
+     * "maxNumVertices". If the file contains less proteins that
+     * "maxNumVertices" then all the proteins of the file are considered. If the
+     * file contains more proteins than "maxNumVertices" then only the first
+     * "maxNumVertices" proteins of the file will be used.
      */
     private static void getProteinList() {
         int index = 0;
@@ -144,11 +150,9 @@ public class ProteinGraphExtractor {
 
         try {
             Conf.setDefaultValues();
-            
+
             //Read and set configuration values from file
             BufferedReader configBR = new BufferedReader(new FileReader(Conf.strMap.get(Conf.strVars.configPath.toString())));
-
-            
 
             //For every valid variable found in the config.txt file, the variable value gets updated
             String line;

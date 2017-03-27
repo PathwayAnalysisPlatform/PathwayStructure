@@ -7,11 +7,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import no.uib.Model.AdjacentNeighbor;
 import no.uib.Model.Pair;
 import no.uib.Model.Reaction;
 import no.uib.pathwayquery.Conf;
@@ -35,13 +33,15 @@ public class ReactomeAccess {
      */
     public static void getComplexOrSetNeighbors() throws UnsupportedEncodingException {
         //Iterate over the proteins in the Graph
-        for (short I = 0; I < G.getNumVertices(); I++) {
+        for (int I = 0; I < G.getNumVertices(); I++) {
+            if(G.getVertexId(I).length() > 6)
+                continue;
             System.out.println("Getting neighbours of: " + I + " " + G.getVertexId(I));
             List<Record> records = queryComplexOrSetNeighbours(G.getVertexId(I));
 
             for (Record r : records) {
                 String n = r.get("id").asString(); //Get the neighbour id as a string.
-                String t = r.get("role").asString(); //Get the edge type as a string
+                String t = r.get("role").asString() + "Neighbor"; //Get the edge type as a string
                 switch (t) {
                     case "Complex":
                         if (!Conf.boolMap.get(Conf.EdgeType.ComplexNeighbor.toString())) {
@@ -433,6 +433,8 @@ public class ReactomeAccess {
                         + "WHERE p1.speciesName = 'Homo sapiens' AND p2.speciesName = 'Homo sapiens'\n"
                         + "RETURN DISTINCT p1.stId as source, p2.stId as destiny";
                 break;
+            default:
+                return null;
         }
 
         Session session = ConnectionNeo4j.driver.session();

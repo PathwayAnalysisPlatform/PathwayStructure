@@ -59,19 +59,19 @@ public class GraphReactome {
         }
 
         this.verticesMapping = new BiMapIntToByteArray(numVertices);
-        this.edgesMapping = new BiMapByteToByteArray(9);
+        this.edgesMapping = new BiMapByteToByteArray(20);
 
-//        byte cont = 0;
-//        for (EdgeType t : EdgeType.values()) {
-//            edgesMapping.put(cont, t.toString());
-//            System.out.println("byte to string: " + edgesMapping.getString(cont));
-//            System.out.println("string to byte: " + edgesMapping.getByte(t.toString()));
-//            cont++;
-//        }
-//        Verify the contents of the edgesMapping
+        byte cont = 0;
+        for (EdgeType t : EdgeType.values()) {
+            edgesMapping.put(cont, t.toString());
+            System.out.println("byte to string: " + edgesMapping.getString(cont));
+            System.out.println("string to byte: " + edgesMapping.getByte(t.toString()));
+            cont++;
+        }
+        //Verify the contents of the edgesMapping
 //        for (byte I = 0; I < edgesMapping.size(); I++) {
 //            String edgeType = edgesMapping.getString(I);
-//            String edgeLabel = EdgeLabel.valueOf(edgeType).toString();
+//            String edgeLabel = Conf.EdgeLabel.valueOf(edgeType).toString();
 //            System.out.println("byte --> edge type --> edge label: " + I + " --> " + edgeType + " --> " + edgeLabel);
 //            System.out.println("edge label --> edge type --> byte: " + edgeLabel + " --> " + EdgeType.valueOf(edgeLabel).toString() + " --> " + edgesMapping.getByte(edgeType));
 //        }
@@ -149,8 +149,9 @@ public class GraphReactome {
      * edges.
      */
     public void addAllEdges(List<Record> records, Conf.EdgeType t) throws UnsupportedEncodingException {
-        if(records == null)
+        if (records == null) {
             return;
+        }
         for (Record r : records) {
             String source = r.get("source").asString(); //Get the source vertex as a string
             String destiny = r.get("destiny").asString(); //Get the destiny vertex as a string
@@ -170,8 +171,9 @@ public class GraphReactome {
      * of the vertices.
      */
     public void addAllVertices(List<Record> records) throws UnsupportedEncodingException {
-        if(records == null)
+        if (records == null) {
             return;
+        }
         for (Record r : records) {
             String id = r.get("id").asString(); //Get the vertex id as a string
             addVertex(id);
@@ -197,6 +199,7 @@ public class GraphReactome {
                 + "." + Conf.strMap.get(Conf.strVars.outputGraphFileType.toString()))) {
             for (int I = 0; I < getNumVertices(); I++) {          //Iterate over all vertices
                 String id = verticesMapping.getString(I);
+                boolean anyNeighborAnyType = false;
                 for (EdgeType t : EdgeType.values()) {            //Go through every edge type to print the grouped in one row of the file
                     boolean foundOne = false;
                     for (AdjacentNeighbor n : this.adjacencyList[I]) {  //Iterate over all the neighbours of the current vertex
@@ -217,6 +220,12 @@ public class GraphReactome {
                     }
                     if (foundOne) {
                         arch.write("\n");
+                        anyNeighborAnyType = true;
+                    }
+                }
+                if (Conf.boolMap.get(Conf.boolVars.showIsolatedVertices.toString())) {
+                    if (!anyNeighborAnyType) {
+                        arch.write(id + "\n");
                     }
                 }
             }

@@ -81,67 +81,67 @@ Relationships (edges) for _Homo sapiens_ in v59 Reactome: 70,991
 ~~~~
 MATCH (c:Complex)-[:hasComponent]->(ewas:EntityWithAccessionedSequence)-[:referenceEntity]->(re:ReferenceEntity)
 WHERE c.speciesName = 'Homo sapiens' AND re.databaseName = 'UniProt'
-RETURN DISTINCT c.stId, re.identifier
+RETURN DISTINCT c.stId as source, re.identifier as destiny
 ~~~~
 * Sp: 13,811
 ~~~~
 MATCH (es:EntitySet)-[:hasMember|hasCandidate]->(ewas:EntityWithAccessionedSequence)-[:referenceEntity]->(re:ReferenceEntity)
 WHERE es.speciesName = 'Homo sapiens' AND re.databaseName = 'UniProt'
-RETURN DISTINCT es.stId, re.identifier
+RETURN DISTINCT es.stId as source, re.identifier as destiny
 ~~~~
 * CC: 5,966 
 ~~~~
 MATCH (c1:Complex)-[:hasComponent]->(c2:Complex)
 WHERE c1.speciesName = 'Homo sapiens' AND c2.speciesName = 'Homo sapiens'
-RETURN DISTINCT c1.stId, c2.stId
+RETURN DISTINCT c1.stId as source, c2.stId as destiny
 ~~~~
 * SC: 2,715
 ~~~~
 MATCH (es:EntitySet)-[:hasMember|hasCandidate]->(c:Complex)
 WHERE c.speciesName = 'Homo sapiens' AND es.speciesName = 'Homo sapiens'
-RETURN DISTINCT c.stId, es.stId
+RETURN DISTINCT c.stId as source, es.stId as destiny
 ~~~~
 * CS: 3,378
 ~~~~
 MATCH (c:Complex)-[:hasComponent]->(es:EntitySet)
 WHERE c.speciesName = 'Homo sapiens' AND es.speciesName = 'Homo sapiens'
-RETURN DISTINCT c.stId, es.stId
+RETURN DISTINCT c.stId as source, es.stId as destiny
 ~~~~
 * SS: 614
 ~~~~
 MATCH (es1:EntitySet)-[:hasMember|hasCandidate]->(es2:EntitySet)
 WHERE es1.speciesName = 'Homo sapiens' AND es2.speciesName = 'Homo sapiens'
-RETURN DISTINCT es1.stId, es2.stId
+RETURN DISTINCT es1.stId as source, es2.stId as destiny
 ~~~~
 * Rp: 5,642 
 ~~~~
 MATCH (r:Reaction)-[:input|output|catalystActivity|physicalEntity|regulatedBy|regulator*]->(ewas:EntityWithAccessionedSequence)-[:referenceEntity]->(re:ReferenceEntity)
 WHERE r.speciesName = 'Homo sapiens' AND re.databaseName = 'UniProt'
-RETURN DISTINCT r.stId AS Reaction, re.identifier as Participant
+RETURN DISTINCT r.stId AS source, re.identifier as destiny
 ~~~~
 * RC: 12,016
 ~~~~
 MATCH (r:Reaction)-[:input|output|catalystActivity|physicalEntity|regulatedBy|regulator*]->(c:Complex)
 WHERE r.speciesName = 'Homo sapiens' AND c.speciesName = 'Homo sapiens'
-RETURN DISTINCT r.stId AS Reaction, c.stId as Participant
+RETURN DISTINCT r.stId AS source, c.stId as destiny
 ~~~~
 * RS: 3,366 
 ~~~~
 MATCH (r:Reaction)-[:input|output|catalystActivity|physicalEntity|regulatedBy|regulator*]->(es:EntitySet)
 WHERE r.speciesName = 'Homo sapiens' AND es.speciesName = 'Homo sapiens'
-RETURN DISTINCT r.stId AS Reaction, es.stId as Participant
+RETURN DISTINCT r.stId AS source, es.stId as destiny
 ~~~~
 * PR: 9,073 
 ~~~~
 MATCH (p:Pathway)-[:hasEvent]->(r:Reaction)
 WHERE p.speciesName = 'Homo sapiens' AND r.speciesName = 'Homo sapiens'
-RETURN DISTINCT p.stId AS Pathway, r.stId AS Reaction
+RETURN DISTINCT p.stId AS source, r.stId AS destiny
 ~~~~
 * PP: 2,109 
 ~~~~
 MATCH (p1:Pathway)-[:hasEvent]->(p2:Pathway)
 WHERE p1.speciesName = 'Homo sapiens' AND p2.speciesName = 'Homo sapiens'
-RETURN DISTINCT p1.stId, p2.stId
+RETURN DISTINCT p1.stId as source, p2.stId as destiny
 ~~~~
 
 #### stId

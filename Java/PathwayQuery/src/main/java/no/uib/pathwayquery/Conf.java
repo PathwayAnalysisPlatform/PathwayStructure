@@ -87,7 +87,7 @@ public class Conf {
         //Results
         strMap.put("outputGraphFileType", "sif"); //TODO
         strMap.put("outputGraphFilePath", ".");
-        strMap.put("outputFileName", "ProteomeInteractions");
+        strMap.put("outputFileName", "ProteomeGraph");
 
         //Database access
         strMap.put("host", "bolt://localhost");
@@ -98,6 +98,7 @@ public class Conf {
         boolMap.put("onlyNeighborsInList", Boolean.TRUE);  //TODO
         boolMap.put("onlyOrderedEdges", Boolean.TRUE);     //TODO
         boolMap.put("showMissingProteins", Boolean.TRUE);  //TODO
+        boolMap.put("showIsolatedVertices", Boolean.TRUE);
 
         //Edges configuration
         //Set default values to all vertical edges
@@ -144,7 +145,7 @@ public class Conf {
     }
 
     public enum boolVars {
-        allProteome, ignoreMisformatedRows, verboseConsole, onlyNeighborsInList, onlyOrderedEdges, showMissingProteins
+        allProteome, ignoreMisformatedRows, verboseConsole, onlyNeighborsInList, onlyOrderedEdges, showMissingProteins, showIsolatedVertices
     }
 
     public enum ProteinType {
