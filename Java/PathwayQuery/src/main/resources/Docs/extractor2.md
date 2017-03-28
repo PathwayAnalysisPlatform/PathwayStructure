@@ -15,19 +15,19 @@ Vertices:
 Edges:
 
 * Vertical:
-    - [ ] complex has a protein (Cp).
-    - [ ] set has a protein (Sp).
-    - [ ] complex has a complex (CC).
-    - [ ] set has a complex (SC).
-    - [ ] complex has a set (CS).
-    - [ ] set has a set (SS).
-    - [ ] reaction has a protein (Rp).
-    - [ ] reaction has a complex (RC).
-    - [ ] reaction has a set (RS).
-    - [ ] pathway has a reaction (PR).
-    - [ ] pathway has a pathway (PP).
+    - [X] complex has a protein (Cp).
+    - [X] set has a protein (Sp).
+    - [X] complex has a complex (CC).
+    - [X] set has a complex (SC).
+    - [X] complex has a set (CS).
+    - [X] set has a set (SS).
+    - [X] reaction has a protein (Rp).
+    - [X] reaction has a complex (RC).
+    - [X] reaction has a set (RS).
+    - [X] pathway has a reaction (PR).
+    - [X] pathway has a pathway (PP).
 * Horizontal:
-    - [ ] Interaction between proteins: input-output, catalyst-input, catalyst-output, regulator-input, regulator-output
+    - [X] Interaction between proteins: input-output, catalyst-input, catalyst-output, regulator-input, regulator-output
     - [ ] Interaction between Complexes or Sets:  input-output, catalyst-input, catalyst-output, regulator-input, regulator-output
     - [ ] Binary interactions between proteins obtained from Uniprot, which in turn gets them from IntAct.
     - [ ] Reactions chained: Two reactions _R1_ and _R2_ are chained if the output of _R1_ is the input of _R2_. Where the input and output can be a protein, complex or set, but not a small molecule such as water, ATP or others.
