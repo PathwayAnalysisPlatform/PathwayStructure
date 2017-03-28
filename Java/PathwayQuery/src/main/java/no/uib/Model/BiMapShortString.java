@@ -8,7 +8,7 @@ import gnu.trove.map.hash.TObjectShortHashMap;
  */
 public class BiMapShortString {
     
-    //<short, byte[]>
+    //<short, byte[]>   //There is a short number labels, and I want to translate them into byte[].
 
     public String[] numberToCharacters;
     private TObjectShortHashMap<String> charactersToNumber;

@@ -6,22 +6,22 @@ package no.uib.Model;
  */
 public class AdjacentNeighbor implements Comparable<AdjacentNeighbor> {
 
-    private short num;
+    private int num;
     private byte type;
 
     /**
      * Creates an AdjacentNeighbour specifying the number of neighbour and
      * number of edge type.
      *
-     * @param num {short} Number of the neighbour.
+     * @param num {int} Number of the neighbour.
      * @param type {byte} Number of the type.
      */
-    public AdjacentNeighbor(short num, byte type) {
+    public AdjacentNeighbor(int num, byte type) {
         this.num = num;
         this.type = type;
     }
 
-    public short getNum() {
+    public int getNum() {
         return this.num;
     }
 
@@ -30,7 +30,7 @@ public class AdjacentNeighbor implements Comparable<AdjacentNeighbor> {
     }
 
     /**
-     * Compates two adjacent neighbours for ordering.
+     * Compares two adjacent neighbours for ordering.
      *
      * @param otherEdge
      * @return Return -1 if the other edge comes before than this in the

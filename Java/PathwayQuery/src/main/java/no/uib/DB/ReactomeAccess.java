@@ -6,15 +6,13 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import no.uib.Model.AdjacentNeighbor;
-import no.uib.Model.GraphAdjListEdgeTypes;
 import no.uib.Model.Pair;
 import no.uib.Model.Reaction;
-import no.uib.pathwayquery.Configuration;
+import no.uib.pathwayquery.Conf;
 import static no.uib.pathwayquery.ProteinGraphExtractor.G;
 import org.neo4j.driver.v1.Record;
 import org.neo4j.driver.v1.Session;
@@ -33,16 +31,45 @@ public class ReactomeAccess {
      * graph. The graph G must me initialised already in
      * {@link ProteinGraphExtractor}
      */
-    public static void getComplexOrSetNeighbors() {
+    public static void getComplexOrSetNeighbors() throws UnsupportedEncodingException {
         //Iterate over the proteins in the Graph
-        for (short I = 0; I < G.numVertices; I++) {
-//            if (!G.verticesMapping.getId(I).equals("P31749")) {
-//                continue;
-//            }
-            System.out.println("Getting neighbours of: " + I + " " + G.verticesMapping.getId(I));
+        for (int I = 0; I < G.getNumVertices(); I++) {
+            if(G.getVertexId(I).length() > 6)
+                continue;
+            System.out.println("Getting neighbours of: " + I + " " + G.getVertexId(I));
+            List<Record> records = queryComplexOrSetNeighbours(G.getVertexId(I));
 
-            for (AdjacentNeighbor n : queryComplexOrSetNeighbours(G.verticesMapping.getId(I))) {
-                G.addEdge(I, n);
+            for (Record r : records) {
+                String n = r.get("id").asString(); //Get the neighbour id as a string.
+                String t = r.get("role").asString() + "Neighbor"; //Get the edge type as a string
+                switch (t) {
+                    case "Complex":
+                        if (!Conf.boolMap.get(Conf.EdgeType.ComplexNeighbor.toString())) {
+                            continue;
+                        }
+                        break;
+                    case "DefinedSet":
+                        if (!Conf.boolMap.get(Conf.EdgeType.DefinedSetNeighbor.toString())) {
+                            continue;
+                        }
+                        break;
+                    case "OpenSet":
+                        if (!Conf.boolMap.get(Conf.EdgeType.OpenSetNeighbor.toString())) {
+                            continue;
+                        }
+                        break;
+                    case "CandidateSet":
+                        if (!Conf.boolMap.get(Conf.EdgeType.CandidateSetNeighbor.toString())) {
+                            continue;
+                        }
+                        break;
+                }
+                //System.out.println(t + " " + n);
+                if (G.containsVertex(n)) {
+                    G.addEdge(G.getVertexId(I), n, Conf.EdgeType.valueOf(t));
+                } else {
+                    System.out.println("Vertex " + n + " not found in list.");
+                }
             }
         }
     }
@@ -51,34 +78,34 @@ public class ReactomeAccess {
      * Makes a query to neo4j to get the complex and set neighbours of a
      * specific protein.
      */
-    private static List<AdjacentNeighbor> queryComplexOrSetNeighbours(String id) {
-        List<AdjacentNeighbor> neighboursList = new ArrayList<AdjacentNeighbor>();
+    private static List<Record> queryComplexOrSetNeighbours(String id) throws UnsupportedEncodingException {
+
         try (Session session = ConnectionNeo4j.driver.session(); Transaction tx = session.beginTransaction()) {
             String query = "MATCH (re:ReferenceEntity{identifier:{id}})<-[:referenceEntity]-(p:EntityWithAccessionedSequence)<-[:hasComponent|hasMember|hasCandidate|repeatedUnit*]-(e)-[:hasComponent|hasMember|hasCandidate|repeatedUnit*]->(nE:EntityWithAccessionedSequence)-[:referenceEntity]->(nP:ReferenceEntity)\n"
                     + "WHERE ANY (l IN labels(e) WHERE l IN [";
             boolean setOne = false;
-            if (Configuration.cn) {
+            if (Conf.boolMap.get(Conf.EdgeType.ComplexNeighbor.toString())) {
                 if (setOne) {
                     query += ", ";
                 }
                 query += "'Complex'";
                 setOne = true;
             }
-            if (Configuration.ds) {
+            if (Conf.boolMap.get(Conf.EdgeType.DefinedSetNeighbor.toString())) {
                 if (setOne) {
                     query += ", ";
                 }
                 query += "'DefinedSet'";
                 setOne = true;
             }
-            if (Configuration.cs) {
+            if (Conf.boolMap.get(Conf.EdgeType.CandidateSetNeighbor.toString())) {
                 if (setOne) {
                     query += ", ";
                 }
                 query += "'CandidateSet'";
                 setOne = true;
             }
-            if (Configuration.os) {
+            if (Conf.boolMap.get(Conf.EdgeType.OpenSetNeighbor.toString())) {
                 if (setOne) {
                     query += ", ";
                 }
@@ -87,45 +114,9 @@ public class ReactomeAccess {
             }
             query += "]) RETURN DISTINCT last(labels(e)) as role, nP.identifier as id";
             StatementResult result = tx.run(query, Values.parameters("id", id));
-            List<Record> records = result.list();
-            for (Record r : records) {
-                String n = r.get("id").asString(); //Get the neighbour id as a string.
-                String t = r.get("role").asString(); //Get the edge type as a string
-                switch (t) {
-                    case "Complex":
-                        if (!Configuration.cn) {
-                            continue;
-                        }
-                        break;
-                    case "DefinedSet":
-                        if (!Configuration.ds) {
-                            continue;
-                        }
-                        break;
-                    case "OpenSet":
-                        if (!Configuration.os) {
-                            continue;
-                        }
-                        break;
-                    case "CandidateSet":
-                        if (!Configuration.cs) {
-                            continue;
-                        }
-                        break;
-                }
-                //System.out.println(t + " " + n);
-                if (G.containsVertex(n)) {
-                    short nShort = G.verticesMapping.getNum(n);
-                    byte tByte = G.edgesMapping.getNum(GraphAdjListEdgeTypes.EdgeTypes.valueOf(t).toString());
-                    //System.out.println(tByte + " " + nShort);
-                    neighboursList.add(new AdjacentNeighbor(nShort, tByte));
-                } else {
-                    System.out.println("Vertex " + n + " not found in list.");
-                }
-            }
-        }
 
-        return neighboursList;
+            return result.list();
+        }
     }
 
     /**
@@ -155,44 +146,43 @@ public class ReactomeAccess {
 
         try {
             //Iterate over all reactions of the file asking for their participants and roles
-            BufferedReader reactionsBR = new BufferedReader(new FileReader(Configuration.reactionsFile));
+            BufferedReader reactionsBR = new BufferedReader(new FileReader(Conf.strMap.get(Conf.strVars.reactionsFile.toString())));
             String line = "";
             try {
                 while ((line = reactionsBR.readLine()) != null) //Read a reaction row
                 {
                     Reaction r = new Reaction(line);
-                    
+
 //                    if(r.stId.equals("R-HSA-382613")){
 //                        int i = 8;
 //                    }
-
                     //Check how many participants of this reaction are in the input protein list
                     //If there are at least two participants of this reaction contained in the input list
                     if (checkReactionIsCompatible(r)) {
 
                         for (Pair<String, String> interaction : r.getIOInteractions()) {
                             if (G.containsVertex(interaction.getL()) && G.containsVertex(interaction.getR())) {
-                                G.addEdge(interaction.getL(), interaction.getR(), GraphAdjListEdgeTypes.EdgeTypes.InputToOutput);
+                                G.addEdge(interaction.getL(), interaction.getR(), Conf.EdgeType.InputToOutput);
                             }
                         }
                         for (Pair<String, String> interaction : r.getCIInteractions()) {
                             if (G.containsVertex(interaction.getL()) && G.containsVertex(interaction.getR())) {
-                                G.addEdge(interaction.getL(), interaction.getR(), GraphAdjListEdgeTypes.EdgeTypes.CatalystToInput);
+                                G.addEdge(interaction.getL(), interaction.getR(), Conf.EdgeType.CatalystToInput);
                             }
                         }
                         for (Pair<String, String> interaction : r.getCOInteractions()) {
                             if (G.containsVertex(interaction.getL()) && G.containsVertex(interaction.getR())) {
-                                G.addEdge(interaction.getL(), interaction.getR(), GraphAdjListEdgeTypes.EdgeTypes.CatalystToOutput);
+                                G.addEdge(interaction.getL(), interaction.getR(), Conf.EdgeType.CatalystToOutput);
                             }
                         }
                         for (Pair<String, String> interaction : r.getRIInteractions()) {
                             if (G.containsVertex(interaction.getL()) && G.containsVertex(interaction.getR())) {
-                                G.addEdge(interaction.getL(), interaction.getR(), GraphAdjListEdgeTypes.EdgeTypes.RegulatorToInput);
+                                G.addEdge(interaction.getL(), interaction.getR(), Conf.EdgeType.RegulatorToInput);
                             }
                         }
                         for (Pair<String, String> interaction : r.getROInteractions()) {
                             if (G.containsVertex(interaction.getL()) && G.containsVertex(interaction.getR())) {
-                                G.addEdge(interaction.getL(), interaction.getR(), GraphAdjListEdgeTypes.EdgeTypes.RegulatorToOutput);
+                                G.addEdge(interaction.getL(), interaction.getR(), Conf.EdgeType.RegulatorToOutput);
                             }
                         }
                     }
@@ -228,9 +218,9 @@ public class ReactomeAccess {
             System.out.println(" 0%");
             for (Record r : records) {
                 String stId = r.get("reaction").asString();
-                if (stId.equals("R-HSA-382613")) {
-                    System.out.print("");
-                }
+//                if (stId.equals("R-HSA-382613")) {
+//                    System.out.print("");
+//                }
                 List<Record> participantRecords = getReactionParticipantsWithRoles(stId);
                 if (records.size() > 0) {
                     try {
@@ -374,12 +364,7 @@ public class ReactomeAccess {
         return result.list();
     }
 
-    private static List<Record> getReactionsContainingAProtein(String proteinId) {
-        return null;
-
-    }
-
-    private static boolean checkReactionIsCompatible(Reaction r) {
+    private static boolean checkReactionIsCompatible(Reaction r) throws UnsupportedEncodingException {
         int foundParticipants = 0;
         for (String p : r.getParticipants()) {
             if (G.containsVertex(p)) {
@@ -387,5 +372,111 @@ public class ReactomeAccess {
             }
         }
         return (foundParticipants >= 2);
+    }
+
+    public static List<Record> getEdgesByType(Conf.EdgeType t) {
+
+        String query = "";
+        switch (t) {
+            case ComplexHasProtein:
+                query = "MATCH (c:Complex)-[:hasComponent]->(ewas:EntityWithAccessionedSequence)-[:referenceEntity]->(re:ReferenceEntity)\n"
+                        + "WHERE c.speciesName = 'Homo sapiens' AND re.databaseName = 'UniProt'\n"
+                        + "RETURN DISTINCT c.stId as source, re.identifier as destiny";
+                break;
+            case SetHasProtein:
+                query = "MATCH (es:EntitySet)-[:hasMember|hasCandidate]->(ewas:EntityWithAccessionedSequence)-[:referenceEntity]->(re:ReferenceEntity)\n"
+                        + "WHERE es.speciesName = 'Homo sapiens' AND re.databaseName = 'UniProt'\n"
+                        + "RETURN DISTINCT es.stId as source, re.identifier as destiny";
+                break;
+            case ComplexHasComplex:
+                query = "MATCH (c1:Complex)-[:hasComponent]->(c2:Complex)\n"
+                        + "WHERE c1.speciesName = 'Homo sapiens' AND c2.speciesName = 'Homo sapiens'\n"
+                        + "RETURN DISTINCT c1.stId as source, c2.stId as destiny";
+                break;
+            case SetHasComplex:
+                query = "MATCH (es:EntitySet)-[:hasMember|hasCandidate]->(c:Complex)\n"
+                        + "WHERE c.speciesName = 'Homo sapiens' AND es.speciesName = 'Homo sapiens'\n"
+                        + "RETURN DISTINCT c.stId as source, es.stId as destiny";
+                break;
+            case ComplexHasSet:
+                query = "MATCH (c:Complex)-[:hasComponent]->(es:EntitySet)\n"
+                        + "WHERE c.speciesName = 'Homo sapiens' AND es.speciesName = 'Homo sapiens'\n"
+                        + "RETURN DISTINCT c.stId as source, es.stId as destiny";
+                break;
+            case SetHasSet:
+                query = "MATCH (es1:EntitySet)-[:hasMember|hasCandidate]->(es2:EntitySet)\n"
+                        + "WHERE es1.speciesName = 'Homo sapiens' AND es2.speciesName = 'Homo sapiens'\n"
+                        + "RETURN DISTINCT es1.stId as source, es2.stId as destiny";
+                break;
+            case ReactionHasProtein:
+                query = "MATCH (r:Reaction)-[:input|output|catalystActivity|physicalEntity|regulatedBy|regulator*]->(ewas:EntityWithAccessionedSequence)-[:referenceEntity]->(re:ReferenceEntity)\n"
+                        + "WHERE r.speciesName = 'Homo sapiens' AND re.databaseName = 'UniProt'\n"
+                        + "RETURN DISTINCT r.stId AS source, re.identifier as destiny";
+                break;
+            case ReactionHasComplex:
+                query = "MATCH (r:Reaction)-[:input|output|catalystActivity|physicalEntity|regulatedBy|regulator*]->(c:Complex)\n"
+                        + "WHERE r.speciesName = 'Homo sapiens' AND c.speciesName = 'Homo sapiens'\n"
+                        + "RETURN DISTINCT r.stId AS source, c.stId as destiny";
+                break;
+            case ReactionHasSet:
+                query = "MATCH (r:Reaction)-[:input|output|catalystActivity|physicalEntity|regulatedBy|regulator*]->(es:EntitySet)\n"
+                        + "WHERE r.speciesName = 'Homo sapiens' AND es.speciesName = 'Homo sapiens'\n"
+                        + "RETURN DISTINCT r.stId AS source, es.stId as destiny";
+                break;
+            case PathwayHasReaction:
+                query = "MATCH (p:Pathway)-[:hasEvent]->(r:Reaction)\n"
+                        + "WHERE p.speciesName = 'Homo sapiens' AND r.speciesName = 'Homo sapiens'\n"
+                        + "RETURN DISTINCT p.stId AS source, r.stId AS destiny";
+                break;
+            case PathwayHasPathway:
+                query = "MATCH (p1:Pathway)-[:hasEvent]->(p2:Pathway)\n"
+                        + "WHERE p1.speciesName = 'Homo sapiens' AND p2.speciesName = 'Homo sapiens'\n"
+                        + "RETURN DISTINCT p1.stId as source, p2.stId as destiny";
+                break;
+            default:
+                return null;
+        }
+
+        Session session = ConnectionNeo4j.driver.session();
+        StatementResult result = session.run(query);
+
+        session.close();
+        return result.list();
+    }
+
+    /**
+     * Gets the list of standard ids existent in Reactome for the specified type
+     * of entity, such as Complex, Set, Reaction, Pathway. The proteins are
+     * obtained from the input list or uniprot updated list.
+     *
+     * @param t {EntityType} Type of entity
+     * @return List of object Record that contain a field called "id" that
+     * contains the stId of every object of the specified type.
+     */
+    public static List<Record> getVerticesByType(Conf.EntityType t) {
+
+        String query = "";
+        switch (t) {
+            case Complex:
+                query = "MATCH (c:Complex) WHERE c.speciesName = 'Homo sapiens' RETURN c.stId as id";
+                break;
+            case Set:
+                query = "MATCH (es:EntitySet) WHERE es.speciesName = 'Homo sapiens' RETURN es.stId as id";
+                break;
+            case Reaction:
+                query = "MATCH (r:Reaction) WHERE r.speciesName = 'Homo sapiens' RETURN r.stId as id";
+                break;
+            case Pathway:
+                query = "MATCH (p:Pathway) WHERE p.speciesName = 'Homo sapiens' RETURN p.stId as id";
+                break;
+            default:
+                return null;
+        }
+
+        Session session = ConnectionNeo4j.driver.session();
+        StatementResult result = session.run(query);
+
+        session.close();
+        return result.list();
     }
 }

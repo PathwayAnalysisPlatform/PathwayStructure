@@ -1,5 +1,6 @@
 package no.uib.DB;
 
+import java.io.FileWriter;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
@@ -68,46 +69,146 @@ public class UniprotAccess {
             LOG.info("Got a OK reply");
             InputStream reader = conn.getInputStream();
             URLConnection.guessContentTypeFromStream(reader);
-
-            //ProteinGraphExtractor.G.verticesMapping.numberToCharacters = new byte[21000][];
+            StringBuilder builder = new StringBuilder();
             int a = 0;
-            String id = "";
-            int cont = 0, col = 0;
-            ProteinGraphExtractor.totalNumProt = 0;
-            //Remove header
-            do {
-                a = reader.read();
-            } while (a != -1 && (char) a != '\n');
-
-            //Separate into id strings
             while ((a = reader.read()) != -1) {
-                if ((char) a == '\n') {
-                    cont++;
-                    col = 0;
-                    if (id.length() <= 6) {
-                        ProteinGraphExtractor.G.verticesMapping.put(ProteinGraphExtractor.totalNumProt, id);
-                        ProteinGraphExtractor.totalNumProt++;
-                    }
-                    id = "";
-                } else {
-                    id += (char) a;
-                    col++;
-                }
+                builder.append((char) a);
             }
+            System.out.println(builder.toString());
         } else {
-            LOG.severe("Failed, got " + conn.getResponseMessage() + " for " + location);
+            LOG.severe("Failed, got " + conn.getResponseMessage() + " for "
+                    + location);
         }
         conn.disconnect();
     }
 
-    public static void getUniprotProteome() {
+    public static void getUniProtProteome() {
         try {
-            run("uniprot", new ParameterNameValue[]{
-                new ParameterNameValue("from", "ACC"),
-                new ParameterNameValue("to", "P_REFSEQ_AC"),
-                new ParameterNameValue("format", "tab"),
-                new ParameterNameValue("columns", "id"),
-                new ParameterNameValue("query", "reviewed:yes+AND+organism:9606"),});
+            String location = "http://www.uniprot.org/uniprot/?from=ACC&to=P_REFSEQ_AC&format=tab&columns=id&query=reviewed%3Ayes%2BAND%2Borganism%3A9606";
+            URL url = new URL(location);
+            LOG.info("Submitting...");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            HttpURLConnection.setFollowRedirects(true);
+            conn.setDoInput(true);
+            conn.connect();
+
+            int status = conn.getResponseCode();
+            while (true) {
+                int wait = 0;
+                String header = conn.getHeaderField("Retry-After");
+                if (header != null) {
+                    wait = Integer.valueOf(header);
+                }
+                if (wait == 0) {
+                    break;
+                }
+                LOG.info("Waiting (" + wait + ")...");
+                conn.disconnect();
+                Thread.sleep(wait * 1000);
+                conn = (HttpURLConnection) new URL(location).openConnection();
+                conn.setDoInput(true);
+                conn.connect();
+                status = conn.getResponseCode();
+            }
+            if (status == HttpURLConnection.HTTP_OK) {
+                LOG.info("Got a OK reply");
+                InputStream reader = conn.getInputStream();
+                URLConnection.guessContentTypeFromStream(reader);
+
+                int a = 0;
+                String id = "";
+                int cont = 0, col = 0;
+                //Remove header
+                do {
+                    a = reader.read();
+                } while (a != -1 && (char) a != '\n');
+
+                //Separate into id strings
+                while ((a = reader.read()) != -1) {
+                    if ((char) a == '\n') {
+                        cont++;
+                        col = 0;
+                        if (id.length() <= 6) {
+                            ProteinGraphExtractor.G.addVertex(id);
+                        }
+                        id = "";
+                    } else {
+                        id += (char) a;
+                        col++;
+                    }
+                }
+            } else {
+                LOG.severe("Failed, got " + conn.getResponseMessage() + " for " + location);
+            }
+            conn.disconnect();
+        } catch (Exception ex) {
+            Logger.getLogger(UniprotAccess.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.severe("Failed to get Uniprot Proteome.");
+        }
+    }
+
+    private static void createUniProtProteomeFile(String path) {
+        try {
+            FileWriter fw = new FileWriter(path);
+            String location = "http://www.uniprot.org/uniprot/?from=ACC&to=P_REFSEQ_AC&format=tab&columns=id&query=reviewed%3Ayes%2BAND%2Borganism%3A9606";
+            URL url = new URL(location);
+            LOG.info("Submitting...");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            HttpURLConnection.setFollowRedirects(true);
+            conn.setDoInput(true);
+            conn.connect();
+
+            int status = conn.getResponseCode();
+            while (true) {
+                int wait = 0;
+                String header = conn.getHeaderField("Retry-After");
+                if (header != null) {
+                    wait = Integer.valueOf(header);
+                }
+                if (wait == 0) {
+                    break;
+                }
+                LOG.info("Waiting (" + wait + ")...");
+                conn.disconnect();
+                Thread.sleep(wait * 1000);
+                conn = (HttpURLConnection) new URL(location).openConnection();
+                conn.setDoInput(true);
+                conn.connect();
+                status = conn.getResponseCode();
+            }
+            if (status == HttpURLConnection.HTTP_OK) {
+                LOG.info("Got a OK reply");
+                InputStream reader = conn.getInputStream();
+                URLConnection.guessContentTypeFromStream(reader);
+
+                int a = 0;
+                String id = "";
+                int cont = 0, col = 0;
+                
+                //Remove header
+                do {
+                    a = reader.read();
+                } while (a != -1 && (char) a != '\n');
+
+                //Separate into id strings
+                while ((a = reader.read()) != -1) {
+                    if ((char) a == '\n') {
+                        cont++;
+                        col = 0;
+                        if (id.length() <= 6) {
+                            fw.write(id + "\n");
+                        }
+                        id = "";
+                    } else {
+                        id += (char) a;
+                        col++;
+                    }
+                }
+            } else {
+                LOG.severe("Failed, got " + conn.getResponseMessage() + " for " + location);
+            }
+            conn.disconnect();
+            fw.close();
         } catch (Exception ex) {
             Logger.getLogger(UniprotAccess.class.getName()).log(Level.SEVERE, null, ex);
             LOG.severe("Failed to get Uniprot Proteome.");
@@ -116,12 +217,8 @@ public class UniprotAccess {
 
     public static void main(String[] args)
             throws Exception {
-        run("uniprot", new ParameterNameValue[]{
-            new ParameterNameValue("from", "ACC"),
-            new ParameterNameValue("to", "P_REFSEQ_AC"),
-            new ParameterNameValue("format", "tab"),
-            new ParameterNameValue("columns", "id"),
-            new ParameterNameValue("query", "reviewed:yes+AND+organism:9606"),});
+        createUniProtProteomeFile("./UniProtHumanProteome.txt");
+        //getUniProtProteome();
     }
 
     private static class ParameterNameValue {

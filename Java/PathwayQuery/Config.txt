@@ -1,7 +1,9 @@
 //General configuration
+version=2
 allProteome=false
 //inputListFile=./src/main/resources/input/listBjorn.csv
-maxNumProt=21000
+maxNumVertices=45000
+showIsolatedVertices=false
 
 //Database access
 host=bolt://localhost
@@ -16,7 +18,7 @@ onlyNeighborsInList=false
 onlyOrderedEdges=false
 showMissingProteins=false
 
-//Edges
+//Horizontal Edges
 cn=false
 ds=false
 os=false
@@ -27,14 +29,20 @@ co=true
 ri=true
 ro=true
 
-reactionNeighbors=true
-complexNeighbors=true
-entityNeighbors=false
-candidateNeighbors=false
-topLevelPathwayNeighbors=false
-pathwayNeighbors=false
+//Vertical edges
+Cp=true
+Sp=true
+CC=true
+SC=true
+Cs=true
+SS=true
+Rp=true
+RC=true
+RS=true
+PR=true
+PP=true
 
 //Results
 outputGraphFileType=sif
 outputGraphFilePath=.
-outputFileName=ProteomeReactions
+outputFileName=ProteomeGraph
