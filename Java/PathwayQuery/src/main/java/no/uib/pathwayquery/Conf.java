@@ -17,55 +17,23 @@ public class Conf {
 
     public static boolean contains(String name) {
 
-        for (strVars v : strVars.values()) {
-            if (v.name().equals(name)) {
-                return true;
-            }
-        }
-        for (boolVars v : boolVars.values()) {
-            if (v.name().equals(name)) {
-                return true;
-            }
-        }
-        for (intVars v : intVars.values()) {
-            if (v.name().equals(name)) {
-                return true;
-            }
-        }
-        for (EdgeType v : EdgeType.values()) {
-            if (v.name().equals(name)) {
-                return true;
-            }
-        }
+        if(strMap.containsKey(name))
+            return true;
+        if(boolMap.containsKey(name))
+            return true;
+        if(intMap.containsKey(name))
+            return true;
 
         return false;
     }
 
     public static void setValue(String name, String value) {
-        for (strVars v : strVars.values()) {
-            if (v.name().equals(name)) {
-                strMap.put(name, value);
-                return;
-            }
-        }
-        for (boolVars v : boolVars.values()) {
-            if (v.name().equals(name)) {
-                boolMap.put(name, Boolean.valueOf(value));
-                return;
-            }
-        }
-        for (intVars v : intVars.values()) {
-            if (v.name().equals(name)) {
-                intMap.put(name, Integer.valueOf(value));
-                return;
-            }
-        }
-        for (EdgeType v : EdgeType.values()) {
-            if (v.name().equals(name)) {
-                boolMap.put(name, Boolean.valueOf(value));
-                return;
-            }
-        }
+        if(strMap.containsKey(name))
+            strMap.put(name, value);
+        if(boolMap.containsKey(name))
+            boolMap.put(name, Boolean.valueOf(value));
+        if(intMap.containsKey(name))
+            intMap.put(name, Integer.valueOf(value));
     }
 
     public static void setDefaultValues() {
@@ -76,7 +44,7 @@ public class Conf {
         // Set general configuration
         intMap.put("version", 2);
         boolMap.put("allProteome", Boolean.TRUE);
-        intMap.put("maxNumProt", 21000); //The graph will ask for memory to accomodate this number of proteins. Then it has to be as accurate as possible.
+        intMap.put("maxNumVertices", 21000); //The graph will ask for memory to accomodate this number of proteins. Then it has to be as accurate as possible.
         strMap.put("inputListFile", "./src/main/resources/input/uniprotList.txt"); //Input to create a json graph
         strMap.put("reactionsFile", "./Reactions.txt"); //Input to create a json graph
         boolMap.put("ignoreMisformatedRows", Boolean.TRUE);
@@ -269,6 +237,11 @@ public class Conf {
         PathwayHasPathway {
             public String toString() {
                 return "PP";
+            }
+        },
+        ReactionChainedToReaction{
+            public String toString(){
+                return "RR";
             }
         }
     }

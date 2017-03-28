@@ -34,8 +34,9 @@ public class ReactomeAccess {
     public static void getComplexOrSetNeighbors() throws UnsupportedEncodingException {
         //Iterate over the proteins in the Graph
         for (int I = 0; I < G.getNumVertices(); I++) {
-            if(G.getVertexId(I).length() > 6)
+            if (G.getVertexId(I).length() > 6) {
                 continue;
+            }
             System.out.println("Getting neighbours of: " + I + " " + G.getVertexId(I));
             List<Record> records = queryComplexOrSetNeighbours(G.getVertexId(I));
 
@@ -433,12 +434,92 @@ public class ReactomeAccess {
                         + "WHERE p1.speciesName = 'Homo sapiens' AND p2.speciesName = 'Homo sapiens'\n"
                         + "RETURN DISTINCT p1.stId as source, p2.stId as destiny";
                 break;
+            case ReactionChainedToReaction:
+                query = "MATCH (r1:Reaction{stId:{id}})-[role1:input|output|catalystActivity|physicalEntity|regulatedBy|regulator|hasComponent|hasMember|hasCandidate|repeatedUnit*]->(ewas:EntityWithAccessionedSequence)<-[role2:input|output|catalystActivity|physicalEntity|regulatedBy|regulator|hasComponent|hasMember|hasCandidate|repeatedUnit*]-(r2:Reaction)\n"
+                        + "WHERE r1.stId <> r2.stId AND head(extract(x IN role1 | type(x))) = 'output' AND last(extract(x IN role2 | type(x))) = 'input'\n"
+                        + "RETURN DISTINCT r1.stId as source, r2.stId as destiny";
+                break;
             default:
                 return null;
         }
 
         Session session = ConnectionNeo4j.driver.session();
         StatementResult result = session.run(query);
+
+        session.close();
+        return result.list();
+    }
+
+    public static List<Record> getEdgesByTypeAndId(Conf.EdgeType t, String id) {
+
+        String query = "";
+        switch (t) {
+            case ComplexHasProtein:
+                query = "MATCH (c:Complex{stId:{id}})-[:hasComponent]->(ewas:EntityWithAccessionedSequence)-[:referenceEntity]->(re:ReferenceEntity)\n"
+                        + "WHERE c.speciesName = 'Homo sapiens' AND re.databaseName = 'UniProt'\n"
+                        + "RETURN DISTINCT c.stId as source, re.identifier as destiny";
+                break;
+            case SetHasProtein:
+                query = "MATCH (es:EntitySet{stId:{id}})-[:hasMember|hasCandidate]->(ewas:EntityWithAccessionedSequence)-[:referenceEntity]->(re:ReferenceEntity)\n"
+                        + "WHERE es.speciesName = 'Homo sapiens' AND re.databaseName = 'UniProt'\n"
+                        + "RETURN DISTINCT es.stId as source, re.identifier as destiny";
+                break;
+            case ComplexHasComplex:
+                query = "MATCH (c1:Complex{stId:{id}})-[:hasComponent]->(c2:Complex)\n"
+                        + "WHERE c1.speciesName = 'Homo sapiens' AND c2.speciesName = 'Homo sapiens'\n"
+                        + "RETURN DISTINCT c1.stId as source, c2.stId as destiny";
+                break;
+            case SetHasComplex:
+                query = "MATCH (es:EntitySet{stId:{id}})-[:hasMember|hasCandidate]->(c:Complex)\n"
+                        + "WHERE c.speciesName = 'Homo sapiens' AND es.speciesName = 'Homo sapiens'\n"
+                        + "RETURN DISTINCT c.stId as source, es.stId as destiny";
+                break;
+            case ComplexHasSet:
+                query = "MATCH (c:Complex{stId:{id}})-[:hasComponent]->(es:EntitySet)\n"
+                        + "WHERE c.speciesName = 'Homo sapiens' AND es.speciesName = 'Homo sapiens'\n"
+                        + "RETURN DISTINCT c.stId as source, es.stId as destiny";
+                break;
+            case SetHasSet:
+                query = "MATCH (es1:EntitySet{stId:{id}})-[:hasMember|hasCandidate]->(es2:EntitySet)\n"
+                        + "WHERE es1.speciesName = 'Homo sapiens' AND es2.speciesName = 'Homo sapiens'\n"
+                        + "RETURN DISTINCT es1.stId as source, es2.stId as destiny";
+                break;
+            case ReactionHasProtein:
+                query = "MATCH (r:Reaction{stId:{id}})-[:input|output|catalystActivity|physicalEntity|regulatedBy|regulator*]->(ewas:EntityWithAccessionedSequence)-[:referenceEntity]->(re:ReferenceEntity)\n"
+                        + "WHERE r.speciesName = 'Homo sapiens' AND re.databaseName = 'UniProt'\n"
+                        + "RETURN DISTINCT r.stId AS source, re.identifier as destiny";
+                break;
+            case ReactionHasComplex:
+                query = "MATCH (r:Reaction{stId:{id}})-[:input|output|catalystActivity|physicalEntity|regulatedBy|regulator*]->(c:Complex)\n"
+                        + "WHERE r.speciesName = 'Homo sapiens' AND c.speciesName = 'Homo sapiens'\n"
+                        + "RETURN DISTINCT r.stId AS source, c.stId as destiny";
+                break;
+            case ReactionHasSet:
+                query = "MATCH (r:Reaction{stId:{id}})-[:input|output|catalystActivity|physicalEntity|regulatedBy|regulator*]->(es:EntitySet)\n"
+                        + "WHERE r.speciesName = 'Homo sapiens' AND es.speciesName = 'Homo sapiens'\n"
+                        + "RETURN DISTINCT r.stId AS source, es.stId as destiny";
+                break;
+            case PathwayHasReaction:
+                query = "MATCH (p:Pathway{stId:{id}})-[:hasEvent]->(r:Reaction)\n"
+                        + "WHERE p.speciesName = 'Homo sapiens' AND r.speciesName = 'Homo sapiens'\n"
+                        + "RETURN DISTINCT p.stId AS source, r.stId AS destiny";
+                break;
+            case PathwayHasPathway:
+                query = "MATCH (p1:Pathway{stId:{id}})-[:hasEvent]->(p2:Pathway)\n"
+                        + "WHERE p1.speciesName = 'Homo sapiens' AND p2.speciesName = 'Homo sapiens'\n"
+                        + "RETURN DISTINCT p1.stId as source, p2.stId as destiny";
+                break;
+            case ReactionChainedToReaction:
+                query = "MATCH (r1:Reaction{stId:{id}})-[role1:input|output|catalystActivity|physicalEntity|regulatedBy|regulator|hasComponent|hasMember|hasCandidate|repeatedUnit*]->(ewas:EntityWithAccessionedSequence)<-[role2:input|output|catalystActivity|physicalEntity|regulatedBy|regulator|hasComponent|hasMember|hasCandidate|repeatedUnit*]-(r2:Reaction)\n"
+                        + "WHERE r1.stId <> r2.stId AND head(extract(x IN role1 | type(x))) = 'output' AND last(extract(x IN role2 | type(x))) = 'input'\n"
+                        + "RETURN DISTINCT r1.stId as source, r2.stId as destiny";
+                break;
+            default:
+                return null;
+        }
+
+        Session session = ConnectionNeo4j.driver.session();
+        StatementResult result = session.run(query, Values.parameters("id", id));
 
         session.close();
         return result.list();

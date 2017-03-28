@@ -34,13 +34,14 @@ Cp=true
 Sp=true
 CC=true
 SC=true
-Cs=true
+CS=true
 SS=true
 Rp=true
 RC=true
 RS=true
-PR=true
-PP=true
+PR=false
+PP=false
+RR=true
 
 //Results
 outputGraphFileType=sif
