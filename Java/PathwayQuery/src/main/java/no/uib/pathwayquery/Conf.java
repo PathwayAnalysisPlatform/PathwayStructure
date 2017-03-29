@@ -17,23 +17,29 @@ public class Conf {
 
     public static boolean contains(String name) {
 
-        if(strMap.containsKey(name))
+        if (strMap.containsKey(name)) {
             return true;
-        if(boolMap.containsKey(name))
+        }
+        if (boolMap.containsKey(name)) {
             return true;
-        if(intMap.containsKey(name))
+        }
+        if (intMap.containsKey(name)) {
             return true;
+        }
 
         return false;
     }
 
     public static void setValue(String name, String value) {
-        if(strMap.containsKey(name))
+        if (strMap.containsKey(name)) {
             strMap.put(name, value);
-        if(boolMap.containsKey(name))
+        }
+        if (boolMap.containsKey(name)) {
             boolMap.put(name, Boolean.valueOf(value));
-        if(intMap.containsKey(name))
+        }
+        if (intMap.containsKey(name)) {
             intMap.put(name, Integer.valueOf(value));
+        }
     }
 
     public static void setDefaultValues() {
@@ -239,8 +245,8 @@ public class Conf {
                 return "PP";
             }
         },
-        ReactionChainedToReaction{
-            public String toString(){
+        ReactionChainedToReaction {
+            public String toString() {
                 return "RR";
             }
         }
@@ -290,6 +296,66 @@ public class Conf {
         ro {
             public String toString() {
                 return "RegulatorToOutput";
+            }
+        },
+        Cp {
+            public String toString() {
+                return "ComplexHasProtein";
+            }
+        },
+        Sp {
+            public String toString() {
+                return "SetHasProtein";
+            }
+        },
+        CC {
+            public String toString() {
+                return "ComplexHasComplex";
+            }
+        },
+        SC {
+            public String toString() {
+                return "SetHasComplex";
+            }
+        },
+        CS {
+            public String toString() {
+                return "ComplexHasSet";
+            }
+        },
+        SS {
+            public String toString() {
+                return "SetHasSet";
+            }
+        },
+        Rp {
+            public String toString() {
+                return "ReactionHasProtein";
+            }
+        },
+        RC {
+            public String toString() {
+                return "ReactionHasComplex";
+            }
+        },
+        RS {
+            public String toString() {
+                return "ReactionHasSet";
+            }
+        },
+        PR {
+            public String toString() {
+                return "PathwayHasReaction";
+            }
+        },
+        PP {
+            public String toString() {
+                return "PathwayHasPathway";
+            }
+        },
+        RR {
+            public String toString() {
+                return "ReactionChainedToReaction";
             }
         }
     }
