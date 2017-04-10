@@ -37,6 +37,8 @@ public class ProteinGraphExtractor {
 
         // Initialize graph
         // In this part I don't know how many proteins are required, then it is set to the maximum capacity
+        String varName = Conf.intVars.maxNumVertices.toString();
+        int num = Conf.intMap.get(varName);
         G = new GraphReactome(Conf.intMap.get(Conf.intVars.maxNumVertices.toString()));
 
         System.out.println(G.getNumVertices());
@@ -97,10 +99,29 @@ public class ProteinGraphExtractor {
         for (Conf.EdgeType t : Conf.EdgeType.values()) {
             if (Conf.boolMap.get(t.toString())) {
                 System.out.println("Getting " + t.toString() + " edges...");
-                List<Record> records = ReactomeAccess.getEdgesByType(t);
-                System.out.println("Found " + (records != null ? records.size() : 0) + " edges.");
-                G.addAllEdges(records, t);
-
+                if (t.equals(Conf.EdgeType.ReactionChainedToReaction)) {
+                    List<Record> reactionList = ReactomeAccess.getVerticesByType(Conf.EntityType.Reaction);
+                    int cont = 0;
+                    int percentage = 0;
+                    System.out.print(percentage + "% ");
+                    for(Record reaction : reactionList){
+                        List<Record> records = ReactomeAccess.getEdgesByTypeAndId(t, reaction.get("id").asString());
+                        G.addAllEdges(records, t);
+                        cont++;
+                        if(cont%400 == 0){
+                            int newPercentage = cont*100/reactionList.size();
+                            if(percentage < newPercentage){
+                                System.out.print(newPercentage + "% ");
+                                percentage = newPercentage;
+                            }
+                        }
+                    }
+                    System.out.println("");
+                } else {
+                    List<Record> records = ReactomeAccess.getEdgesByType(t);
+                    System.out.println("Found " + (records != null ? records.size() : 0) + " edges.");
+                    G.addAllEdges(records, t);
+                }
             }
         }
 

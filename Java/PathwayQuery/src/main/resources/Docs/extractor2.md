@@ -28,9 +28,8 @@ Edges:
     - [X] pathway has a pathway (PP).
 * Horizontal:
     - [X] Interaction between proteins: input-output, catalyst-input, catalyst-output, regulator-input, regulator-output
-    - [ ] Interaction between Complexes or Sets:  input-output, catalyst-input, catalyst-output, regulator-input, regulator-output
     - [ ] Binary interactions between proteins obtained from Uniprot, which in turn gets them from IntAct.
-    - [ ] Reactions chained: Two reactions _R1_ and _R2_ are chained if the output of _R1_ is the input of _R2_. Where the input and output can be a protein, complex or set, but not a small molecule such as water, ATP or others.
+    - [X] Reactions chained (RR): Two reactions _R1_ and _R2_ are chained if the output of _R1_ is the input of _R2_. Where the input and output can be a protein, complex or set, but not a small molecule such as water, ATP or others.
 
 ## Input
 
@@ -142,6 +141,15 @@ RETURN DISTINCT p.stId AS source, r.stId AS destiny
 MATCH (p1:Pathway)-[:hasEvent]->(p2:Pathway)
 WHERE p1.speciesName = 'Homo sapiens' AND p2.speciesName = 'Homo sapiens'
 RETURN DISTINCT p1.stId as source, p2.stId as destiny
+~~~~
+* RR:
+~~~~
+MATCH (r1:Reaction)-[role1:input|output|catalystActivity|physicalEntity|regulatedBy|regulator|hasComponent|hasMember|hasCandidate|repeatedUnit*]->(ewas:EntityWithAccessionedSequence)<-[role2:input|output|catalystActivity|physicalEntity|regulatedBy|regulator|hasComponent|hasMember|hasCandidate|repeatedUnit*]-(r2:Reaction)
+WHERE NOT (r1.stId = r2.stId)
+WITH r1, head(extract(x IN role1 | type(x))) as role1, ewas, last(extract(x IN role2 | type(x))) as role2, r2
+MATCH (ewas)-[:referenceEntity]->(re:ReferenceEntity{databaseName:'UniProt'})
+WHERE role1 = 'output' AND role2 = 'input'
+RETURN DISTINCT r1.stId as Reaction1, role1, re.identifier as protein,  role2, r2.stId as Reaction2 ORDER BY Reaction1
 ~~~~
 
 #### stId

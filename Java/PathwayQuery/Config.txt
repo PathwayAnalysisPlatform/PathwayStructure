@@ -19,7 +19,7 @@ onlyOrderedEdges=false
 showMissingProteins=false
 
 //Horizontal Edges
-cn=false
+cn=true
 ds=false
 os=false
 cs=false
@@ -28,19 +28,20 @@ ci=true
 co=true
 ri=true
 ro=true
+RR=false
 
 //Vertical edges
-Cp=true
-Sp=true
-CC=true
-SC=true
-Cs=true
-SS=true
-Rp=true
-RC=true
-RS=true
-PR=true
-PP=true
+Cp=false
+Sp=false
+CC=false
+SC=false
+CS=false
+SS=false
+Rp=false
+RC=false
+RS=false
+PR=false
+PP=false
 
 //Results
 outputGraphFileType=sif
