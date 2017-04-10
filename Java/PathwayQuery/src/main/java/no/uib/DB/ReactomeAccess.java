@@ -209,7 +209,9 @@ public class ReactomeAccess {
         try {
             FileWriter reactionsFW = new FileWriter("./Reactions.txt"); //Create or empty the file for reactions
             Session session = ConnectionNeo4j.driver.session();
-            String query = "MATCH (n:ReactionLikeEvent) RETURN n.stId as reaction";
+            String query = "MATCH (n:ReactionLikeEvent) \n"
+                    + "WHERE n.speciesName = 'Homo sapiens'\n"
+                    + "RETURN n.stId as reaction";
             StatementResult result = session.run(query);
             List<Record> records = result.list();
             int progress = 0;
@@ -511,7 +513,7 @@ public class ReactomeAccess {
                 break;
             case ReactionChainedToReaction:
                 query = "MATCH (r1:Reaction{stId:{id}})-[role1:input|output|catalystActivity|physicalEntity|regulatedBy|regulator|hasComponent|hasMember|hasCandidate|repeatedUnit*]->(ewas:EntityWithAccessionedSequence)<-[role2:input|output|catalystActivity|physicalEntity|regulatedBy|regulator|hasComponent|hasMember|hasCandidate|repeatedUnit*]-(r2:Reaction)\n"
-                        + "WHERE r1.stId <> r2.stId AND head(extract(x IN role1 | type(x))) = 'output' AND last(extract(x IN role2 | type(x))) = 'input'\n"
+                        + "WHERE r1.stId <> r2.stId AND head(extract(x IN role1 | type(x))) = 'output' AND last(extract(x IN role2 | type(x))) = 'input' AND r1.speciesName = 'Homo sapiens' AND r2.speciesName = 'Homo sapiens'\n"
                         + "RETURN DISTINCT r1.stId as source, r2.stId as destiny";
                 break;
             default:

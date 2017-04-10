@@ -23,7 +23,6 @@ import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import no.uib.Model.GraphReactome;
-import no.uib.pathwayquery.Conf;
 
 /**
  *
@@ -49,7 +48,7 @@ public class ShortestPathsCalculator {
         int index = 0;
         BufferedReader input;
         try {
-            input = new BufferedReader(new FileReader("./src/main/resources/input/listLeukDiat.csv"));
+            input = new BufferedReader(new FileReader("./src/main/resources/input/diabetesProteinsUniProt.txt"));
             for (String id; (id = input.readLine()) != null; ) {
                 if (id.length() <= 6) {
                     s.add(id);

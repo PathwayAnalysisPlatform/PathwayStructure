@@ -93,6 +93,8 @@ public class GraphReactome {
      * @param path {String} The path to the file that contains the graph.
      */
     public GraphReactome(String path, int numVertices) throws UnsupportedEncodingException {
+        
+        //TODO when the edges are of certain types, I have to duplicate the edge in the reverse order
         this.adjacencyList = (HashSet<AdjacentNeighbor>[]) new HashSet[numVertices];
         for (int I = 0; I < numVertices; I++) {
             adjacencyList[I] = new HashSet<>();
@@ -339,7 +341,7 @@ public class GraphReactome {
         //Initialize distances
         for (int r = 0; r < proteinSet.size(); r++) {
             for (int c = 0; c < proteinSet.size(); c++) {
-                d[r][c] = 0;
+                d[r][c] = Byte.MAX_VALUE;
             }
         }
         int index = 0;
