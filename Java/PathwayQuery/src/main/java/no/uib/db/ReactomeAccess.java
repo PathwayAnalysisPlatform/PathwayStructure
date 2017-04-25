@@ -1,4 +1,4 @@
-package no.uib.DB;
+package no.uib.db;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -7,11 +7,12 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import no.uib.Model.Pair;
-import no.uib.Model.Reaction;
+import no.uib.model.Pair;
+import no.uib.model.Reaction;
 import no.uib.pathwayquery.Conf;
 import static no.uib.pathwayquery.ProteinGraphExtractor.G;
 import org.neo4j.driver.v1.Record;
@@ -19,6 +20,7 @@ import org.neo4j.driver.v1.Session;
 import org.neo4j.driver.v1.StatementResult;
 import org.neo4j.driver.v1.Transaction;
 import org.neo4j.driver.v1.Values;
+import no.uib.db.CypherQueries.Queries;
 
 /**
  *
@@ -561,5 +563,23 @@ public class ReactomeAccess {
 
         session.close();
         return result.list();
+    }
+
+    public static List<String> getProteinListByMods(List<String> mods) {
+
+        String query = CypherQueries.Queries.getProteinsByPsiMod.toString();
+        mods.replaceAll(mod -> "\"" + mod + "\"");
+        query = query.replace("{modList}", mods.toString());
+        List<String> result = new ArrayList<>();
+
+        Session session = ConnectionNeo4j.driver.session();
+        StatementResult queryResult = session.run(query);
+
+        for (Record record : queryResult.list()) {
+            result.add(record.get("protein").asString());
+        }
+
+        session.close();
+        return result;
     }
 }

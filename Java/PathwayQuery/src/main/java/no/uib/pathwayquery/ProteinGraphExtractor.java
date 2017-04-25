@@ -1,6 +1,6 @@
 package no.uib.pathwayquery;
 
-import no.uib.DB.UniprotAccess;
+import no.uib.db.UniprotAccess;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -8,9 +8,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import no.uib.DB.ConnectionNeo4j;
-import no.uib.DB.ReactomeAccess;
-import no.uib.Model.GraphReactome;
+import no.uib.db.ConnectionNeo4j;
+import no.uib.db.ReactomeAccess;
+import no.uib.model.GraphReactome;
 import org.neo4j.driver.v1.AuthTokens;
 import org.neo4j.driver.v1.GraphDatabase;
 import org.neo4j.driver.v1.Record;
@@ -104,13 +104,13 @@ public class ProteinGraphExtractor {
                     int cont = 0;
                     int percentage = 0;
                     System.out.print(percentage + "% ");
-                    for(Record reaction : reactionList){
+                    for (Record reaction : reactionList) {
                         List<Record> records = ReactomeAccess.getEdgesByTypeAndId(t, reaction.get("id").asString());
                         G.addAllEdges(records, t);
                         cont++;
-                        if(cont%400 == 0){
-                            int newPercentage = cont*100/reactionList.size();
-                            if(percentage < newPercentage){
+                        if (cont % 400 == 0) {
+                            int newPercentage = cont * 100 / reactionList.size();
+                            if (percentage < newPercentage) {
                                 System.out.print(newPercentage + "% ");
                                 percentage = newPercentage;
                             }
@@ -170,7 +170,7 @@ public class ProteinGraphExtractor {
     private static int initialize() {
 
         try {
-            Conf.setDefaultValues();
+            Conf.setDefaultValuesGraphExtractor();
 
             //Read and set configuration values from file
             BufferedReader configBR = new BufferedReader(new FileReader(Conf.strMap.get(Conf.strVars.configPath.toString())));
@@ -193,7 +193,13 @@ public class ProteinGraphExtractor {
                 }
             }
 
-            ConnectionNeo4j.driver = GraphDatabase.driver(ConnectionNeo4j.host, AuthTokens.basic(ConnectionNeo4j.username, ConnectionNeo4j.password));
+            ConnectionNeo4j.driver = GraphDatabase.driver(
+                    Conf.strMap.get(Conf.strVars.host.toString()),
+                    AuthTokens.basic(Conf.strMap.get(
+                            Conf.strVars.username.toString()),
+                            Conf.strMap.get(Conf.strVars.password.toString())
+                    )
+            );
 
         } catch (FileNotFoundException ex) {
             System.out.println("Configuration file not found at: " + Conf.strMap.get(Conf.strVars.configPath.toString()));

@@ -1,4 +1,4 @@
-package no.uib.Model;
+package no.uib.model;
 
 import gnu.trove.map.hash.TObjectIntHashMap;
 import java.io.UnsupportedEncodingException;

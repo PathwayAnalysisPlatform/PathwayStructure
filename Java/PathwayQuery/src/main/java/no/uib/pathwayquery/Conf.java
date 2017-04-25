@@ -1,5 +1,9 @@
 package no.uib.pathwayquery;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.HashMap;
 
 /**
@@ -31,6 +35,7 @@ public class Conf {
     }
 
     public static void setValue(String name, String value) {
+        
         if (strMap.containsKey(name)) {
             strMap.put(name, value);
         }
@@ -42,10 +47,9 @@ public class Conf {
         }
     }
 
-    public static void setDefaultValues() {
-        intMap = new HashMap<>();
-        boolMap = new HashMap<>();
-        strMap = new HashMap<>();
+    public static void setDefaultValuesGraphExtractor() {
+
+        setEmptyMaps();
 
         // Set general configuration
         intMap.put("version", 2);
@@ -63,10 +67,7 @@ public class Conf {
         strMap.put("outputGraphFilePath", ".");
         strMap.put("outputFileName", "ProteomeGraph");
 
-        //Database access
-        strMap.put("host", "bolt://localhost");
-        strMap.put("username", "neo4j");
-        strMap.put("password", "neo4j2");
+        setDefaultReactomeValues();
 
         //Vertices configuration
         boolMap.put("onlyNeighborsInList", Boolean.TRUE);  //TODO
@@ -79,6 +80,60 @@ public class Conf {
         for (Conf.EdgeType t : Conf.EdgeType.values()) {
             boolMap.put(t.toString(), Boolean.TRUE);
         }
+    }
+
+    public static int readConf() {
+        return readConf(Conf.strMap.get(Conf.strVars.configPath.toString()));
+    }
+
+    public static int readConf(String path) {
+
+        try {
+            //Read and set configuration values from file
+            BufferedReader configBR = new BufferedReader(new FileReader(path));
+
+            //For every valid variable found in the config.txt file, the variable value gets updated
+            String line;
+            while ((line = configBR.readLine()) != null) {
+                if (line.length() == 0) {
+                    continue;
+                }
+                if (line.startsWith("//")) {
+                    continue;
+                }
+                if (!line.contains("=")) {
+                    continue;
+                }
+                String[] parts = line.split("=");
+                if (Conf.contains(parts[0])) {
+                    Conf.setValue(parts[0], parts[1]);
+                }
+            }
+        } catch (FileNotFoundException ex) {
+            System.out.println("Configuration file not found at: " + Conf.strMap.get(Conf.strVars.configPath.toString()));
+            System.out.println(System.getProperty("user.dir"));
+
+            System.exit(1);
+            return 1;
+        } catch (IOException ex) {
+            System.out.println("Not possible to read the configuration file: " + Conf.strMap.get(Conf.strVars.configPath.toString()));
+            System.exit(1);
+        }
+
+        return 0;
+    }
+
+    public static void setEmptyMaps() {
+        intMap = new HashMap<>();
+        boolMap = new HashMap<>();
+        strMap = new HashMap<>();
+    }
+
+    public static void setDefaultReactomeValues() {
+        //Database access
+        strMap.put(strVars.host.toString(), "bolt://localhost");
+        strMap.put(strVars.username.toString(), "neo4j");
+        strMap.put(strVars.password.toString(), "neo4j2");
     }
 
     public enum EntityType {

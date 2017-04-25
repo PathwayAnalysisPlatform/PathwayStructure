@@ -1,4 +1,4 @@
-package no.uib.Model;
+package no.uib.model;
 
 import java.util.ArrayList;
 import java.util.Arrays;

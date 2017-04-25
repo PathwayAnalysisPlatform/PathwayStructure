@@ -1,4 +1,4 @@
-package no.uib.DB;
+package no.uib.db;
 
 import java.io.FileWriter;
 import java.io.InputStream;

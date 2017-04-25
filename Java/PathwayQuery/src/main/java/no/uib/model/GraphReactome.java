@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package no.uib.Model;
+package no.uib.model;
 
 import gnu.trove.map.hash.TObjectShortHashMap;
 import gnu.trove.set.TIntSet;
@@ -24,6 +24,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -336,6 +337,7 @@ public class GraphReactome {
     public byte[][] shortestUnweightedPaths(TreeSet<String> proteinSet) throws UnsupportedEncodingException {
         TObjectShortHashMap<String> labelToIndex = new TObjectShortHashMap<String>();
         byte[][] d = new byte[proteinSet.size()][proteinSet.size()];
+        HashMap<String, String> predecesor = new HashMap<>();
 
         //For each vertex on the list, perform Breadth-first search
         //Initialize distances
@@ -351,7 +353,7 @@ public class GraphReactome {
         }
 
         // Get the shortest path from every vertex to every other vertex
-        for (String source : proteinSet) {
+        for (String source : proteinSet) {  //For every source
 
             System.out.println("Calculating distances from: " + source);
 
@@ -366,6 +368,7 @@ public class GraphReactome {
 
             visited.add(this.verticesMapping.getInt(source));
             queued.add(new Pair<>(source, (byte) 0));
+            predecesor.put(source, source);
 
             int cont = 0;
             int percentage = 0;
@@ -390,9 +393,10 @@ public class GraphReactome {
                 index = this.verticesMapping.getInt(current.getL());
                 for (AdjacentNeighbor n : this.adjacencyList[index]) {
                     String nLabel = verticesMapping.getString(n.getNum());
-                    if (!visited.contains(n.getNum())) {    //Add to the queue if it has not been visited
+                     if (!visited.contains(n.getNum())) {    //Add to the queue if it has not been visited
                         byte newDist = (byte) (current.getR() + 1);
                         queued.add(new Pair<String, Byte>(nLabel, newDist));
+                        predecesor.put(nLabel, current.getL());
                         visited.add(this.verticesMapping.getInt(nLabel));
                     }
                 }
@@ -416,6 +420,14 @@ public class GraphReactome {
             System.out.println("");
             r++;
         }
+        
+        // Print paths
+//        for (String source : proteinSet) {
+//            while(predecesor != current){
+//                
+//            }
+//        }
+        
 
         return d;
     }

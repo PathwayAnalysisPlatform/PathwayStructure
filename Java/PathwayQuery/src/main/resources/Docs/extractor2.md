@@ -144,6 +144,11 @@ RETURN DISTINCT p1.stId as source, p2.stId as destiny
 ~~~~
 * RR:
 ~~~~
+MATCH (r1:Reaction{stId:{id}})-[role1:input|output|catalystActivity|physicalEntity|regulatedBy|regulator|hasComponent|hasMember|hasCandidate|repeatedUnit*]->(ewas:EntityWithAccessionedSequence)<-[role2:input|output|catalystActivity|physicalEntity|regulatedBy|regulator|hasComponent|hasMember|hasCandidate|repeatedUnit*]-(r2:Reaction)
+WHERE r1.stId <> r2.stId AND head(extract(x IN role1 | type(x))) = 'output' AND last(extract(x IN role2 | type(x))) = 'input' AND r1.speciesName = 'Homo sapiens' AND r2.speciesName = 'Homo sapiens'
+RETURN DISTINCT r1.stId as source, r2.stId as destiny
+
+
 MATCH (r1:Reaction)-[role1:input|output|catalystActivity|physicalEntity|regulatedBy|regulator|hasComponent|hasMember|hasCandidate|repeatedUnit*]->(ewas:EntityWithAccessionedSequence)<-[role2:input|output|catalystActivity|physicalEntity|regulatedBy|regulator|hasComponent|hasMember|hasCandidate|repeatedUnit*]-(r2:Reaction)
 WHERE NOT (r1.stId = r2.stId)
 WITH r1, head(extract(x IN role1 | type(x))) as role1, ewas, last(extract(x IN role2 | type(x))) as role2, r2

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package no.uib.Tools;
+package no.uib.tools;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -22,7 +22,7 @@ import java.io.IOException;
 import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import no.uib.Model.GraphReactome;
+import no.uib.model.GraphReactome;
 
 /**
  *
