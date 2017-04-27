@@ -20,7 +20,7 @@ import org.neo4j.driver.v1.Session;
 import org.neo4j.driver.v1.StatementResult;
 import org.neo4j.driver.v1.Transaction;
 import org.neo4j.driver.v1.Values;
-import no.uib.db.CypherQueries.Queries;
+import no.uib.db.ReactomeQueries.Queries;
 
 /**
  *
@@ -567,7 +567,7 @@ public class ReactomeAccess {
 
     public static List<String> getProteinListByMods(List<String> mods) {
 
-        String query = CypherQueries.Queries.getProteinsByPsiMod.toString();
+        String query = ReactomeQueries.Queries.getProteinsByPsiMod.toString();
         mods.replaceAll(mod -> "\"" + mod + "\"");
         query = query.replace("{modList}", mods.toString());
         List<String> result = new ArrayList<>();

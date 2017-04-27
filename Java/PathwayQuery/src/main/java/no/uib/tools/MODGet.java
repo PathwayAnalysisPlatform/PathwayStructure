@@ -17,12 +17,11 @@ package no.uib.tools;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 import no.uib.db.ConnectionNeo4j;
-import no.uib.db.CypherQueries;
 import no.uib.db.ReactomeAccess;
 import no.uib.pathwayquery.Conf;
+import no.uib.pathwayquery.Conf.strVars;
 import org.apache.commons.cli.*;
 import org.neo4j.driver.v1.AuthTokens;
 import org.neo4j.driver.v1.GraphDatabase;
@@ -93,10 +92,10 @@ public class MODGet {
         }
 
         ConnectionNeo4j.driver = GraphDatabase.driver(
-                Conf.strMap.get(Conf.strVars.host.toString()),
+                Conf.strMap.get(strVars.host.toString()),
                 AuthTokens.basic(Conf.strMap.get(
-                        Conf.strVars.username.toString()),
-                        Conf.strMap.get(Conf.strVars.password.toString())
+                        strVars.username.toString()),
+                        Conf.strMap.get(strVars.password.toString())
                 )
         );
 
