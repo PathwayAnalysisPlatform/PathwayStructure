@@ -70,7 +70,7 @@ public class GraphReactome {
         }
 
         this.verticesMapping = new BiMapIntToByteArray(numVertices);
-        this.edgesMapping = new BiMapByteToByteArray(21);
+        this.edgesMapping = new BiMapByteToByteArray(24);
 
         byte cont = 0;
         for (EdgeType t : EdgeType.values()) {
