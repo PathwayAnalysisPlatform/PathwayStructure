@@ -225,6 +225,11 @@ public class Conf {
                 return "io";
             }
         },
+        OutputToInput {
+            public String toString() {
+                return "oi";
+            }
+        },
         CatalystToInput {
             public String toString() {
                 return "ci";
@@ -235,6 +240,11 @@ public class Conf {
                 return "co";
             }
         },
+        OutputToCatalyst {
+            public String toString() {
+                return "oc";
+            }
+        },
         RegulatorToInput {
             public String toString() {
                 return "ri";
@@ -243,6 +253,11 @@ public class Conf {
         RegulatorToOutput {
             public String toString() {
                 return "ro";
+            }
+        },
+        OutputToRegulator {
+            public String toString() {
+                return "or";
             }
         },
         ComplexHasProtein {
@@ -333,6 +348,11 @@ public class Conf {
                 return "InputToOutput";
             }
         },
+        oi {
+            public String toString() {
+                return "OutputToInput";
+            }
+        },
         ci {
             public String toString() {
                 return "CatalystToInput";
@@ -343,6 +363,11 @@ public class Conf {
                 return "CatalystToOutput";
             }
         },
+        oc {
+            public String toString() {
+                return "OutputToCatalyst";
+            }
+        },
         ri {
             public String toString() {
                 return "RegulatorToInput";
@@ -351,6 +376,11 @@ public class Conf {
         ro {
             public String toString() {
                 return "RegulatorToOutput";
+            }
+        },
+        or {
+            public String toString() {
+                return "OutputToRegulator";
             }
         },
         Cp {
