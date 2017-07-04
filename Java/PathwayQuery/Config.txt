@@ -1,6 +1,6 @@
 //General configuration
 version=2
-allProteome=false
+allProteome=true
 //inputListFile=./src/main/resources/input/listBjorn.csv
 maxNumVertices=45000
 showIsolatedVertices=false
@@ -8,26 +8,29 @@ showIsolatedVertices=false
 //Database access
 host=bolt://localhost
 username=neo4j
-password=neo4j2
+//password=neo4j2
 
 verboseConsole=true
 unitType=uniprot
 
 //Vertices
-onlyNeighborsInList=false
+onlyNeighborsInList=true
 onlyOrderedEdges=false
-showMissingProteins=false
+showMissingProteins=true
 
 //Horizontal Edges
-cn=true
+cn=false
 ds=false
 os=false
 cs=false
 io=true
-ci=true
 co=true
-ri=true
 ro=true
+ci=false
+ri=false
+oi=true
+oc=true
+or=true
 RR=false
 
 //Vertical edges
