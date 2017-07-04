@@ -72,6 +72,19 @@ public class Reaction {
         return result;
     }
     
+    public List<Pair<String, String>> getOIInteractions() {
+        List<Pair<String, String>> result = new ArrayList<>();
+        
+        for (String output : outputs) {
+            for (String input : inputs) {
+                if (!input.equals(output)) {
+                    result.add(new Pair<>(output, input));
+                }
+            }
+        }
+        return result;
+    }
+    
     public List<Pair<String, String>> getCIInteractions() {
         List<Pair<String, String>> result = new ArrayList<>();
         
@@ -92,6 +105,20 @@ public class Reaction {
             for (String output : outputs) {
                 if (!catalyst.equals(output)) {
                     result.add(new Pair<>(catalyst, output));
+                }
+            }
+        }
+        
+        return result;
+    }
+    
+    public List<Pair<String, String>> getOCInteractions() {
+        List<Pair<String, String>> result = new ArrayList<>();
+        
+        for (String output : outputs) {
+            for (String catalyst : catalysts) {
+                if (!catalyst.equals(output)) {
+                    result.add(new Pair<>(output, catalyst));
                 }
             }
         }
@@ -127,6 +154,20 @@ public class Reaction {
         return result;
     }
     
+    public List<Pair<String, String>> getORInteractions() {
+        List<Pair<String, String>> result = new ArrayList<>();
+        
+        for (String output : outputs) {
+            for (String regulator : regulators) {
+                if (!regulator.equals(output)) {
+                    result.add(new Pair<>(output, regulator));
+                }
+            }
+        }
+        
+        return result;
+    }
+
     public void addParticipant(String proteinId, String role) {
         switch (role) {
             case "input":

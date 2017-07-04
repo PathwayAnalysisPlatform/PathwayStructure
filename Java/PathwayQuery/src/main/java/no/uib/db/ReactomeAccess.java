@@ -168,6 +168,11 @@ public class ReactomeAccess {
                                 G.addEdge(interaction.getL(), interaction.getR(), Conf.EdgeType.InputToOutput);
                             }
                         }
+                        for (Pair<String, String> interaction : r.getOIInteractions()) {
+                            if (G.containsVertex(interaction.getL()) && G.containsVertex(interaction.getR())) {
+                                G.addEdge(interaction.getL(), interaction.getR(), Conf.EdgeType.OutputToInput);
+                            }
+                        }
                         for (Pair<String, String> interaction : r.getCIInteractions()) {
                             if (G.containsVertex(interaction.getL()) && G.containsVertex(interaction.getR())) {
                                 G.addEdge(interaction.getL(), interaction.getR(), Conf.EdgeType.CatalystToInput);
@@ -178,6 +183,11 @@ public class ReactomeAccess {
                                 G.addEdge(interaction.getL(), interaction.getR(), Conf.EdgeType.CatalystToOutput);
                             }
                         }
+                        for (Pair<String, String> interaction : r.getOCInteractions()) {
+                            if (G.containsVertex(interaction.getL()) && G.containsVertex(interaction.getR())) {
+                                G.addEdge(interaction.getL(), interaction.getR(), Conf.EdgeType.OutputToCatalyst);
+                            }
+                        }
                         for (Pair<String, String> interaction : r.getRIInteractions()) {
                             if (G.containsVertex(interaction.getL()) && G.containsVertex(interaction.getR())) {
                                 G.addEdge(interaction.getL(), interaction.getR(), Conf.EdgeType.RegulatorToInput);
@@ -186,6 +196,11 @@ public class ReactomeAccess {
                         for (Pair<String, String> interaction : r.getROInteractions()) {
                             if (G.containsVertex(interaction.getL()) && G.containsVertex(interaction.getR())) {
                                 G.addEdge(interaction.getL(), interaction.getR(), Conf.EdgeType.RegulatorToOutput);
+                            }
+                        }
+                        for (Pair<String, String> interaction : r.getORInteractions()) {
+                            if (G.containsVertex(interaction.getL()) && G.containsVertex(interaction.getR())) {
+                                G.addEdge(interaction.getL(), interaction.getR(), Conf.EdgeType.OutputToRegulator);
                             }
                         }
                     }
