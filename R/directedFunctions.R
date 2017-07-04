@@ -14,12 +14,13 @@
 #' @param edgeTypes a character vector containing the
 #' types of edges to retain
 makeDirected <- function (inFile, outFile, edgeTypes) {
-    ## inFileList <- readFile(inFile)
-    ## connections <- getConnections(inFileList, edgeTypes)
-    ## writeFile(outFile, connections)
-    writeFile(outFile,
-              getConnections(readFile(inFile),
-                             edgeTypes))
+    inFileList <- readFile(inFile)
+    connections <- getConnections(inFileList, edgeTypes)
+    proteinNames <- writeFile(outFile, connections)
+    length(proteinNames)
+    ## writeFile(outFile,
+    ##           getConnections(readFile(inFile),
+    ##                          edgeTypes))
 }
 
 #' Read a .sif file, as made using PathwayQuery, ProteinGraphExtractor,
@@ -65,7 +66,12 @@ readFile <- function (inFile) {
 #' of an edge for a pair of nodes
 sources <- function (inFileList, connTypes = NULL) {
     if (is.null(connTypes)) {
-        unique(names(inFileList))
+        unique(
+            unlist(
+                lapply(names(inFileList),
+                       function (x) {
+                           names(inFileList[[x]])
+                       })))
     } else {
         unique(
             unlist(
@@ -100,10 +106,13 @@ getConnections <- function (inFileList, connTypes = NULL) {
     for (name in sources(inFileList, connTypes)) {
         temp <- c()
         for (x in connTypes) {
-            temp <- c(temp, inFileList[[x]][[name]])
+            if (name %in% names(inFileList[[x]])) {
+                temp <- c(temp, inFileList[[x]][[name]])
+            }
         }
         connections[[name]] <- unique(temp)
     }
+    connections
 }
 
 #' Write an .sif file from the list of connections
@@ -137,7 +146,7 @@ writeFile <- function (outFile, connections) {
     proteinNames <- unique(c(sources, unlist(connections)))
 
     print(paste(length(proteinNames), "proteins"))
-    print(paste("of which", names(connections), "sources"))
+    print(paste("of which", length(names(connections)), "sources"))
 
     proteinNames
 }
