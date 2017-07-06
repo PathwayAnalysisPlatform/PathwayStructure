@@ -46,20 +46,16 @@ public class Centrality {
 
     /**
      * 
-     * @param args If empty or more than two elements, 
+     * @param args If empty or more than one element, 
      * the input file will be the default.
-     * If one argument is given this will be taken to be the input file.
-     * If two arguments are give, the first will be taken to be the
-     * input file, and the second to be the prefix for the output files.
+     * If exactly one argument is given this will be taken to be 
+     * the input file.
      * @throws IOException 
      */
     public static void main(String args[]) throws IOException {
         String outPrefix = "";
         if (args.length == 1) {
             getGraph(args[0]);
-        } else if (args.length == 2) {
-            getGraph(args[0]);
-            outPrefix = args[1];
         } else {
             getGraph();
         }
@@ -75,10 +71,9 @@ public class Centrality {
         long endTime = System.currentTimeMillis();
         System.out.println("Total execution time Algorithm: "
                 + (endTime - startTime) + " millisecs.");
-
         System.out.println("Finished calculating centralities.");
+
         System.out.println("Start printing centralities to files.");
-        
         startTime = System.currentTimeMillis();
         centralitiesToCSV(outPrefix);
         nShortestToCSV(outPrefix);
@@ -97,7 +92,8 @@ public class Centrality {
             throws UnsupportedEncodingException {
         // String path = "./AllInCatRegToOutput.sif";
         // String path = "./SignalTransductionInCatRegToOutput.sif";
-        String path = "./thing2.sif";
+        // String path = "./thing2.sif";
+        String path = "./lessMonks.sif";
 
         // second number indicates how much space to reserve for graph
         // expressed in the number of nodes
@@ -124,10 +120,14 @@ public class Centrality {
      */
     private static void initOutput (int nProteins) {
         // Centrality measures
-        // between, closeness, graph, stress, radiality
-        // Matrix nrProteins rows, 5 columns
+        // between, stess, radiality, integration,
+        // closenessIn, closenessOut,
+        // graphIn, graphOut
+        // kIn, kOut
+        // Matrix nrProteins rows, 10 columns
         // nProteins because of the mapping to integers for indices...
-        centrality = new double[nProteins][5];
+//        centrality = new double[nProteins][8];
+        centrality = new double[nProteins][10];
 
         // number of shortest paths (sigma)
         nShortestPaths = new int[nProteins][nProteins];
@@ -156,6 +156,9 @@ public class Centrality {
             calculateStressCentrality(i);
         }
         calculateRadiality();
+        calculateIntegration();
+        getkIn();
+        getkOut();
     }
 
     /**
@@ -260,7 +263,7 @@ public class Centrality {
 
     /**
      * Algorithm to calculate stress centrality.
-     * Puts the output in centrality[startNode][3]
+     * Puts the output in centrality[startNode][1]
      * Needs access to the complete nShortestPaths matrix, so can
      * only be calculated after all nodes have been evaluated
      * as starting node.
@@ -287,8 +290,8 @@ public class Centrality {
                             lengthShortestPaths[i][j] == 
                             lengthShortestPaths[i][startNode] 
                             + lengthShortestPaths[startNode][j]) {
-                        centrality[startNode][3] = 
-                                centrality[startNode][3] 
+                        centrality[startNode][1] = 
+                                centrality[startNode][1] 
                                 + nShortestPaths[i][startNode]
                                 * nShortestPaths[startNode][j];
                     }
@@ -297,9 +300,11 @@ public class Centrality {
         }
     }
 
+    
     /**
      * Algorithm to calculate closeness centrality.
-     * Puts the output in centrality[starltNode][1]
+     * Calls functions to calculate based on incoming and 
+     * outgoing nodes.
      *
      * Closeness centrality of a node is calculated as the reciprocal 
      * of the sum of the shortest paths starting at the node.
@@ -310,22 +315,89 @@ public class Centrality {
      * closeness centrality is calculated
      */
     private static void calculateClosenessCentrality (int startNode) {
+        calculateClosenessCentralityIn(startNode);
+        calculateClosenessCentralityOut(startNode);
+    }
+
+    /**
+     * Algorithm to calculate closeness centrality,
+     * based on incoming nodes.
+     * Puts the output in centrality[startNode][4]
+     *
+     * Closeness centrality of a node is calculated as the reciprocal 
+     * of the sum of the shortest paths starting at the node.
+     * In a disconnected graph, in this version, only paths 
+     * to nodes which can be reached are considered.
+     *
+     * @param startNode index of the node for which 
+     * closeness centrality is calculated
+     */
+    private static void calculateClosenessCentralityIn (int startNode) {
         int runningSum = 0;
         for (int i = 0; i < lengthShortestPaths[startNode].length; i++) {
-            if (i != startNode) {
+            if (lengthShortestPaths[i][startNode] > 0) {
+                runningSum += lengthShortestPaths[i][startNode];
+            }
+        }
+        if (runningSum == 0) {
+            centrality[startNode][4] = 0.0;
+        } else {
+            centrality[startNode][4] = 1.0 / 
+                    (runningSum * lengthShortestPaths.length);
+        }
+    }
+
+    /**
+     * Algorithm to calculate closeness centrality, 
+     * based on outgoing nodes.
+     * Puts the output in centrality[startNode][5]
+     *
+     * Closeness centrality of a node is calculated as the reciprocal 
+     * of the sum of the shortest paths starting at the node.
+     * In a disconnected graph, in this version, only paths 
+     * to nodes which can be reached are considered.
+     *
+     * @param startNode index of the node for which 
+     * closeness centrality is calculated
+     */
+    private static void calculateClosenessCentralityOut (int startNode) {
+        int runningSum = 0;
+        for (int i = 0; i < lengthShortestPaths[startNode].length; i++) {
+            if (lengthShortestPaths[startNode][i] > 0) {
                 runningSum += lengthShortestPaths[startNode][i];
             }
         }
         if (runningSum == 0) {
-            centrality[startNode][1] = 0.0;
+            centrality[startNode][5] = 0.0;
         } else {
-            centrality[startNode][1] = 1.0 / runningSum;
+            centrality[startNode][5] = 1.0 / 
+                    (runningSum * lengthShortestPaths.length);
         }
     }
 
     /**
      * Algorithm to calculate graph centrality.
-     * Puts the output in centrality[startNode][2]
+     *
+     * Graph centrality of a node is the reciprocal of the longest 
+     * shortest path starting from that node.
+     * In a disconnected graph, it only considers 
+     * (in this version at least) paths to nodes which 
+     * the node can reach.
+     * 
+     * Edited according to 
+     * https://toreopsahl.com/2010/03/20/closeness-centrality-in-networks-with-disconnected-components/
+     *
+     * @param startNode index of the node for which 
+     * graph centrality is calculated
+     */
+    private static void calculateGraphCentrality (int startNode) {
+        calculateGraphCentralityIn(startNode);
+        calculateGraphCentralityOut(startNode);
+    }
+    /**
+     * Algorithm to calculate graph centrality,
+     * based on outgoing nodes.
+     * Puts the output in centrality[startNode][7]
      *
      * Graph centrality of a node is the reciprocal of the longest 
      * shortest path starting from that node.
@@ -336,12 +408,40 @@ public class Centrality {
      * @param startNode index of the node for which 
      * graph centrality is calculated
      */
-    private static void calculateGraphCentrality (int startNode) {
+    private static void calculateGraphCentralityOut (int startNode) {
         int longestShortest = getMaxFromIntList(lengthShortestPaths[startNode]);
         if (longestShortest == 0) {
-            centrality[startNode][2] = 0.0;
+            centrality[startNode][7] = 0.0;
         } else {
-            centrality[startNode][2] = 1.0 / longestShortest;
+            centrality[startNode][7] = 1.0 / longestShortest;
+        }
+    }
+    
+    /**
+     * Algorithm to calculate graph centrality, 
+     * based on incoming nodes.
+     * Puts the output in centrality[startNode][6]
+     *
+     * Graph centrality of a node is the reciprocal of the longest 
+     * shortest path starting from that node.
+     * In a disconnected graph, it only considers 
+     * (in this version at least) paths to nodes which 
+     * the node can reach.
+     *
+     * @param startNode index of the node for which 
+     * graph centrality is calculated
+     */
+    private static void calculateGraphCentralityIn (int startNode) {
+        int longestPath = 0;
+        for (int i = 0; i < lengthShortestPaths.length; i++) {
+            if (lengthShortestPaths[i][startNode] > longestPath) {
+                longestPath = lengthShortestPaths[i][startNode];
+            }
+        }
+        if (longestPath == 0) {
+            centrality[startNode][6] = 0.0;
+        } else {
+            centrality[startNode][6] = 1.0 / longestPath;
         }
     }
 
@@ -365,27 +465,90 @@ public class Centrality {
 
     /**
      * Algorithm to calculate radiality.
-     * Puts output in centrality[startNode][4]
+     * Puts output in centrality[startNode][2]
      *
      */
     private static void calculateRadiality() {
-        int longestShortestTo[] = getLongestShortestPathsToNodes();
-        int diameter = getMaxFromIntList(longestShortestTo);
-
-        for (int i = 0; i < longestShortestTo.length; i++) {
-            if ( diameter == 0) {
-                centrality[i][4] = 0.0;
-            } else {
-                for (int j = 0; j < longestShortestTo.length; j++) {
-                    centrality[i][4] += longestShortestTo[j] + 1.0 
-                            - lengthShortestPaths[i][j];
+        int diameter = getDiameter();
+        // int maxRD = diameter + 1 - getMinShortestPath(diameter);
+        
+        for (int i = 0; i < lengthShortestPaths.length; i++) {
+            int radiality = 0;
+            for (int j = 0; j < lengthShortestPaths.length; j++) {
+                if (lengthShortestPaths[i][j] > 0) {
+                    radiality += 
+                            diameter + 1 - lengthShortestPaths[i][j];
                 }
-                centrality[i][4] = centrality[i][4] / 
-                        ((longestShortestTo.length - 1) * diameter);
             }
+            centrality[i][2] = radiality / 
+                    ((lengthShortestPaths.length - 1.0) * diameter);
         }
     }
 
+    /**
+     * Algorithm to calculate integration.
+     * Puts output in centrality[startNode][3]
+     *
+     */
+    private static void calculateIntegration () {
+        int diameter = getDiameter();
+        // int maxRD = diameter + 1 - getMinShortestPath(diameter);
+        
+        for (int i = 0; i < lengthShortestPaths.length; i++) {
+            int radiality = 0;
+            for (int j = 0; j < lengthShortestPaths.length; j++) {
+                if (lengthShortestPaths[j][i] > 0) {
+                    radiality += 
+                            diameter + 1 - lengthShortestPaths[j][i];
+                }
+            }
+            centrality[i][3] = radiality / 
+                    ((lengthShortestPaths.length - 1.0) * diameter);
+        }
+    }
+
+    /**
+     * Get the diameter of the graph.
+     * This is the longest shortest path from one node to another.
+     * @return integer value of the diameter of the graph
+     */
+    private static int getDiameter () {
+        int maxShortestPath = 0;
+        for (int i = 0; i < lengthShortestPaths.length; i++) {
+            for (int j = 0; j < lengthShortestPaths.length; j++) {
+                if (i != j && 
+                        lengthShortestPaths[i][j] > maxShortestPath) {
+                    maxShortestPath = lengthShortestPaths[i][j];
+                }
+            }
+        }
+        return (maxShortestPath);
+    }
+    
+    /**
+     * Get the shortest path in the graph.
+     * If there is at least one edge in the graph this should be 1.
+     * @param diameterthe diameter of the graph (or a number which 
+     * is larger than the shortest path. So 2 should be good as well)
+     * @return integer value of the shortest shortest path in the graph
+     */
+    private static int getMinShortestPath (int diameter) { 
+        int minShortestPath = diameter;
+        for (int i = 0; i < lengthShortestPaths.length; i++) {
+            for (int j = 0; j < lengthShortestPaths.length; j++) {
+                if (lengthShortestPaths[i][j] > 0 &&
+                        lengthShortestPaths[i][j] < minShortestPath) {
+                    if (lengthShortestPaths[i][j] == 1) {
+                        return (1);
+                    } else {
+                        minShortestPath = lengthShortestPaths[i][j];
+                    }
+                }
+            }
+        }
+        return (minShortestPath);
+    }
+    
     /**
      * Gets the lengths of the longest shortest paths that end 
      * in each node.
@@ -412,6 +575,30 @@ public class Centrality {
         return (longestShortestTo);
     }
 
+    /**
+     * Calculates the number of incoming edges for each node
+     * Puts the result in centrality[node][8]
+     */
+    private static void getkIn () throws UnsupportedEncodingException {
+        for (int i = 0; i < adjacencyList.getNumVertices(); i++) {
+            for (AdjacentNeighbor neighbour : adjacencyList.getNeighbors(adjacencyList.getVertexId(i))) {
+                centrality[neighbour.getNum()][8] += 1.0;
+            }
+        }
+    }
+    
+    /**
+     * Gets the number of outgoing edges for each node.
+     * Puts the result in centrality[node][9]
+     * @throws UnsupportedEncodingException 
+     */
+    private static void getkOut () throws UnsupportedEncodingException {
+        for (int i = 0; i < adjacencyList.getNumVertices(); i++) {
+            centrality[i][9] = 
+                    adjacencyList.getNeighbors(adjacencyList.getVertexId(i)).size();
+        }
+    }
+    
     /**
      * Write the centralities to a csv file.
      * Centrality measures are taken from the class level variable 
@@ -458,7 +645,10 @@ public class Centrality {
      */
     private static void writeCentralitiesHeader(FileWriter outFile) 
             throws IOException {
-        String header = "Protein,Betweenness,Closeness,Graph,Stress,Radiality";
+        String header = "Protein"
+                + ",Betweenness,Stress,Radiality,Integration"
+                + ",ClosenessIn,ClosenessOut,GraphIn,GraphOut"
+                + ",kIn,kOut";
         outFile.write(header + "\n");
     }
 
