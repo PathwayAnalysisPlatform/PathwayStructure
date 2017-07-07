@@ -34,6 +34,13 @@ import no.uib.model.GraphReactome;
  * Ulrik Brandes
  * A Faster Algorithm for Betweenness Centrality
  * Journal of Mathematical Sociology 25(2):163-177, (2001).
+ * 
+ * The lessMonks.sif file refers to the Monks graph as described
+ * and adapted in 
+ * T.W. Valente and R.K. Foreman
+ * Integration and radiality: measuring the extent of an
+ * individual's connectedness and reachability in a network
+ * Social Networks 20 (1998) 89-105
  *
  * @author Bram Burger
  */
@@ -126,7 +133,6 @@ public class Centrality {
         // kIn, kOut
         // Matrix nrProteins rows, 10 columns
         // nProteins because of the mapping to integers for indices...
-//        centrality = new double[nProteins][8];
         centrality = new double[nProteins][10];
 
         // number of shortest paths (sigma)
@@ -151,7 +157,8 @@ public class Centrality {
         }
         // stress centrality needs shortest paths from AND to node i
         // (the way I've implemented it now, anyway)
-        // so can only be calculated when we have performed the algorithm on all the nodes
+        // so can only be calculated when we have performed 
+        // the algorithm on all the nodes
         for (int i = 0; i < nProteins; i++) {
             calculateStressCentrality(i);
         }
