@@ -53,18 +53,25 @@ public class Centrality {
 
     /**
      * 
-     * @param args If empty or more than one element, 
+     * @param args If empty or more than two elements, 
      * the input file will be the default.
-     * If exactly one argument is given this will be taken to be 
-     * the input file.
+     * If exactly one or two arguments is given the first arg will be 
+     * taken to be the input file.
+     * If exactly two arguments are gives, the second arg will be
+     * taken to be the prefix for the output files.
      * @throws IOException 
      */
     public static void main(String args[]) throws IOException {
         String outPrefix = "";
-        if (args.length == 1) {
-            getGraph(args[0]);
-        } else {
-            getGraph();
+        switch (args.length) {
+            case 2:
+                outPrefix = args[1];
+            case 1:
+                getGraph(args[0]);
+                break;
+            default:
+                getGraph();
+                break;
         }
 
         // get the number of proteins in the graph
@@ -133,7 +140,7 @@ public class Centrality {
         // kIn, kOut
         // Matrix nrProteins rows, 10 columns
         // nProteins because of the mapping to integers for indices...
-        centrality = new double[nProteins][10];
+        centrality = new double[nProteins][12];
 
         // number of shortest paths (sigma)
         nShortestPaths = new int[nProteins][nProteins];
@@ -226,6 +233,7 @@ public class Centrality {
         calculateBetweennessCentrality(startNode, stack,
                 parents, nProteins);
         calculateClosenessCentrality(startNode);
+        calculateHarmonicCentrality(startNode);
         calculateGraphCentrality(startNode);
     }
 
@@ -379,6 +387,63 @@ public class Centrality {
         } else {
             centrality[startNode][5] = 1.0 / 
                     (runningSum * lengthShortestPaths.length);
+        }
+    }
+
+    /**
+     * Algorithm to calculate harmonic centrality.
+     * Calls functions to calculate based on incoming and 
+     * outgoing nodes.
+     *
+     * @param startNode index of the node for which 
+     * closeness centrality is calculated
+     */
+    private static void calculateHarmonicCentrality (int startNode) {
+        calculateHarmonicCentralityIn(startNode);
+        calculateHarmonicCentralityOut(startNode);
+    }
+
+    /**
+     * Algorithm to calculate harmonic centrality,
+     * based on incoming nodes.
+     * Puts the output in centrality[startNode][10]
+     *
+     * Harmonic centrality of a node is calculated as sum of 
+     * the reciprocals of the shortest paths starting at the node.
+     * Unconnected nodes have distance infinity, of which the 
+     * reciprocal is (at least here) 0.
+     * 
+     * @param startNode index of the node for which 
+     * closeness centrality is calculated
+     */
+    private static void calculateHarmonicCentralityIn (int startNode) {
+        for (int i = 0; i < lengthShortestPaths[startNode].length; i++) {
+            if (lengthShortestPaths[i][startNode] > 0) {
+                centrality[startNode][10] 
+                        += 1.0 / lengthShortestPaths[i][startNode];
+            }
+        }
+    }
+
+    /**
+     * Algorithm to calculate harmonic centrality, 
+     * based on outgoing nodes.
+     * Puts the output in centrality[startNode][11]
+     *
+     * Harmonic centrality of a node is calculated as the sum of
+     * the reciprocals of the shortest paths starting at the node.
+     * Unconnected nodes have distance infinity, of which the 
+     * reciprocal is (at least here) 0.
+     *
+     * @param startNode index of the node for which 
+     * closeness centrality is calculated
+     */
+    private static void calculateHarmonicCentralityOut (int startNode) {
+        for (int i = 0; i < lengthShortestPaths[startNode].length; i++) {
+            if (lengthShortestPaths[startNode][i] > 0) {
+                centrality[startNode][11] 
+                        += 1.0 / lengthShortestPaths[startNode][i];
+            }
         }
     }
 
@@ -655,7 +720,7 @@ public class Centrality {
         String header = "Protein"
                 + ",Betweenness,Stress,Radiality,Integration"
                 + ",ClosenessIn,ClosenessOut,GraphIn,GraphOut"
-                + ",kIn,kOut";
+                + ",kIn,kOut,harmonicIn,harmonicOut";
         outFile.write(header + "\n");
     }
 
