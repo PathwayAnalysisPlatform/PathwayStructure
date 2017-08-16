@@ -186,11 +186,6 @@ public class ReactomeAccess {
                                 }
                             }
                         }
-                        for (Pair<String, String> interaction : r.getORInteractions()) {
-                            if (G.containsVertex(interaction.getL()) && G.containsVertex(interaction.getR())) {
-                                G.addEdge(interaction.getL(), interaction.getR(), Conf.EdgeType.OutputToRegulator);
-                            }
-                        }
                     }
                 }
             } catch (IOException ex) {

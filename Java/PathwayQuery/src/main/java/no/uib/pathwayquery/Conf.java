@@ -478,16 +478,6 @@ public class Conf {
                 return "ro";
             }
         },
-        OutputToInput {
-            public String toString() {
-                return "oi";
-            }
-        },
-        OutputToCatalyst {
-            public String toString() {
-                return "oc";
-            }
-        },
         OutputToRegulator {
             public String toString() {
                 return "or";

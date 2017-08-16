@@ -123,23 +123,6 @@ public class Reaction {
 
         return result;
     }
-<<<<<<< HEAD
-=======
-    
-    public List<Pair<String, String>> getORInteractions() {
-        List<Pair<String, String>> result = new ArrayList<>();
-        
-        for (String output : outputs) {
-            for (String regulator : regulators) {
-                if (!regulator.equals(output)) {
-                    result.add(new Pair<>(output, regulator));
-                }
-            }
-        }
-        
-        return result;
-    }
->>>>>>> 1d35476a29ad9b7a84b6fa13d1789d7be03ab8e5
 
     public void addParticipant(String proteinId, String role) {
         switch (role) {
