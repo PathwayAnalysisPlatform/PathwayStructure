@@ -1,0 +1,52 @@
+//General configuration
+version=2
+allProteome=true
+//inputListFile=./src/main/resources/input/listBjorn.csv
+maxNumVertices=45000
+showIsolatedVertices=false
+
+//Database access
+host=bolt://localhost
+username=neo4j
+//password=neo4j2
+
+verboseConsole=true
+unitType=uniprot
+
+//Vertices
+onlyNeighborsInList=true
+onlyOrderedEdges=false
+showMissingProteins=true
+
+//Horizontal Edges
+cn=false
+ds=false
+os=false
+cs=false
+io=true
+co=true
+ro=true
+ci=false
+ri=false
+oi=true
+oc=true
+or=true
+RR=false
+
+//Vertical edges
+Cp=false
+Sp=false
+CC=false
+SC=false
+CS=false
+SS=false
+Rp=false
+RC=false
+RS=false
+PR=false
+PP=false
+
+//Results
+outputGraphFileType=sif
+outputGraphFilePath=.
+outputFileName=ProteomeGraph

@@ -3,6 +3,8 @@ package no.uib.model;
 import gnu.trove.map.hash.TObjectIntHashMap;
 import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Bidirectional map data structure from int integers to byte arrays. It is
@@ -49,12 +51,22 @@ public class BiMapIntToByteArray {
      * will be given a int number
      * @throws java.io.UnsupportedEncodingException
      */
-    public void put(String id) throws UnsupportedEncodingException {
-        if (!this.containsId(id)) {
-            byte[] arr = id.getBytes("US-ASCII");
-            intToArray[arrayToInt.size()] = arr;
-            arrayToInt.put(ByteBuffer.wrap(arr), arrayToInt.size());
+    public void put(String id)  {
+        try {
+            if (!this.containsId(id)) {
+                byte[] arr = id.getBytes("US-ASCII");
+                
+                intToArray[arrayToInt.size()] = arr;
+                arrayToInt.put(ByteBuffer.wrap(arr), arrayToInt.size());
+            }
+        } 
+//catch(IndexOutOfBoundsException ex){
+//            System.out.println(id);
+//        }
+catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(BiMapIntToByteArray.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }
 
     /**
@@ -84,8 +96,13 @@ public class BiMapIntToByteArray {
      * @throws UnsupportedEncodingException Because of the convertion from
      * string to byte array.
      */
-    public int getInt(String id) throws UnsupportedEncodingException {
-        return arrayToInt.get(ByteBuffer.wrap(id.getBytes("US-ASCII")));
+    public int getInt(String id) {
+        try {
+            return arrayToInt.get(ByteBuffer.wrap(id.getBytes("US-ASCII")));
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(BiMapIntToByteArray.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return -1;
     }
 
     /**

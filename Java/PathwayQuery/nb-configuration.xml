@@ -15,4 +15,11 @@ Any value defined here will override the pom.xml file value but is only applicab
 -->
         <netbeans.hint.license>apache20</netbeans.hint.license>
     </properties>
+    <config-data xmlns="http://www.netbeans.org/ns/maven-config-data/1">
+        <configurations>
+            <configuration id="Centrality" profiles=""/>
+            <configuration id="In-Centrality" profiles=""/>
+            <configuration id="Out-Centrality" profiles=""/>
+        </configurations>
+    </config-data>
 </project-shared-configuration>

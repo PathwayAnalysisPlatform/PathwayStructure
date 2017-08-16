@@ -65,4 +65,8 @@ public class AdjacentNeighbor implements Comparable<AdjacentNeighbor> {
         }
         return false;
     }
+    
+    public String toString(){
+        return num + " " + type;
+    }
 }

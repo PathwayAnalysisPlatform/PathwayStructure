@@ -103,7 +103,7 @@ public class GraphReactome {
         }
 
         this.verticesMapping = new BiMapIntToByteArray(numVertices);
-        this.edgesMapping = new BiMapByteToByteArray(21);
+        this.edgesMapping = new BiMapByteToByteArray(24);
 
         byte cont = 0;
         for (EdgeType t : EdgeType.values()) {
@@ -135,6 +135,7 @@ public class GraphReactome {
                     }
                     source += character;
                 } while ((c = input.read()) != -1);
+                source = source.trim();
                 if (!this.containsVertex(source)) {
                     this.addVertex(source);
                 }
@@ -150,6 +151,7 @@ public class GraphReactome {
                 while ((c = input.read()) != -1) {
                     character = (char) c;
                     if (character == ' ' || character == '\n') {
+                        destiny = destiny.trim();
                         if (!this.containsVertex(destiny)) {
                             this.addVertex(destiny);
                         }
@@ -314,6 +316,10 @@ public class GraphReactome {
 
     public String getVertexId(int index) {
         return verticesMapping.getString(index);
+    }
+    
+    public int getVertexIndex(String id) {
+        return verticesMapping.getInt(id);
     }
 
     /**
