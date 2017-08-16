@@ -42,6 +42,8 @@ public class ShortestPathsCalculator {
         G.shortestUnweightedPaths(proteinSet);
     }
     
+    
+    
     private static TreeSet<String> getProteinList(){
         TreeSet<String> s = new TreeSet<>();
         //Read protein list

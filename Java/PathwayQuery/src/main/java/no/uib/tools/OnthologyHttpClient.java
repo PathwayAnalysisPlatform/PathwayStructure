@@ -19,12 +19,10 @@ import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.naming.spi.DirStateFactory;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpGet;
@@ -40,12 +38,8 @@ public class OnthologyHttpClient {
     private static String pattern = "obo/MOD_"; //Pattern to find the ids of the mods in the Json file of the web service.
 
     public static void main(String[] args) {
-        //Get the number of elements in the onthology
-        //TODO
-
-        //Query for 
         try {
-            DefaultHttpClient httpClient = new DefaultHttpClient();
+            CloseableHttpClient httpClient = HttpClients.createDefault();
             HttpGet getRequest = new HttpGet(
                     "http://www.ebi.ac.uk/ols/api/ontologies/mod/terms/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FMOD_00861/descendants?size=2002");
             getRequest.addHeader("accept", "application/json");
@@ -68,7 +62,7 @@ public class OnthologyHttpClient {
             }
 
             fw.close();
-            httpClient.getConnectionManager().shutdown();
+            httpClient.close();
 
         } catch (ClientProtocolException e) {
 

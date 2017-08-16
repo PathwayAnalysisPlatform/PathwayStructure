@@ -5,12 +5,16 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
+import org.apache.commons.cli.Option;
+import org.apache.commons.cli.Options;
 
 /**
  *
  * @author Luis Francisco Hernández Sánchez
  */
 public class Conf {
+
+    public static Options options;
 
     /**
      * Contains a map from a variable to its value
@@ -35,7 +39,7 @@ public class Conf {
     }
 
     public static void setValue(String name, String value) {
-        
+
         if (strMap.containsKey(name)) {
             strMap.put(name, value);
         }
@@ -47,35 +51,104 @@ public class Conf {
         }
     }
 
+    public static void setValue(String name, Boolean value) {
+
+        if (boolMap.containsKey(name)) {
+            boolMap.put(name, Boolean.valueOf(value));
+        }
+    }
+
+    public interface StrVars {
+
+        String input = "input";
+        String output = "output";
+        String conf = "conf";
+
+        String host = "host";
+        String username = "username";
+        String password = "password";
+
+        String reactionsFile = "reactionsFile";
+    }
+
+    public interface IntVars {
+
+        String maxNumVertices = "maxNumVertices";
+    }
+
+    public interface BoolVars {
+
+        String onlyProteinsInList = "onlyProteinsInList";
+        //String showMissingProteins = "showMissingProteins";
+        String showDisconnectedProteins = "showIsolatedProteins";
+    }
+
+    /**
+     * Creates the command line options for the ProteinGraphExtractor. The
+     */
+    public static void createCLIOptions() {
+
+        options = new Options();
+
+        // Program Input and Output
+        newOption("i", StrVars.input, true, false, "Input file path and name");
+        newOption("o", StrVars.output, true, false, "Output file path and name");
+        newOption("c", StrVars.conf, true, false, "Configuration file path and name");
+
+        // Neo4j database access
+        newOption("h", StrVars.host, true, false, "The url where Neo4j is accessible with Reactome knowledgebase loaded.");
+        newOption("u", StrVars.username, true, false, "The password associated to the username specified.");
+        newOption("p", StrVars.password, true, false, "The password associated to the username specified.");
+
+        // Graph vertices
+        newOption("n", IntVars.maxNumVertices, true, false, "Use only the first __n__ proteins");
+        newOption("l", BoolVars.onlyProteinsInList, false, false, "Output graph will only contain proteins(vertices) in the input list.");
+        //newOption("m", BoolVars.showMissingProteins, false, false, "Add to graph proteins not found in Reactome");
+        newOption("d", BoolVars.showDisconnectedProteins, false, false, "If set to true, the output graph will include the proteins contained in the input file but do not have connections.");
+
+        // Graph arcs
+        newOption(EdgeType.InputToOutput.toString(), EdgeType.InputToOutput.name(), false, false, "Show edges indicating two proteins participate in the same reaction, having the first one as input and the other as output.");
+        newOption(EdgeType.CatalystToInput.toString(), EdgeType.CatalystToInput.name(), false, false, "Show edges indicating two proteins participate in the same reaction, having the first one as catalyst and the other as input.");
+        newOption(EdgeType.CatalystToOutput.toString(), EdgeType.CatalystToOutput.name(), false, false, "Show edges indicating two proteins participate in the same reaction, having the first one as catalyst and the other as output.");
+        newOption(EdgeType.RegulatorToInput.toString(), EdgeType.RegulatorToInput.name(), false, false, "Show edges indicating two proteins participate in the same reaction, having the first one as regulator and the other as input.");
+        newOption(EdgeType.RegulatorToOutput.toString(), EdgeType.RegulatorToOutput.name(), false, false, "Show edges indicating two proteins participate in the same reaction, having the first one as regulator and the other as output.");
+        newOption(EdgeType.OutputToInput.toString(), EdgeType.OutputToInput.name(), false, false, "Show edges indicating two proteins participate in the same reaction, having the first one as output and the other as input. ");
+        newOption(EdgeType.OutputToCatalyst.toString(), EdgeType.OutputToCatalyst.name(), false, false, "Show edges indicating two proteins participate in the same reaction, having the first one as output and the other as catalyst.");
+        newOption(EdgeType.OutputToRegulator.toString(), EdgeType.OutputToRegulator.name(), false, false, "Show edges indicating two proteins participate in the same reaction, having the first one as output and the other as catalyst.");
+
+        newOption(EdgeType.ComplexNeighbour.toString(), EdgeType.ComplexNeighbour.name(), false, false, "Show arcs indicating complex neighbours.");
+        newOption(EdgeType.DefinedSetNeighbour.toString(), EdgeType.DefinedSetNeighbour.name(), false, false, "Show edges indicating defined set neighbours.");
+        newOption(EdgeType.OpenSetNeighbour.toString(), EdgeType.OpenSetNeighbour.name(), false, false, "Show edges indicating open set neighbours.");
+        newOption(EdgeType.CandidateSetNeighbour.toString(), EdgeType.CandidateSetNeighbour.name(), false, false, "Show edges indicating candidate set neighbours.");
+        newOption(EdgeType.EntitySetNeighbour.toString(), EdgeType.EntitySetNeighbour.name(), false, false, "Show edges indicating entity set neighbours.");
+    }
+
+    private static void newOption(String shortName, String name, boolean needsValue, boolean required, String description) {
+        Option cla = new Option(shortName, name, needsValue, description);
+        cla.setRequired(required);
+        options.addOption(cla);
+    }
+
     public static void setDefaultValuesGraphExtractor() {
 
         setEmptyMaps();
 
-        // Set general configuration
-        intMap.put("version", 2);
-        boolMap.put("allProteome", Boolean.TRUE);
-        intMap.put("maxNumVertices", 21000); //The graph will ask for memory to accomodate this number of proteins. Then it has to be as accurate as possible.
-        strMap.put("inputListFile", "./src/main/resources/input/uniprotList.txt"); //Input to create a json graph
-        strMap.put("reactionsFile", "./Reactions.txt"); //Input to create a json graph
-        boolMap.put("ignoreMisformatedRows", Boolean.TRUE);
-        boolMap.put("verboseConsole", Boolean.TRUE);        //TODO
-        strMap.put("unitType", "UniProt");
-        strMap.put("configPath", "./Config.txt");    //TODO
+        // Input and Output
+        strMap.put(StrVars.input, "");
+        strMap.put(StrVars.output, "./output.sif");
+        strMap.put(StrVars.conf, "./Config.txt");
 
-        //Results
-        strMap.put("outputGraphFileType", "sif"); //TODO
-        strMap.put("outputGraphFilePath", ".");
-        strMap.put("outputFileName", "ProteomeGraph");
-
-        setDefaultReactomeValues();
+        setDefaultNeo4jValues();
 
         //Vertices configuration
-        boolMap.put("onlyNeighborsInList", Boolean.TRUE);  //TODO
-        boolMap.put("onlyOrderedEdges", Boolean.TRUE);     //TODO
-        boolMap.put("showMissingProteins", Boolean.TRUE);  //TODO
-        boolMap.put("showIsolatedVertices", Boolean.TRUE);
+        intMap.put(IntVars.maxNumVertices, 21000);
+        boolMap.put(BoolVars.onlyProteinsInList, Boolean.FALSE);
+        //boolMap.put(BoolVars.showMissingProteins, Boolean.FALSE);  //TODO
+        boolMap.put(BoolVars.showDisconnectedProteins, Boolean.FALSE);
 
-        //Edges configuration
+        strMap.put(StrVars.reactionsFile, "./Reactions.txt");
+
+        //Arcs configuration
         //Set default values to all vertical edges
         for (Conf.EdgeType t : Conf.EdgeType.values()) {
             boolMap.put(t.toString(), Boolean.TRUE);
@@ -83,7 +156,7 @@ public class Conf {
     }
 
     public static int readConf() {
-        return readConf(Conf.strMap.get(Conf.strVars.configPath.toString()));
+        return readConf(Conf.strMap.get(Conf.StrVars.conf));
     }
 
     public static int readConf(String path) {
@@ -110,13 +183,13 @@ public class Conf {
                 }
             }
         } catch (FileNotFoundException ex) {
-            System.out.println("Configuration file not found at: " + Conf.strMap.get(Conf.strVars.configPath.toString()));
+            System.out.println("Configuration file not found at: " + Conf.strMap.get(Conf.StrVars.conf));
             System.out.println(System.getProperty("user.dir"));
 
             System.exit(1);
             return 1;
         } catch (IOException ex) {
-            System.out.println("Not possible to read the configuration file: " + Conf.strMap.get(Conf.strVars.configPath.toString()));
+            System.out.println("Not possible to read the configuration file: " + Conf.strMap.get(Conf.StrVars.conf));
             System.exit(1);
         }
 
@@ -129,11 +202,11 @@ public class Conf {
         strMap = new HashMap<>();
     }
 
-    public static void setDefaultReactomeValues() {
+    public static void setDefaultNeo4jValues() {
         //Database access
-        strMap.put(strVars.host.toString(), "bolt://localhost");
-        strMap.put(strVars.username.toString(), "neo4j");
-        strMap.put(strVars.password.toString(), "neo4j2");
+        strMap.put(StrVars.host, "bolt://127.0.0.1:7687");
+        strMap.put(StrVars.username, "neo4j");
+        strMap.put(StrVars.password, "neo4j2");
     }
 
     public enum EntityType {
@@ -164,19 +237,6 @@ public class Conf {
         }
     }
 
-    public enum strVars {
-        inputListFile, reactionsFile, unitType, configPath, outputGraphFileType,
-        outputGraphFilePath, outputFileName, host, username, password,
-    }
-
-    public enum intVars {
-        version, maxNumVertices
-    }
-
-    public enum boolVars {
-        allProteome, ignoreMisformatedRows, verboseConsole, onlyNeighborsInList, onlyOrderedEdges, showMissingProteins, showIsolatedVertices
-    }
-
     public enum ProteinType {
         ewas, uniprot
     }
@@ -199,25 +259,188 @@ public class Conf {
         }
     }
 
-    public enum EdgeType {
-        ComplexNeighbor {
+    public enum ReactionArcs {
+        InputToOutput {
+            @Override
+            public String toString() {
+                return "io";
+            }
+        },
+        CatalystToInput {
+            @Override
+            public String toString() {
+                return "ci";
+            }
+        },
+        CatalystToOutput {
+            @Override
+            public String toString() {
+                return "co";
+            }
+        },
+        RegulatorToInput {
+            @Override
+            public String toString() {
+                return "ri";
+            }
+        },
+        RegulatorToOutput {
+            @Override
+            public String toString() {
+                return "ro";
+            }
+        },
+        OutputToInput {
+            @Override
+            public String toString() {
+                return "oi";
+            }
+        },
+        OutputToCatalyst {
+            @Override
+            public String toString() {
+                return "oc";
+            }
+        },
+        OutputToRegulator {
+            @Override
+            public String toString() {
+                return "or";
+            }
+        }
+    }
+
+    public enum SetArcs {
+        ComplexNeighbour {
+            @Override
             public String toString() {
                 return "cn";
             }
         },
-        CandidateSetNeighbor {
+        CandidateSetNeighbour {
+            @Override
             public String toString() {
                 return "cs";
             }
         },
-        DefinedSetNeighbor {
+        DefinedSetNeighbour {
+            @Override
             public String toString() {
                 return "ds";
             }
         },
-        OpenSetNeighbor {
+        OpenSetNeighbour {
+            @Override
             public String toString() {
                 return "os";
+            }
+        },
+        EntitySetNeighbour {
+            @Override
+            public String toString() {
+                return "es";
+            }
+        }
+    }
+
+    public enum HierarchicalArcs {
+        ComplexHasProtein {
+            @Override
+            public String toString() {
+                return "Cp";
+            }
+        },
+        SetHasProtein {
+            @Override
+            public String toString() {
+                return "Sp";
+            }
+        },
+        ComplexHasComplex {
+            @Override
+            public String toString() {
+                return "CC";
+            }
+        },
+        SetHasComplex {
+            @Override
+            public String toString() {
+                return "SC";
+            }
+        },
+        ComplexHasSet {
+            @Override
+            public String toString() {
+                return "CS";
+            }
+        },
+        SetHasSet {
+            @Override
+            public String toString() {
+                return "SS";
+            }
+        },
+        ReactionHasProtein {
+            @Override
+            public String toString() {
+                return "Rp";
+            }
+        },
+        ReactionHasComplex {
+            public String toString() {
+                return "RC";
+            }
+        },
+        ReactionHasSet {
+            @Override
+            public String toString() {
+                return "RS";
+            }
+        },
+        PathwayHasReaction {
+            @Override
+            public String toString() {
+                return "PR";
+            }
+        },
+        PathwayHasPathway {
+            @Override
+            public String toString() {
+                return "PP";
+            }
+        },
+        ReactionChainedToReaction {
+            @Override
+            public String toString() {
+                return "RR";
+            }
+        }
+    }
+
+    public enum EdgeType {
+        ComplexNeighbour {
+            public String toString() {
+                return "cn";
+            }
+        },
+        CandidateSetNeighbour {
+            public String toString() {
+                return "cs";
+            }
+        },
+        DefinedSetNeighbour {
+            public String toString() {
+                return "ds";
+            }
+        },
+        OpenSetNeighbour {
+            public String toString() {
+                return "os";
+            }
+        },
+        EntitySetNeighbour {
+            public String toString() {
+                return "es";
             }
         },
         InputToOutput {
@@ -243,6 +466,21 @@ public class Conf {
         RegulatorToOutput {
             public String toString() {
                 return "ro";
+            }
+        },
+        OutputToInput {
+            public String toString() {
+                return "oi";
+            }
+        },
+        OutputToCatalyst {
+            public String toString() {
+                return "oc";
+            }
+        },
+        OutputToRegulator {
+            public String toString() {
+                return "or";
             }
         },
         ComplexHasProtein {

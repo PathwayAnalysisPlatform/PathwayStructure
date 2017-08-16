@@ -51,3 +51,10 @@ hs_err_pid*
 /target/
 *.sif
 *.txt
+
+#cytoscape
+*.json
+*.cys
+.idea/
+
+wikipathways/

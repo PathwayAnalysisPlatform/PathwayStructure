@@ -28,13 +28,14 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import no.uib.pathwayquery.Conf;
+import no.uib.pathwayquery.Conf.BoolVars;
 import no.uib.pathwayquery.Conf.EdgeType;
+import no.uib.pathwayquery.Conf.StrVars;
 import no.uib.pathwayquery.ProteinGraphExtractor;
 import org.neo4j.driver.v1.Record;
 
@@ -70,13 +71,13 @@ public class GraphReactome {
         }
 
         this.verticesMapping = new BiMapIntToByteArray(numVertices);
-        this.edgesMapping = new BiMapByteToByteArray(21);
+        this.edgesMapping = new BiMapByteToByteArray(25);
 
         byte cont = 0;
         for (EdgeType t : EdgeType.values()) {
             edgesMapping.put(cont, t.toString());
-            System.out.println("byte to string: " + edgesMapping.getString(cont));
-            System.out.println("string to byte: " + edgesMapping.getByte(t.toString()));
+//            System.out.println("byte to string: " + edgesMapping.getString(cont));
+//            System.out.println("string to byte: " + edgesMapping.getByte(t.toString()));
             cont++;
         }
         //Verify the contents of the edgesMapping
@@ -93,8 +94,8 @@ public class GraphReactome {
      *
      * @param path {String} The path to the file that contains the graph.
      */
-    public GraphReactome(String path, int numVertices) throws UnsupportedEncodingException {
-        
+    public GraphReactome(String path, int numVertices) {
+
         //TODO when the edges are of certain types, I have to duplicate the edge in the reverse order
         this.adjacencyList = (HashSet<AdjacentNeighbor>[]) new HashSet[numVertices];
         for (int I = 0; I < numVertices; I++) {
@@ -106,7 +107,11 @@ public class GraphReactome {
 
         byte cont = 0;
         for (EdgeType t : EdgeType.values()) {
-            edgesMapping.put(cont, t.toString());
+            try {
+                edgesMapping.put(cont, t.toString());
+            } catch (UnsupportedEncodingException ex) {
+                Logger.getLogger(GraphReactome.class.getName()).log(Level.SEVERE, null, ex);
+            }
             //System.out.println("byte to string: " + edgesMapping.getString(cont));
             //System.out.println("string to byte: " + edgesMapping.getByte(t.toString()));
             cont++;
@@ -188,11 +193,11 @@ public class GraphReactome {
      * Adds and edge without translating from String to int.
      *
      * @param source {int} The source vertex of the edge (start).
-     * @param destiny {String} The destination vertex of the edge (end).
+     * @param destination {String} The destination vertex of the edge (end).
      * @param type {EdgeType} Takes a value of the enum of EdgeType
      */
-    public void addEdge(int source, String destiny, EdgeType type) throws UnsupportedEncodingException {
-        int dNum = verticesMapping.getInt(destiny);
+    public void addEdge(int source, String destination, EdgeType type) throws UnsupportedEncodingException {
+        int dNum = verticesMapping.getInt(destination);
         byte t = edgesMapping.getByte(type.toString());
         AdjacentNeighbor n = new AdjacentNeighbor(dNum, t);
         adjacencyList[source].add(n);
@@ -202,14 +207,14 @@ public class GraphReactome {
      * Implement the abstract method for adding an edge.
      *
      * @param source {String} The source vertex of the edge (start).
-     * @param destiny {String} The destination vertex of the edge (end).
+     * @param destination {String} The destination vertex of the edge (end).
      * @param type {EdgeType} Takes a value of the enum of EdgeType in
      * {@link AdjacentNeighbor}.
      * @throws java.io.UnsupportedEncodingException
      */
-    public void addEdge(String source, String destiny, EdgeType type) throws UnsupportedEncodingException {
+    public void addEdge(String source, String destination, EdgeType type) throws UnsupportedEncodingException {
         int sNum = verticesMapping.getInt(source);
-        int dNum = verticesMapping.getInt(destiny);
+        int dNum = verticesMapping.getInt(destination);
         byte t = (byte) edgesMapping.getByte(type.toString());
         AdjacentNeighbor n = new AdjacentNeighbor(dNum, t);
         for (AdjacentNeighbor savedNeighbor : adjacencyList[sNum]) {    //Check if the neighbour is already in the set
@@ -250,8 +255,40 @@ public class GraphReactome {
         }
     }
 
+    /**
+     * Adds one vertex to the graph. Increases the size of the graph by one.
+     *
+     * @param id
+     * @throws UnsupportedEncodingException
+     */
     public void addVertex(String id) throws UnsupportedEncodingException {
         verticesMapping.put(id);
+    }
+
+    /**
+     * Adds one vertex to the graph if it is not already there. Increases the
+     * size of the graph by one.
+     *
+     * @param id
+     * @throws UnsupportedEncodingException
+     */
+    public void addVertexIfNot(String id) throws UnsupportedEncodingException {
+        if (!this.containsVertex(id)) {
+            verticesMapping.put(id);
+        }
+    }
+
+    /**
+     * Adds a list of vertices to the graph. It increases the size of the graph
+     * by 1 for each vertex.
+     *
+     * @param idList The list containing the string names of the vertices.
+     * @throws UnsupportedEncodingException
+     */
+    public void addAllVertex(List<String> idList) throws UnsupportedEncodingException {
+        for (String id : idList) {
+            verticesMapping.put(id);
+        }
     }
 
     /**
@@ -285,9 +322,7 @@ public class GraphReactome {
      */
     public void writeSifGraph() {
 
-        try (FileWriter arch = new FileWriter(Conf.strMap.get(Conf.strVars.outputGraphFilePath.toString())
-                + "/" + Conf.strMap.get(Conf.strVars.outputFileName.toString())
-                + "." + Conf.strMap.get(Conf.strVars.outputGraphFileType.toString()))) {
+        try (FileWriter arch = new FileWriter(Conf.strMap.get(StrVars.output))) {
             for (int I = 0; I < getNumVertices(); I++) {          //Iterate over all vertices
                 String id = verticesMapping.getString(I);
                 boolean anyNeighborAnyType = false;
@@ -297,11 +332,11 @@ public class GraphReactome {
                         String nType = edgesMapping.getString(n.getType());
                         if (nType.equals(t.toString())) {       //If it is of the type of neighbours that will be printed in this row.
                             String nId = verticesMapping.getString(n.getNum());
-                            if (id.compareTo(nId) <= 0) {       //Allow only relations to vertices with higher lexicographical Id. Halves the number of edges.
-                                if (nType.equals("cn") || nType.equals("ds") || nType.equals("os") || nType.equals("cs")) {   //Only applies for complex or set neighbours       
-                                    continue;
-                                }
-                            }
+//                            if (id.compareTo(nId) <= 0) {       //Allow only relations to vertices with higher lexicographical Id. Halves the number of edges.
+//                                if (nType.equals("cn") || nType.equals("ds") || nType.equals("os") || nType.equals("cs")) {   //Only applies for complex or set neighbours       
+//                                    continue;
+//                                }
+//                            }
                             if (!foundOne) {                    //Raise flag that there are neighbors if this type
                                 foundOne = true;
                                 arch.write(id + " " + t.toString());
@@ -314,7 +349,7 @@ public class GraphReactome {
                         anyNeighborAnyType = true;
                     }
                 }
-                if (Conf.boolMap.get(Conf.boolVars.showIsolatedVertices.toString())) {
+                if (Conf.boolMap.get(BoolVars.showDisconnectedProteins)) {
                     if (!anyNeighborAnyType) {
                         arch.write(id + "\n");
                     }
@@ -328,7 +363,7 @@ public class GraphReactome {
     }
 
     public void writeGraphToFile() {
-        switch (Conf.strMap.get(Conf.strVars.outputGraphFileType.toString())) {
+        switch ("sif") {
             case "sif":
                 writeSifGraph();
         }
@@ -380,7 +415,7 @@ public class GraphReactome {
                 int newPercentage = cont * 100 / this.getNumVertices();
                 if (newPercentage > percentage) {
                     percentage = newPercentage;
-                    if (newPercentage % 4 == 0) { 
+                    if (newPercentage % 4 == 0) {
                         System.out.print(percentage + "% ");
                     }
                 }
@@ -393,7 +428,7 @@ public class GraphReactome {
                 index = this.verticesMapping.getInt(current.getL());
                 for (AdjacentNeighbor n : this.adjacencyList[index]) {
                     String nLabel = verticesMapping.getString(n.getNum());
-                     if (!visited.contains(n.getNum())) {    //Add to the queue if it has not been visited
+                    if (!visited.contains(n.getNum())) {    //Add to the queue if it has not been visited
                         byte newDist = (byte) (current.getR() + 1);
                         queued.add(new Pair<String, Byte>(nLabel, newDist));
                         predecesor.put(nLabel, current.getL());
@@ -420,15 +455,13 @@ public class GraphReactome {
             System.out.println("");
             r++;
         }
-        
+
         // Print paths
 //        for (String source : proteinSet) {
 //            while(predecesor != current){
 //                
 //            }
 //        }
-        
-
         return d;
     }
 }

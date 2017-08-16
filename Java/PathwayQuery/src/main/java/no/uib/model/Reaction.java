@@ -5,29 +5,30 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import no.uib.pathwayquery.Conf;
 
 /**
  *
  * @author Luis Francisco Hernández Sánchez
  */
 public class Reaction {
-    
+
     public String stId;
-    
+
     public Set<String> inputs;
     public Set<String> outputs;
     public Set<String> regulators;
     public Set<String> catalysts;
-    
+
     public Reaction(String line) {
         String[] parts = line.split(",");
-        
+
         this.stId = parts[0];
         catalysts = new HashSet<>();
         inputs = new HashSet<>();
         outputs = new HashSet<>();
         regulators = new HashSet<>();
-        
+
         if (parts.length > 1) {
             catalysts.addAll(Arrays.asList(parts[1].split(";"))); //catalysts
         }
@@ -41,7 +42,7 @@ public class Reaction {
             regulators.addAll(Arrays.asList(parts[4].split(";"))); //regulators
         }
     }
-    
+
     public Reaction() {
         this.stId = "";
         inputs = new HashSet<>();
@@ -49,7 +50,7 @@ public class Reaction {
         regulators = new HashSet<>();
         catalysts = new HashSet<>();
     }
-    
+
     public Set<String> getParticipants() {
         Set<String> participants = new HashSet<>();
         participants.addAll(catalysts);
@@ -58,75 +59,71 @@ public class Reaction {
         participants.addAll(regulators);
         return participants;
     }
-    
-    public List<Pair<String, String>> getIOInteractions() {
+
+    private Set<String> getSetByRole(String role) {
+        switch (role) {
+            case "inputs":
+                return inputs;
+            case "outputs":
+                return outputs;
+            case "catalysts":
+                return catalysts;
+            case "regulators":
+                return regulators;
+        }
+        return new HashSet<String>();
+    }
+
+    public List<Pair<String, String>> getInteractions(Conf.ReactionArcs arcType) {
         List<Pair<String, String>> result = new ArrayList<>();
-        
-        for (String input : inputs) {
-            for (String output : outputs) {
-                if (!input.equals(output)) {
-                    result.add(new Pair<>(input, output));
+        Set<String> set1 = new HashSet<>(), set2 = new HashSet<>();
+
+        switch (arcType) {
+            case InputToOutput:
+                set1 = inputs;
+                set2 = outputs;
+                break;
+            case CatalystToInput:
+                set1 = catalysts;
+                set2 = inputs;
+                break;
+            case CatalystToOutput:
+                set1 = catalysts;
+                set2 = outputs;
+                break;
+            case OutputToCatalyst:
+                set1 = outputs;
+                set2 = catalysts;
+                break;
+            case OutputToInput:
+                set1 = outputs;
+                set2 = inputs;
+                break;
+            case OutputToRegulator:
+                set1 = outputs;
+                set2 = regulators;
+                break;
+            case RegulatorToInput:
+                set1 = regulators;
+                set2 = inputs;
+                break;
+            case RegulatorToOutput:
+                set1 = regulators;
+                set2 = outputs;
+                break;
+        }
+
+        for (String p1 : set1) {
+            for (String p2 : set2) {
+                if (!p1.equals(p2)) {
+                    result.add(new Pair<>(p1, p2));
                 }
             }
         }
+
         return result;
     }
-    
-    public List<Pair<String, String>> getCIInteractions() {
-        List<Pair<String, String>> result = new ArrayList<>();
-        
-        for (String catalyst : catalysts) {
-            for (String input : inputs) {
-                if (!catalyst.equals(input)) {
-                    result.add(new Pair<>(catalyst, input));
-                }
-            }
-        }
-        return result;
-    }
-    
-    public List<Pair<String, String>> getCOInteractions() {
-        List<Pair<String, String>> result = new ArrayList<>();
-        
-        for (String catalyst : catalysts) {
-            for (String output : outputs) {
-                if (!catalyst.equals(output)) {
-                    result.add(new Pair<>(catalyst, output));
-                }
-            }
-        }
-        
-        return result;
-    }
-    
-    public List<Pair<String, String>> getRIInteractions() {
-        List<Pair<String, String>> result = new ArrayList<>();
-        
-        for (String regulator : regulators) {
-            for (String input : inputs) {
-                if (!regulator.equals(input)) {
-                    result.add(new Pair<>(regulator, input));
-                }
-            }
-        }
-        
-        return result;
-    }
-    
-    public List<Pair<String, String>> getROInteractions() {
-        List<Pair<String, String>> result = new ArrayList<>();
-        
-        for (String regulator : regulators) {
-            for (String output : outputs) {
-                if (!regulator.equals(output)) {
-                    result.add(new Pair<>(regulator, output));
-                }
-            }
-        }
-        
-        return result;
-    }
-    
+
     public void addParticipant(String proteinId, String role) {
         switch (role) {
             case "input":
@@ -143,5 +140,5 @@ public class Reaction {
                 break;
         }
     }
-    
+
 }

@@ -22,6 +22,16 @@ package no.uib.db;
 public interface ReactomeQueries {
 
     /**
+     * Cypher query to check if Reactome contains a Protein using its UniProt
+     * Id. Requires a parameter @id when running the query.
+     *
+     * @param id The UniProt Id of the protein of interest. Example: "P69906" or
+     * "P68871"
+     */
+    String containsUniProtId = "MATCH (re:ReferenceEntity{identifier:{id}})\nWHERE re.databaseName = \"UniProt\"\n"
+            + "RETURN re.identifier as protein";
+
+    /**
      * Cypher query to get a list of Ewas associated to a Protein using its
      * UniProt Id. Requires a parameter @id when running the query.
      *
@@ -72,11 +82,34 @@ public interface ReactomeQueries {
      * Cypher query to get a list of Pathways and Reactions that contain an
      * Ewas. Requires a parameter @stId when running the query.
      *
-     * @param stId The stable identifier of the Ewas in Reactome. Example: "R-HSA-2230966"
+     * @param stId The stable identifier of the Ewas in Reactome. Example:
+     * "R-HSA-2230966"
      */
     String getPathwaysByEwas = "MATCH (p:Pathway)-[:hasEvent*]->(rle:ReactionLikeEvent),\n"
             + "(rle)-[:input|output|catalystActivity|physicalEntity|regulatedBy|regulator|hasComponent|hasMember|hasCandidate*]->(pe:PhysicalEntity{stId:{stId}})\n"
             + "RETURN p.stId AS Pathway, p.displayName AS PathwayDisplayName, rle.stId AS Reaction, rle.displayName as ReactionDisplayName";
+
+    /**
+     * Cypher query to get a list of Pathways and Reactions that contain a
+     * protein referenced by a UniProtId. Requires a parameter @id when running
+     * the query.
+     *
+     * @param id The UniProt id of the protein to search. Example: "P69905"
+     */
+    String getPathwaysByUniProtId = "MATCH (p:Pathway)-[:hasEvent]->(r:Reaction)-[:input|output|catalystActivity|physicalEntity|regulatedBy|regulator|hasComponent|hasMember|hasCandidate*]->(pe:PhysicalEntity)-[:referenceEntity]->(re:ReferenceEntity{identifier:{id}})\n"
+            + "WHERE re.databaseName = \"UniProt\"\nRETURN DISTINCT p.stId AS pathway, r.stId AS reaction";
+
+    /**
+     * Cypher query to get a list of Pathways and Reactions that contain a
+     * protein referenced by a UniProtId. Requires a parameter @id when running
+     * the query. It shows also two columns witht the name and id of the
+     * TopLevelPathways where the reactions and pathways are.
+     *
+     * @param id The UniProt id of the protein to search. Example: "P69905"
+     */
+    String getPathwaysByUniProtIdWithTLP = "MATCH (tlp:TopLevelPathway)-[:hasEvent*]->(p:Pathway)-[:hasEvent]->(r:Reaction)-[:input|output|catalystActivity|physicalEntity|regulatedBy|regulator|hasComponent|hasMember|hasCandidate*]->(pe:PhysicalEntity)-[:referenceEntity]->(re:ReferenceEntity{identifier:{id}})\n"
+            + "WHERE re.databaseName = \"UniProt\"\n"
+            + "RETURN DISTINCT tlp.stId as TopLevelPathwayStId, tlp.displayName as TopLevelPathwayName, p.stId AS pathway, r.stId AS reaction";
 
     public enum Queries {
         getProteinsByPsiMod {

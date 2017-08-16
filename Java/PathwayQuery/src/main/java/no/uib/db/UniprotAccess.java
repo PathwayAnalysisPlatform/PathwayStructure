@@ -9,6 +9,7 @@ import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import no.uib.pathwayquery.Conf;
 import no.uib.pathwayquery.ProteinGraphExtractor;
 //import static no.uib.PathwayQuery.ProteinGraphExtractor.proteins;
 
@@ -129,7 +130,12 @@ public class UniprotAccess {
                         cont++;
                         col = 0;
                         if (id.length() <= 6) {
-                            ProteinGraphExtractor.G.addVertex(id);
+                            if (ProteinGraphExtractor.G.getNumVertices() < Conf.intMap.get(Conf.IntVars.maxNumVertices)) {
+                                ProteinGraphExtractor.G.addVertex(id);
+                            }
+                            else{
+                                break;
+                            }
                         }
                         id = "";
                     } else {
@@ -184,7 +190,7 @@ public class UniprotAccess {
                 int a = 0;
                 String id = "";
                 int cont = 0, col = 0;
-                
+
                 //Remove header
                 do {
                     a = reader.read();

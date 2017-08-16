@@ -21,7 +21,7 @@ import java.util.List;
 import no.uib.db.ConnectionNeo4j;
 import no.uib.db.ReactomeAccess;
 import no.uib.pathwayquery.Conf;
-import no.uib.pathwayquery.Conf.strVars;
+import no.uib.pathwayquery.Conf.StrVars;
 import org.apache.commons.cli.*;
 import org.neo4j.driver.v1.AuthTokens;
 import org.neo4j.driver.v1.GraphDatabase;
@@ -77,7 +77,7 @@ public class MODGet {
 //        System.out.println("modId: " + cmd.getOptionValue("mod"));
 //        System.out.println("output: " + cmd.getOptionValue("output"));
         Conf.setEmptyMaps();
-        Conf.setDefaultReactomeValues();
+        Conf.setDefaultNeo4jValues();
         if (cmd.hasOption("confPath")) {
             Conf.readConf();
         }
@@ -92,10 +92,10 @@ public class MODGet {
         }
 
         ConnectionNeo4j.driver = GraphDatabase.driver(
-                Conf.strMap.get(strVars.host.toString()),
+                Conf.strMap.get(StrVars.host),
                 AuthTokens.basic(Conf.strMap.get(
-                        strVars.username.toString()),
-                        Conf.strMap.get(strVars.password.toString())
+                        StrVars.username),
+                        Conf.strMap.get(StrVars.password)
                 )
         );
 

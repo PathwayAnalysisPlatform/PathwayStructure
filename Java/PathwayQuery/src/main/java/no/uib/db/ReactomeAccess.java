@@ -14,13 +14,13 @@ import java.util.logging.Logger;
 import no.uib.model.Pair;
 import no.uib.model.Reaction;
 import no.uib.pathwayquery.Conf;
+import no.uib.pathwayquery.Conf.StrVars;
 import static no.uib.pathwayquery.ProteinGraphExtractor.G;
 import org.neo4j.driver.v1.Record;
 import org.neo4j.driver.v1.Session;
 import org.neo4j.driver.v1.StatementResult;
-import org.neo4j.driver.v1.Transaction;
 import org.neo4j.driver.v1.Values;
-import no.uib.db.ReactomeQueries.Queries;
+import static no.uib.pathwayquery.Conf.strMap;
 
 /**
  *
@@ -33,7 +33,7 @@ public class ReactomeAccess {
      * graph. The graph G must me initialised already in
      * {@link ProteinGraphExtractor}
      */
-    public static void getComplexOrSetNeighbors() throws UnsupportedEncodingException {
+    public static void getComplexOrSetNeighbours() throws UnsupportedEncodingException {
         //Iterate over the proteins in the Graph
         for (int I = 0; I < G.getNumVertices(); I++) {
             if (G.getVertexId(I).length() > 6) {
@@ -44,34 +44,35 @@ public class ReactomeAccess {
 
             for (Record r : records) {
                 String n = r.get("id").asString(); //Get the neighbour id as a string.
-                String t = r.get("role").asString() + "Neighbor"; //Get the edge type as a string
+                String t = r.get("role").asString(); //Get the edge type as a string
                 switch (t) {
                     case "Complex":
-                        if (!Conf.boolMap.get(Conf.EdgeType.ComplexNeighbor.toString())) {
+                        if (!Conf.boolMap.get(Conf.EdgeType.ComplexNeighbour.toString())) {
                             continue;
                         }
                         break;
                     case "DefinedSet":
-                        if (!Conf.boolMap.get(Conf.EdgeType.DefinedSetNeighbor.toString())) {
+                        if (!Conf.boolMap.get(Conf.EdgeType.DefinedSetNeighbour.toString())) {
                             continue;
                         }
                         break;
                     case "OpenSet":
-                        if (!Conf.boolMap.get(Conf.EdgeType.OpenSetNeighbor.toString())) {
+                        if (!Conf.boolMap.get(Conf.EdgeType.OpenSetNeighbour.toString())) {
                             continue;
                         }
                         break;
                     case "CandidateSet":
-                        if (!Conf.boolMap.get(Conf.EdgeType.CandidateSetNeighbor.toString())) {
+                        if (!Conf.boolMap.get(Conf.EdgeType.CandidateSetNeighbour.toString())) {
                             continue;
                         }
                         break;
                 }
                 //System.out.println(t + " " + n);
+                t += "Neighbour";
                 if (G.containsVertex(n)) {
                     G.addEdge(G.getVertexId(I), n, Conf.EdgeType.valueOf(t));
                 } else {
-                    System.out.println("Vertex " + n + " not found in list.");
+                    //System.out.println("Vertex " + n + " not found in list.");
                 }
             }
         }
@@ -83,32 +84,35 @@ public class ReactomeAccess {
      */
     private static List<Record> queryComplexOrSetNeighbours(String id) throws UnsupportedEncodingException {
 
-        try (Session session = ConnectionNeo4j.driver.session(); Transaction tx = session.beginTransaction()) {
+        List<Record> result = new ArrayList<Record>();
+        try {
+            Session session = ConnectionNeo4j.driver.session();
+            StatementResult queryResult;
             String query = "MATCH (re:ReferenceEntity{identifier:{id}})<-[:referenceEntity]-(p:EntityWithAccessionedSequence)<-[:hasComponent|hasMember|hasCandidate|repeatedUnit*]-(e)-[:hasComponent|hasMember|hasCandidate|repeatedUnit*]->(nE:EntityWithAccessionedSequence)-[:referenceEntity]->(nP:ReferenceEntity)\n"
                     + "WHERE ANY (l IN labels(e) WHERE l IN [";
             boolean setOne = false;
-            if (Conf.boolMap.get(Conf.EdgeType.ComplexNeighbor.toString())) {
+            if (Conf.boolMap.get(Conf.EdgeType.ComplexNeighbour.toString())) {
                 if (setOne) {
                     query += ", ";
                 }
                 query += "'Complex'";
                 setOne = true;
             }
-            if (Conf.boolMap.get(Conf.EdgeType.DefinedSetNeighbor.toString())) {
+            if (Conf.boolMap.get(Conf.EdgeType.DefinedSetNeighbour.toString())) {
                 if (setOne) {
                     query += ", ";
                 }
                 query += "'DefinedSet'";
                 setOne = true;
             }
-            if (Conf.boolMap.get(Conf.EdgeType.CandidateSetNeighbor.toString())) {
+            if (Conf.boolMap.get(Conf.EdgeType.CandidateSetNeighbour.toString())) {
                 if (setOne) {
                     query += ", ";
                 }
                 query += "'CandidateSet'";
                 setOne = true;
             }
-            if (Conf.boolMap.get(Conf.EdgeType.OpenSetNeighbor.toString())) {
+            if (Conf.boolMap.get(Conf.EdgeType.OpenSetNeighbour.toString())) {
                 if (setOne) {
                     query += ", ";
                 }
@@ -116,10 +120,14 @@ public class ReactomeAccess {
                 setOne = true;
             }
             query += "]) RETURN DISTINCT last(labels(e)) as role, nP.identifier as id";
-            StatementResult result = tx.run(query, Values.parameters("id", id));
-
-            return result.list();
+            queryResult = session.run(query, Values.parameters("id", id));
+            result = queryResult.list();
+            session.close();
+        } catch (org.neo4j.driver.v1.exceptions.ClientException e) {
+            System.out.println(" Unable to connect to \"" + strMap.get(StrVars.host) + "\", ensure the database is running and that there is a working network connection to it.");
+            System.exit(1);
         }
+        return result;
     }
 
     /**
@@ -138,7 +146,7 @@ public class ReactomeAccess {
      * moment.</p>
      *
      */
-    public static void getReactionNeighbors() {
+    public static void getReactionNeighbours() {
 
         //Check if file with all reactions exists
         File f = new File("./Reactions.txt");
@@ -149,7 +157,7 @@ public class ReactomeAccess {
 
         try {
             //Iterate over all reactions of the file asking for their participants and roles
-            BufferedReader reactionsBR = new BufferedReader(new FileReader(Conf.strMap.get(Conf.strVars.reactionsFile.toString())));
+            BufferedReader reactionsBR = new BufferedReader(new FileReader(Conf.strMap.get(StrVars.reactionsFile)));
             String line = "";
             try {
                 while ((line = reactionsBR.readLine()) != null) //Read a reaction row
@@ -161,31 +169,21 @@ public class ReactomeAccess {
 //                    }
                     //Check how many participants of this reaction are in the input protein list
                     //If there are at least two participants of this reaction contained in the input list
+                    // Or if there is one and I am allowing proteins not in the list
                     if (checkReactionIsCompatible(r)) {
-
-                        for (Pair<String, String> interaction : r.getIOInteractions()) {
-                            if (G.containsVertex(interaction.getL()) && G.containsVertex(interaction.getR())) {
-                                G.addEdge(interaction.getL(), interaction.getR(), Conf.EdgeType.InputToOutput);
-                            }
-                        }
-                        for (Pair<String, String> interaction : r.getCIInteractions()) {
-                            if (G.containsVertex(interaction.getL()) && G.containsVertex(interaction.getR())) {
-                                G.addEdge(interaction.getL(), interaction.getR(), Conf.EdgeType.CatalystToInput);
-                            }
-                        }
-                        for (Pair<String, String> interaction : r.getCOInteractions()) {
-                            if (G.containsVertex(interaction.getL()) && G.containsVertex(interaction.getR())) {
-                                G.addEdge(interaction.getL(), interaction.getR(), Conf.EdgeType.CatalystToOutput);
-                            }
-                        }
-                        for (Pair<String, String> interaction : r.getRIInteractions()) {
-                            if (G.containsVertex(interaction.getL()) && G.containsVertex(interaction.getR())) {
-                                G.addEdge(interaction.getL(), interaction.getR(), Conf.EdgeType.RegulatorToInput);
-                            }
-                        }
-                        for (Pair<String, String> interaction : r.getROInteractions()) {
-                            if (G.containsVertex(interaction.getL()) && G.containsVertex(interaction.getR())) {
-                                G.addEdge(interaction.getL(), interaction.getR(), Conf.EdgeType.RegulatorToOutput);
+                        for (Conf.ReactionArcs arcType : Conf.ReactionArcs.values()) {
+                            if (Conf.boolMap.get(arcType.toString())) {
+                                for (Pair<String, String> interaction : r.getInteractions(arcType)) {
+                                    if (Conf.boolMap.get(Conf.BoolVars.onlyProteinsInList)) {
+                                        if (G.containsVertex(interaction.getL()) && G.containsVertex(interaction.getR())) {
+                                            G.addEdge(interaction.getL(), interaction.getR(), Conf.EdgeType.valueOf(arcType.name()));
+                                        }
+                                    } else {
+                                        G.addVertexIfNot(interaction.getL());
+                                        G.addVertexIfNot(interaction.getR());
+                                        G.addEdge(interaction.getL(), interaction.getR(), Conf.EdgeType.valueOf(arcType.name()));
+                                    }
+                                }
                             }
                         }
                     }
@@ -370,13 +368,20 @@ public class ReactomeAccess {
     }
 
     private static boolean checkReactionIsCompatible(Reaction r) throws UnsupportedEncodingException {
+        int minNumParticipants = 1;
+        if (Conf.boolMap.get(Conf.BoolVars.onlyProteinsInList)) {
+            minNumParticipants = 2;
+        }
         int foundParticipants = 0;
         for (String p : r.getParticipants()) {
             if (G.containsVertex(p)) {
                 foundParticipants++;
+                if (foundParticipants >= minNumParticipants) {
+                    return true;
+                }
             }
         }
-        return (foundParticipants >= 2);
+        return false;
     }
 
     public static List<Record> getEdgesByType(Conf.EdgeType t) {
