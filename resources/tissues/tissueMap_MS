@@ -1,0 +1,158 @@
+category	tissue
+adipose	adipocyte
+adrenal	adrenal gland
+ascites	ascites
+autonomic_nervous_system	SK-N-BE(2) cell
+bone	bone
+bone	osteosarcoma cell
+bone	U2-OS cell
+bone_marrow	bone marrow stromal cell
+bone_marrow	mesenchymal stem cell
+brain	arachnoid cyst
+brain	brain
+brain	cerebral cortex
+brain	GaMG cell
+brain	MO3.13
+brain	prefrontal cortex
+brain	SF-268 cell
+brain	SF-295 cell
+brain	SF-539 cell
+brain	SNB-19 cell
+brain	SNB-75 cell
+brain	U-251 MG cell
+breast	breast
+breast	BT-549 cell
+breast	HCC-1143
+breast	HCC-1599
+breast	HCC-1937 cell
+breast	HCC-202
+breast	HCC-2218
+breast	HMELonza
+breast	HMEpC cell
+breast	HMT-3522 cell
+breast	Hs-578T cell
+breast	MCF-10A cell
+breast	MCF-7 cell
+breast	MCF-7/adr cell
+breast	MDA-MB-231 cell
+breast	MDA-MB-435 cell
+breast	MDA-MB-453 cell
+breast	MFM-223 cell
+breast	T-47D cell
+cardia	cardia
+cerebrospinal_fluid	cerebrospinal fluid
+cerumen	cerumen
+cervix_uterine	cervical mucosa
+cervix_uterine	HeLa cell
+cervix_uterine	uterine cervix
+circulatory system	HL-60 cell
+circulatory_system	B-lymphocyte
+circulatory_system	blood
+circulatory_system	blood platelet
+circulatory_system	CCRF-CEM cell
+circulatory_system	cytotoxic T-lymphocyte
+circulatory_system	helper T-lymphocyte
+circulatory_system	JURKAT cell
+circulatory_system	K-562 cell
+circulatory_system	MOLT-4 cell
+circulatory_system	monocyte
+circulatory_system	natural killer cell
+circulatory_system	RPMI-8226 cell
+circulatory_system	SR cell
+colon	Colo-205 cell
+colon	colon
+colon	colonic epithelial cell
+colon	HCC-2998 cell
+colon	HCT-15 cell
+colon	HT-29 cell
+colon	HTC-116 cell
+colon	KM-12 cell
+colon	RKO cell
+colon	SW-480 cell
+colon	SW-620 cell
+esophagus	esophagus
+eye	retina
+eye	vitreous humor
+gall_bladder	gall bladder
+gut	gut
+hair_follicle	hair follicle
+heart	heart
+ileum	ileum epithelial cell
+kidney	A-498 cell
+kidney	ACHN cell
+kidney	Caki-1 cell
+kidney	HEK-293 cell
+kidney	kidney
+kidney	RCC 786-O cell
+kidney	renal cell carcinoma cell
+kidney	RXF-393 cell
+kidney	SN-12C cell
+kidney	TK-10 cell
+kidney	UO-31 cell
+liver	Hep-G2 cell
+liver	liver
+lung	A-549 cell
+lung	EKVX cell
+lung	HOP-62 cell
+lung	HOP-92 cell
+lung	lung
+lung	NCI-H226 cell
+lung	NCI-H23 cell
+lung	NCI-H322M cell
+lung	NCI-H460 cell
+lung	NCI-H522 cell
+lung	non-small cell lung cancer cell line
+lymph_node	lymph node
+milk	milk
+mixed	Mixed
+myometrium	myometrium
+nasopharynx	nasopharynx
+oral_cavity	CAL-27 cell
+oral_cavity	oral epithelium
+ovary	IGROV-1 cell
+ovary	ovary
+ovary	OVCAR-3 cell
+ovary	OVCAR-4 cell
+ovary	OVCAR-5 cell
+ovary	OVCAR-8/ADR cell
+ovary	SKOV-3 cell
+pancreas	pancreas
+pancreas	pancreatic islet
+pancreatic_juice	pancreatic juice
+placenta	amniocyte
+placenta	placenta
+prostate	DU-145 cell
+prostate	LNCaP cell
+prostate	PC-3 cell
+prostate	prostate gland
+prostate	seminal vesicle
+proximal_fluid	proximal fluid (coronary sinus)
+rectum	rectum
+saliva	saliva
+salivary_gland	salivary gland
+seminal_plasma	seminal plasma
+skin	A-375 cell
+skin	LOX-IMVI cell
+skin	M14 cell
+skin	MALME-3M cell
+skin	SK-MEL-2 cell
+skin	SK-MEL-28 cell
+skin	SK-MEL-5 cell
+skin	skin
+skin	UACC-257 cell
+skin	UACC-62 cell
+smooth_muscle	colon muscle
+spinal_cord	spinal cord
+spleen	spleen
+stem_cells	cycling crypt base columnar cell
+stem_cells	HES-3
+stomach	HFE-145
+stomach	stomach
+synovial_fluid	synovial fluid
+testis	spermatozoon
+testis	testis
+thyroid	thyroid gland
+tonsils	tonsil
+urinary_bladder	urinary bladder
+urine	urine
+uterus	uterus
