@@ -185,7 +185,7 @@ public class ProteinGraphExtractor {
         try {
             // Verify if configuration file exists
             File f = new File(strMap.get(Conf.StrVars.conf));
-            if (f.exists() && !f.isDirectory()) {
+            //if (f.exists() && !f.isDirectory()) {
                 //Read and set configuration values from file
                 BufferedReader configBR = new BufferedReader(new FileReader(strMap.get(Conf.StrVars.conf)));
 
@@ -208,14 +208,16 @@ public class ProteinGraphExtractor {
                         }
                     }
                 }
-            }
+            //}
         } catch (FileNotFoundException ex) {
             System.out.println("Configuration file not found at: " + strMap.get(Conf.StrVars.conf));
-            Logger.getLogger(ProteinGraphExtractor.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(ProteinGraphExtractor.class.getName()).log(Level.SEVERE, null, ex);
+            System.exit(1);
             return 1;
         } catch (IOException ex) {
             System.out.println("Not possible to read the configuration file: " + strMap.get(Conf.StrVars.conf));
-            Logger.getLogger(ProteinGraphExtractor.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(ProteinGraphExtractor.class.getName()).log(Level.SEVERE, null, ex);
+            System.exit(1);
         }
 
         /**
