@@ -34,6 +34,7 @@ dev.off()
 
 ## most compounds are pretty close to the average abundance density
 ## notable deviations are blood, bllod paltelets, and a couple of others
+pdf('abundancePerCompoundOnePlot.pdf', width=13, height=7)
 plot(density(abundances$intensity_average),
      xlab='Protein Abundance', ylab='Density',
      main='',
@@ -43,7 +44,7 @@ for (tis in unique(abundances$tissue)) {
                              "intensity_average"]),
           col = rgb(1,0,1,0.3))
 }
-
+dev.off()
 
 pdf('abundancePerCompound.pdf', width=13, height=7)
 for (tis in unique(abundances$tissue)) {
