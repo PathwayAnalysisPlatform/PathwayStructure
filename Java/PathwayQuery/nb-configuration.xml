@@ -17,9 +17,9 @@ Any value defined here will override the pom.xml file value but is only applicab
     </properties>
     <config-data xmlns="http://www.netbeans.org/ns/maven-config-data/1">
         <configurations>
+            <configuration id="AllProteinsCentrality" profiles=""/>
             <configuration id="Centrality" profiles=""/>
-            <configuration id="In-Centrality" profiles=""/>
-            <configuration id="Out-Centrality" profiles=""/>
+            <configuration id="CentralityPerPAthway" profiles=""/>
         </configurations>
     </config-data>
 </project-shared-configuration>
