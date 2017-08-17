@@ -23,7 +23,6 @@ import no.uib.pathwayquery.Conf.StrVars;
 
 import org.neo4j.driver.v1.AuthTokens;
 import org.neo4j.driver.v1.GraphDatabase;
-import org.neo4j.driver.v1.Record;
 import org.apache.commons.cli.*;
 import org.neo4j.driver.v1.Session;
 

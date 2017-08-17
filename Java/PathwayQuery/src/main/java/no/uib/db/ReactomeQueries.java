@@ -111,6 +111,29 @@ public interface ReactomeQueries {
             + "WHERE re.databaseName = \"UniProt\"\n"
             + "RETURN DISTINCT tlp.stId as TopLevelPathwayStId, tlp.displayName as TopLevelPathwayName, p.stId AS pathway, r.stId AS reaction";
 
+    /**
+     * Cypher query to get a list of the stId of all reactions in Reactome.
+     */
+    String getAllReactions = "MATCH (n:ReactionLikeEvent) WHERE n.speciesName = 'Homo sapiens' RETURN n.stId as reaction";
+
+    /**
+     * Cypher query to get a list of the stId of all reactions with first
+     * publication before or at year.
+     * 
+     * @param year Year of the first publication for that reaction
+     */
+    String getReactionsByYear = "MATCH (p:Publication)\n"
+            + "WHERE p.year <= {year}\n"
+            + "WITH DISTINCT p ORDER BY p.year DESC\n"
+            + "MATCH (r:Reaction{speciesName:'Homo sapiens'})-[:literatureReference]-(p)\n"
+            + "WITH DISTINCT r.stId as reaction, last(collect(p.year)) as publicationYears\n"
+            + "RETURN reaction, publicationYears";
+
+    /**
+     * Cypher query to get count the number of reactions in Reactome.
+     */
+    String getReactionsCount = "MATCH (n:ReactionLikeEvent) WHERE n.speciesName = 'Homo sapiens' RETURN count(n) as reactionsCount";
+
     public enum Queries {
         getProteinsByPsiMod {
             public String toString() {
