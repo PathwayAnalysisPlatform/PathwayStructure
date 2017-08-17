@@ -24,10 +24,12 @@ import no.uib.pathwayquery.ProteinGraphExtractor;
  */
 public class GraphPerYear {
     public static void main(String args[]) throws IOException {
+        // ProteinGraphExtractor.main(new String[]{"-o", "1970.sif", "-l", "-io", "-co", "-ro", "-y", "1970"});
+        
         /* this does not check whether anything actually changed between years... */
-        // for (int i = 1934; i < 2018; i++) {
-        //     ProteinGraphExtractor.main(new String[]{"-o", Integer.toString(i)+".sif", "-io", "-co", "-ro", "-y", Integer.toString(i)});
-        // }
-        ProteinGraphExtractor.main(new String[]{"-o", "1970.sif", "-io", "-co", "-ro", "-y", "1970"});
+        for (int i = 1934; i < 2018; i++) {
+            ProteinGraphExtractor.main(new String[]{"-o", Integer.toString(i)+".sif", "-l", "-io", "-co", "-ro", "-y", Integer.toString(i)});
+        }
+        
     }
 }
