@@ -207,7 +207,6 @@ public class ReactomeAccess {
             FileWriter reactionsFW = new FileWriter("./Reactions.txt"); //Create or empty the file for reactions
             Session session = ConnectionNeo4j.driver.session();
             
-            
             String query;
             StatementResult result;
             if(Conf.intMap.get(Conf.IntVars.year) < 0){
@@ -363,8 +362,7 @@ public class ReactomeAccess {
      */
     private static List<Record> getReactionParticipantsWithRoles(String reactionId) {
         Session session = ConnectionNeo4j.driver.session();
-        String query = "MATCH (rle:ReactionLikeEvent{stId:{id}})-[role:input|output|catalystActivity|physicalEntity|regulatedBy|regulator|hasComponent|hasMember|hasCandidate|repeatedUnit*]->(pe:PhysicalEntity)-[:referenceEntity]->(re:ReferenceEntity{databaseName:'UniProt'})\n"
-                + "RETURN DISTINCT re.identifier as protein, head(extract(x IN role | type(x))) as role ORDER BY role";         //Get all the proteins that play a role in this reaction
+        String query = ReactomeQueries.getReactionParticipantsWithRoles;         //Get all the proteins that play a role in this reaction
         StatementResult result = session.run(query, Values.parameters("id", reactionId));
 
         session.close();

@@ -119,7 +119,7 @@ public interface ReactomeQueries {
     /**
      * Cypher query to get a list of the stId of all reactions with first
      * publication before or at year.
-     * 
+     *
      * @param year Year of the first publication for that reaction
      */
     String getReactionsByYear = "MATCH (p:Publication)\n"
@@ -133,6 +133,9 @@ public interface ReactomeQueries {
      * Cypher query to get count the number of reactions in Reactome.
      */
     String getReactionsCount = "MATCH (n:ReactionLikeEvent) WHERE n.speciesName = 'Homo sapiens' RETURN count(n) as reactionsCount";
+
+    String getReactionParticipantsWithRoles = "MATCH (rle:ReactionLikeEvent{stId:{id}})-[role:input|output|catalystActivity|physicalEntity|regulatedBy|regulator|hasComponent|hasMember|hasCandidate|repeatedUnit*]->(pe:PhysicalEntity)-[:referenceEntity]->(re:ReferenceEntity{databaseName:'UniProt'}) "
+            + "RETURN DISTINCT re.identifier as protein, head(extract(x IN role | type(x))) as role ORDER BY role";
 
     public enum Queries {
         getProteinsByPsiMod {
