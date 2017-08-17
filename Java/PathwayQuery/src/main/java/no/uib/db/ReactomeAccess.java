@@ -150,10 +150,10 @@ public class ReactomeAccess {
 
         //Check if file with all reactions exists
         File f = new File("./Reactions.txt");
-        if (!f.exists() || f.isDirectory()) {
+        //if (!f.exists() || f.isDirectory()) {
             //Write all reactions with their participants to file
             createReactionsFile();
-        }
+        //}
 
         try {
             //Iterate over all reactions of the file asking for their participants and roles
@@ -164,9 +164,6 @@ public class ReactomeAccess {
                 {
                     Reaction r = new Reaction(line);
 
-//                    if(r.stId.equals("R-HSA-382613")){
-//                        int i = 8;
-//                    }
                     //Check how many participants of this reaction are in the input protein list
                     //If there are at least two participants of this reaction contained in the input list
                     // Or if there is one and I am allowing proteins not in the list
@@ -209,10 +206,18 @@ public class ReactomeAccess {
         try {
             FileWriter reactionsFW = new FileWriter("./Reactions.txt"); //Create or empty the file for reactions
             Session session = ConnectionNeo4j.driver.session();
-            String query = "MATCH (n:ReactionLikeEvent) \n"
-                    + "WHERE n.speciesName = 'Homo sapiens'\n"
-                    + "RETURN n.stId as reaction";
-            StatementResult result = session.run(query);
+            
+            String query;
+            StatementResult result;
+            if(Conf.intMap.get(Conf.IntVars.year) < 0){
+                query = ReactomeQueries.getAllReactions;
+                result = session.run(query);
+            }
+            else{
+                query = ReactomeQueries.getReactionsByYear;
+                result = session.run(query, Values.parameters("year", Conf.intMap.get(Conf.IntVars.year)));
+            }
+                    
             List<Record> records = result.list();
             int progress = 0;
             int currentProgress = 0;
@@ -221,9 +226,7 @@ public class ReactomeAccess {
             System.out.println(" 0%");
             for (Record r : records) {
                 String stId = r.get("reaction").asString();
-//                if (stId.equals("R-HSA-382613")) {
-//                    System.out.print("");
-//                }
+
                 List<Record> participantRecords = getReactionParticipantsWithRoles(stId);
                 if (records.size() > 0) {
                     try {
@@ -359,8 +362,7 @@ public class ReactomeAccess {
      */
     private static List<Record> getReactionParticipantsWithRoles(String reactionId) {
         Session session = ConnectionNeo4j.driver.session();
-        String query = "MATCH (rle:ReactionLikeEvent{stId:{id}})-[role:input|output|catalystActivity|physicalEntity|regulatedBy|regulator|hasComponent|hasMember|hasCandidate|repeatedUnit*]->(pe:PhysicalEntity)-[:referenceEntity]->(re:ReferenceEntity{databaseName:'UniProt'})\n"
-                + "RETURN DISTINCT re.identifier as protein, head(extract(x IN role | type(x))) as role ORDER BY role";         //Get all the proteins that play a role in this reaction
+        String query = ReactomeQueries.getReactionParticipantsWithRoles;         //Get all the proteins that play a role in this reaction
         StatementResult result = session.run(query, Values.parameters("id", reactionId));
 
         session.close();

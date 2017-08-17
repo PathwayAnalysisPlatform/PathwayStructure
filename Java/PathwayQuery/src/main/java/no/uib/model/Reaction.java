@@ -30,16 +30,24 @@ public class Reaction {
         regulators = new HashSet<>();
 
         if (parts.length > 1) {
-            catalysts.addAll(Arrays.asList(parts[1].split(";"))); //catalysts
+            if (parts[1].length() > 0) {
+                catalysts.addAll(Arrays.asList(parts[1].split(";"))); //catalysts
+            }
         }
         if (parts.length > 2) {
-            inputs.addAll(Arrays.asList(parts[2].split(";"))); //inputs
+            if (parts[2].length() > 0) {
+                inputs.addAll(Arrays.asList(parts[2].split(";"))); //inputs    
+            }
         }
         if (parts.length > 3) {
-            outputs.addAll(Arrays.asList(parts[3].split(";"))); //outputs
+            if (parts[3].length() > 0) {
+                outputs.addAll(Arrays.asList(parts[3].split(";"))); //outputs
+            }
         }
         if (parts.length > 4) {
-            regulators.addAll(Arrays.asList(parts[4].split(";"))); //regulators
+            if (parts[4].length() > 0) {
+                regulators.addAll(Arrays.asList(parts[4].split(";"))); //regulators
+            }
         }
     }
 

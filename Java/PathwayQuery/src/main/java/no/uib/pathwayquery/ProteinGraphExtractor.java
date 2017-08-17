@@ -23,7 +23,6 @@ import no.uib.pathwayquery.Conf.StrVars;
 
 import org.neo4j.driver.v1.AuthTokens;
 import org.neo4j.driver.v1.GraphDatabase;
-import org.neo4j.driver.v1.Record;
 import org.apache.commons.cli.*;
 import org.neo4j.driver.v1.Session;
 
@@ -181,45 +180,6 @@ public class ProteinGraphExtractor {
         Conf.setDefaultValuesGraphExtractor();
 
         /**
-         * *** Read config file ***
-         */
-        try {
-            // Verify if configuration file exists
-            File f = new File(strMap.get(Conf.StrVars.conf));
-            if (f.exists() && !f.isDirectory()) {
-                //Read and set configuration values from file
-                BufferedReader configBR = new BufferedReader(new FileReader(strMap.get(Conf.StrVars.conf)));
-
-                //For every valid variable found in the config.txt file, the variable value gets updated
-                String line;
-                while ((line = configBR.readLine()) != null) {
-                    if (line.length() == 0) {
-                        continue;
-                    }
-                    line = line.trim();
-                    if (line.startsWith("//")) {    //Discard the comment lines in the 
-                        continue;
-                    }
-                    if (!line.contains("=")) {      //Set to true the flag arguments
-                        Conf.setValue(line, Boolean.TRUE);
-                    } else {                        // Set the value for the valued arguments
-                        String[] parts = line.split("=");
-                        if (Conf.contains(parts[0])) {
-                            Conf.setValue(parts[0], parts[1]);
-                        }
-                    }
-                }
-            }
-        } catch (FileNotFoundException ex) {
-            System.out.println("Configuration file not found at: " + strMap.get(Conf.StrVars.conf));
-            Logger.getLogger(ProteinGraphExtractor.class.getName()).log(Level.SEVERE, null, ex);
-            return 1;
-        } catch (IOException ex) {
-            System.out.println("Not possible to read the configuration file: " + strMap.get(Conf.StrVars.conf));
-            Logger.getLogger(ProteinGraphExtractor.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        /**
          * *** Parse the command line parameters ***
          */
         // Define and parse command line options
@@ -230,6 +190,56 @@ public class ProteinGraphExtractor {
 
         try {
             CommandLine cmd = parser.parse(options, args);
+
+            if (cmd.hasOption(Conf.StrVars.conf)) {
+                Conf.setValue(Conf.StrVars.conf, cmd.getOptionValue(Conf.StrVars.conf));
+            }
+            /**
+             * *** Read config file ***
+             */
+            try {
+                // Verify if configuration file exists
+                File f = new File(strMap.get(Conf.StrVars.conf));
+                if (f.exists() && !f.isDirectory()) {
+                    //Read and set configuration values from file
+                    BufferedReader configBR = new BufferedReader(new FileReader(strMap.get(Conf.StrVars.conf)));
+
+                    //For every valid variable found in the config.txt file, the variable value gets updated
+                    String line;
+                    while ((line = configBR.readLine()) != null) {
+                        if (line.length() == 0) {
+                            continue;
+                        }
+                        line = line.trim();
+                        if (line.startsWith("//")) {    //Discard the comment lines in the 
+                            continue;
+                        }
+                        if (!line.contains("=")) {      //Set to true the flag arguments
+                            Conf.setValue(line, Boolean.TRUE);
+                        } else {                        // Set the value for the valued arguments
+                            String[] parts = line.split("=");
+                            if (Conf.contains(parts[0])) {
+                                Conf.setValue(parts[0], parts[1]);
+                            }
+                        }
+                    }
+                } else if (cmd.hasOption(Conf.StrVars.conf)) {
+                    throw new FileNotFoundException();
+                }
+            } catch (FileNotFoundException ex) {
+                System.out.println("Configuration file not found at: " + strMap.get(Conf.StrVars.conf));
+                //Logger.getLogger(ProteinGraphExtractor.class.getName()).log(Level.SEVERE, null, ex);
+                System.exit(1);
+                return 1;
+            } catch (IOException ex) {
+                System.out.println("Not possible to read the configuration file: " + strMap.get(Conf.StrVars.conf));
+                //Logger.getLogger(ProteinGraphExtractor.class.getName()).log(Level.SEVERE, null, ex);
+                System.exit(1);
+                return 1;
+            }
+            /**
+             * *********************************
+             */
 
             // Load all the values received in the command line. All variables, except the edge types, because those are referenced with the short name
             boolean anyFlag = false;
