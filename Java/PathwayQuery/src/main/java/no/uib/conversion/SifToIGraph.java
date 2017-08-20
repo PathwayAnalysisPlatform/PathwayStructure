@@ -139,6 +139,8 @@ public class SifToIGraph {
      * the sif file.
      */
     private void parseSif(File sifFile, HashSet<String> restrictionList) throws IOException {
+        
+        HashMap<String, HashSet<String>> tempReaction = new HashMap<>();
 
         BufferedReader br = new BufferedReader(new FileReader(sifFile));
 
@@ -166,12 +168,12 @@ public class SifToIGraph {
 
                             if (functionIn == 'i' && functionOut == 'o') {
 
-                                HashSet<String> outputs = reaction.get(accession);
+                                HashSet<String> outputs = tempReaction.get(accession);
 
                                 if (outputs == null) {
 
                                     outputs = new HashSet<>(1);
-                                    reaction.put(accession, outputs);
+                                    tempReaction.put(accession, outputs);
 
                                 }
 
@@ -219,6 +221,29 @@ public class SifToIGraph {
                             }
                         }
                     }
+                }
+            }
+        }
+        
+        for (String accession : tempReaction.keySet()) {
+            
+            HashSet<String> targets = tempReaction.get(accession);
+            HashSet<String> complexes = complex.get(accession);
+            
+            if (complexes == null) {
+                
+                reaction.put(accession, targets);
+                
+            } else {
+                
+                HashSet<String> filteredTargets = targets.stream()
+                        .filter(target -> !complexes.contains(target))
+                        .collect(Collectors.toCollection(HashSet::new));
+                
+                if (!filteredTargets.isEmpty()) {
+                    
+                    reaction.put(accession, filteredTargets);
+                    
                 }
             }
         }
