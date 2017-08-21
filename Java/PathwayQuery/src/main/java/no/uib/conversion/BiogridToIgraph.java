@@ -5,7 +5,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -17,6 +16,7 @@ import java.util.HashSet;
 import java.util.stream.Collectors;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
+import static no.uib.conversion.Utils.encoding;
 
 /**
  * This class converts an intact file to igraph files.
@@ -36,6 +36,7 @@ public class BiogridToIgraph {
 
             args = new String[]{"C:\\Github\\PathwayProjectQueries\\resources\\iGraph\\biogrid\\BIOGRID-ALL-3.4.151.mitab.gz",
                 "C:\\Github\\PathwayProjectQueries\\resources\\HUMAN_9606_idmapping.dat.gz",
+                "C:\\Github\\PathwayProjectQueries\\resources\\uniprot_names_human_21.08.17.tab.gz",
                 "C:\\Github\\PathwayProjectQueries\\resources\\iGraph\\biogrid",
                 "BIOGRID-ALL-3.4.151"};
 
@@ -43,21 +44,26 @@ public class BiogridToIgraph {
 
             File sifFile = new File(args[0]);
             File idMappingFile = new File(args[1]);
-            File outputFolder = new File(args[2]);
-            String baseName = args[3];
+            File namesMappingFile = new File(args[2]);
+            File outputFolder = new File(args[3]);
+            String baseName = args[4];
 
-            System.out.println(new Date() + " Parsing uniprot file");
+            System.out.println(new Date() + " Parsing uniprot id mapping file");
 
             HashMap<String, HashSet<String>> accessions = biogridToIgraph.getUniprotAccessions(idMappingFile);
+
+            System.out.println(new Date() + " Parsing uniprot names mapping file");
+
+            HashMap<String, String> proteinNames = Utils.getNamesMap(namesMappingFile);
 
             System.out.println(new Date() + " Parsing Biogrid file");
 
             biogridToIgraph.parseBiogridFile(sifFile, accessions);
 
             System.out.println(new Date() + " Exporting results");
-            biogridToIgraph.writeIGraphFiles(outputFolder, baseName);
+            biogridToIgraph.writeIGraphFiles(outputFolder, baseName, proteinNames);
 
-            int nEdges = biogridToIgraph.getNEdges();
+            int nEdges = Utils.getNEdges(biogridToIgraph.getInteractions());
             System.out.println(new Date() + " " + nEdges + " interractions found");
 
         } catch (Exception e) {
@@ -75,15 +81,9 @@ public class BiogridToIgraph {
      * Set of all nodes.
      */
     private HashSet<String> allNodes = new HashSet<>();
-    /**
-     * Encoding.
-     */
-    public static final String encoding = "UTF-8";
-
-    private BufferedWriter bw;
 
     public BiogridToIgraph() throws IOException {
-        bw = new BufferedWriter(new FileWriter(new File("C:\\Github\\post-association\\resources\\function\\mouse")));
+
     }
 
     /**
@@ -200,45 +200,6 @@ public class BiogridToIgraph {
                 }
             }
         }
-
-        bw.close();
-    }
-
-    /**
-     * Splits the biogrid entry and extracts the ensembl accessions present in
-     * the given list.
-     *
-     * @param biogridEntry the biogrid entry
-     * @param accessions the accessions to look for
-     *
-     * @return the accessions found in a set
-     */
-    private HashSet<String> getAccessions(String biogridEntry) {
-
-        String[] splittedEntry = biogridEntry.split("\\|");
-        HashSet<String> result = new HashSet<>(splittedEntry.length);
-
-        for (String entry : splittedEntry) {
-
-            if (entry.length() >= 16) {
-
-                String accession = entry.substring(22);
-
-                result.add(accession);
-
-                if (accession.contains("/")) {
-
-                    for (String subName : accession.split("/")) {
-
-                        result.add(subName);
-
-                    }
-                }
-            }
-        }
-
-        return result;
-
     }
 
     /**
@@ -286,15 +247,25 @@ public class BiogridToIgraph {
     }
 
     /**
+     * Returns the interactions found in a map.
+     *
+     * @return the interactions found in a map
+     */
+    public HashMap<String, HashSet<String>> getInteractions() {
+        return interactions;
+    }
+
+    /**
      * Write the igraph files.
      *
      * @param folder the destination folder
      * @param baseFileName the base name for the edges and vertices files
+     * @param proteinNames the accession to protein name map
      *
      * @throws IOException exception thrown if an error occurred while writing
      * the file
      */
-    private void writeIGraphFiles(File folder, String baseFileName) throws IOException {
+    private void writeIGraphFiles(File folder, String baseFileName, HashMap<String, String> proteinNames) throws IOException {
 
         File edgeFile = new File(folder, baseFileName + "_edges");
 
@@ -307,7 +278,7 @@ public class BiogridToIgraph {
             bw.write("from to type");
             bw.newLine();
 
-            writeEdges(bw, interactions, "Complex");
+            Utils.writeEdges(bw, interactions, "Complex");
 
         }
 
@@ -319,82 +290,16 @@ public class BiogridToIgraph {
 
         try (BufferedWriter bw = new BufferedWriter(outputEncoder)) {
 
-            bw.write("id");
+            bw.write("id\tname");
             bw.newLine();
 
             bw.write(
                     allNodes.stream()
                             .sorted()
+                            .map(accession -> Utils.getNodeLine(accession, proteinNames))
                             .collect(Collectors.joining(System.lineSeparator()))
             );
-
         }
-
-    }
-
-    /**
-     * Writes the given edges using the given writer. Writing exceptions are
-     * thrown as runtime exception.
-     *
-     * @param bw the writer
-     * @param targetsMap the accession to target map
-     * @param category the category of the mapping
-     */
-    private void writeEdges(BufferedWriter bw, HashMap<String, HashSet<String>> targetsMap, String category) {
-        targetsMap.keySet().stream()
-                .sorted()
-                .forEach(accession -> writeEdges(bw, accession, targetsMap.get(accession), category));
-
-    }
-
-    /**
-     * Writes the given edges using the given writer. Writing exceptions are
-     * thrown as runtime exception.
-     *
-     * @param bw the writer
-     * @param accession the accession
-     * @param targets the targets
-     * @param category the category of the mapping
-     */
-    private void writeEdges(BufferedWriter bw, String accession, HashSet<String> targets, String category) {
-
-        targets.stream()
-                .sorted()
-                .forEach(target -> writeEdge(bw, accession, target, category));
-    }
-
-    /**
-     * Writes the given edge using the given writer. Writing exceptions are
-     * thrown as runtime exception.
-     *
-     * @param bw the writer
-     * @param accession the accession
-     * @param target the target
-     * @param category the category of the mapping
-     */
-    private void writeEdge(BufferedWriter bw, String accession, String target, String category) {
-
-        try {
-
-            StringBuilder sb = new StringBuilder(accession.length() + target.length() + category.length() + 2);
-            sb.append(accession).append(' ').append(target).append(' ').append(category);
-            bw.write(sb.toString());
-            bw.newLine();
-
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    /**
-     * Returns the number of edges found.
-     *
-     * @return the number of edges found
-     */
-    private int getNEdges() {
-
-        return interactions.values().stream().mapToInt(targets -> targets.size()).sum();
-
     }
 
 }
