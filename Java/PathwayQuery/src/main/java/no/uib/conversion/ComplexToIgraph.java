@@ -16,6 +16,7 @@ import java.util.HashSet;
 import java.util.stream.Collectors;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
+import static no.uib.conversion.Utils.encoding;
 
 /**
  * This class converts a protein complex mapping to igraph files.
@@ -34,22 +35,28 @@ public class ComplexToIgraph {
 
         try {
 
-            args = new String[]{"C:\\Projects\\Bram\\graphs\\resources\\complexes\\homo_sapiens_complexes.tsv.gz",
-                "C:\\Github\\post-association\\resources\\function\\complexes",
+            args = new String[]{"C:\\Github\\PathwayProjectQueries\\resources\\iGraph\\complexes\\homo_sapiens_complexes.tsv.gz",
+                "C:\\Github\\PathwayProjectQueries\\resources\\uniprot_names_human_21.08.17.tab.gz",
+                "C:\\Github\\PathwayProjectQueries\\resources\\iGraph\\complexes",
                 "complexes_18.08.17"};
 
             ComplexToIgraph complexToIgraph = new ComplexToIgraph();
 
             File sifFile = new File(args[0]);
-            File outputFolder = new File(args[1]);
-            String baseName = args[2];
+            File namesMappingFile = new File(args[1]);
+            File outputFolder = new File(args[2]);
+            String baseName = args[3];
+
+            System.out.println(new Date() + " Parsing uniprot names mapping file");
+
+            HashMap<String, String> proteinNames = Utils.getNamesMap(namesMappingFile);
 
             System.out.println(new Date() + " Parsing complex file");
 
             complexToIgraph.parseComplexFile(sifFile);
 
             System.out.println(new Date() + " Exporting results");
-            complexToIgraph.writeIGraphFiles(outputFolder, baseName);
+            complexToIgraph.writeIGraphFiles(outputFolder, baseName, proteinNames);
 
         } catch (Exception e) {
 
@@ -66,10 +73,6 @@ public class ComplexToIgraph {
      * Set of all nodes.
      */
     private HashSet<String> allNodes = new HashSet<>();
-    /**
-     * Encoding.
-     */
-    public static final String encoding = "UTF-8";
 
     /**
      * Parses a complex file and populates the network attributes.
@@ -163,10 +166,11 @@ public class ComplexToIgraph {
      * 
      * @param folder the destination folder
      * @param baseFileName the base name for the edges and vertices files
+     * @param proteinNames the accession to protein name map
      * 
      * @throws IOException exception thrown if an error occurred while writing the file
      */
-    private void writeIGraphFiles(File folder, String baseFileName) throws IOException {
+    private void writeIGraphFiles(File folder, String baseFileName, HashMap<String, String> proteinNames) throws IOException {
 
         File edgeFile = new File(folder, baseFileName + "_edges");
 
@@ -179,7 +183,7 @@ public class ComplexToIgraph {
             bw.write("from to type");
             bw.newLine();
 
-            writeEdges(bw, complexes, "Complex");
+            Utils.writeEdges(bw, complexes, "Complex");
 
         }
 
@@ -191,67 +195,15 @@ public class ComplexToIgraph {
 
         try (BufferedWriter bw = new BufferedWriter(outputEncoder)) {
 
-            bw.write("id");
+            bw.write("id\tname");
             bw.newLine();
 
             bw.write(
                     allNodes.stream()
                             .sorted()
+                            .map(accession -> Utils.getNodeLine(accession, proteinNames))
                             .collect(Collectors.joining(System.lineSeparator()))
             );
-
-        }
-
-    }
-
-    /**
-     * Writes the given edges using the given writer. Writing exceptions are thrown as runtime exception.
-     * 
-     * @param bw the writer
-     * @param targetsMap the accession to target map
-     * @param category the category of the mapping
-     */
-    private void writeEdges(BufferedWriter bw, HashMap<String, HashSet<String>> targetsMap, String category) {
-        targetsMap.keySet().stream()
-                .sorted()
-                .forEach(accession -> writeEdges(bw, accession, targetsMap.get(accession), category));
-
-    }
-
-    /**
-     * Writes the given edges using the given writer. Writing exceptions are thrown as runtime exception.
-     * 
-     * @param bw the writer
-     * @param accession the accession
-     * @param targets the targets
-     * @param category the category of the mapping
-     */
-    private void writeEdges(BufferedWriter bw, String accession, HashSet<String> targets, String category) {
-
-        targets.stream()
-                .sorted()
-                .forEach(target -> writeEdge(bw, accession, target, category));
-    }
-
-    /**
-     * Writes the given edge using the given writer. Writing exceptions are thrown as runtime exception.
-     * 
-     * @param bw the writer
-     * @param accession the accession
-     * @param target the target
-     * @param category the category of the mapping
-     */
-    private void writeEdge(BufferedWriter bw, String accession, String target, String category) {
-
-        try {
-
-            StringBuilder sb = new StringBuilder(accession.length() + target.length() + category.length() + 2);
-            sb.append(accession).append(' ').append(target).append(' ').append(category);
-            bw.write(sb.toString());
-            bw.newLine();
-
-        } catch (Exception e) {
-            throw new RuntimeException(e);
         }
     }
 }

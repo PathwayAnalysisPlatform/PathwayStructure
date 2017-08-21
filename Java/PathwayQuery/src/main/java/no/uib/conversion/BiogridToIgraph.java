@@ -5,7 +5,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -24,47 +23,47 @@ import static no.uib.conversion.Utils.encoding;
  *
  * @author Marc Vaudel
  */
-public class IntactToIgraph {
+public class BiogridToIgraph {
 
     /**
-     * The main method takes an intact file and writes igraph files.
+     * The main method takes a biogrid file and writes igraph files.
      *
      * @param args the arguments
      */
     public static void main(String[] args) {
 
         try {
-            
-            args = new String[]{"C:\\Github\\PathwayProjectQueries\\resources\\iGraph\\intact\\intact_18.08.17.gz",
+
+            args = new String[]{"C:\\Github\\PathwayProjectQueries\\resources\\iGraph\\biogrid\\BIOGRID-ALL-3.4.151.mitab.gz",
                 "C:\\Github\\PathwayProjectQueries\\resources\\HUMAN_9606_idmapping.dat.gz",
                 "C:\\Github\\PathwayProjectQueries\\resources\\uniprot_names_human_21.08.17.tab.gz",
-                "C:\\Github\\PathwayProjectQueries\\resources\\iGraph\\intact",
-                "intact_18.08.17"};
+                "C:\\Github\\PathwayProjectQueries\\resources\\iGraph\\biogrid",
+                "BIOGRID-ALL-3.4.151"};
 
-            IntactToIgraph intactToIgraph = new IntactToIgraph();
+            BiogridToIgraph biogridToIgraph = new BiogridToIgraph();
 
             File sifFile = new File(args[0]);
-            File uniprotFile = new File(args[1]);
+            File idMappingFile = new File(args[1]);
             File namesMappingFile = new File(args[2]);
             File outputFolder = new File(args[3]);
             String baseName = args[4];
 
-            System.out.println(new Date() + " Parsing uniprot file");
+            System.out.println(new Date() + " Parsing uniprot id mapping file");
 
-            HashSet<String> accessions = intactToIgraph.getUniprotAccessions(uniprotFile);
+            HashMap<String, HashSet<String>> accessions = biogridToIgraph.getUniprotAccessions(idMappingFile);
 
             System.out.println(new Date() + " Parsing uniprot names mapping file");
 
             HashMap<String, String> proteinNames = Utils.getNamesMap(namesMappingFile);
 
-            System.out.println(new Date() + " Parsing Intact file");
+            System.out.println(new Date() + " Parsing Biogrid file");
 
-            intactToIgraph.parseIntactFile(sifFile, accessions);
+            biogridToIgraph.parseBiogridFile(sifFile, accessions);
 
             System.out.println(new Date() + " Exporting results");
-            intactToIgraph.writeIGraphFiles(outputFolder, baseName, proteinNames);
+            biogridToIgraph.writeIGraphFiles(outputFolder, baseName, proteinNames);
 
-            int nEdges = Utils.getNEdges(intactToIgraph.getInteractions());
+            int nEdges = Utils.getNEdges(biogridToIgraph.getInteractions());
             System.out.println(new Date() + " " + nEdges + " interractions found");
 
         } catch (Exception e) {
@@ -82,16 +81,14 @@ public class IntactToIgraph {
      * Set of all nodes.
      */
     private HashSet<String> allNodes = new HashSet<>();
-    
-    private BufferedWriter bw;
-    
-    public IntactToIgraph() throws IOException {
-        bw = new BufferedWriter(new FileWriter(new File("C:\\Github\\post-association\\resources\\function\\mouse")));
+
+    public BiogridToIgraph() throws IOException {
+
     }
 
     /**
-     * Parses the list of uniprot accessions from the given uniprot mapping
-     * file.
+     * Parses the uniprot ID mapping and returns a map GeneId to uniprot
+     * accession.
      *
      * @param uniprotFile the uniprot mapping file
      *
@@ -100,9 +97,9 @@ public class IntactToIgraph {
      * @throws IOException exception thrown if an error occurred while reading
      * the file.
      */
-    private HashSet<String> getUniprotAccessions(File uniprotFile) throws IOException {
+    private HashMap<String, HashSet<String>> getUniprotAccessions(File uniprotFile) throws IOException {
 
-        HashSet<String> accessions = new HashSet<>();
+        HashMap<String, HashSet<String>> mapping = new HashMap<>();
 
         InputStream fileStream = new FileInputStream(uniprotFile);
         InputStream gzipStream = new GZIPInputStream(fileStream);
@@ -110,30 +107,47 @@ public class IntactToIgraph {
 
         try (BufferedReader br = new BufferedReader(decoder)) {
 
-            String line = br.readLine();
+            String line;
             while ((line = br.readLine()) != null) {
 
-                String accession = line.substring(0, line.indexOf('\t'));
-                accessions.add(accession);
+                String[] lineSplit = line.split("\t");
 
+                String uniprot = lineSplit[0];
+                String db = lineSplit[1];
+                String id = lineSplit[2];
+
+                if (db.equals("GeneID") || db.equals("Gene_Name")) {
+
+                    HashSet<String> ids = mapping.get(id);
+
+                    if (ids == null) {
+
+                        ids = new HashSet<>(1);
+                        mapping.put(id, ids);
+
+                    }
+
+                    ids.add(uniprot);
+
+                }
             }
         }
 
-        return accessions;
+        return mapping;
     }
 
     /**
-     * Parses a intact file and populates the network attributes.
+     * Parses a biogrid file and populates the network attributes.
      *
-     * @param intactFile the intact file
-     * @param restrictionList list of accessions to retain
+     * @param biogridFile the biogrid file
+     * @param idMapping gene to uniprot mapping
      *
      * @throws IOException exception thrown if an error occurred while reading
      * the file.
      */
-    private void parseIntactFile(File intactFile, HashSet<String> restrictionList) throws IOException {
+    private void parseBiogridFile(File biogridFile, HashMap<String, HashSet<String>> idMapping) throws IOException {
 
-        InputStream fileStream = new FileInputStream(intactFile);
+        InputStream fileStream = new FileInputStream(biogridFile);
         InputStream gzipStream = new GZIPInputStream(fileStream);
         Reader decoder = new InputStreamReader(gzipStream, encoding);
 
@@ -144,19 +158,19 @@ public class IntactToIgraph {
 
                 String[] lineSplit = line.split("\t");
 
-                HashSet<String> accessionsA = getAccessions(lineSplit[0], restrictionList);
+                HashSet<String> accessionsA = getAccessions(lineSplit[0], idMapping);
 
                 if (accessionsA.isEmpty()) {
 
-                    accessionsA = getAccessions(lineSplit[2], restrictionList);
+                    accessionsA = getAccessions(lineSplit[2], idMapping);
 
                 }
 
-                HashSet<String> accessionsB = getAccessions(lineSplit[1], restrictionList);
+                HashSet<String> accessionsB = getAccessions(lineSplit[1], idMapping);
 
                 if (accessionsB.isEmpty()) {
 
-                    accessionsB = getAccessions(lineSplit[3], restrictionList);
+                    accessionsB = getAccessions(lineSplit[3], idMapping);
 
                 }
 
@@ -186,69 +200,45 @@ public class IntactToIgraph {
                 }
             }
         }
-        
-        bw.close();
     }
 
     /**
-     * Splits the intact entry and extracts the accessions present in the given
-     * list.
+     * Splits the biogrid entry and extracts the uniprot accessions present in
+     * the given list.
      *
-     * @param intactEntry the intact entry
-     * @param accessions the accessions to look for
+     * @param biogridEntry the biogrid entry
+     * @param idMapping geneId to Uniprot mapping
      *
      * @return the accessions found in a set
      */
-    private HashSet<String> getAccessions(String intactEntry, HashSet<String> accessions) {
+    private HashSet<String> getAccessions(String biogridEntry, HashMap<String, HashSet<String>> idMapping) {
 
-        String[] splittedEntry = intactEntry.split("\\|");
+        String[] splittedEntry = biogridEntry.split("\\|");
         HashSet<String> result = new HashSet<>(splittedEntry.length);
 
         for (String entry : splittedEntry) {
-            if (entry.length() >= 16) {
+            if (entry.length() >= 22) {
 
-                String accession = entry.substring(10);
+                String accession = entry.substring(22);
 
-                if (accessions.contains(accession)) {
+                HashSet<String> uniprotAccessions = idMapping.get(accession);
 
-                    result.add(accession);
+                if (uniprotAccessions != null) {
 
-                } else {
+                    result.addAll(uniprotAccessions);
 
-                    int dashIndex = accession.indexOf('-');
+                } else if (accession.contains("/")) {
 
-                    if (dashIndex > 0) {
+                    for (String subName : accession.split("/")) {
 
-                        accession = accession.substring(0, dashIndex);
+                        uniprotAccessions = idMapping.get(subName);
 
-                        if (accessions.contains(accession)) {
+                        if (uniprotAccessions != null) {
 
-                            result.add(accession);
+                            result.addAll(uniprotAccessions);
 
-                        } else if (accession.length() > 5) {
-                            
-                            try {
-                                
-                            bw.write(accession);
-                            bw.newLine();
-                            
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                            
                         }
-                    } else if (accession.length() > 5) {
-                            
-                            try {
-                                
-                            bw.write(accession);
-                            bw.newLine();
-                            
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                            
-                        }
+                    }
                 }
             }
         }
@@ -311,4 +301,5 @@ public class IntactToIgraph {
             );
         }
     }
+
 }
