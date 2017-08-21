@@ -20,9 +20,13 @@ Any value defined here will override the pom.xml file value but is only applicab
             <configuration id="AllProteinsCentrality" profiles=""/>
             <configuration id="Centrality" profiles=""/>
             <configuration id="CentralityPerPAthway" profiles=""/>
+            <configuration id="CompleteCompleteGraph" profiles=""/>
+            <configuration id="CompleteGraph" profiles=""/>
+            <configuration id="failGraph" profiles=""/>
             <configuration id="perYearAll" profiles=""/>
-            <configuration id="proteinGraph1970" profiles=""/>
             <configuration id="proteinGraph1934" profiles=""/>
+            <configuration id="proteinGraph1970" profiles=""/>
+            <configuration id="CentrPerYear" profiles=""/>
         </configurations>
     </config-data>
 </project-shared-configuration>
