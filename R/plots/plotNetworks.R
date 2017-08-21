@@ -36,10 +36,10 @@ complexes <- graph_from_data_frame(d = edgesComplexes, vertices = verticesComple
 
 print(paste(Sys.time(), " Plotting Network", sep = ""))
 
-png("resources/iGraph/complexes.png", width = 800, height = 600)
+png("resources/iGraph/plots/networks/complexes.png", width = 800, height = 600)
 l <- layout_with_fr(complexes)
 plot(complexes, vertex.shape = "none", vertex.label = NA, edge.color = defaultColor, layout = l)
-dev.off()
+dummy <- dev.off()
 
 
 # Reactome
@@ -61,9 +61,9 @@ edgeColors <- as.character(edgeColors)
 
 print(paste(Sys.time(), " Plotting Network", sep = ""))
 
-png("resources/iGraph/reactome.png", width = 800, height = 600)
+png("resources/iGraph/plots/networks/reactome.png", width = 800, height = 600)
 plot(reactome, vertex.shape = "none", vertex.label = NA, edge.arrow.size = 0.2, edge.arrow.width = 0.2, edge.color = edgeColors)
-dev.off()
+dummy <- dev.off()
 
 
 # Reactome reactions only
@@ -79,9 +79,9 @@ reactomeReactions <- graph_from_data_frame(d=edgesReactions, vertices=verticesRe
 
 print(paste(Sys.time(), " Plotting Network", sep = ""))
 
-png("resources/iGraph/reactome_reactions.png", width = 800, height = 600)
+png("resources/iGraph/plots/networks/reactome_reactions.png", width = 800, height = 600)
 plot(reactome, vertex.shape = "none", vertex.label = NA, edge.arrow.size = 0.2, edge.arrow.width = 0.2, edge.color = defaultColor)
-dev.off()
+dummy <- dev.off()
 
 
 # Intact
@@ -97,9 +97,9 @@ intact <- graph_from_data_frame(d = edgesIntact, vertices = verticesIntact, dire
 
 print(paste(Sys.time(), " Plotting Network", sep = ""))
 
-png("resources/iGraph/intact.png", width = 800, height = 600)
+png("resources/iGraph/plots/networks/intact.png", width = 800, height = 600)
 plot(intact, vertex.shape = "none", vertex.label = NA, edge.color = defaultColor)
-dev.off()
+dummy <- dev.off()
 
 
 # Interractome Mann
@@ -115,10 +115,9 @@ mann <- graph_from_data_frame(d = edgesMann, vertices = verticesMann, directed =
 
 print(paste(Sys.time(), " Plotting Network", sep = ""))
 
-png("resources/iGraph/mann.png", width = 800, height = 600)
+png("resources/iGraph/plots/networks/mann.png", width = 800, height = 600)
 plot(mann, vertex.shape = "none", vertex.label = NA, edge.color = defaultColor)
-dev.off()
-
+dummy <- dev.off()
 
 
 
