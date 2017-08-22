@@ -55,8 +55,8 @@ public class StringToIgraph {
 
         try {
 
-            args = new String[]{"C:\\Github\\PathwayProjectQueries\\resources\\iGraph\\string\\9606.protein.actions.v10.5.txt.gz",
-                "C:\\Github\\PathwayProjectQueries\\resources\\iGraph\\string\\9606.protein.links.detailed.v10.5.txt.gz",
+            args = new String[]{"C:\\Projects\\Bram\\graphs\\resources\\String\\9606.protein.actions.v10.5.txt.gz",
+                "C:\\Projects\\Bram\\graphs\\resources\\String\\9606.protein.links.detailed.v10.5.txt.gz",
                 "C:\\Github\\PathwayProjectQueries\\resources\\HUMAN_9606_idmapping.dat.gz",
                 "C:\\Github\\PathwayProjectQueries\\resources\\uniprot_names_human_21.08.17.tab.gz",
                 "C:\\Github\\PathwayProjectQueries\\resources\\iGraph\\string",
@@ -110,6 +110,11 @@ public class StringToIgraph {
      * Set of all nodes.
      */
     private HashSet<String> allNodes = new HashSet<>();
+    /**
+     * Boolean indicating whether the isoform number should be removed from the
+     * uniprot accession.
+     */
+    public final boolean removeIsoforms = true;
 
     public StringToIgraph() {
 
@@ -142,6 +147,14 @@ public class StringToIgraph {
                 String[] lineSplit = line.split("\t");
 
                 String uniprot = lineSplit[0];
+
+                if (removeIsoforms) {
+                    int dashIndex = uniprot.indexOf('-');
+                    if (dashIndex > -1) {
+                        uniprot = uniprot.substring(0, dashIndex);
+                    }
+                }
+                
                 String db = lineSplit[1];
                 String id = lineSplit[2];
 

@@ -34,11 +34,11 @@ public class BiogridToIgraph {
 
         try {
 
-            args = new String[]{"C:\\Projects\\Bram\\graphs\\resources\\biogrid\\28514442.gz",
+            args = new String[]{"C:\\Projects\\Bram\\graphs\\resources\\biogrid\\BIOGRID-ORGANISM-Homo_sapiens-3.4.151.gz",
                 "C:\\Github\\PathwayProjectQueries\\resources\\HUMAN_9606_idmapping.dat.gz",
                 "C:\\Github\\PathwayProjectQueries\\resources\\uniprot_names_human_21.08.17.tab.gz",
                 "C:\\Github\\PathwayProjectQueries\\resources\\iGraph\\biogrid",
-                "28514442"};
+                "BIOGRID-ORGANISM-Homo_sapiens-3.4.151"};
 
             BiogridToIgraph biogridToIgraph = new BiogridToIgraph();
 
@@ -84,7 +84,12 @@ public class BiogridToIgraph {
     /**
      * Boolean indicating whether accessions should be converted to Uniprot.
      */
-    public static final boolean uniprotConversion = true;
+    public final boolean uniprotConversion = true;
+    /**
+     * Boolean indicating whether the isoform number should be removed from the
+     * uniprot accession.
+     */
+    public final boolean removeIsoforms = true;
 
     public BiogridToIgraph() throws IOException {
 
@@ -117,6 +122,14 @@ public class BiogridToIgraph {
                 String[] lineSplit = line.split("\t");
 
                 String uniprot = lineSplit[0];
+
+                if (removeIsoforms) {
+                    int dashIndex = uniprot.indexOf('-');
+                    if (dashIndex > -1) {
+                        uniprot = uniprot.substring(0, dashIndex);
+                    }
+                }
+
                 String db = lineSplit[1];
                 String id = lineSplit[2];
 
@@ -225,7 +238,7 @@ public class BiogridToIgraph {
 
                 String accession = entry.substring(22);
 
-                if (uniprotConversion) {
+                if (!uniprotConversion) {
 
                     result.add(accession);
 

@@ -92,6 +92,11 @@ public class KeggToIgraph {
      * Set of all nodes.
      */
     private HashSet<String> allNodes = new HashSet<>();
+    /**
+     * Boolean indicating whether the isoform number should be removed from the
+     * uniprot accession.
+     */
+    public final boolean removeIsoforms = true;
 
     /**
      * Parses the uniprot ID mapping and returns a map ensembl protein
@@ -120,6 +125,14 @@ public class KeggToIgraph {
                 String[] lineSplit = line.split("\t");
 
                 String uniprot = lineSplit[0];
+
+                if (removeIsoforms) {
+                    int dashIndex = uniprot.indexOf('-');
+                    if (dashIndex > -1) {
+                        uniprot = uniprot.substring(0, dashIndex);
+                    }
+                }
+                
                 String db = lineSplit[1];
                 String id = lineSplit[2];
 

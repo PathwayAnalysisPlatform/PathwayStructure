@@ -86,6 +86,11 @@ public class SifToIGraph {
      * Set of all nodes.
      */
     private HashSet<String> allNodes = new HashSet<>();
+    /**
+     * Boolean indicating whether the isoform number should be removed from the
+     * uniprot accession.
+     */
+    public final boolean removeIsoforms = true;
 
     /**
      * Parses a sif file and populates the maps.
@@ -113,6 +118,13 @@ public class SifToIGraph {
                     int firstSpaceIndex = line.indexOf(' ');
                     String accession = line.substring(0, firstSpaceIndex);
 
+                    if (removeIsoforms) {
+                        int dashIndex = accession.indexOf('-');
+                        if (dashIndex > -1) {
+                            accession = accession.substring(0, dashIndex);
+                        }
+                    }
+
                     allNodes.add(accession);
 
                     char functionIn = line.charAt(firstSpaceIndex + 1);
@@ -122,6 +134,13 @@ public class SifToIGraph {
                     String[] targets = targetsLine.split(" ");
 
                     for (String target : targets) {
+
+                        if (removeIsoforms) {
+                            int dashIndex = target.indexOf('-');
+                            if (dashIndex > -1) {
+                                target = target.substring(0, dashIndex);
+                            }
+                        }
 
                         if (!target.equals(accession)) {
 

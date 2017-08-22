@@ -34,12 +34,12 @@ public class IntactToIgraph {
     public static void main(String[] args) {
 
         try {
-            
-            args = new String[]{"C:\\Github\\PathwayProjectQueries\\resources\\iGraph\\intact\\intact_18.08.17.gz",
+
+            args = new String[]{"C:\\Projects\\Bram\\graphs\\resources\\intact\\26496610.gz",
                 "C:\\Github\\PathwayProjectQueries\\resources\\HUMAN_9606_idmapping.dat.gz",
                 "C:\\Github\\PathwayProjectQueries\\resources\\uniprot_names_human_21.08.17.tab.gz",
                 "C:\\Github\\PathwayProjectQueries\\resources\\iGraph\\intact",
-                "intact_18.08.17"};
+                "26496610"};
 
             IntactToIgraph intactToIgraph = new IntactToIgraph();
 
@@ -82,9 +82,14 @@ public class IntactToIgraph {
      * Set of all nodes.
      */
     private HashSet<String> allNodes = new HashSet<>();
-    
+    /**
+     * Boolean indicating whether the isoform number should be removed from the
+     * uniprot accession.
+     */
+    public final boolean removeIsoforms = true;
+
     private BufferedWriter bw;
-    
+
     public IntactToIgraph() throws IOException {
         bw = new BufferedWriter(new FileWriter(new File("C:\\Github\\post-association\\resources\\function\\mouse")));
     }
@@ -186,7 +191,7 @@ public class IntactToIgraph {
                 }
             }
         }
-        
+
         bw.close();
     }
 
@@ -209,46 +214,28 @@ public class IntactToIgraph {
 
                 String accession = entry.substring(10);
 
+                if (removeIsoforms) {
+                    int dashIndex = accession.indexOf('-');
+                    if (dashIndex > 3) {
+                        accession = accession.substring(0, dashIndex);
+                    }
+                }
+
                 if (accessions.contains(accession)) {
 
                     result.add(accession);
 
-                } else {
+                } else if (accession.length() > 5) {
 
-                    int dashIndex = accession.indexOf('-');
+                    try {
 
-                    if (dashIndex > 0) {
+                        bw.write(accession);
+                        bw.newLine();
 
-                        accession = accession.substring(0, dashIndex);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
 
-                        if (accessions.contains(accession)) {
-
-                            result.add(accession);
-
-                        } else if (accession.length() > 5) {
-                            
-                            try {
-                                
-                            bw.write(accession);
-                            bw.newLine();
-                            
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                            
-                        }
-                    } else if (accession.length() > 5) {
-                            
-                            try {
-                                
-                            bw.write(accession);
-                            bw.newLine();
-                            
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                            
-                        }
                 }
             }
         }
