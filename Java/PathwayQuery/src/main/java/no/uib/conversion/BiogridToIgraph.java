@@ -34,11 +34,11 @@ public class BiogridToIgraph {
 
         try {
 
-            args = new String[]{"C:\\Github\\PathwayProjectQueries\\resources\\iGraph\\biogrid\\BIOGRID-ALL-3.4.151.mitab.gz",
+            args = new String[]{"C:\\Projects\\Bram\\graphs\\resources\\biogrid\\28514442.gz",
                 "C:\\Github\\PathwayProjectQueries\\resources\\HUMAN_9606_idmapping.dat.gz",
                 "C:\\Github\\PathwayProjectQueries\\resources\\uniprot_names_human_21.08.17.tab.gz",
                 "C:\\Github\\PathwayProjectQueries\\resources\\iGraph\\biogrid",
-                "BIOGRID-ALL-3.4.151"};
+                "28514442"};
 
             BiogridToIgraph biogridToIgraph = new BiogridToIgraph();
 
@@ -74,13 +74,17 @@ public class BiogridToIgraph {
     }
 
     /**
-     * Map of complexes, from input to outputs.
+     * Map of interactions, from input to outputs.
      */
     private HashMap<String, HashSet<String>> interactions = new HashMap<>();
     /**
      * Set of all nodes.
      */
     private HashSet<String> allNodes = new HashSet<>();
+    /**
+     * Boolean indicating whether accessions should be converted to Uniprot.
+     */
+    public static final boolean uniprotConversion = true;
 
     public BiogridToIgraph() throws IOException {
 
@@ -116,7 +120,7 @@ public class BiogridToIgraph {
                 String db = lineSplit[1];
                 String id = lineSplit[2];
 
-                if (db.equals("GeneID") || db.equals("Gene_Name")) {
+                if (db.equals("GeneID")) {
 
                     HashSet<String> ids = mapping.get(id);
 
@@ -221,23 +225,18 @@ public class BiogridToIgraph {
 
                 String accession = entry.substring(22);
 
-                HashSet<String> uniprotAccessions = idMapping.get(accession);
+                if (uniprotConversion) {
 
-                if (uniprotAccessions != null) {
+                    result.add(accession);
 
-                    result.addAll(uniprotAccessions);
+                } else {
 
-                } else if (accession.contains("/")) {
+                    HashSet<String> uniprotAccessions = idMapping.get(accession);
 
-                    for (String subName : accession.split("/")) {
+                    if (uniprotAccessions != null) {
 
-                        uniprotAccessions = idMapping.get(subName);
+                        result.addAll(uniprotAccessions);
 
-                        if (uniprotAccessions != null) {
-
-                            result.addAll(uniprotAccessions);
-
-                        }
                     }
                 }
             }
@@ -301,5 +300,4 @@ public class BiogridToIgraph {
             );
         }
     }
-
 }

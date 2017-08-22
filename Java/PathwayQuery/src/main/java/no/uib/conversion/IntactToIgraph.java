@@ -75,7 +75,7 @@ public class IntactToIgraph {
     }
 
     /**
-     * Map of complexes, from input to outputs.
+     * Map of interactions, from input to outputs.
      */
     private HashMap<String, HashSet<String>> interactions = new HashMap<>();
     /**

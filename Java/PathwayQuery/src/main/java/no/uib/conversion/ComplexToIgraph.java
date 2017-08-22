@@ -56,6 +56,7 @@ public class ComplexToIgraph {
             complexToIgraph.parseComplexFile(sifFile);
 
             System.out.println(new Date() + " Exporting results");
+            
             complexToIgraph.writeIGraphFiles(outputFolder, baseName, proteinNames);
 
         } catch (Exception e) {

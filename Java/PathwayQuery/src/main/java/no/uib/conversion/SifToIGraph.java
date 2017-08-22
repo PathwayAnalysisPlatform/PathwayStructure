@@ -36,7 +36,7 @@ public class SifToIGraph {
 
         try {
 
-            args = new String[]{"C:\\Github\\PathwayProjectQueries\\resources\\iGraph\\reactome\\ProteomeGraphAllEdgeTypes.sif.gz",
+            args = new String[]{"C:\\Projects\\Bram\\graphs\\ProteomeGraphAllEdgeTypes.sif.gz",
                 "C:\\Github\\PathwayProjectQueries\\resources\\uniprot_names_human_21.08.17.tab.gz",
                 "C:\\Github\\PathwayProjectQueries\\resources\\iGraph\\reactome",
                 "reactome_18.08.17"};
