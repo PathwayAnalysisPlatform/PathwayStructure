@@ -14,9 +14,9 @@ library(ggplot2)
 
 ## Parameters
 
-mainCategoryNames <- c("Complexes", "Pathways", "Interactions")
-categoryNames <- c("Complexes", "Reactome", "Reactions", "Intact", "Mann")
-categoryColors <- c("#4daf4a", "#377eb8", "#984ea3", "#e41a1c", "#ff7f00")
+mainCategoryNames <- c("Complexes", "Pathways", "Interactions", "Composite")
+categoryNames <- c("Complexes", "Reactome", "Reactions", "Kegg", "Biogrid", "Intact", "Huttlin", "Hein", "String")
+categoryColors <- c("#e31a1c", "#1f78b4", "#a6cee3", "#33a02c", "#ff7f00", "#6a3d9a", "#fdbf6f", "#cab2d6", "#999999")
 
 
 ## Main script
@@ -26,20 +26,32 @@ categoryColors <- c("#4daf4a", "#377eb8", "#984ea3", "#e41a1c", "#ff7f00")
 
 print(paste(Sys.time(), " Loading data", sep = ""))
 
-verticesComplexes <- read.table("resources/iGraph/complexes/complexes_18.08.17_vertices", header = T, sep = " ", stringsAsFactors = F)
-edgesComplexes <- read.table("resources/iGraph/complexes/complexes_18.08.17_edges", header = T, sep = " ", stringsAsFactors = F)
+verticesComplexes <- read.table("resources/iGraph/complexes/complexes_18.08.17_vertices", header = T, sep = "\t", stringsAsFactors = F, quote = "", comment.char = "")
+edgesComplexes <- read.table("resources/iGraph/complexes/complexes_18.08.17_edges", header = T, sep = " ", stringsAsFactors = F, quote = "", comment.char = "")
 
-verticesReactome <- read.table("resources/iGraph/reactome/reactome_18.08.17_vertices", header = T, sep = " ", stringsAsFactors = F)
-edgesReactome <- read.table("resources/iGraph/reactome/reactome_18.08.17_edges", header = T, sep = " ", stringsAsFactors = F)
+verticesReactome <- read.table("resources/iGraph/reactome/reactome_18.08.17_vertices", header = T, sep = "\t", stringsAsFactors = F, quote = "", comment.char = "")
+edgesReactome <- read.table("resources/iGraph/reactome/reactome_18.08.17_edges", header = T, sep = " ", stringsAsFactors = F, quote = "", comment.char = "")
 
 edgesReactions <- edgesReactome[edgesReactome$type == "Reaction", c("from", "to")]
 verticesReactions <- verticesReactome[verticesReactome$id %in% edgesReactions$from | verticesReactome$id %in% edgesReactions$to, ]
 
-verticesIntact <- read.table("resources/iGraph/intact/intact_18.08.17_vertices", header = T, sep = " ", stringsAsFactors = F)
-edgesIntact <- read.table("resources/iGraph/intact/intact_18.08.17_edges", header = T, sep = " ", stringsAsFactors = F)
+verticesKegg <- read.table("resources/iGraph/kegg/kegg_21.08.17_vertices", header = T, sep = "\t", stringsAsFactors = F, quote = "", comment.char = "")
+edgesKegg <- read.table("resources/iGraph/kegg/kegg_21.08.17_edges", header = T, sep = " ", stringsAsFactors = F, quote = "", comment.char = "")
 
-verticesMann <- read.table("resources/iGraph/intact/26496610_mann_vertices", header = T, sep = " ", stringsAsFactors = F)
-edgesMann <- read.table("resources/iGraph/intact/26496610_mann_edges", header = T, sep = " ", stringsAsFactors = F)
+verticesBiogrid <- read.table("resources/iGraph/biogrid/BIOGRID-ORGANISM-Homo_sapiens-3.4.151_vertices", header = T, sep = "\t", stringsAsFactors = F, quote = "", comment.char = "")
+edgesBiogrid <- read.table("resources/iGraph/biogrid/BIOGRID-ORGANISM-Homo_sapiens-3.4.151_edges", header = T, sep = " ", stringsAsFactors = F, quote = "", comment.char = "")
+
+verticesIntact <- read.table("resources/iGraph/intact/intact_18.08.17_vertices", header = T, sep = "\t", stringsAsFactors = F, quote = "", comment.char = "")
+edgesIntact <- read.table("resources/iGraph/intact/intact_18.08.17_edges", header = T, sep = " ", stringsAsFactors = F, quote = "", comment.char = "")
+
+verticesGygi <- read.table("resources/iGraph/biogrid/28514442_vertices", header = T, sep = "\t", stringsAsFactors = F, quote = "", comment.char = "")
+edgesGygi <- read.table("resources/iGraph/biogrid/28514442_edges", header = T, sep = " ", stringsAsFactors = F, quote = "", comment.char = "")
+
+verticesMann <- read.table("resources/iGraph/intact/26496610_mann_vertices", header = T, sep = "\t", stringsAsFactors = F, quote = "", comment.char = "")
+edgesMann <- read.table("resources/iGraph/intact/26496610_mann_edges", header = T, sep = " ", stringsAsFactors = F, quote = "", comment.char = "")
+
+verticesString <- read.table("resources/iGraph/string/string_v10.5_vertices", header = T, sep = "\t", stringsAsFactors = F, quote = "", comment.char = "")
+edgesString <- read.table("resources/iGraph/string/string_v10.5_edges", header = T, sep = " ", stringsAsFactors = F, quote = "", comment.char = "")
 
 
 # Get graphs and degrees
@@ -49,29 +61,44 @@ print(paste(Sys.time(), " Processing graphs", sep = ""))
 complexes <- graph_from_data_frame(d = edgesComplexes, vertices = verticesComplexes, directed = F)
 reactome <- graph_from_data_frame(d=edgesReactome, vertices=verticesReactome, directed=T)
 reactomeReactions <- graph_from_data_frame(d=edgesReactions, vertices=verticesReactions, directed=T)
+kegg <- graph_from_data_frame(d = edgesKegg, vertices = verticesKegg, directed = F)
+biogrid <- graph_from_data_frame(d = edgesBiogrid, vertices = verticesBiogrid, directed = F)
 intact <- graph_from_data_frame(d = edgesIntact, vertices = verticesIntact, directed = F)
+gygi <- graph_from_data_frame(d = edgesGygi, vertices = verticesGygi, directed = F)
 mann <- graph_from_data_frame(d = edgesMann, vertices = verticesMann, directed = F)
+string <- graph_from_data_frame(d = edgesString, vertices = verticesString, directed = F)
+
 
 complexesDegrees <- degree(complexes)
+reactomeDegrees <- degree(reactome, mode = "all")
+reactomeReactionsDegrees <- degree(reactomeReactions, mode = "all")
+keggDegrees <- degree(kegg)
+biogridDegrees <- degree(biogrid)
+intactDegrees <- degree(intact)
+gygiDegrees <- degree(gygi)
+mannDegrees <- degree(mann)
+stringDegrees <- degree(string)
+
 reactomeDegreesIn <- degree(reactome, mode = "in")
 reactomeDegreesOut <- degree(reactome, mode = "out")
-reactomeDegrees <- degree(reactome, mode = "all")
 reactomeReactionsDegreesIn <- degree(reactomeReactions, mode = "in")
 reactomeReactionsDegreesOut <- degree(reactomeReactions, mode = "out")
-reactomeReactionsDegrees <- degree(reactomeReactions, mode = "all")
-intactDegrees <- degree(intact)
-mannDegrees <- degree(mann)
 
 complexesDistribution <- degree.distribution(complexes)
-reactomeDistributionIn <- degree.distribution(reactome, mode = "in")
-reactomeDistributionOut <- degree.distribution(reactome, mode = "out")
 reactomeDistribution <- degree.distribution(reactome, mode = "all")
-reactomeReactionsDistributionIn <- degree.distribution(reactomeReactions, mode = "in")
-reactomeReactionsDistributionOut <- degree.distribution(reactomeReactions, mode = "out")
 reactomeReactionsDistribution <- degree.distribution(reactomeReactions, mode = "all")
+keggDistribution <- degree.distribution(kegg)
+biogridDistribution <- degree.distribution(biogrid)
 intactDistribution <- degree.distribution(intact)
+gygiDistribution <- degree.distribution(gygi)
 mannDistribution <- degree.distribution(mann)
+stringDistribution <- degree.distribution(string)
 
+
+reactomeDistributionIn <- degree.distribution(reactome, mode = "in")
+reactomeReactionsDistributionIn <- degree.distribution(reactomeReactions, mode = "in")
+reactomeDistributionOut <- degree.distribution(reactome, mode = "out")
+reactomeReactionsDistributionOut <- degree.distribution(reactomeReactions, mode = "out")
 
 # Plot directed distributions
 
@@ -143,13 +170,29 @@ degree <- c(degree, unname(reactomeReactionsDegrees))
 category <- c(category, rep(categoryNames[3], length(reactomeReactionsDegrees)))
 mainCategory <- c(mainCategory, rep(mainCategoryNames[2], length(reactomeReactionsDegrees)))
 
+degree <- c(degree, unname(keggDegrees))
+category <- c(category, rep(categoryNames[4], length(keggDegrees)))
+mainCategory <- c(mainCategory, rep(mainCategoryNames[2], length(keggDegrees)))
+
+degree <- c(degree, unname(biogridDegrees))
+category <- c(category, rep(categoryNames[5], length(biogridDegrees)))
+mainCategory <- c(mainCategory, rep(mainCategoryNames[3], length(biogridDegrees)))
+
 degree <- c(degree, unname(intactDegrees))
-category <- c(category, rep(categoryNames[4], length(intactDegrees)))
+category <- c(category, rep(categoryNames[6], length(intactDegrees)))
 mainCategory <- c(mainCategory, rep(mainCategoryNames[3], length(intactDegrees)))
 
+degree <- c(degree, unname(gygiDegrees))
+category <- c(category, rep(categoryNames[7], length(gygiDegrees)))
+mainCategory <- c(mainCategory, rep(mainCategoryNames[3], length(gygiDegrees)))
+
 degree <- c(degree, unname(mannDegrees))
-category <- c(category, rep(categoryNames[5], length(mannDegrees)))
+category <- c(category, rep(categoryNames[8], length(mannDegrees)))
 mainCategory <- c(mainCategory, rep(mainCategoryNames[3], length(mannDegrees)))
+
+degree <- c(degree, unname(stringDegrees))
+category <- c(category, rep(categoryNames[9], length(stringDegrees)))
+mainCategory <- c(mainCategory, rep(mainCategoryNames[4], length(stringDegrees)))
 
 dPlotData <- data.frame(degree, category, mainCategory, stringsAsFactors = F)
 dPlotData$mainCategory <- factor(dPlotData$mainCategory, levels = mainCategoryNames)
@@ -190,15 +233,35 @@ frequency <- c(frequency, reactomeReactionsDistribution)
 category <- c(category, rep(categoryNames[3], length(reactomeReactionsDistribution)))
 mainCategory <- c(mainCategory, rep(mainCategoryNames[2], length(reactomeReactionsDistribution)))
 
+degree <- c(degree, 0:(length(keggDistribution)-1))
+frequency <- c(frequency, keggDistribution)
+category <- c(category, rep(categoryNames[4], length(keggDistribution)))
+mainCategory <- c(mainCategory, rep(mainCategoryNames[2], length(keggDistribution)))
+
+degree <- c(degree, 0:(length(biogridDistribution)-1))
+frequency <- c(frequency, biogridDistribution)
+category <- c(category, rep(categoryNames[5], length(biogridDistribution)))
+mainCategory <- c(mainCategory, rep(mainCategoryNames[3], length(biogridDistribution)))
+
 degree <- c(degree, 0:(length(intactDistribution)-1))
 frequency <- c(frequency, intactDistribution)
-category <- c(category, rep(categoryNames[4], length(intactDistribution)))
+category <- c(category, rep(categoryNames[6], length(intactDistribution)))
 mainCategory <- c(mainCategory, rep(mainCategoryNames[3], length(intactDistribution)))
+
+degree <- c(degree, 0:(length(gygiDistribution)-1))
+frequency <- c(frequency, gygiDistribution)
+category <- c(category, rep(categoryNames[7], length(gygiDistribution)))
+mainCategory <- c(mainCategory, rep(mainCategoryNames[3], length(gygiDistribution)))
 
 degree <- c(degree, 0:(length(mannDistribution)-1))
 frequency <- c(frequency, mannDistribution)
-category <- c(category, rep(categoryNames[5], length(mannDistribution)))
+category <- c(category, rep(categoryNames[8], length(mannDistribution)))
 mainCategory <- c(mainCategory, rep(mainCategoryNames[3], length(mannDistribution)))
+
+degree <- c(degree, 0:(length(stringDistribution)-1))
+frequency <- c(frequency, stringDistribution)
+category <- c(category, rep(categoryNames[9], length(stringDistribution)))
+mainCategory <- c(mainCategory, rep(mainCategoryNames[4], length(stringDistribution)))
 
 
 dPlotData <- data.frame(degree, frequency, category, mainCategory, stringsAsFactors = F)

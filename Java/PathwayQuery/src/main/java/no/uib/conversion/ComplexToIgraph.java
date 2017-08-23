@@ -35,7 +35,7 @@ public class ComplexToIgraph {
 
         try {
 
-            args = new String[]{"C:\\Github\\PathwayProjectQueries\\resources\\iGraph\\complexes\\homo_sapiens_complexes.tsv.gz",
+            args = new String[]{"C:\\Projects\\Bram\\graphs\\resources\\complexes\\homo_sapiens_complexes.tsv.gz",
                 "C:\\Github\\PathwayProjectQueries\\resources\\uniprot_names_human_21.08.17.tab.gz",
                 "C:\\Github\\PathwayProjectQueries\\resources\\iGraph\\complexes",
                 "complexes_18.08.17"};
@@ -56,6 +56,7 @@ public class ComplexToIgraph {
             complexToIgraph.parseComplexFile(sifFile);
 
             System.out.println(new Date() + " Exporting results");
+
             complexToIgraph.writeIGraphFiles(outputFolder, baseName, proteinNames);
 
         } catch (Exception e) {
@@ -73,6 +74,11 @@ public class ComplexToIgraph {
      * Set of all nodes.
      */
     private HashSet<String> allNodes = new HashSet<>();
+    /**
+     * Boolean indicating whether the isoform number should be removed from the
+     * uniprot accession.
+     */
+    public final boolean removeIsoforms = true;
 
     /**
      * Parses a complex file and populates the network attributes.
@@ -103,51 +109,58 @@ public class ComplexToIgraph {
                     if (character == '\t') {
 
                         if (nSeparators < 3) {
-                            
+
                             nSeparators++;
 
                         } else if (nSeparators == 3) {
-                            
+
                             HashSet<String> participants = new HashSet<>(2);
-                            int lastStart = i+1;
-                            
+                            int lastStart = i + 1;
+
                             cellIteration:
-                            for (int j = i + 1; j < lineAsCharArray.length ; j++) {
-                                
+                            for (int j = i + 1; j < lineAsCharArray.length; j++) {
+
                                 character = lineAsCharArray[j];
-                                
+
                                 switch (character) {
                                     case '\t':
                                         break cellIteration;
                                     case '(':
                                         String participant = line.substring(lastStart, j);
+
+                                        if (removeIsoforms) {
+                                            int dashIndex = participant.indexOf('-');
+                                            if (dashIndex > -1) {
+                                                participant = participant.substring(0, dashIndex);
+                                            }
+                                        }
                                         participants.add(participant);
                                         break;
                                     case '|':
-                                        lastStart = j+1;
+                                        lastStart = j + 1;
                                 }
                             }
-                            
+
                             if (participants.size() > 1) {
-                                
+
                                 allNodes.addAll(participants);
-                                
+
                                 for (String accession : participants) {
-                                    
+
                                     HashSet<String> currentTargets = participants.stream()
                                             .filter(participant -> !participant.equals(accession))
                                             .collect(Collectors.toCollection(HashSet::new));
-                                    
+
                                     HashSet<String> targets = complexes.get(accession);
-                                    
+
                                     if (targets == null) {
-                                        
+
                                         complexes.put(accession, currentTargets);
-                                        
+
                                     } else {
-                                        
+
                                         targets.addAll(currentTargets);
-                                        
+
                                     }
                                 }
                             }
@@ -163,12 +176,13 @@ public class ComplexToIgraph {
 
     /**
      * Write the igraph files.
-     * 
+     *
      * @param folder the destination folder
      * @param baseFileName the base name for the edges and vertices files
      * @param proteinNames the accession to protein name map
-     * 
-     * @throws IOException exception thrown if an error occurred while writing the file
+     *
+     * @throws IOException exception thrown if an error occurred while writing
+     * the file
      */
     private void writeIGraphFiles(File folder, String baseFileName, HashMap<String, String> proteinNames) throws IOException {
 

@@ -11,14 +11,10 @@ library(igraph)
 
 ## Parameters
 
-alpha <- 0.2
-defaultColor <- adjustcolor("grey60", alpha.f = alpha)
-
-categoryLevels <- c("Reaction", "Catalysis", "Regulation", "Complex")
-categoryColors <- c(defaultColor, 
-                    adjustcolor("lightgreen", alpha.f = alpha), 
-                    adjustcolor("lightblue", alpha.f = alpha), 
-                    adjustcolor("orange", alpha.f = alpha))
+alpha <- 0.1
+categoryNames <- c("Complexes", "Reactome", "Reactions", "Kegg", "Biogrid", "Intact", "Huttlin", "Hein", "String")
+categoryColors <- c("#e31a1c", "#1f78b4", "#1f78b4", "#33a02c", "#ff7f00", "#6a3d9a", "#ff7f00", "#6a3d9a", "#999999")
+categoryColorsAlpha <- adjustcolor(categoryColors, alpha.f = alpha)
 
 
 ## Main script
@@ -27,8 +23,8 @@ categoryColors <- c(defaultColor,
 
 print(paste(Sys.time(), " Loading complexes data", sep = ""))
 
-verticesComplexes <- read.table("resources/iGraph/complexes/complexes_18.08.17_vertices", header = T, sep = " ", stringsAsFactors = F)
-edgesComplexes <- read.table("resources/iGraph/complexes/complexes_18.08.17_edges", header = T, sep = " ", stringsAsFactors = F)
+verticesComplexes <- read.table("resources/iGraph/complexes/complexes_18.08.17_vertices", header = T, sep = "\t", stringsAsFactors = F, quote = "", comment.char = "")
+edgesComplexes <- read.table("resources/iGraph/complexes/complexes_18.08.17_edges", header = T, sep = " ", stringsAsFactors = F, quote = "", comment.char = "")
 
 print(paste(Sys.time(), " Making graph", sep = ""))
 
@@ -38,7 +34,7 @@ print(paste(Sys.time(), " Plotting Network", sep = ""))
 
 png("resources/iGraph/plots/networks/complexes.png", width = 800, height = 600)
 l <- layout_with_fr(complexes)
-plot(complexes, vertex.shape = "none", vertex.label = NA, edge.color = defaultColor, layout = l)
+plot(complexes, vertex.shape = "none", vertex.label = NA, edge.color = categoryColorsAlpha[1], layout = l)
 dummy <- dev.off()
 
 
@@ -46,8 +42,8 @@ dummy <- dev.off()
 
 print(paste(Sys.time(), " Loading reactome data", sep = ""))
 
-verticesReactome <- read.table("resources/iGraph/reactome/reactome_18.08.17_vertices", header = T, sep = " ", stringsAsFactors = F)
-edgesReactome <- read.table("resources/iGraph/reactome/reactome_18.08.17_edges", header = T, sep = " ", stringsAsFactors = F)
+verticesReactome <- read.table("resources/iGraph/reactome/reactome_18.08.17_vertices", header = T, sep = "\t", stringsAsFactors = F, quote = "", comment.char = "")
+edgesReactome <- read.table("resources/iGraph/reactome/reactome_18.08.17_edges", header = T, sep = " ", stringsAsFactors = F, quote = "", comment.char = "")
 
 print(paste(Sys.time(), " Making graph", sep = ""))
 
@@ -55,8 +51,14 @@ reactome <- graph_from_data_frame(d=edgesReactome, vertices=verticesReactome, di
 
 print(paste(Sys.time(), " Formatting graph", sep = ""))
 
-edgeColors <- factor(E(reactome)$type, levels = categoryLevels)
-levels(edgeColors) <- categoryColors
+reactomeCategoryLevels <- c("Reaction", "Catalysis", "Regulation", "Complex")
+ReactomeCategoryColors <- c(categoryColors[2], 
+                            adjustcolor("#4daf4a", alpha.f = alpha), 
+                            adjustcolor("#984ea3", alpha.f = alpha), 
+                            adjustcolor("#ff7f00", alpha.f = alpha))
+
+edgeColors <- factor(E(reactome)$type, levels = reactomeCategoryLevels)
+levels(edgeColors) <- ReactomeCategoryColors
 edgeColors <- as.character(edgeColors)
 
 print(paste(Sys.time(), " Plotting Network", sep = ""))
@@ -64,6 +66,8 @@ print(paste(Sys.time(), " Plotting Network", sep = ""))
 png("resources/iGraph/plots/networks/reactome.png", width = 800, height = 600)
 plot(reactome, vertex.shape = "none", vertex.label = NA, edge.arrow.size = 0.2, edge.arrow.width = 0.2, edge.color = edgeColors)
 dummy <- dev.off()
+
+print(paste(Sys.time(), " Plotting Network", sep = ""))
 
 
 # Reactome reactions only
@@ -80,7 +84,49 @@ reactomeReactions <- graph_from_data_frame(d=edgesReactions, vertices=verticesRe
 print(paste(Sys.time(), " Plotting Network", sep = ""))
 
 png("resources/iGraph/plots/networks/reactome_reactions.png", width = 800, height = 600)
-plot(reactome, vertex.shape = "none", vertex.label = NA, edge.arrow.size = 0.2, edge.arrow.width = 0.2, edge.color = defaultColor)
+plot(reactome, vertex.shape = "none", vertex.label = NA, edge.arrow.size = 0.2, edge.arrow.width = 0.2, edge.color = categoryColorsAlpha[3])
+dummy <- dev.off()
+
+
+# Kegg
+
+print(paste(Sys.time(), " Loading KEGG data", sep = ""))
+
+verticesKegg <- read.table("resources/iGraph/kegg/kegg_21.08.17_vertices", header = T, sep = "\t", stringsAsFactors = F, quote = "", comment.char = "")
+edgesKegg <- read.table("resources/iGraph/kegg/kegg_21.08.17_edges", header = T, sep = " ", stringsAsFactors = F, quote = "", comment.char = "")
+
+print(paste(Sys.time(), " Making graph", sep = ""))
+
+kegg <- graph_from_data_frame(d = edgesKegg, vertices = verticesKegg, directed = F)
+
+print(paste(Sys.time(), " Formatting graph", sep = ""))
+
+edgeColors <- factor(E(kegg)$type)
+levels(edgeColors) <- adjustcolor(scales::hue_pal()(length(levels(edgeColors))), alpha.f = alpha)
+edgeColors <- as.character(edgeColors)
+
+print(paste(Sys.time(), " Plotting Network", sep = ""))
+
+png("resources/iGraph/plots/networks/kegg.png", width = 800, height = 600)
+plot(reactome, vertex.shape = "none", vertex.label = NA, edge.arrow.size = 0.2, edge.arrow.width = 0.2, edge.color = categoryColorsAlpha[4])
+dummy <- dev.off()
+
+
+# Biogrid
+
+print(paste(Sys.time(), " Loading Biogrid data", sep = ""))
+
+verticesBiogrid <- read.table("resources/iGraph/biogrid/BIOGRID-ORGANISM-Homo_sapiens-3.4.151_vertices", header = T, sep = "\t", stringsAsFactors = F, quote = "", comment.char = "")
+edgesBiogrid <- read.table("resources/iGraph/biogrid/BIOGRID-ORGANISM-Homo_sapiens-3.4.151_edges", header = T, sep = " ", stringsAsFactors = F, quote = "", comment.char = "")
+
+print(paste(Sys.time(), " Making graph", sep = ""))
+
+biogrid <- graph_from_data_frame(d = edgesBiogrid, vertices = verticesBiogrid, directed = F)
+
+print(paste(Sys.time(), " Plotting Network", sep = ""))
+
+png("resources/iGraph/plots/networks/biogrid.png", width = 800, height = 600)
+plot(biogrid, vertex.shape = "none", vertex.label = NA, edge.color = categoryColorsAlpha[5])
 dummy <- dev.off()
 
 
@@ -88,8 +134,8 @@ dummy <- dev.off()
 
 print(paste(Sys.time(), " Loading Intact data", sep = ""))
 
-verticesIntact <- read.table("resources/iGraph/intact/intact_18.08.17_vertices", header = T, sep = " ", stringsAsFactors = F)
-edgesIntact <- read.table("resources/iGraph/intact/intact_18.08.17_edges", header = T, sep = " ", stringsAsFactors = F)
+verticesIntact <- read.table("resources/iGraph/intact/intact_18.08.17_vertices", header = T, sep = "\t", stringsAsFactors = F, quote = "", comment.char = "")
+edgesIntact <- read.table("resources/iGraph/intact/intact_18.08.17_edges", header = T, sep = " ", stringsAsFactors = F, quote = "", comment.char = "")
 
 print(paste(Sys.time(), " Making graph", sep = ""))
 
@@ -98,16 +144,34 @@ intact <- graph_from_data_frame(d = edgesIntact, vertices = verticesIntact, dire
 print(paste(Sys.time(), " Plotting Network", sep = ""))
 
 png("resources/iGraph/plots/networks/intact.png", width = 800, height = 600)
-plot(intact, vertex.shape = "none", vertex.label = NA, edge.color = defaultColor)
+plot(intact, vertex.shape = "none", vertex.label = NA, edge.color = categoryColorsAlpha[6])
 dummy <- dev.off()
 
 
-# Interractome Mann
+# Gygi
+
+print(paste(Sys.time(), " Loading Gygi data", sep = ""))
+
+verticesGygi <- read.table("resources/iGraph/biogrid/28514442_vertices", header = T, sep = "\t", stringsAsFactors = F, quote = "", comment.char = "")
+edgesGygi <- read.table("resources/iGraph/biogrid/28514442_edges", header = T, sep = " ", stringsAsFactors = F, quote = "", comment.char = "")
+
+print(paste(Sys.time(), " Making graph", sep = ""))
+
+gygi <- graph_from_data_frame(d = edgesBiogrid, vertices = verticesBiogrid, directed = F)
+
+print(paste(Sys.time(), " Plotting Network", sep = ""))
+
+png("resources/iGraph/plots/networks/gygi.png", width = 800, height = 600)
+plot(gygi, vertex.shape = "none", vertex.label = NA, edge.color = categoryColorsAlpha[7])
+dummy <- dev.off()
+
+
+# Mann
 
 print(paste(Sys.time(), " Loading Mann data", sep = ""))
 
-verticesMann <- read.table("resources/iGraph/intact/26496610_mann_vertices", header = T, sep = " ", stringsAsFactors = F)
-edgesMann <- read.table("resources/iGraph/intact/26496610_mann_edges", header = T, sep = " ", stringsAsFactors = F)
+verticesMann <- read.table("resources/iGraph/intact/26496610_mann_vertices", header = T, sep = "\t", stringsAsFactors = F, quote = "", comment.char = "")
+edgesMann <- read.table("resources/iGraph/intact/26496610_mann_edges", header = T, sep = " ", stringsAsFactors = F, quote = "", comment.char = "")
 
 print(paste(Sys.time(), " Making graph", sep = ""))
 
@@ -116,7 +180,25 @@ mann <- graph_from_data_frame(d = edgesMann, vertices = verticesMann, directed =
 print(paste(Sys.time(), " Plotting Network", sep = ""))
 
 png("resources/iGraph/plots/networks/mann.png", width = 800, height = 600)
-plot(mann, vertex.shape = "none", vertex.label = NA, edge.color = defaultColor)
+plot(mann, vertex.shape = "none", vertex.label = NA, edge.color = categoryColorsAlpha[8])
+dummy <- dev.off()
+
+
+# String
+
+print(paste(Sys.time(), " Loading String data", sep = ""))
+
+verticesString <- read.table("resources/iGraph/string/string_v10.5_vertices", header = T, sep = "\t", stringsAsFactors = F, quote = "", comment.char = "")
+edgesString <- read.table("resources/iGraph/string/string_v10.5_edges", header = T, sep = " ", stringsAsFactors = F, quote = "", comment.char = "")
+
+print(paste(Sys.time(), " Making graph", sep = ""))
+
+string <- graph_from_data_frame(d = edgesBiogrid, vertices = verticesBiogrid, directed = F)
+
+print(paste(Sys.time(), " Plotting Network", sep = ""))
+
+png("resources/iGraph/plots/networks/string.png", width = 800, height = 600)
+plot(string, vertex.shape = "none", vertex.label = NA, edge.color = categoryColorsAlpha[9])
 dummy <- dev.off()
 
 
