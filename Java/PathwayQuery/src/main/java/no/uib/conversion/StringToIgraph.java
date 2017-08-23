@@ -154,7 +154,7 @@ public class StringToIgraph {
                         uniprot = uniprot.substring(0, dashIndex);
                     }
                 }
-                
+
                 String db = lineSplit[1];
                 String id = lineSplit[2];
 
@@ -223,15 +223,6 @@ public class StringToIgraph {
                             boolean directional = lineSplit[4].charAt(0) == 't';
                             boolean aActing = lineSplit[5].charAt(0) == 't';
 
-                            HashMap<String, HashSet<String>> modeMap = actions.get(mode);
-
-                            if (modeMap == null) {
-
-                                modeMap = new HashMap<>();
-                                actions.put(mode, modeMap);
-
-                            }
-
                             if (!directional || aActing) {
 
                                 for (String accession : uniprotAccessionsA) {
@@ -240,15 +231,27 @@ public class StringToIgraph {
                                             .filter(participant -> !participant.equals(accession))
                                             .collect(Collectors.toCollection(HashSet::new));
 
-                                    HashSet<String> targets = modeMap.get(accession);
+                                    HashMap<String, HashSet<String>> accessionMap = actions.get(accession);
 
-                                    if (targets == null) {
+                                    if (accessionMap == null) {
 
-                                        modeMap.put(accession, currentTargets);
+                                        accessionMap = new HashMap<>(currentTargets.size());
+                                        actions.put(accession, accessionMap);
 
-                                    } else {
+                                    }
 
-                                        targets.addAll(targets);
+                                    for (String target : currentTargets) {
+
+                                        HashSet<String> targetActions = accessionMap.get(target);
+
+                                        if (targetActions == null) {
+
+                                            targetActions = new HashSet<>(1);
+                                            accessionMap.put(target, targetActions);
+
+                                        }
+
+                                        targetActions.add(mode);
 
                                     }
                                 }
@@ -263,15 +266,27 @@ public class StringToIgraph {
                                             .filter(participant -> !participant.equals(accession))
                                             .collect(Collectors.toCollection(HashSet::new));
 
-                                    HashSet<String> targets = modeMap.get(accession);
+                                    HashMap<String, HashSet<String>> accessionMap = actions.get(accession);
 
-                                    if (targets == null) {
+                                    if (accessionMap == null) {
 
-                                        modeMap.put(accession, currentTargets);
+                                        accessionMap = new HashMap<>(currentTargets.size());
+                                        actions.put(accession, accessionMap);
 
-                                    } else {
+                                    }
 
-                                        targets.addAll(targets);
+                                    for (String target : currentTargets) {
+
+                                        HashSet<String> targetActions = accessionMap.get(target);
+
+                                        if (targetActions == null) {
+
+                                            targetActions = new HashSet<>(1);
+                                            accessionMap.put(target, targetActions);
+
+                                        }
+
+                                        targetActions.add(mode);
 
                                     }
                                 }
@@ -387,34 +402,49 @@ public class StringToIgraph {
 
     /**
      * Merges the actions and links maps into a single map.
-     * 
+     *
      * @param actions the actions map
      * @param links the links map
      */
     private void mergeActionsLinks(HashMap<String, HashMap<String, HashSet<String>>> actions, HashMap<String, HashMap<String, LinkLevel>> links) {
 
-        for (String mode : actions.keySet()) {
+        HashSet<String> accessionsA = new HashSet<>(links.size());
+        accessionsA.addAll(links.keySet());
+        accessionsA.addAll(actions.keySet());
 
-            HashMap<String, HashSet<String>> modeInterractions = actions.get(mode);
+        for (String accessionA : accessionsA) {
 
-            for (String accessionA : modeInterractions.keySet()) {
+            HashMap<String, LinkLevel> linksA = links.get(accessionA);
+            HashMap<String, HashSet<String>> actionsA = actions.get(accessionA);
 
-                HashMap<String, LinkLevel> linksA = links.get(accessionA);
+            if (linksA == null) {
 
-                if (linksA == null) {
+                linksA = new HashMap<>(0);
 
-                    linksA = new HashMap<>(0);
+            }
 
-                }
+            if (actionsA == null) {
 
-                for (String accessionB : modeInterractions.get(accessionA)) {
+                actionsA = new HashMap<>(0);
 
-                    LinkLevel linkLevel = linksA.get(accessionB);
+            }
+            
+            HashSet<String> accessionsB = new HashSet<>(linksA.size());
+            accessionsB.addAll(linksA.keySet());
+            accessionsB.addAll(actionsA.keySet());
 
+            for (String accessionB : accessionsB) {
+                
+                LinkLevel linkLevel = linksA.get(accessionB);
                     String levelName = linkLevel == null ? "other" : linkLevel.name();
-
-                    StringBuilder sb = new StringBuilder(mode.length() + levelName.length() + 1);
-                    sb.append(mode).append(' ').append(levelName);
+                    
+                    HashSet<String> actionsAB = actionsA.get(accessionB);
+                    
+                    String actionAB = actionsAB == null ? "unknown" : actionsAB.stream()
+                            .sorted().collect(Collectors.joining(","));
+                    
+                    StringBuilder sb = new StringBuilder(actionAB.length() + levelName.length() + 1);
+                    sb.append(actionAB).append(' ').append(levelName);
                     String key = sb.toString();
 
                     HashMap<String, HashSet<String>> interactions = mergedMap.get(key);
@@ -436,8 +466,9 @@ public class StringToIgraph {
                     }
 
                     targets.add(accessionB);
-                }
+
             }
+
         }
     }
 
