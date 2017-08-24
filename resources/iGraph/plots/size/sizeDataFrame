@@ -1,0 +1,10 @@
+categoryNames categoryColors category nVertices nEdges nClusters diameter
+1 Complexes #e31a1c Complexes 844 7108 132 9
+2 Reactome #1f78b4 Reactome 9372 1096179 938 14
+3 Reactions #a6cee3 Reactions 5594 524292 306 11
+4 Kegg #33a02c Kegg 10794 102458 336 22
+5 Biogrid #ff7f00 Biogrid 28770 1150181 28 8
+6 Intact #6a3d9a Intact 16539 166180 49 10
+7 Huttlin #fdbf6f Huttlin 10945 56469 28 11
+8 Hein #cab2d6 Hein 4951 15794 4 10
+9 String #999999 String 17716 1446724 63 10

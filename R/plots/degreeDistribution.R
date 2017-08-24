@@ -14,7 +14,7 @@ library(ggplot2)
 
 ## Parameters
 
-mainCategoryNames <- c("Complexes", "Pathways", "Interactions", "Composite")
+mainCategoryNames <- c("Complex", "Pathway", "Interaction", "Composite")
 categoryNames <- c("Complexes", "Reactome", "Reactions", "Kegg", "Biogrid", "Intact", "Huttlin", "Hein", "String")
 categoryColors <- c("#e31a1c", "#1f78b4", "#a6cee3", "#33a02c", "#ff7f00", "#6a3d9a", "#fdbf6f", "#cab2d6", "#999999")
 
@@ -50,8 +50,8 @@ edgesGygi <- read.table("resources/iGraph/biogrid/28514442_edges", header = T, s
 verticesMann <- read.table("resources/iGraph/intact/26496610_mann_vertices", header = T, sep = "\t", stringsAsFactors = F, quote = "", comment.char = "")
 edgesMann <- read.table("resources/iGraph/intact/26496610_mann_edges", header = T, sep = " ", stringsAsFactors = F, quote = "", comment.char = "")
 
-verticesString <- read.table("resources/iGraph/string/string_v10.5_vertices", header = T, sep = "\t", stringsAsFactors = F, quote = "", comment.char = "")
-edgesString <- read.table("resources/iGraph/string/string_v10.5_edges", header = T, sep = " ", stringsAsFactors = F, quote = "", comment.char = "")
+verticesString <- read.table("resources/iGraph/string/string_v10.5_medium_vertices", header = T, sep = "\t", stringsAsFactors = F, quote = "", comment.char = "")
+edgesString <- read.table("resources/iGraph/string/string_v10.5_medium_edges", header = T, sep = " ", stringsAsFactors = F, quote = "", comment.char = "")
 
 
 # Get graphs and degrees
@@ -94,65 +94,83 @@ gygiDistribution <- degree.distribution(gygi)
 mannDistribution <- degree.distribution(mann)
 stringDistribution <- degree.distribution(string)
 
+complexesDistributionScaled <- complexesDistribution * nrow(verticesComplexes)
+reactomeDistributionScaled <- reactomeDistribution * nrow(verticesReactome)
+reactomeReactionDistributionScaled <- reactomeReactionDistribution * nrow(verticesReactomeReaction)
+keggDistributionScaled <- keggDistribution * nrow(verticesKegg)
+biogridDistributionScaled <- biogridDistribution * nrow(verticesBiogrid)
+intactDistributionScaled <- intactDistribution * nrow(verticesIntact)
+gygiDistributionScaled <- gygiDistribution * nrow(verticesGygi)
+mannDistributionScaled <- mannDistribution * nrow(verticesMann)
+stringDistributionScaled <- stringDistribution * nrow(verticesString)
+
 
 reactomeDistributionIn <- degree.distribution(reactome, mode = "in")
 reactomeReactionsDistributionIn <- degree.distribution(reactomeReactions, mode = "in")
 reactomeDistributionOut <- degree.distribution(reactome, mode = "out")
 reactomeReactionsDistributionOut <- degree.distribution(reactomeReactions, mode = "out")
 
+reactomeDistributionInScaled <- reactomeDistributionIn * nrow(verticesReactome)
+reactomeDistributionOutScaled <- reactomeDistributionOut * nrow(verticesReactome)
+reactomeReactionsDistributionInScaled <- reactomeReactionsDistributionIn * nrow(verticesReactions)
+reactomeReactionsDistributionOutScaled <- reactomeReactionsDistributionOut * nrow(verticesReactions)
+
+
 # Plot directed distributions
 
 print(paste(Sys.time(), " Plotting reactome in out degrees", sep = ""))
 
-degree <- 0:(length(reactomeDistributionIn)-1)
-frequency <- reactomeDistributionIn
-category <- rep("in", length(reactomeDistributionIn))
+degree <- 0:(length(reactomeDistributionInScaled)-1)
+frequency <- reactomeDistributionInScaled
+category <- rep("in", length(reactomeDistributionInScaled))
 
-degree <- c(degree, 0:(length(reactomeDistributionOut)-1))
-frequency <- c(frequency, reactomeDistributionOut)
-category <- c(category, rep("out", length(reactomeDistributionOut)))
+degree <- c(degree, 0:(length(reactomeDistributionOutScaled)-1))
+frequency <- c(frequency, reactomeDistributionOutScaled)
+category <- c(category, rep("out", length(reactomeDistributionOutScaled)))
 
 ddPlotData <- data.frame(degree, frequency, category, stringsAsFactors = T)
-ddPlotData <- ddPlotData[ddPlotData$frequency > 0, ]
+ddPlotData <- ddPlotData[ddPlotData$degree > 0 & ddPlotData$frequency > 0, ]
 ddPlotData$degree <- log10(ddPlotData$degree)
 ddPlotData$frequency <- log10(ddPlotData$frequency)
 
 ddPlot <- ggplot()
-ddPlot <- ddPlot + geom_point(data = ddPlotData, aes(x = degree, y = frequency, col = category), alpha = 0.3)
-ddPlot <- ddPlot + theme_bw()
+ddPlot <- ddPlot + geom_point(data = ddPlotData, aes(x = degree, y = frequency, col = category), alpha = 0.3, size = 3)
+ddPlot <- ddPlot + theme_bw(base_size = 22)
 ddPlot <- ddPlot + scale_color_manual(name = element_blank(), values = c("darkblue", "darkred"))
 ddPlot <- ddPlot + scale_x_continuous(name = "degree [log10]")
-ddPlot <- ddPlot + scale_y_continuous(name = "p [log10]")
+ddPlot <- ddPlot + scale_y_continuous(name = "# Proteins [log10]")
+ddPlot <- ddPlot + theme(legend.position = 'none')
 
-png("resources/iGraph/plots/distributions/reactomeIO.png", width = 800, height = 600)
+png("resources/iGraph/plots/distributions/reactomeIO.png", width = 600, height = 800)
 plot(ddPlot)
 dummy <- dev.off()
 
 
-degree <- 0:(length(reactomeReactionsDistributionIn)-1)
-frequency <- reactomeReactionsDistributionIn
-category <- rep("in", length(reactomeReactionsDistributionIn))
+degree <- 0:(length(reactomeReactionsDistributionInScaled)-1)
+frequency <- reactomeReactionsDistributionInScaled
+category <- rep("in", length(reactomeReactionsDistributionInScaled))
 
-degree <- c(degree, 0:(length(reactomeReactionsDistributionOut)-1))
-frequency <- c(frequency, reactomeReactionsDistributionOut)
-category <- c(category, rep("out", length(reactomeReactionsDistributionOut)))
+degree <- c(degree, 0:(length(reactomeReactionsDistributionOutScaled)-1))
+frequency <- c(frequency, reactomeReactionsDistributionOutScaled)
+category <- c(category, rep("out", length(reactomeReactionsDistributionOutScaled)))
 
 ddPlotData <- data.frame(degree, frequency, category, stringsAsFactors = T)
-ddPlotData <- ddPlotData[ddPlotData$degree > 0, ]
-ddPlotData <- ddPlotData[ddPlotData$frequency > 0, ]
+ddPlotData <- ddPlotData[ddPlotData$degree > 0 & ddPlotData$frequency > 0, ]
 ddPlotData$degree <- log10(ddPlotData$degree)
 ddPlotData$frequency <- log10(ddPlotData$frequency)
 
 ddPlot <- ggplot()
-ddPlot <- ddPlot + geom_point(data = ddPlotData, aes(x = degree, y = frequency, col = category), alpha = 0.3)
-ddPlot <- ddPlot + theme_bw()
+ddPlot <- ddPlot + geom_point(data = ddPlotData, aes(x = degree, y = frequency, col = category), alpha = 0.3, size = 3)
+ddPlot <- ddPlot + theme_bw(base_size = 22)
 ddPlot <- ddPlot + scale_color_manual(name = element_blank(), values = c("darkblue", "darkred"))
 ddPlot <- ddPlot + scale_x_continuous(name = "degree [log10]")
-ddPlot <- ddPlot + scale_y_continuous(name = "p [log10]")
+ddPlot <- ddPlot + scale_y_continuous(name = "# Proteins [log10]")
+ddPlot <- ddPlot + theme(legend.position = 'none')
 
-png("resources/iGraph/plots/distributions/reactomeReactionsIO.png", width = 800, height = 600)
+png("resources/iGraph/plots/distributions/reactomeReactionsIO.png", width = 600, height = 800)
 plot(ddPlot)
 dummy <- dev.off()
+
 
 # Plot distributions
 
@@ -161,38 +179,32 @@ print(paste(Sys.time(), " Plotting degree distributions", sep = ""))
 degree <- unname(complexesDegrees)
 category <- rep(categoryNames[1], length(complexesDegrees))
 mainCategory <- rep(mainCategoryNames[1], length(complexesDegrees))
+colors <- categoryColors[1]
 
 degree <- c(degree, unname(reactomeDegrees))
 category <- c(category, rep(categoryNames[2], length(reactomeDegrees)))
 mainCategory <- c(mainCategory, rep(mainCategoryNames[2], length(reactomeDegrees)))
-
-degree <- c(degree, unname(reactomeReactionsDegrees))
-category <- c(category, rep(categoryNames[3], length(reactomeReactionsDegrees)))
-mainCategory <- c(mainCategory, rep(mainCategoryNames[2], length(reactomeReactionsDegrees)))
+colors <- c(colors, categoryColors[2])
 
 degree <- c(degree, unname(keggDegrees))
 category <- c(category, rep(categoryNames[4], length(keggDegrees)))
 mainCategory <- c(mainCategory, rep(mainCategoryNames[2], length(keggDegrees)))
+colors <- c(colors, categoryColors[4])
 
 degree <- c(degree, unname(biogridDegrees))
 category <- c(category, rep(categoryNames[5], length(biogridDegrees)))
 mainCategory <- c(mainCategory, rep(mainCategoryNames[3], length(biogridDegrees)))
+colors <- c(colors, categoryColors[5])
 
 degree <- c(degree, unname(intactDegrees))
 category <- c(category, rep(categoryNames[6], length(intactDegrees)))
 mainCategory <- c(mainCategory, rep(mainCategoryNames[3], length(intactDegrees)))
-
-degree <- c(degree, unname(gygiDegrees))
-category <- c(category, rep(categoryNames[7], length(gygiDegrees)))
-mainCategory <- c(mainCategory, rep(mainCategoryNames[3], length(gygiDegrees)))
-
-degree <- c(degree, unname(mannDegrees))
-category <- c(category, rep(categoryNames[8], length(mannDegrees)))
-mainCategory <- c(mainCategory, rep(mainCategoryNames[3], length(mannDegrees)))
+colors <- c(colors, categoryColors[6])
 
 degree <- c(degree, unname(stringDegrees))
 category <- c(category, rep(categoryNames[9], length(stringDegrees)))
 mainCategory <- c(mainCategory, rep(mainCategoryNames[4], length(stringDegrees)))
+colors <- c(colors, categoryColors[9])
 
 dPlotData <- data.frame(degree, category, mainCategory, stringsAsFactors = F)
 dPlotData$mainCategory <- factor(dPlotData$mainCategory, levels = mainCategoryNames)
@@ -202,66 +214,59 @@ dPlotData$degree <- log10(dPlotData$degree)
 
 dPlot <- ggplot()
 dPlot <- dPlot + geom_density(data = dPlotData, aes(x = degree, fill = category, col = category), alpha = 0.3)
-dPlot <- dPlot + theme_bw()
-dPlot <- dPlot + scale_color_manual(name = element_blank(), values = categoryColors)
-dPlot <- dPlot + scale_fill_manual(name = element_blank(), values = categoryColors)
+dPlot <- dPlot + theme_bw(base_size = 22)
+dPlot <- dPlot + scale_color_manual(name = element_blank(), values = colors)
+dPlot <- dPlot + scale_fill_manual(name = element_blank(), values = colors)
 dPlot <- dPlot + scale_x_continuous(name = "degree [log10]", expand = c(0, 0))
 dPlot <- dPlot + scale_y_continuous(expand = c(0, 0))
+dPlot <- dPlot + guides(col = guide_legend(nrow = 1))
 dPlot <- dPlot + theme(axis.title.y = element_blank(),
                        axis.text.y = element_blank(),
-                       axis.ticks.y = element_blank())
+                       axis.ticks.y = element_blank(),
+                       legend.position = 'top')
 
 dPlot <- dPlot + facet_grid(mainCategory ~ .)
 
-png("resources/iGraph/plots/distributions/degreeDistributions_density.png", width = 800, height = 600)
+png("resources/iGraph/plots/distributions/degreeDistributions_density_legend.png", width = 800, height = 600)
 plot(dPlot)
 dummy <- dev.off()
 
 
-degree <- 0:(length(complexesDistribution)-1)
-frequency <- complexesDistribution
-category <- rep(categoryNames[1], length(complexesDistribution))
-mainCategory <- rep(mainCategoryNames[1], length(complexesDistribution))
+degree <- 0:(length(complexesDistributionScaled)-1)
+frequency <- complexesDistributionScaled
+category <- rep(categoryNames[1], length(complexesDistributionScaled))
+mainCategory <- rep(mainCategoryNames[1], length(complexesDistributionScaled))
+colors <- categoryColors[1]
 
-degree <- c(degree, 0:(length(reactomeDistribution)-1))
-frequency <- c(frequency, reactomeDistribution)
-category <- c(category, rep(categoryNames[2], length(reactomeDistribution)))
-mainCategory <- c(mainCategory, rep(mainCategoryNames[2], length(reactomeDistribution)))
+degree <- c(degree, 0:(length(reactomeDistributionScaled)-1))
+frequency <- c(frequency, reactomeDistributionScaled)
+category <- c(category, rep(categoryNames[2], length(reactomeDistributionScaled)))
+mainCategory <- c(mainCategory, rep(mainCategoryNames[2], length(reactomeDistributionScaled)))
+colors <- c(colors, categoryColors[2])
 
-degree <- c(degree, 0:(length(reactomeReactionsDistribution)-1))
-frequency <- c(frequency, reactomeReactionsDistribution)
-category <- c(category, rep(categoryNames[3], length(reactomeReactionsDistribution)))
-mainCategory <- c(mainCategory, rep(mainCategoryNames[2], length(reactomeReactionsDistribution)))
+degree <- c(degree, 0:(length(keggDistributionScaled)-1))
+frequency <- c(frequency, keggDistributionScaled)
+category <- c(category, rep(categoryNames[4], length(keggDistributionScaled)))
+mainCategory <- c(mainCategory, rep(mainCategoryNames[2], length(keggDistributionScaled)))
+colors <- c(colors, categoryColors[4])
 
-degree <- c(degree, 0:(length(keggDistribution)-1))
-frequency <- c(frequency, keggDistribution)
-category <- c(category, rep(categoryNames[4], length(keggDistribution)))
-mainCategory <- c(mainCategory, rep(mainCategoryNames[2], length(keggDistribution)))
+degree <- c(degree, 0:(length(biogridDistributionScaled)-1))
+frequency <- c(frequency, biogridDistributionScaled)
+category <- c(category, rep(categoryNames[5], length(biogridDistributionScaled)))
+mainCategory <- c(mainCategory, rep(mainCategoryNames[3], length(biogridDistributionScaled)))
+colors <- c(colors, categoryColors[5])
 
-degree <- c(degree, 0:(length(biogridDistribution)-1))
-frequency <- c(frequency, biogridDistribution)
-category <- c(category, rep(categoryNames[5], length(biogridDistribution)))
-mainCategory <- c(mainCategory, rep(mainCategoryNames[3], length(biogridDistribution)))
+degree <- c(degree, 0:(length(intactDistributionScaled)-1))
+frequency <- c(frequency, intactDistributionScaled)
+category <- c(category, rep(categoryNames[6], length(intactDistributionScaled)))
+mainCategory <- c(mainCategory, rep(mainCategoryNames[3], length(intactDistributionScaled)))
+colors <- c(colors, categoryColors[6])
 
-degree <- c(degree, 0:(length(intactDistribution)-1))
-frequency <- c(frequency, intactDistribution)
-category <- c(category, rep(categoryNames[6], length(intactDistribution)))
-mainCategory <- c(mainCategory, rep(mainCategoryNames[3], length(intactDistribution)))
-
-degree <- c(degree, 0:(length(gygiDistribution)-1))
-frequency <- c(frequency, gygiDistribution)
-category <- c(category, rep(categoryNames[7], length(gygiDistribution)))
-mainCategory <- c(mainCategory, rep(mainCategoryNames[3], length(gygiDistribution)))
-
-degree <- c(degree, 0:(length(mannDistribution)-1))
-frequency <- c(frequency, mannDistribution)
-category <- c(category, rep(categoryNames[8], length(mannDistribution)))
-mainCategory <- c(mainCategory, rep(mainCategoryNames[3], length(mannDistribution)))
-
-degree <- c(degree, 0:(length(stringDistribution)-1))
-frequency <- c(frequency, stringDistribution)
-category <- c(category, rep(categoryNames[9], length(stringDistribution)))
-mainCategory <- c(mainCategory, rep(mainCategoryNames[4], length(stringDistribution)))
+degree <- c(degree, 0:(length(stringDistributionScaled)-1))
+frequency <- c(frequency, stringDistributionScaled)
+category <- c(category, rep(categoryNames[9], length(stringDistributionScaled)))
+mainCategory <- c(mainCategory, rep(mainCategoryNames[4], length(stringDistributionScaled)))
+colors <- c(colors, categoryColors[9])
 
 
 dPlotData <- data.frame(degree, frequency, category, mainCategory, stringsAsFactors = F)
@@ -273,14 +278,18 @@ dPlotData$degree <- log10(dPlotData$degree)
 dPlotData$frequency <- log10(dPlotData$frequency)
 
 dPlot <- ggplot()
-dPlot <- dPlot + geom_point(data = dPlotData, aes(x = degree, y = frequency, col = category), alpha = 0.3)
-dPlot <- dPlot + theme_bw()
-dPlot <- dPlot + scale_color_manual(name = element_blank(), values = categoryColors)
+dPlot <- dPlot + geom_point(data = dPlotData, aes(x = degree, y = frequency, col = category), alpha = 0.3, size = 3)
+dPlot <- dPlot + theme_bw(base_size = 22)
+dPlot <- dPlot + scale_color_manual(name = element_blank(), values = colors)
 dPlot <- dPlot + scale_x_continuous(name = "degree [log10]")
-dPlot <- dPlot + scale_y_continuous(name = "p [log10]")
+dPlot <- dPlot + scale_y_continuous(name = "# Proteins [log10]")
+dPlot <- dPlot + theme(legend.position = 'none')
 
 dPlot <- dPlot + facet_grid(mainCategory ~ .)
 
-png("resources/iGraph/plots/distributions/degreeDistributions_scatter.png", width = 800, height = 600)
+png("resources/iGraph/plots/distributions/degreeDistributions_scatter.png", width = 600, height = 800)
 plot(dPlot)
 dummy <- dev.off()
+
+
+

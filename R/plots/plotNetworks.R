@@ -32,10 +32,10 @@ complexes <- graph_from_data_frame(d = edgesComplexes, vertices = verticesComple
 
 print(paste(Sys.time(), " Plotting Network", sep = ""))
 
-png("resources/iGraph/plots/networks/complexes.png", width = 800, height = 600)
-l <- layout_with_fr(complexes)
-plot(complexes, vertex.shape = "none", vertex.label = NA, edge.color = categoryColorsAlpha[1], layout = l)
-dummy <- dev.off()
+# png("resources/iGraph/plots/networks/complexes.png", width = 800, height = 600)
+# l <- layout_with_fr(complexes)
+# plot(complexes, vertex.shape = "none", vertex.label = NA, edge.color = categoryColorsAlpha[1], layout = l)
+# dummy <- dev.off()
 
 
 # Reactome
@@ -63,11 +63,9 @@ edgeColors <- as.character(edgeColors)
 
 print(paste(Sys.time(), " Plotting Network", sep = ""))
 
-png("resources/iGraph/plots/networks/reactome.png", width = 800, height = 600)
-plot(reactome, vertex.shape = "none", vertex.label = NA, edge.arrow.size = 0.2, edge.arrow.width = 0.2, edge.color = edgeColors)
-dummy <- dev.off()
-
-print(paste(Sys.time(), " Plotting Network", sep = ""))
+# png("resources/iGraph/plots/networks/reactome.png", width = 800, height = 600)
+# plot(reactome, vertex.shape = "none", vertex.label = NA, edge.arrow.size = 0.2, edge.arrow.width = 0.2, edge.color = edgeColors)
+# dummy <- dev.off()
 
 
 # Reactome reactions only
@@ -83,9 +81,9 @@ reactomeReactions <- graph_from_data_frame(d=edgesReactions, vertices=verticesRe
 
 print(paste(Sys.time(), " Plotting Network", sep = ""))
 
-png("resources/iGraph/plots/networks/reactome_reactions.png", width = 800, height = 600)
-plot(reactome, vertex.shape = "none", vertex.label = NA, edge.arrow.size = 0.2, edge.arrow.width = 0.2, edge.color = categoryColorsAlpha[3])
-dummy <- dev.off()
+# png("resources/iGraph/plots/networks/reactome_reactions.png", width = 800, height = 600)
+# plot(reactome, vertex.shape = "none", vertex.label = NA, edge.arrow.size = 0.2, edge.arrow.width = 0.2, edge.color = categoryColorsAlpha[3])
+# dummy <- dev.off()
 
 
 # Kegg
@@ -108,7 +106,7 @@ edgeColors <- as.character(edgeColors)
 print(paste(Sys.time(), " Plotting Network", sep = ""))
 
 png("resources/iGraph/plots/networks/kegg.png", width = 800, height = 600)
-plot(reactome, vertex.shape = "none", vertex.label = NA, edge.arrow.size = 0.2, edge.arrow.width = 0.2, edge.color = categoryColorsAlpha[4])
+plot(reactome, vertex.shape = "none", vertex.label = NA, edge.arrow.size = 0.2, edge.arrow.width = 0.2, edge.color = edgeColors)
 dummy <- dev.off()
 
 
@@ -188,17 +186,23 @@ dummy <- dev.off()
 
 print(paste(Sys.time(), " Loading String data", sep = ""))
 
-verticesString <- read.table("resources/iGraph/string/string_v10.5_vertices", header = T, sep = "\t", stringsAsFactors = F, quote = "", comment.char = "")
-edgesString <- read.table("resources/iGraph/string/string_v10.5_edges", header = T, sep = " ", stringsAsFactors = F, quote = "", comment.char = "")
+verticesString <- read.table("resources/iGraph/string/string_v10.5_medium_vertices", header = T, sep = "\t", stringsAsFactors = F, quote = "", comment.char = "")
+edgesString <- read.table("resources/iGraph/string/string_v10.5_medium_edges", header = T, sep = " ", stringsAsFactors = F, quote = "", comment.char = "")
 
 print(paste(Sys.time(), " Making graph", sep = ""))
 
 string <- graph_from_data_frame(d = edgesBiogrid, vertices = verticesBiogrid, directed = F)
 
+print(paste(Sys.time(), " Formatting graph", sep = ""))
+
+edgeColors <- factor(E(string)$type)
+levels(edgeColors) <- adjustcolor(scales::hue_pal()(length(levels(edgeColors))), alpha.f = alpha)
+edgeColors <- as.character(edgeColors)
+
 print(paste(Sys.time(), " Plotting Network", sep = ""))
 
-png("resources/iGraph/plots/networks/string.png", width = 800, height = 600)
-plot(string, vertex.shape = "none", vertex.label = NA, edge.color = categoryColorsAlpha[9])
+png("resources/iGraph/plots/networks/string_medium.png", width = 800, height = 600)
+plot(string, vertex.shape = "none", vertex.label = NA, edge.color = edgeColors)
 dummy <- dev.off()
 
 
