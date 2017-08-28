@@ -217,3 +217,214 @@ cdPlot <- cdPlot + theme(panel.grid.minor = element_blank())
 png("resources/iGraph/plots/size/cluster-diameter.png", width = 800, height = 600)
 plot(cdPlot)
 dummy <- dev.off()
+
+# Make adjacency matrices
+
+complexes <- simplify(complexes, remove.multiple = T, remove.loops = T) 
+reactome <- simplify(reactome, remove.multiple = T, remove.loops = T) 
+kegg <- simplify(kegg, remove.multiple = T, remove.loops = T) 
+biogrid <- simplify(biogrid, remove.multiple = T, remove.loops = T) 
+intact <- simplify(intact, remove.multiple = T, remove.loops = T) 
+gygi <- simplify(gygi, remove.multiple = T, remove.loops = T) 
+mann <- simplify(mann, remove.multiple = T, remove.loops = T) 
+string <- simplify(string, remove.multiple = T, remove.loops = T) 
+
+
+verticesComplexes$comm <- membership(cluster_fast_greedy(complexes))
+verticesComplexes <- verticesComplexes[order(verticesComplexes$comm, verticesComplexes$id), ]
+
+verticesReactome$comm <- membership(cluster_fast_greedy(reactome))
+verticesReactome <- verticesReactome[order(verticesReactome$comm, verticesReactome$id), ]
+
+verticesKegg$comm <- membership(cluster_fast_greedy(kegg))
+verticesKegg <- verticesKegg[order(verticesKegg$comm, verticesKegg$id), ]
+
+verticesBiogrid$comm <- membership(cluster_fast_greedy(biogrid))
+verticesBiogrid <- verticesBiogrid[order(verticesBiogrid$comm, verticesBiogrid$id), ]
+
+verticesIntact$comm <- membership(cluster_fast_greedy(intact))
+verticesIntact <- verticesIntact[order(verticesIntact$comm, verticesIntact$id), ]
+
+verticesGygi$comm <- membership(cluster_fast_greedy(gygi))
+verticesGygi <- verticesGygi[order(verticesGygi$comm, verticesGygi$id), ]
+
+verticesMann$comm <- membership(cluster_fast_greedy(mann))
+verticesMann <- verticesMann[order(verticesMann$comm, verticesMann$id), ]
+
+verticesString$comm <- membership(cluster_fast_greedy(string))
+verticesString <- verticesString[order(verticesString$comm, verticesString$id), ]
+
+complexesDataFrame <- edgesComplexes %>% mutate(
+  to = factor(to, levels = verticesComplexes$id),
+  from = factor(from, levels = verticesComplexes$id))
+complexesDataFrame$typeFactor <- as.factor(complexesDataFrame$type)
+
+reactomeDataFrame <- edgesReactome %>% mutate(
+  to = factor(to, levels = verticesReactome$id),
+  from = factor(from, levels = verticesReactome$id))
+reactomeDataFrame$typeFactor <- as.factor(reactomeDataFrame$type)
+
+keggDataFrame <- edgesKegg %>% mutate(
+  to = factor(to, levels = verticesKegg$id),
+  from = factor(from, levels = verticesKegg$id))
+keggDataFrame$typeFactor <- as.factor(keggDataFrame$type)
+
+biogridDataFrame <- edgesBiogrid %>% mutate(
+  to = factor(to, levels = verticesBiogrid$id),
+  from = factor(from, levels = verticesBiogrid$id))
+biogridDataFrame$typeFactor <- as.factor(biogridDataFrame$type)
+
+intactDataFrame <- edgesIntact %>% mutate(
+  to = factor(to, levels = verticesIntact$id),
+  from = factor(from, levels = verticesIntact$id))
+intactDataFrame$typeFactor <- as.factor(intactDataFrame$type)
+
+gygiDataFrame <- edgesGygi %>% mutate(
+  to = factor(to, levels = verticesGygi$id),
+  from = factor(from, levels = verticesGygi$id))
+gygiDataFrame$typeFactor <- as.factor(gygiDataFrame$type)
+
+mannDataFrame <- edgesMann %>% mutate(
+  to = factor(to, levels = verticesMann$id),
+  from = factor(from, levels = verticesMann$id))
+mannDataFrame$typeFactor <- as.factor(mannDataFrame$type)
+
+stringDataFrame <- edgesString %>% mutate(
+  to = factor(to, levels = verticesString$id),
+  from = factor(from, levels = verticesString$id))
+stringDataFrame$typeFactor <- as.factor(stringDataFrame$type)
+
+
+heatMapPlot <- ggplot()
+heatMapPlot <- heatMapPlot + theme_bw()
+heatMapPlot <- heatMapPlot + geom_tile(data = complexesDataFrame, aes(x = from, y = to, fill = typeFactor))
+heatMapPlot <- heatMapPlot + scale_x_discrete(name = element_blank(), expand = c(0, 0))
+heatMapPlot <- heatMapPlot + scale_y_discrete(name = element_blank(), position = "right", expand = c(0, 0))
+heatMapPlot <- heatMapPlot + scale_fill_manual(values = c("black"))
+heatMapPlot <- heatMapPlot + theme(axis.title = element_blank(),
+                                   axis.text = element_blank(),
+                                   axis.ticks = element_blank(),
+                                   panel.grid = element_blank(),
+                                   legend.position = 'none')
+
+png("resources/iGraph/plots/size/complexes.png", width = 3200, height = 2400)
+plot(heatMapPlot)
+dummy <- dev.off()
+
+
+heatMapPlot <- ggplot()
+heatMapPlot <- heatMapPlot + theme_bw()
+heatMapPlot <- heatMapPlot + geom_tile(data = reactomeDataFrame, aes(x = from, y = to, fill = typeFactor))
+heatMapPlot <- heatMapPlot + scale_x_discrete(name = element_blank(), expand = c(0, 0))
+heatMapPlot <- heatMapPlot + scale_y_discrete(name = element_blank(), position = "right", expand = c(0, 0))
+heatMapPlot <- heatMapPlot + scale_fill_manual(values = c("darkgreen", "black", "blue", "darkred"))
+heatMapPlot <- heatMapPlot + theme(axis.title = element_blank(),
+                                   axis.text = element_blank(),
+                                   axis.ticks = element_blank(),
+                                   panel.grid = element_blank(),
+                                   legend.position = 'none')
+
+png("resources/iGraph/plots/size/reactome.png", width = 3200, height = 2400)
+plot(heatMapPlot)
+dummy <- dev.off()
+
+
+heatMapPlot <- ggplot()
+heatMapPlot <- heatMapPlot + theme_bw()
+heatMapPlot <- heatMapPlot + geom_tile(data = keggDataFrame, aes(x = from, y = to), fill = "black")
+heatMapPlot <- heatMapPlot + scale_x_discrete(name = element_blank(), expand = c(0, 0))
+heatMapPlot <- heatMapPlot + scale_y_discrete(name = element_blank(), position = "right", expand = c(0, 0))
+heatMapPlot <- heatMapPlot + theme(axis.title = element_blank(),
+                                   axis.text = element_blank(),
+                                   axis.ticks = element_blank(),
+                                   panel.grid = element_blank(),
+                                   legend.position = 'none')
+
+png("resources/iGraph/plots/size/kegg_bw.png", width = 3200, height = 2400)
+plot(heatMapPlot)
+dummy <- dev.off()
+
+
+heatMapPlot <- ggplot()
+heatMapPlot <- heatMapPlot + theme_bw()
+heatMapPlot <- heatMapPlot + geom_tile(data = biogridDataFrame, aes(x = from, y = to), fill = "black")
+heatMapPlot <- heatMapPlot + scale_x_discrete(name = element_blank(), expand = c(0, 0))
+heatMapPlot <- heatMapPlot + scale_y_discrete(name = element_blank(), position = "right", expand = c(0, 0))
+heatMapPlot <- heatMapPlot + theme(axis.title = element_blank(),
+                                   axis.text = element_blank(),
+                                   axis.ticks = element_blank(),
+                                   panel.grid = element_blank(),
+                                   legend.position = 'none')
+
+png("resources/iGraph/plots/size/biogrid.png", width = 6400, height = 4800)
+plot(heatMapPlot)
+dummy <- dev.off()
+
+
+heatMapPlot <- ggplot()
+heatMapPlot <- heatMapPlot + theme_bw()
+heatMapPlot <- heatMapPlot + geom_tile(data = intactDataFrame, aes(x = from, y = to), fill = "black")
+heatMapPlot <- heatMapPlot + scale_x_discrete(name = element_blank(), expand = c(0, 0))
+heatMapPlot <- heatMapPlot + scale_y_discrete(name = element_blank(), position = "right", expand = c(0, 0))
+heatMapPlot <- heatMapPlot + theme(axis.title = element_blank(),
+                                   axis.text = element_blank(),
+                                   axis.ticks = element_blank(),
+                                   panel.grid = element_blank(),
+                                   legend.position = 'none')
+
+png("resources/iGraph/plots/size/intact.png", width = 6400, height = 4800)
+plot(heatMapPlot)
+dummy <- dev.off()
+
+
+heatMapPlot <- ggplot()
+heatMapPlot <- heatMapPlot + theme_bw()
+heatMapPlot <- heatMapPlot + geom_tile(data = gygiDataFrame, aes(x = from, y = to, fill = typeFactor))
+heatMapPlot <- heatMapPlot + scale_x_discrete(name = element_blank(), expand = c(0, 0))
+heatMapPlot <- heatMapPlot + scale_y_discrete(name = element_blank(), position = "right", expand = c(0, 0))
+heatMapPlot <- heatMapPlot + scale_fill_manual(values = c("black"))
+heatMapPlot <- heatMapPlot + theme(axis.title = element_blank(),
+                                   axis.text = element_blank(),
+                                   axis.ticks = element_blank(),
+                                   panel.grid = element_blank(),
+                                   legend.position = 'none')
+
+png("resources/iGraph/plots/size/gygi.png", width = 3200, height = 2400)
+plot(heatMapPlot)
+dummy <- dev.off()
+
+
+heatMapPlot <- ggplot()
+heatMapPlot <- heatMapPlot + theme_bw()
+heatMapPlot <- heatMapPlot + geom_tile(data = mannDataFrame, aes(x = from, y = to, fill = typeFactor))
+heatMapPlot <- heatMapPlot + scale_x_discrete(name = element_blank(), expand = c(0, 0))
+heatMapPlot <- heatMapPlot + scale_y_discrete(name = element_blank(), position = "right", expand = c(0, 0))
+heatMapPlot <- heatMapPlot + scale_fill_manual(values = c("black"))
+heatMapPlot <- heatMapPlot + theme(axis.title = element_blank(),
+                                   axis.text = element_blank(),
+                                   axis.ticks = element_blank(),
+                                   panel.grid = element_blank(),
+                                   legend.position = 'none')
+
+png("resources/iGraph/plots/size/mann.png", width = 3200, height = 2400)
+plot(heatMapPlot)
+dummy <- dev.off()
+
+
+heatMapPlot <- ggplot()
+heatMapPlot <- heatMapPlot + theme_bw(base_size = 22)
+heatMapPlot <- heatMapPlot + geom_tile(data = stringDataFrame, aes(x = from, y = to), fill = "black")
+heatMapPlot <- heatMapPlot + scale_x_discrete(name = element_blank(), expand = c(0, 0))
+heatMapPlot <- heatMapPlot + scale_y_discrete(name = element_blank(), position = "right", expand = c(0, 0))
+heatMapPlot <- heatMapPlot + theme(axis.title = element_blank(),
+                                   axis.text = element_blank(),
+                                   axis.ticks = element_blank(),
+                                   panel.grid = element_blank(),
+                                   legend.position = 'none')
+
+png("resources/iGraph/plots/size/string.png", width = 3200, height = 2400)
+plot(heatMapPlot)
+dummy <- dev.off()
+
+
+

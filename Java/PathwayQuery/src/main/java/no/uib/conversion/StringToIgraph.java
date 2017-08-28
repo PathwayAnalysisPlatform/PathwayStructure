@@ -60,7 +60,7 @@ public class StringToIgraph {
                 "C:\\Github\\PathwayProjectQueries\\resources\\HUMAN_9606_idmapping.dat.gz",
                 "C:\\Github\\PathwayProjectQueries\\resources\\uniprot_names_human_21.08.17.tab.gz",
                 "C:\\Github\\PathwayProjectQueries\\resources\\iGraph\\string",
-                "string_v10.5"};
+                "string_v10.5_highest"};
 
             StringToIgraph stringToIgraph = new StringToIgraph();
 
@@ -85,7 +85,7 @@ public class StringToIgraph {
 
             System.out.println(new Date() + " Parsing links file");
 
-            HashMap<String, HashMap<String, LinkLevel>> links = stringToIgraph.parseLinks(linksFile, accessions);
+            HashMap<String, HashMap<String, LevelWithScore>> links = stringToIgraph.parseLinks(linksFile, accessions);
 
             System.out.println(new Date() + " Merging links");
 
@@ -115,6 +115,10 @@ public class StringToIgraph {
      * uniprot accession.
      */
     public final boolean removeIsoforms = true;
+    /**
+     * The confidence threshold.
+     */
+    public final double confidenceThreshold = 0.9;
 
     public StringToIgraph() {
 
@@ -309,9 +313,9 @@ public class StringToIgraph {
      * @throws IOException exception thrown if an error occurred while reading
      * the file.
      */
-    private HashMap<String, HashMap<String, LinkLevel>> parseLinks(File linksFile, HashMap<String, HashSet<String>> idMapping) throws IOException {
+    private HashMap<String, HashMap<String, LevelWithScore>> parseLinks(File linksFile, HashMap<String, HashSet<String>> idMapping) throws IOException {
 
-        HashMap<String, HashMap<String, LinkLevel>> links = new HashMap<>();
+        HashMap<String, HashMap<String, LevelWithScore>> links = new HashMap<>();
 
         // Parse actions and populate the action map
         InputStream fileStream = new FileInputStream(linksFile);
@@ -348,11 +352,11 @@ public class StringToIgraph {
 
                                 linkLevel = LinkLevel.database;
 
-                            } else if (!lineSplit[7].equals("5")) {
+                            } else if (!lineSplit[5].equals("0")) {
 
                                 linkLevel = LinkLevel.coexpression;
 
-                            } else if (!lineSplit[7].equals("8")) {
+                            } else if (!lineSplit[8].equals("0")) {
 
                                 linkLevel = LinkLevel.textMining;
 
@@ -360,32 +364,54 @@ public class StringToIgraph {
 
                             if (linkLevel != null) {
 
-                                for (String uniprotAccessionA : uniprotAccessionsA) {
+                                double score = Double.parseDouble(lineSplit[9]) / 1000.0;
 
-                                    HashMap<String, LinkLevel> links2 = links.get(uniprotAccessionA);
+                                if (score >= confidenceThreshold) {
 
-                                    if (links2 == null) {
+                                    LevelWithScore levelWithScore = new LevelWithScore(linkLevel, score);
 
-                                        links2 = new HashMap<>(uniprotAccessionsB.size());
+                                    HashMap<LinkLevel, Double> linkMap = new HashMap<>(1);
+                                    linkMap.put(linkLevel, score);
 
-                                        for (String uniprotAccessionB : uniprotAccessionsB) {
+                                    for (String uniprotAccessionA : uniprotAccessionsA) {
 
-                                            links2.put(uniprotAccessionB, linkLevel);
+                                        HashMap<String, LevelWithScore> links2 = links.get(uniprotAccessionA);
 
-                                        }
+                                        if (links2 == null) {
 
-                                        links.put(uniprotAccessionA, links2);
+                                            links2 = new HashMap<>(uniprotAccessionsB.size());
 
-                                    } else {
+                                            for (String uniprotAccessionB : uniprotAccessionsB) {
 
-                                        for (String uniprotAccessionB : uniprotAccessionsB) {
+                                                links2.put(uniprotAccessionB, levelWithScore);
 
-                                            LinkLevel previousLink = links2.get(uniprotAccessionB);
+                                            }
 
-                                            if (previousLink == null || previousLink.index < linkLevel.index) {
+                                            links.put(uniprotAccessionA, links2);
 
-                                                links2.put(uniprotAccessionB, linkLevel);
+                                        } else {
 
+                                            for (String uniprotAccessionB : uniprotAccessionsB) {
+
+                                                LevelWithScore previousLevelWithScore = links2.get(uniprotAccessionB);
+
+                                                if (previousLevelWithScore == null) {
+
+                                                    links2.put(uniprotAccessionB, levelWithScore);
+
+                                                } else {
+
+                                                    LinkLevel previousLinkLevel = previousLevelWithScore.getLinkLevel();
+                                                    double previousScore = previousLevelWithScore.getScore();
+
+                                                    LinkLevel bestLinkLevel = previousLinkLevel.index > linkLevel.index ? previousLinkLevel : linkLevel;
+                                                    double bestScore = previousScore > score ? previousScore : score;
+
+                                                    LevelWithScore bestLevelWithScore = new LevelWithScore(bestLinkLevel, bestScore);
+
+                                                    links2.put(uniprotAccessionB, bestLevelWithScore);
+
+                                                }
                                             }
                                         }
                                     }
@@ -406,7 +432,7 @@ public class StringToIgraph {
      * @param actions the actions map
      * @param links the links map
      */
-    private void mergeActionsLinks(HashMap<String, HashMap<String, HashSet<String>>> actions, HashMap<String, HashMap<String, LinkLevel>> links) {
+    private void mergeActionsLinks(HashMap<String, HashMap<String, HashSet<String>>> actions, HashMap<String, HashMap<String, LevelWithScore>> links) {
 
         HashSet<String> accessionsA = new HashSet<>(links.size());
         accessionsA.addAll(links.keySet());
@@ -414,7 +440,9 @@ public class StringToIgraph {
 
         for (String accessionA : accessionsA) {
 
-            HashMap<String, LinkLevel> linksA = links.get(accessionA);
+            allNodes.add(accessionA);
+
+            HashMap<String, LevelWithScore> linksA = links.get(accessionA);
             HashMap<String, HashSet<String>> actionsA = actions.get(accessionA);
 
             if (linksA == null) {
@@ -428,21 +456,26 @@ public class StringToIgraph {
                 actionsA = new HashMap<>(0);
 
             }
-            
+
             HashSet<String> accessionsB = new HashSet<>(linksA.size());
             accessionsB.addAll(linksA.keySet());
             accessionsB.addAll(actionsA.keySet());
 
             for (String accessionB : accessionsB) {
-                
-                LinkLevel linkLevel = linksA.get(accessionB);
-                    String levelName = linkLevel == null ? "other" : linkLevel.name();
-                    
+
+                allNodes.add(accessionB);
+
+                LevelWithScore levelWithScore = linksA.get(accessionB);
+
+                if (levelWithScore != null || confidenceThreshold == 0.0) {
+
+                    String levelName = levelWithScore == null ? "other" : levelWithScore.getLinkLevel().name();
+
                     HashSet<String> actionsAB = actionsA.get(accessionB);
-                    
+
                     String actionAB = actionsAB == null ? "unknown" : actionsAB.stream()
                             .sorted().collect(Collectors.joining(","));
-                    
+
                     StringBuilder sb = new StringBuilder(actionAB.length() + levelName.length() + 1);
                     sb.append(actionAB).append(' ').append(levelName);
                     String key = sb.toString();
@@ -467,8 +500,8 @@ public class StringToIgraph {
 
                     targets.add(accessionB);
 
+                }
             }
-
         }
     }
 
@@ -521,4 +554,36 @@ public class StringToIgraph {
             );
         }
     }
+
+    private class LevelWithScore {
+
+        private LinkLevel linkLevel;
+
+        private double score;
+
+        public LevelWithScore(LinkLevel linkLevel, double score) {
+
+            this.linkLevel = linkLevel;
+            this.score = score;
+
+        }
+
+        public LinkLevel getLinkLevel() {
+            return linkLevel;
+        }
+
+        public void setLinkLevel(LinkLevel linkLevel) {
+            this.linkLevel = linkLevel;
+        }
+
+        public double getScore() {
+            return score;
+        }
+
+        public void setScore(double score) {
+            this.score = score;
+        }
+
+    }
+
 }
