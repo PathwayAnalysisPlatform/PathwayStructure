@@ -9,9 +9,16 @@ topNbetweenness <- function (n) {
     topBet
 }
 
-topNbetweenness(20)
+topNbetweenness(20)$Protein
 
 
+swisstonames <- read.table("../../resources/swissprot/swissHumanMapping20170823.tab",
+                           stringsAsFactors=FALSE, header=TRUE, sep="\t",
+                           quote="", comment="")
+colnames(swisstonames)
+
+swisstonames[swisstonames$Entry %in% topNbetweenness(20)$Protein,
+             "Protein.names"]
 
 
 

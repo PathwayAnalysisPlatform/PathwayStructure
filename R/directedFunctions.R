@@ -46,6 +46,7 @@ readFile <- function (inFile) {
         theLine <- strsplit(line, " ")[[1]]
         theNode <- theLine[1]
         typeConn <- theLine[2]
+        print(paste(theNode, typeConn))
         fileOutputList[[typeConn]][[theNode]] <-
             theLine[3:length(theLine)]
     }
