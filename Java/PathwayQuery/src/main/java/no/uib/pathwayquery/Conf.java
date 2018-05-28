@@ -75,6 +75,7 @@ public class Conf {
 
         String maxNumVertices = "maxNumVertices";
         String year = "year";
+        String reactomeYear = "reactomeYear";
     }
 
     public interface BoolVars {
@@ -107,6 +108,7 @@ public class Conf {
         //newOption("m", BoolVars.showMissingProteins, false, false, "Add to graph proteins not found in Reactome");
         newOption("d", BoolVars.showDisconnectedProteins, false, false, "If set to true, the output graph will include the proteins contained in the input file but do not have connections.");
         newOption("y", IntVars.year, true, false, "Only proteins participant in reactions with first publication before/at year");
+        newOption("r", IntVars.reactomeYear, true, false, "Only proteins participant in reactions which were created at/before that year");
 
         // Graph arcs
         newOption(EdgeType.InputToOutput.toString(), EdgeType.InputToOutput.name(), false, false, "Show edges indicating two proteins participate in the same reaction, having the first one as input and the other as output.");
@@ -148,6 +150,7 @@ public class Conf {
         //boolMap.put(BoolVars.showMissingProteins, Boolean.FALSE);  //TODO
         boolMap.put(BoolVars.showDisconnectedProteins, Boolean.FALSE);
         intMap.put(IntVars.year, -1);
+        intMap.put(IntVars.reactomeYear, -1);
 
         strMap.put(StrVars.reactionsFile, "./Reactions.txt");
 

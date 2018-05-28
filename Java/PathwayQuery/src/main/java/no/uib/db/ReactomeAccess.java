@@ -209,13 +209,16 @@ public class ReactomeAccess {
             
             String query;
             StatementResult result;
-            if(Conf.intMap.get(Conf.IntVars.year) < 0){
+            if(Conf.intMap.get(Conf.IntVars.year) < 0 && Conf.intMap.get(Conf.IntVars.reactomeYear) < 0){
                 query = ReactomeQueries.getAllReactions;
                 result = session.run(query);
             }
-            else{
+            else if (Conf.intMap.get(Conf.IntVars.reactomeYear) < 0){
                 query = ReactomeQueries.getReactionsByYear;
                 result = session.run(query, Values.parameters("year", Conf.intMap.get(Conf.IntVars.year)));
+            } else {
+                query = ReactomeQueries.getReactionsByReactomeYear;
+                result = session.run(query, Values.parameters("reactomeYear", Conf.intMap.get(Conf.IntVars.reactomeYear)));            
             }
                     
             List<Record> records = result.list();
