@@ -1,0 +1,400 @@
+"uniprotID","proteinName","radiality","integration"
+"P31941","DNA dC->dU-editing enzyme APOBEC-3A (A3A) (EC 3.5.4.-) (Phorbolin-1)",0.000927520869219557,0.000927520869219557
+"Q6NTF7","DNA dC->dU-editing enzyme APOBEC-3H (EC 3.5.4.-) (APOBEC-related protein 10) (ARP-10) (Apolipoprotein B mRNA-editing enzyme catalytic polypeptide-like 3H) (A3H)",0.000927520869219557,0.000927520869219557
+"P33897","ATP-binding cassette sub-family D member 1 (Adrenoleukodystrophy protein) (ALDP)",0.000927520869219557,0.000927520869219557
+"Q9NRW3","DNA dC->dU-editing enzyme APOBEC-3C (A3C) (EC 3.5.4.-) (APOBEC1-like) (Phorbolin I)",0.000927520869219557,0.000927520869219557
+"Q9UBJ2","ATP-binding cassette sub-family D member 2 (Adrenoleukodystrophy-like 1) (Adrenoleukodystrophy-related protein) (hALDR)",0.000927520869219557,0.000927520869219557
+"Q8WW27","Putative C->U-editing enzyme APOBEC-4 (EC 3.5.4.-) (Apolipoprotein B mRNA-editing enzyme catalytic polypeptide-like 4)",0.000927520869219557,0.000927520869219557
+"P41238","C->U-editing enzyme APOBEC-1 (EC 3.5.4.36) (Apolipoprotein B mRNA-editing enzyme 1) (HEPR) (mRNA(cytosine(6666)) deaminase 1)",0.000927520869219557,0.000927520869219557
+"Q9Y235","C->U-editing enzyme APOBEC-2 (EC 3.5.4.36) (mRNA(cytosine(6666)) deaminase 2)",0.000927520869219557,0.000927520869219557
+"Q8NC06","Acyl-CoA-binding domain-containing protein 4",0.000530011925268318,0.000530011925268318
+"Q5T8D3","Acyl-CoA-binding domain-containing protein 5",0.000530011925268318,0.000530011925268318
+"Q9UH17","DNA dC->dU-editing enzyme APOBEC-3B (A3B) (EC 3.5.4.-) (Phorbolin-1-related protein) (Phorbolin-2/3)",0.000530011925268318,0.000530011925268318
+"P61221","ATP-binding cassette sub-family E member 1 (2'-5'-oligoadenylate-binding protein) (HuHP68) (RNase L inhibitor) (Ribonuclease 4 inhibitor) (RNS4I)",0.000530011925268318,0.000530011925268318
+"Q9NQ94","APOBEC1 complementation factor (APOBEC1-stimulating protein)",0.000530011925268318,0.000530011925268318
+"P28288","ATP-binding cassette sub-family D member 3 (70 kDa peroxisomal membrane protein) (PMP70)",0.00013250298131708,0.00013250298131708
+"P07108","Acyl-CoA-binding protein (ACBP) (Diazepam-binding inhibitor) (DBI) (Endozepine) (EP)",0.00013250298131708,0.00013250298131708
+"P10109","Adrenodoxin, mitochondrial (Adrenal ferredoxin) (Ferredoxin-1) (Hepatoredoxin)",0.00013250298131708,0.00013250298131708
+"Q13085","Acetyl-CoA carboxylase 1 (ACC1) (EC 6.4.1.2) (ACC-alpha) [Includes: Biotin carboxylase (EC 6.3.4.14)]",0.00013250298131708,0.00013250298131708
+"Q8N6N7","Acyl-CoA-binding domain-containing protein 7",0.00013250298131708,0.00013250298131708
+"Q86V24","Adiponectin receptor protein 2 (Progestin and adipoQ receptor family member II)",0.00013250298131708,0.00013250298131708
+"Q9NRN7","L-aminoadipate-semialdehyde dehydrogenase-phosphopantetheinyl transferase (EC 2.7.8.-) (4'-phosphopantetheinyl transferase) (Alpha-aminoadipic semialdehyde dehydrogenase-phosphopantetheinyl transferase) (AASD-PPT) (LYS5 ortholog)",0.000397508943951239,0.000397508943951239
+"P42330","Aldo-keto reductase family 1 member C3 (EC 1.-.-.-) (17-beta-hydroxysteroid dehydrogenase type 5) (17-beta-HSD 5) (3-alpha-HSD type II, brain) (3-alpha-hydroxysteroid dehydrogenase type 2) (3-alpha-HSD type 2) (EC 1.1.1.357) (Chlordecone reductase homolog HAKRb) (Dihydrodiol dehydrogenase 3) (DD-3) (DD3) (Dihydrodiol dehydrogenase type I) (HA1753) (Indanol dehydrogenase) (EC 1.1.1.112) (Prostaglandin F synthase) (PGFS) (EC 1.1.1.188) (Testosterone 17-beta-dehydrogenase 5) (EC 1.1.1.239) (EC 1.1.1.64) (Trans-1,2-dihydrobenzene-1,2-diol dehydrogenase) (EC 1.3.1.20)",0.000397508943951239,0.000397508943951239
+"P22570","NADPH:adrenodoxin oxidoreductase, mitochondrial (AR) (Adrenodoxin reductase) (EC 1.18.1.6) (Ferredoxin--NADP(+) reductase) (Ferredoxin reductase)",0.000397508943951239,0.000397508943951239
+"O60218","Aldo-keto reductase family 1 member B10 (EC 1.1.1.-) (ARL-1) (Aldose reductase-like) (Aldose reductase-related protein) (ARP) (hARP) (Small intestine reductase) (SI reductase)",0.000397508943951239,0.000397508943951239
+"P17516","Aldo-keto reductase family 1 member C4 (EC 1.1.1.-) (3-alpha-HSD1) (3-alpha-hydroxysteroid dehydrogenase type I) (EC 1.1.1.357) (Chlordecone reductase) (CDR) (EC 1.1.1.225) (Dihydrodiol dehydrogenase 4) (DD-4) (DD4) (HAKRA)",0.000265005962634159,0.000265005962634159
+"Q15848","Adiponectin (30 kDa adipocyte complement-related protein) (Adipocyte complement-related 30 kDa protein) (ACRP30) (Adipocyte, C1q and collagen domain-containing protein) (Adipose most abundant gene transcript 1 protein) (apM-1) (Gelatin-binding protein)",0.000265005962634159,0.000265005962634159
+"Q96A54","Adiponectin receptor protein 1 (Progestin and adipoQ receptor family member I)",0.000265005962634159,0.000265005962634159
+"P55196","Afadin (ALL1-fused gene from chromosome 6 protein) (Protein AF-6) (Afadin adherens junction formation factor)",0.00013250298131708,0
+"P20594","Atrial natriuretic peptide receptor 2 (EC 4.6.1.2) (Atrial natriuretic peptide receptor type B) (ANP-B) (ANPR-B) (NPR-B) (Guanylate cyclase B) (GC-B)",0,0.000265005962634159
+"Q9NWT8","Aurora kinase A-interacting protein (AURKA-interacting protein) (28S ribosomal protein S38, mitochondrial) (MRP-S38) (Mitochondrial small ribosomal subunit protein mS38)",0.00013250298131708,0
+"P23582","C-type natriuretic peptide [Cleaved into: CNP-22; CNP-29; CNP-53]",0,0.000795017887902478
+"Q96Q83","Alpha-ketoglutarate-dependent dioxygenase alkB homolog 3 (EC 1.14.11.54) (Alkylated DNA repair protein alkB homolog 3) (hABH3) (DEPC-1) (Prostate cancer antigen 1)",0.00013250298131708,0
+"Q8N9N2","Activating signal cointegrator 1 complex subunit 1 (ASC-1 complex subunit p50) (Trip4 complex subunit p50)",0.00013250298131708,0
+"Q04828","Aldo-keto reductase family 1 member C1 (EC 1.1.1.-) (20-alpha-hydroxysteroid dehydrogenase) (20-alpha-HSD) (EC 1.1.1.149) (Chlordecone reductase homolog HAKRC) (Dihydrodiol dehydrogenase 1/2) (DD1/DD2) (High-affinity hepatic bile acid-binding protein) (HBAB) (Indanol dehydrogenase) (EC 1.1.1.112) (Trans-1,2-dihydrobenzene-1,2-diol dehydrogenase) (EC 1.3.1.20)",0.00135815555850007,0.00135815555850007
+"Q9H6X2","Anthrax toxin receptor 1 (Tumor endothelial marker 8)",0.00138023938871958,0.00138023938871958
+"Q3SXY8","ADP-ribosylation factor-like protein 13B (ADP-ribosylation factor-like protein 2-like 1) (ARL2-like protein 1)",0.00135815555850007,0.00135815555850007
+"P05090","Apolipoprotein D (Apo-D) (ApoD)",0.00138023938871958,0.00138023938871958
+"P36405","ADP-ribosylation factor-like protein 3",0.00141336513404885,0.00141336513404885
+"P58335","Anthrax toxin receptor 2 (Capillary morphogenesis gene 2 protein) (CMG-2)",0.00013250298131708,0.00013250298131708
+"Q04656","Copper-transporting ATPase 1 (EC 3.6.3.54) (Copper pump 1) (Menkes disease-associated protein)",0.00013250298131708,0.00013250298131708
+"Q9H1I8","Activating signal cointegrator 1 complex subunit 2 (ASC-1 complex subunit p100) (Trip4 complex subunit p100)",0.011660262355903,0.011660262355903
+"Q8N3C0","Activating signal cointegrator 1 complex subunit 3 (EC 3.6.4.12) (ASC-1 complex subunit p200) (ASC1p200) (Helicase, ATP binding 1) (Trip4 complex subunit p200)",0.011660262355903,0.011660262355903
+"O00244","Copper transport protein ATOX1 (Metal transport protein ATX1)",0.011660262355903,0.011660262355903
+"P07307","Asialoglycoprotein receptor 2 (ASGP-R 2) (ASGPR 2) (C-type lectin domain family 4 member H2) (Hepatic lectin H2) (HL-2)",0.011660262355903,0.011660262355903
+"P07306","Asialoglycoprotein receptor 1 (ASGP-R 1) (ASGPR 1) (C-type lectin domain family 4 member H1) (Hepatic lectin H1) (HL-1)",0.011660262355903,0.011660262355903
+"Q8NHY0","Beta-1,4 N-acetylgalactosaminyltransferase 2 (EC 2.4.1.-) (Sd(a) beta-1,4-GalNAc transferase) (UDP-GalNAc:Neu5Aca2-3Galb-R b1,4-N-acetylgalactosaminyltransferase)",0.011660262355903,0.011660262355903
+"Q99643","Succinate dehydrogenase cytochrome b560 subunit, mitochondrial (Integral membrane protein CII-3) (QPs-1) (QPs1) (Succinate dehydrogenase complex subunit C) (Succinate-ubiquinone oxidoreductase cytochrome B large subunit) (CYBL)",0.011616094695464,0.011616094695464
+"O14977","Antizyme inhibitor 1 (AZI) (AZI1) (Ornithine decarboxylase antizyme inhibitor)",0.011616094695464,0.011616094695464
+"O60238","BCL2/adenovirus E1B 19 kDa protein-interacting protein 3-like (Adenovirus E1B19K-binding protein B5) (BCL2/adenovirus E1B 19 kDa protein-interacting protein 3A) (NIP3-like protein X) (NIP3L)",0.011660262355903,0.011660262355903
+"Q9NP55","BPI fold-containing family A member 1 (Lung-specific protein X) (Nasopharyngeal carcinoma-related protein) (Palate lung and nasal epithelium clone protein) (Secretory protein in upper respiratory tracts) (Short PLUNC1) (SPLUNC1) (Tracheal epithelium-enriched protein) (Von Ebner protein Hl)",0.011660262355903,0.011660262355903
+"Q8N4F0","BPI fold-containing family B member 2 (Bactericidal/permeability-increasing protein-like 1) (BPI-like 1) (Long palate, lung and nasal epithelium carcinoma-associated protein 2) (RYSR)",0.011660262355903,0.011660262355903
+"Q8N3J6","Cell adhesion molecule 2 (Immunoglobulin superfamily member 4D) (IgSF4D) (Nectin-like protein 3) (NECL-3) (Synaptic cell adhesion molecule 2) (SynCAM 2)",0.011660262355903,0.011660262355903
+"Q96DR5","BPI fold-containing family A member 2 (Parotid secretory protein) (PSP) (Short palate, lung and nasal epithelium carcinoma-associated protein 2)",0.011660262355903,0.011660262355903
+"P07498","Kappa-casein",0.011660262355903,0.011660262355903
+"Q8N126","Cell adhesion molecule 3 (Brain immunoglobulin receptor) (Immunoglobulin superfamily member 4B) (IgSF4B) (Nectin-like protein 1) (NECL-1) (Synaptic cell adhesion molecule 3) (SynCAM3) (TSLC1-like protein 1) (TSLL1)",0.011616094695464,0.011616094695464
+"Q8TDL5","BPI fold-containing family B member 1 (Long palate, lung and nasal epithelium carcinoma-associated protein 1) (Von Ebner minor salivary gland protein) (VEMSGP)",0.011660262355903,0.011660262355903
+"Q8NFQ5","BPI fold-containing family B member 6 (Bactericidal/permeability-increasing protein-like 3)",0.011660262355903,0.011660262355903
+"P50747","Biotin--protein ligase (EC 6.3.4.-) (Biotin apo-protein ligase) [Includes: Biotin--[methylmalonyl-CoA-carboxytransferase] ligase (EC 6.3.4.9); Biotin--[propionyl-CoA-carboxylase [ATP-hydrolyzing]] ligase (EC 6.3.4.10) (Holocarboxylase synthetase) (HCS); Biotin--[methylcrotonoyl-CoA-carboxylase] ligase (EC 6.3.4.11); Biotin--[acetyl-CoA-carboxylase] ligase (EC 6.3.4.15)]",0.011660262355903,0.011660262355903
+"Q9BY67","Cell adhesion molecule 1 (Immunoglobulin superfamily member 4) (IgSF4) (Nectin-like protein 2) (NECL-2) (Spermatogenic immunoglobulin superfamily) (SgIgSF) (Synaptic cell adhesion molecule) (SynCAM) (Tumor suppressor in lung cancer 1) (TSLC-1)",0.011660262355903,0.011660262355903
+"P59827","BPI fold-containing family B member 4 (Ligand-binding protein RY2G5) (Long palate, lung and nasal epithelium carcinoma-associated protein 4)",0.011660262355903,0.011660262355903
+"P09326","CD48 antigen (B-lymphocyte activation marker BLAST-1) (BCM1 surface antigen) (Leukocyte antigen MEM-102) (SLAM family member 2) (SLAMF2) (Signaling lymphocytic activation molecule 2) (TCT.1) (CD antigen CD48)",0.011660262355903,0.011660262355903
+"Q9NPF0","CD320 antigen (8D6 antigen) (FDC-signaling molecule 8D6) (FDC-SM-8D6) (Transcobalamin receptor) (TCblR) (CD antigen CD320)",0.011660262355903,0.011660262355903
+"P47710","Alpha-S1-casein [Cleaved into: Casoxin-D]",0.011660262355903,0.011660262355903
+"Q9BZW8","Natural killer cell receptor 2B4 (NK cell activation-inducing ligand) (NAIL) (NK cell type I receptor protein 2B4) (NKR2B4) (h2B4) (SLAM family member 4) (SLAMF4) (Signaling lymphocytic activation molecule 4) (CD antigen CD244)",0.011660262355903,0.011660262355903
+"Q15762","CD226 antigen (DNAX accessory molecule 1) (DNAM-1) (CD antigen CD226)",0.011660262355903,0.011660262355903
+"P26842","CD27 antigen (CD27L receptor) (T-cell activation antigen CD27) (T14) (Tumor necrosis factor receptor superfamily member 7) (CD antigen CD27)",0.011660262355903,0.011660262355903
+"P32970","CD70 antigen (CD27 ligand) (CD27-L) (Tumor necrosis factor ligand superfamily member 7) (CD antigen CD70)",0.011660262355903,0.011660262355903
+"Q96BP2","Coiled-coil-helix-coiled-coil-helix domain-containing protein 1 (28S ribosomal protein S37, mitochondrial) (MRP-S37) (Mitochondrial small ribosomal subunit protein mS37) (Nuclear protein C2360)",0.011660262355903,0.011660262355903
+"O60543","Cell death activator CIDE-A (Cell death-inducing DFFA-like effector A)",0.011660262355903,0.011660262355903
+"A8K7I4","Calcium-activated chloride channel regulator 1 (EC 3.4.-.-) (Calcium-activated chloride channel family member 1) (hCLCA1) (Calcium-activated chloride channel protein 1) (CaCC-1) (hCaCC-1)",0.011660262355903,0.011660262355903
+"Q9UHP7","C-type lectin domain family 2 member D (Lectin-like NK cell receptor) (Lectin-like transcript 1) (LLT-1) (Osteoclast inhibitory lectin)",0.011660262355903,0.011660262355903
+"Q9UQC9","Calcium-activated chloride channel regulator 2 (EC 3.4.-.-) (Calcium-activated chloride channel family member 2) (hCLCA2) (Calcium-activated chloride channel protein 3) (CaCC-3) (hCaCC-3) [Cleaved into: Calcium-activated chloride channel regulator 2, 109 kDa form; Calcium-activated chloride channel regulator 2, 35 kDa form]",0.011660262355903,0.011660262355903
+"Q92478","C-type lectin domain family 2 member B (Activation-induced C-type lectin) (C-type lectin superfamily member 2) (IFN-alpha-2b-inducing-related protein 1)",0.011660262355903,0.011660262355903
+"Q96AQ7","Cell death activator CIDE-3 (Cell death-inducing DFFA-like effector protein C) (Fat-specific protein FSP27 homolog)",0.011660262355903,0.011660262355903
+"P05108","Cholesterol side-chain cleavage enzyme, mitochondrial (EC 1.14.15.6) (CYPXIA1) (Cholesterol desmolase) (Cytochrome P450 11A1) (Cytochrome P450(scc))",0.011660262355903,0.011660262355903
+"Q9Y6N3","Calcium-activated chloride channel regulator family member 3 (Calcium-activated chloride channel family member 3) (hCLCA3)",0.011660262355903,0.011660262355903
+"Q14CN2","Calcium-activated chloride channel regulator 4 (EC 3.4.-.-) (Calcium-activated chloride channel family member 4) (hCLCA4) (Calcium-activated chloride channel protein 2) (CaCC-2) (hCaCC-2) (Chloride channel accessory 4) [Cleaved into: Calcium-activated chloride channel regulator 4, 110 kDa form; Calcium-activated chloride channel regulator 4, 30 kDa form]",0.011660262355903,0.011660262355903
+"O95476","CTD nuclear envelope phosphatase 1 (EC 3.1.3.16) (Serine/threonine-protein phosphatase dullard)",0.0116271366105737,0.0116271366105737
+"O95727","Cytotoxic and regulatory T-cell molecule (Class-I MHC-restricted T-cell-associated molecule) (CD antigen CD355)",0.011660262355903,0.011660262355903
+"O43174","Cytochrome P450 26A1 (EC 1.14.13.-) (Cytochrome P450 retinoic acid-inactivating 1) (Cytochrome P450RAI) (hP450RAI) (Retinoic acid 4-hydroxylase) (Retinoic acid-metabolizing cytochrome)",0.011660262355903,0.011660262355903
+"Q9NR63","Cytochrome P450 26B1 (EC 1.14.13.-) (Cytochrome P450 26A2) (Cytochrome P450 retinoic acid-inactivating 2) (Cytochrome P450RAI-2) (Retinoic acid-metabolizing cytochrome)",0.011660262355903,0.011660262355903
+"Q6FI81","Anamorsin (Cytokine-induced apoptosis inhibitor 1) (Fe-S cluster assembly protein DRE2 homolog)",0.011660262355903,0.011660262355903
+"Q6V0L0","Cytochrome P450 26C1 (EC 1.14.-.-)",0.011660262355903,0.011660262355903
+"Q96D31","Calcium release-activated calcium channel protein 1 (Protein orai-1) (Transmembrane protein 142A)",0.011660262355903,0.011660262355903
+"Q9BUF7","Protein crumbs homolog 3",0.011660262355903,0.011660262355903
+"Q6ZRH7","Cation channel sperm-associated protein subunit gamma",0.011660262355903,0.011660262355903
+"P08034","Gap junction beta-1 protein (Connexin-32) (Cx32) (GAP junction 28 kDa liver protein)",0.011660262355903,0.011660262355903
+"P29033","Gap junction beta-2 protein (Connexin-26) (Cx26)",0.011660262355903,0.011660262355903
+"Q99062","Granulocyte colony-stimulating factor receptor (G-CSF receptor) (G-CSF-R) (CD antigen CD114)",0.011660262355903,0.011660262355903
+"P09919","Granulocyte colony-stimulating factor (G-CSF) (Pluripoietin) (Filgrastim) (Lenograstim)",0.011660262355903,0.011660262355903
+"Q96P56","Cation channel sperm-associated protein 2 (CatSper2)",0.011660262355903,0.011660262355903
+"Q7RTX7","Cation channel sperm-associated protein 4 (CatSper4)",0.011660262355903,0.011660262355903
+"P49238","CX3C chemokine receptor 1 (C-X3-C CKR-1) (CX3CR1) (Beta chemokine receptor-like 1) (CMK-BRL-1) (CMK-BRL1) (Fractalkine receptor) (G-protein coupled receptor 13) (V28)",0.011660262355903,0.011660262355903
+"P07333","Macrophage colony-stimulating factor 1 receptor (CSF-1 receptor) (CSF-1-R) (CSF-1R) (M-CSF-R) (EC 2.7.10.1) (Proto-oncogene c-Fms) (CD antigen CD115)",0.011660262355903,0.011660262355903
+"Q86XM0","Cation channel sperm-associated protein subunit delta (CatSper-delta) (CatSperdelta) (Transmembrane protein 146)",0.011660262355903,0.011660262355903
+"Q2VPK5","Cytoplasmic tRNA 2-thiolation protein 2 (Cytosolic thiouridylase subunit 2)",0.011660262355903,0.011660262355903
+"P78310","Coxsackievirus and adenovirus receptor (CAR) (hCAR) (CVB3-binding protein) (Coxsackievirus B-adenovirus receptor) (HCVADR)",0.011660262355903,0.011660262355903
+"Q717R9","Cystin-1 (Cilia-associated protein)",0.011660262355903,0.011660262355903
+"Q9H7T0","Cation channel sperm-associated protein subunit beta (CatSper-beta)",0.011660262355903,0.011660262355903
+"Q7Z7A3","Cytoplasmic tRNA 2-thiolation protein 1 (EC 2.7.7.-) (ATP-binding domain-containing protein 3) (Cancer-associated gene protein) (Cytoplasmic tRNA adenylyltransferase 1)",0.011660262355903,0.011660262355903
+"Q8NEC5","Cation channel sperm-associated protein 1 (CatSper1) (hCatSper)",0.011660262355903,0.011660262355903
+"Q86XQ3","Cation channel sperm-associated protein 3 (CatSper3) (Ca(v)-like protein) (One-repeat calcium channel-like protein)",0.011660262355903,0.011660262355903
+"P11926","Ornithine decarboxylase (ODC) (EC 4.1.1.17)",0.011660262355903,0.011660262355903
+"Q09013","Myotonin-protein kinase (MT-PK) (EC 2.7.11.1) (DM-kinase) (DMK) (DM1 protein kinase) (DMPK) (Myotonic dystrophy protein kinase)",0.011660262355903,0.011660262355903
+"P49366","Deoxyhypusine synthase (DHS) (EC 2.5.1.46)",0.011660262355903,0.011660262355903
+"O14521","Succinate dehydrogenase [ubiquinone] cytochrome b small subunit, mitochondrial (CybS) (CII-4) (QPs3) (Succinate dehydrogenase complex subunit D) (Succinate-ubiquinone oxidoreductase cytochrome b small subunit) (Succinate-ubiquinone reductase membrane anchor subunit)",0.011660262355903,0.011660262355903
+"Q9BU89","Deoxyhypusine hydroxylase (hDOHH) (EC 1.14.99.29) (Deoxyhypusine dioxygenase) (Deoxyhypusine monooxygenase) (HEAT-like repeat-containing protein 1)",0.011660262355903,0.011660262355903
+"Q9UNE0","Tumor necrosis factor receptor superfamily member EDAR (Anhidrotic ectodysplasin receptor 1) (Downless homolog) (EDA-A1 receptor) (Ectodermal dysplasia receptor) (Ectodysplasin-A receptor)",0.011660262355903,0.011660262355903
+"P49411","Elongation factor Tu, mitochondrial (EF-Tu) (P43)",0.011660262355903,0.011660262355903
+"Q8WWZ3","Ectodysplasin-A receptor-associated adapter protein (EDAR-associated death domain protein) (Protein crinkled homolog)",0.011660262355903,0.011660262355903
+"Q92838","Ectodysplasin-A (Ectodermal dysplasia protein) (EDA protein) [Cleaved into: Ectodysplasin-A, membrane form; Ectodysplasin-A, secreted form]",0.011660262355903,0.011660262355903
+"Q96RP9","Elongation factor G, mitochondrial (EF-Gmt) (Elongation factor G 1, mitochondrial) (mEF-G 1) (Elongation factor G1) (hEFG1)",0.011660262355903,0.011660262355903
+"P43080","Guanylyl cyclase-activating protein 1 (GCAP 1) (Guanylate cyclase activator 1A)",0.011660262355903,0.011660262355903
+"Q9UMX6","Guanylyl cyclase-activating protein 2 (GCAP 2) (Guanylate cyclase activator 1B)",0.011660262355903,0.011660262355903
+"Q9P1Z3","Potassium/sodium hyperpolarization-activated cyclic nucleotide-gated channel 3",0.011660262355903,0.011660262355903
+"Q9Y3Q4","Potassium/sodium hyperpolarization-activated cyclic nucleotide-gated channel 4",0.011660262355903,0.011660262355903
+"Q9UL51","Potassium/sodium hyperpolarization-activated cyclic nucleotide-gated channel 2 (Brain cyclic nucleotide-gated channel 2) (BCNG-2)",0.011660262355903,0.011660262355903
+"Q12918","Killer cell lectin-like receptor subfamily B member 1 (C-type lectin domain family 5 member B) (HNKR-P1a) (NKR-P1A) (Natural killer cell surface protein P1A) (CD antigen CD161)",0.011660262355903,0.011660262355903
+"O60259","Kallikrein-8 (hK8) (EC 3.4.21.118) (Neuropsin) (NP) (Ovasin) (Serine protease 19) (Serine protease TADG-14) (Tumor-associated differentially expressed gene 14 protein)",0.011660262355903,0.011660262355903
+"O75616","GTPase Era, mitochondrial (H-ERA) (hERA) (Conserved ERA-like GTPase) (CEGA) (ERA-W) (ERA-like protein 1)",0.011660262355903,0.011660262355903
+"O95571","Persulfide dioxygenase ETHE1, mitochondrial (EC 1.13.11.18) (Ethylmalonic encephalopathy protein 1) (Hepatoma subtracted clone one protein) (Sulfur dioxygenase ETHE1)",0.011660262355903,0.011660262355903
+"P49327","Fatty acid synthase (EC 2.3.1.85) [Includes: [Acyl-carrier-protein] S-acetyltransferase (EC 2.3.1.38); [Acyl-carrier-protein] S-malonyltransferase (EC 2.3.1.39); 3-oxoacyl-[acyl-carrier-protein] synthase (EC 2.3.1.41); 3-oxoacyl-[acyl-carrier-protein] reductase (EC 1.1.1.100); 3-hydroxyacyl-[acyl-carrier-protein] dehydratase (EC 4.2.1.59); Enoyl-[acyl-carrier-protein] reductase (EC 1.3.1.39); Oleoyl-[acyl-carrier-protein] hydrolase (EC 3.1.2.14)]",0.011660262355903,0.011660262355903
+"Q6P4F2","Ferredoxin-2, mitochondrial (Adrenodoxin-like protein) (Ferredoxin-1-like protein)",0.011660262355903,0.011660262355903
+"P49771","Fms-related tyrosine kinase 3 ligand (Flt3 ligand) (Flt3L) (SL cytokine)",0.011660262355903,0.011660262355903
+"P36888","Receptor-type tyrosine-protein kinase FLT3 (EC 2.7.10.1) (FL cytokine receptor) (Fetal liver kinase-2) (FLK-2) (Fms-like tyrosine kinase 3) (FLT-3) (Stem cell tyrosine kinase 1) (STK-1) (CD antigen CD135)",0.011660262355903,0.011660262355903
+"P30793","GTP cyclohydrolase 1 (EC 3.5.4.16) (GTP cyclohydrolase I) (GTP-CH-I)",0.011660262355903,0.011660262355903
+"Q8N6M3","Fat storage-inducing transmembrane protein 2 (Fat-inducing protein 2)",0.011660262355903,0.011660262355903
+"A5D6W6","Fat storage-inducing transmembrane protein 1 (Fat-inducing protein 1)",0.0116271366105737,0.0116271366105737
+"Q8TAE8","Growth arrest and DNA damage-inducible proteins-interacting protein 1 (39S ribosomal protein L59, mitochondrial) (MRP-L59) (CKII beta-associating protein) (CR6-interacting factor 1) (CRIF1) (Mitochondrial large ribosomal subunit protein mL64) (Papillomavirus L2-interacting nuclear protein 1) (PLINP) (PLINP-1) (p53-responsive gene 6 protein)",0.011660262355903,0.011660262355903
+"P30047","GTP cyclohydrolase 1 feedback regulatory protein (GFRP) (GTP cyclohydrolase I feedback regulatory protein) (p35)",0.000397508943951239,0.000397508943951239
+"P35754","Glutaredoxin-1 (Thioltransferase-1) (TTase-1)",0.000397508943951239,0.000397508943951239
+"O95843","Guanylyl cyclase-activating protein 3 (GCAP 3) (Guanylate cyclase activator 1C)",0.000397508943951239,0.000397508943951239
+"P15515","Histatin-1 (Histidine-rich protein 1) (Post-PB protein) (PPB) [Cleaved into: His1-(31-57)-peptide (His1 31/57) (His1-(12-38)-peptide) (His1 12/38) (Histatin-2)]",0.000397508943951239,0.000397508943951239
+"Q8TDQ0","Hepatitis A virus cellular receptor 2 (HAVcr-2) (T-cell immunoglobulin and mucin domain-containing protein 3) (TIMD-3) (T-cell immunoglobulin mucin receptor 3) (TIM-3) (T-cell membrane protein 3)",0.00013250298131708,0
+"O60741","Potassium/sodium hyperpolarization-activated cyclic nucleotide-gated channel 1 (Brain cyclic nucleotide-gated channel 1) (BCNG-1)",0.000265005962634159,0.000265005962634159
+"P26927","Hepatocyte growth factor-like protein (Macrophage stimulatory protein) (Macrophage-stimulating protein) (MSP) [Cleaved into: Hepatocyte growth factor-like protein alpha chain; Hepatocyte growth factor-like protein beta chain]",0.000265005962634159,0.000265005962634159
+"P15516","Histatin-3 (Basic histidine-rich protein) (Hst) (Histidine-rich protein 3) (PB) [Cleaved into: Histatin-3; His3-(20-44)-peptide (His3 20/44) (His3-(1-25)-peptide) (His3 1/25) (Histatin-3 1/25) (Histatin-6); His3-(20-43)-peptide (His3 20/43) (His3-(1-24)-peptide) (His3 1/24) (Histatin-3 1/24) (Histatin-5); His3-(20-32)-peptide (His3 20/32) (His3-(1-13)-peptide) (His3 1/13) (Histatin-3 1/13); His3-(20-31)-peptide (His3 20/31) (His3-(1-12)-peptide) (His3 1/12) (Histatin-3 1/12); His3-(20-30)-peptide (His3 20/30) (His3-(1-11)-peptide) (His3 1/11) (Histatin-3 1/11); His3-(24-32)-peptide (His3 24/32) (His3-(5-13)-peptide) (His3 5/13) (Histatin-3 5/13); His3-(24-31)-peptide (His3 24/31) (His3-(5-12)-peptide) (His3 5/12) (Histatin-11) (Histatin-3 5/12); His3-(24-30)-peptide (His3 24/30) (His3-(5-11)-peptide) (His3 5/11) (Histatin-12) (Histatin-3 5/11); His3-(25-32)-peptide (His3 25/32) (His3-(6-13)-peptide) (His3 6/13) (Histatin-3 6/13); His3-(25-30)-peptide (His3 25/30) (His3-(6-11)-peptide) (His3 6/11) (Histatin-3 6/11); His3-(26-32)-peptide (His3 26/32) (His3-(7-13)-peptide) (His3 7/13) (Histatin-3 7/13); His3-(26-31)-peptide (His3 26/31) (His3-(7-12)-peptide) (His3 7/12) (Histatin-3 7/12); His3-(26-30)-peptide (His3 26/30) (His3-(7-11)-peptide) (His3 7/11) (Histatin-3 7/11); His3-(31-51)-peptide (His3 31/51) (His3-(12-32)-peptide) (His3 12/32) (Histatin-3 12/32) (Histatin-4); His3-(31-44)-peptide (His3 31/44) (His3-(12-25)-peptide) (His3 12/25) (Histatin-3 12/25) (Histatin-9); His3-(31-43)-peptide (His3 31/43) (His3-(12-24)-peptide) (His3 12/24) (Histatin-3 12/24) (Histatin-7); His3-(32-44)-peptide (His3 32/44) (His3-(13-25)-peptide) (His3 13/25) (Histatin-10) (Histatin-3 13/25); His3-(32-43)-peptide (His3 32-43) (His3-(13-24)-peptide) (His3 13/24) (Histatin-3 13/24) (Histatin-8); His3-(33-44)-peptide (His3 33/44) (His3-(14-25)-peptide) (His3 14/25) (Histatin-3 14/25); His3-(33-43)-peptide (His3 33/43) (His3-(14-24)-peptide) (His3 14/24) (Histatin-3 14/24); His3-(34-44)-peptide (His3 34/44) (His3-(15-25)-peptide) (His3 15/25) (Histatin-3 15/25); His3-(34-43)-peptide (His3 34/43) (His3-(15-24)-peptide) (His3 15/24) (Histatin-3 15/24); His3-(45-51)-peptide (His3 45/51) (His3-(26-32)-peptide) (His3 26/32) (Histatin-3 26/32); His3-(47-51)-peptide (His3 47/51) (His3-(28-32)-peptide) (His3 28/32) (Histatin-3 28/32); His3-(48-51)-peptide (His3 48/51) (His3-(29-32)-peptide) (His3 29/32) (Histatin-3 29/32)]",0.000265005962634159,0.000265005962634159
+"Q9NRM6","Interleukin-17 receptor B (IL-17 receptor B) (IL-17RB) (Cytokine receptor-like 4) (IL-17 receptor homolog 1) (IL-17Rh1) (IL17Rh1) (Interleukin-17B receptor) (IL-17B receptor)",0.000530011925268318,0.000530011925268318
+"Q969J5","Interleukin-22 receptor subunit alpha-2 (IL-22 receptor subunit alpha-2) (IL-22R-alpha-2) (IL-22RA2) (Cytokine receptor class-II member 10) (Cytokine receptor family 2 member 10) (CRF2-10) (Cytokine receptor family type 2, soluble 1) (CRF2-S1) (Interleukin-22-binding protein) (IL-22BP) (IL22BP) (ZcytoR16)",0.000530011925268318,0.000530011925268318
+"Q96F46","Interleukin-17 receptor A (IL-17 receptor A) (IL-17RA) (CDw217) (CD antigen CD217)",0.000530011925268318,0.000530011925268318
+"Q08334","Interleukin-10 receptor subunit beta (IL-10 receptor subunit beta) (IL-10R subunit beta) (IL-10RB) (Cytokine receptor class-II member 4) (Cytokine receptor family 2 member 4) (CRF2-4) (Interleukin-10 receptor subunit 2) (IL-10R subunit 2) (IL-10R2) (CD antigen CDw210b)",0.000530011925268318,0.000530011925268318
+"Q8NAC3","Interleukin-17 receptor C (IL-17 receptor C) (IL-17RC) (Interleukin-17 receptor homolog) (IL17Rhom) (Interleukin-17 receptor-like protein) (IL-17RL) (ZcytoR14)",0.000530011925268318,0.000530011925268318
+"Q8NFR9","Interleukin-17 receptor E (IL-17 receptor E) (IL-17RE)",0.000530011925268318,0.000530011925268318
+"Q14627","Interleukin-13 receptor subunit alpha-2 (IL-13 receptor subunit alpha-2) (IL-13R subunit alpha-2) (IL-13R-alpha-2) (IL-13RA2) (Interleukin-13-binding protein) (CD antigen CD213a2)",0.000530011925268318,0.000530011925268318
+"Q9H293","Interleukin-25 (IL-25) (Interleukin-17E) (IL-17E)",0.000507928095048805,0.000507928095048805
+"Q8IZI9","Interferon lambda-3 (IFN-lambda-3) (Cytokine Zcyto22) (Interleukin-28B) (IL-28B) (Interleukin-28C) (IL-28C)",0.000518970010158562,0.000518970010158562
+"Q96PD4","Interleukin-17F (IL-17F) (Cytokine ML-1)",0.000518970010158562,0.000518970010158562
+"Q9GZX6","Interleukin-22 (IL-22) (Cytokine Zcyto18) (IL-10-related T-cell-derived-inducible factor) (IL-TIF)",0.00013250298131708,0
+"Q8N6P7","Interleukin-22 receptor subunit alpha-1 (IL-22 receptor subunit alpha-1) (IL-22R-alpha-1) (IL-22RA1) (Cytokine receptor class-II member 9) (Cytokine receptor family 2 member 9) (CRF2-9) (ZcytoR11)",0,0.000265005962634159
+"Q6ZMJ4","Interleukin-34 (IL-34)",0.00013250298131708,0.00013250298131708
+"Q8NI35","InaD-like protein (Inadl protein) (hINADL) (Pals1-associated tight junction protein) (Protein associated to tight junctions)",0.00013250298131708,0.00013250298131708
+"Q9NRR6","72 kDa inositol polyphosphate 5-phosphatase (EC 3.1.3.36) (Phosphatidylinositol 4,5-bisphosphate 5-phosphatase) (Phosphatidylinositol polyphosphate 5-phosphatase type IV)",0.00013250298131708,0
+"Q8IU54","Interferon lambda-1 (IFN-lambda-1) (Cytokine Zcyto21) (Interleukin-29) (IL-29)",0,0.00013250298131708
+"P35225","Interleukin-13 (IL-13)",0.000397508943951239,0.000530011925268318
+"Q9P0M4","Interleukin-17C (IL-17C) (Cytokine CX2)",0.000397508943951239,0.000530011925268318
+"Q16552","Interleukin-17A (IL-17) (IL-17A) (Cytotoxic T-lymphocyte-associated antigen 8) (CTLA-8)",0.000397508943951239,0.000530011925268318
+"Q8IU57","Interferon lambda receptor 1 (IFN-lambda receptor 1) (IFN-lambda-R1) (Cytokine receptor class-II member 12) (Cytokine receptor family 2 member 12) (CRF2-12) (Interleukin-28 receptor subunit alpha) (IL-28 receptor subunit alpha) (IL-28R-alpha) (IL-28RA) (Likely interleukin or cytokine receptor 2) (LICR2)",0.000397508943951239,0.000530011925268318
+"Q9GZV4","Eukaryotic translation initiation factor 5A-2 (eIF-5A-2) (eIF-5A2) (Eukaryotic initiation factor 5A isoform 2)",0.000651472991475642,0.000651472991475642
+"Q14197","Peptidyl-tRNA hydrolase ICT1, mitochondrial (EC 3.1.1.29) (39S ribosomal protein L58, mitochondrial) (MRP-L58) (Digestion substraction 1) (DS-1) (Immature colon carcinoma transcript 1 protein) (Mitochondrial large ribosomal subunit protein mL62)",0.000662514906585398,0.000662514906585398
+"P63241","Eukaryotic translation initiation factor 5A-1 (eIF-5A-1) (eIF-5A1) (Eukaryotic initiation factor 5A isoform 1) (eIF-5A) (Rev-binding factor) (eIF-4D)",0.000651472991475642,0.000651472991475642
+"Q8IZJ0","Interferon lambda-2 (IFN-lambda-2) (Cytokine Zcyto20) (Interleukin-28A) (IL-28A)",0.000651472991475642,0.000651472991475642
+"Q86YT9","Junctional adhesion molecule-like (Adhesion molecule interacting with CXADR antigen 1) (Dendritic cell-specific protein CREA7-1)",0.000651472991475642,0.000651472991475642
+"Q14643","Inositol 1,4,5-trisphosphate receptor type 1 (IP3 receptor isoform 1) (IP3R 1) (InsP3R1) (Type 1 inositol 1,4,5-trisphosphate receptor) (Type 1 InsP3 receptor)",0.00013250298131708,0.00013250298131708
+"Q14571","Inositol 1,4,5-trisphosphate receptor type 2 (IP3 receptor isoform 2) (IP3R 2) (InsP3R2) (Type 2 inositol 1,4,5-trisphosphate receptor) (Type 2 InsP3 receptor)",0.00013250298131708,0.00013250298131708
+"Q14573","Inositol 1,4,5-trisphosphate receptor type 3 (IP3 receptor isoform 3) (IP3R 3) (InsP3R3) (Type 3 inositol 1,4,5-trisphosphate receptor) (Type 3 InsP3 receptor)",0.000662514906585398,0.000662514906585398
+"Q6UWW0","Lipocalin-15",0.000662514906585398,0.000662514906585398
+"O00182","Galectin-9 (Gal-9) (Ecalectin) (Tumor antigen HOM-HD-21)",0.000662514906585398,0.000662514906585398
+"Q9NZS2","Killer cell lectin-like receptor subfamily F member 1 (Lectin-like receptor F1) (Activating coreceptor NKp80) (C-type lectin domain family 5 member C)",0.000662514906585398,0.000662514906585398
+"Q6JVE5","Epididymal-specific lipocalin-12",0.000662514906585398,0.000662514906585398
+"Q8WX39","Epididymal-specific lipocalin-9 (MUP-like lipocalin)",0.000662514906585398,0.000662514906585398
+"P31025","Lipocalin-1 (Tear lipocalin) (Tlc) (Tear prealbumin) (TP) (Von Ebner gland protein) (VEG protein)",0.0012477364074025,0.0012477364074025
+"O95237","Lecithin retinol acyltransferase (EC 2.3.1.135) (Phosphatidylcholine--retinol O-acyltransferase)",0.00133607172828055,0.00133607172828055
+"O15525","Transcription factor MafG (V-maf musculoaponeurotic fibrosarcoma oncogene homolog G) (hMAF)",0.00134711364339031,0.00134711364339031
+"Q9UEW3","Macrophage receptor MARCO (Macrophage receptor with collagenous structure) (Scavenger receptor class A member 2)",0.00013250298131708,0.00013250298131708
+"O95372","Acyl-protein thioesterase 2 (APT-2) (EC 3.1.2.-) (Lysophospholipase II) (LPL-II) (LysoPLA II)",0.00013250298131708,0.00013250298131708
+"O60675","Transcription factor MafK (Erythroid transcription factor NF-E2 p18 subunit)",0,0.00013250298131708
+"Q9NPA3","Mid1-interacting protein 1 (Gastrulation-specific G12-like protein) (Mid1-interacting G12-like protein) (Protein STRAIT11499) (Spot 14-related protein) (S14R) (Spot 14-R)",0.000927520869219557,0
+"Q9ULX9","Transcription factor MafF (U-Maf) (V-maf musculoaponeurotic fibrosarcoma oncogene homolog F)",0.00013250298131708,0.000265005962634159
+"Q96RQ3","Methylcrotonoyl-CoA carboxylase subunit alpha, mitochondrial (MCCase subunit alpha) (EC 6.4.1.4) (3-methylcrotonyl-CoA carboxylase 1) (3-methylcrotonyl-CoA carboxylase biotin-containing subunit) (3-methylcrotonyl-CoA:carbon dioxide ligase subunit alpha)",0.00013250298131708,0.000265005962634159
+"Q99707","Methionine synthase (EC 2.1.1.13) (5-methyltetrahydrofolate--homocysteine methyltransferase) (Vitamin-B12 dependent methionine synthase) (MS)",0,0.00013250298131708
+"Q9HCC0","Methylcrotonoyl-CoA carboxylase beta chain, mitochondrial (MCCase subunit beta) (EC 6.4.1.4) (3-methylcrotonyl-CoA carboxylase 2) (3-methylcrotonyl-CoA carboxylase non-biotin-containing subunit) (3-methylcrotonyl-CoA:carbon dioxide ligase subunit beta)",0,0.00013250298131708
+"Q8IVH4","Methylmalonic aciduria type A protein, mitochondrial (EC 3.6.-.-)",0.00013250298131708,0.000265005962634159
+"Q9Y4U1","Methylmalonic aciduria and homocystinuria type C protein (EC 1.16.1.-) (CblC) (Cyanocobalamin reductase (cyanide-eliminating))",0.00013250298131708,0.000265005962634159
+"P41217","OX-2 membrane glycoprotein (CD antigen CD200)",0.00013250298131708,0.00013250298131708
+"P05165","Propionyl-CoA carboxylase alpha chain, mitochondrial (PCCase subunit alpha) (EC 6.4.1.3) (Propanoyl-CoA:carbon dioxide ligase subunit alpha)",0.00013250298131708,0.00013250298131708
+"P54750","Calcium/calmodulin-dependent 3',5'-cyclic nucleotide phosphodiesterase 1A (Cam-PDE 1A) (EC 3.1.4.17) (61 kDa Cam-PDE) (hCam-1)",0.00013250298131708,0.00013250298131708
+"Q5EBL8","PDZ domain-containing protein 11 (ATPase-interacting PDZ protein) (Plasma membrane calcium ATPase-interacting single-PDZ protein) (PMCA-interacting single-PDZ protein)",0.00013250298131708,0.00013250298131708
+"P05166","Propionyl-CoA carboxylase beta chain, mitochondrial (PCCase subunit beta) (EC 6.4.1.3) (Propanoyl-CoA:carbon dioxide ligase subunit beta)",0.00131398789806104,0.00131398789806104
+"Q14123","Calcium/calmodulin-dependent 3',5'-cyclic nucleotide phosphodiesterase 1C (Cam-PDE 1C) (EC 3.1.4.17) (hCam-3)",0.00134711364339031,0.00134711364339031
+"Q9H3L0","Methylmalonic aciduria and homocystinuria type D protein, mitochondrial (CblD)",0.00013250298131708,0.00013250298131708
+"Q8N3R9","MAGUK p55 subfamily member 5",0.00013250298131708,0.00013250298131708
+"Q8TD46","Cell surface glycoprotein CD200 receptor 1 (CD200 cell surface glycoprotein receptor) (Cell surface glycoprotein OX2 receptor 1)",0.00013250298131708,0.00013250298131708
+"Q9Y6F6","Protein MRVI1 (Inositol 1,4,5-trisphosphate receptor-associated cGMP kinase substrate) (JAW1-related protein MRVI1)",0.00013250298131708,0.00013250298131708
+"Q9UBK8","Methionine synthase reductase (MSR) (EC 1.16.1.8)",0.000397508943951239,0.000397508943951239
+"P22033","Methylmalonyl-CoA mutase, mitochondrial (MCM) (EC 5.4.99.2) (Methylmalonyl-CoA isomerase)",0.000397508943951239,0.000397508943951239
+"Q16621","Transcription factor NF-E2 45 kDa subunit (Leucine zipper protein NF-E2) (Nuclear factor, erythroid-derived 2 45 kDa subunit) (p45 NF-E2)",0.000397508943951239,0.000397508943951239
+"Q9UHB4","NADPH-dependent diflavin oxidoreductase 1 (EC 1.18.1.-) (NADPH-dependent FMN and FAD-containing oxidoreductase) (Novel reductase 1)",0.000397508943951239,0.000397508943951239
+"Q9NQS3","Nectin-3 (CDw113) (Nectin cell adhesion molecule 3) (Poliovirus receptor-related protein 3) (CD antigen CD113)",0.00013250298131708,0.00013250298131708
+"Q92692","Nectin-2 (Herpes virus entry mediator B) (Herpesvirus entry mediator B) (HveB) (Nectin cell adhesion molecule 2) (Poliovirus receptor-related protein 2) (CD antigen CD112)",0.00013250298131708,0.00013250298131708
+"Q15223","Nectin-1 (Herpes virus entry mediator C) (Herpesvirus entry mediator C) (HveC) (Herpesvirus Ig-like receptor) (HIgR) (Nectin cell adhesion molecule 1) (Poliovirus receptor-related protein 1) (CD antigen CD111)",0.00013250298131708,0.00013250298131708
+"Q96NY8","Nectin-4 (Ig superfamily receptor LNIR) (Nectin cell adhesion molecule 4) (Poliovirus receptor-related protein 4) [Cleaved into: Processed poliovirus receptor-related protein 4]",0.00013250298131708,0.00013250298131708
+"Q8N9A8","Nuclear envelope phosphatase-regulatory subunit 1 (NEP1-R1) (Transmembrane protein 188)",0.000397508943951239,0
+"P17677","Neuromodulin (Axonal membrane protein GAP-43) (Growth-associated protein 43) (Neural phosphoprotein B-50) (pp46)",0.00126982023762201,0.00126982023762201
+"P15559","NAD(P)H dehydrogenase [quinone] 1 (EC 1.6.5.2) (Azoreductase) (DT-diaphorase) (DTD) (Menadione reductase) (NAD(P)H:quinone oxidoreductase 1) (Phylloquinone reductase) (Quinone reductase 1) (QR1)",0.00013250298131708,0
+"Q7Z494","Nephrocystin-3",0,0.000397508943951239
+"P54368","Ornithine decarboxylase antizyme 1 (AZ1) (ODC-Az)",0.00013250298131708,0
+"O95190","Ornithine decarboxylase antizyme 2 (AZ2) (ODC-Az 2)",0.00013250298131708,0.00013250298131708
+"Q9UMX2","Ornithine decarboxylase antizyme 3 (AZ3) (ODC-Az 3)",0.00013250298131708,0.00013250298131708
+"O60313","Dynamin-like 120 kDa protein, mitochondrial (EC 3.6.5.5) (Optic atrophy protein 1) [Cleaved into: Dynamin-like 120 kDa protein, form S1]",0.00013250298131708,0
+"Q96E52","Metalloendopeptidase OMA1, mitochondrial (EC 3.4.24.-) (Metalloprotease-related protein 1) (MPRP-1) (Overlapping with the m-AAA protease 1 homolog)",0.000386467028841482,0.00119252683185372
+"P02818","Osteocalcin (Bone Gla protein) (BGP) (Gamma-carboxyglutamic acid-containing protein)",0.000386467028841482,0.00119252683185372
+"Q96SN7","Protein orai-2 (CAP-binding protein complex-interacting protein 2) (Transmembrane protein 142B)",0.000397508943951239,0.00128086215273177
+"P40855","Peroxisomal biogenesis factor 19 (33 kDa housekeeping protein) (Peroxin-19) (Peroxisomal farnesylated protein)",0.000265005962634159,0.000265005962634159
+"Q01064","Calcium/calmodulin-dependent 3',5'-cyclic nucleotide phosphodiesterase 1B (Cam-PDE 1B) (EC 3.1.4.17) (63 kDa Cam-PDE)",0.000265005962634159,0.000265005962634159
+"Q96LB9","Peptidoglycan recognition protein 3 (Peptidoglycan recognition protein I-alpha) (PGLYRPIalpha) (PGRP-I-alpha) (Peptidoglycan recognition protein intermediate alpha)",0.000265005962634159,0.000265005962634159
+"O43924","Retinal rod rhodopsin-sensitive cGMP 3',5'-cyclic phosphodiesterase subunit delta (GMP-PDE delta) (Protein p17)",0.000795017887902478,0.000795017887902478
+"P56589","Peroxisomal biogenesis factor 3 (Peroxin-3) (Peroxisomal assembly protein PEX3)",0.000795017887902478,0.000795017887902478
+"Q96LB8","Peptidoglycan recognition protein 4 (Peptidoglycan recognition protein I-beta) (PGLYRPIbeta) (PGRP-I-beta) (Peptidoglycan recognition protein intermediate beta)",0.000795017887902478,0.000795017887902478
+"Q96J94","Piwi-like protein 1 (EC 3.1.26.-)",0.000795017887902478,0.000795017887902478
+"Q03393","6-pyruvoyl tetrahydrobiopterin synthase (PTP synthase) (PTPS) (EC 4.2.3.12)",0.000795017887902478,0.000795017887902478
+"Q96EY7","Pentatricopeptide repeat domain-containing protein 3, mitochondrial (28S ribosomal protein S39, mitochondrial) (MRP-S39) (Mitochondrial small ribosomal subunit protein mS39) (Transformation-related gene 15 protein) (TRG-15)",0.000795017887902478,0.000795017887902478
+"P30048","Thioredoxin-dependent peroxide reductase, mitochondrial (EC 1.11.1.15) (Antioxidant protein 1) (AOP-1) (HBC189) (Peroxiredoxin III) (Prx-III) (Peroxiredoxin-3) (Protein MER5 homolog)",0.000795017887902478,0.000795017887902478
+"P81277","Prolactin-releasing peptide (PrRP) (Prolactin-releasing hormone) [Cleaved into: Prolactin-releasing peptide PrRP31; Prolactin-releasing peptide PrRP20]",0.00013250298131708,0.00013250298131708
+"P29762","Cellular retinoic acid-binding protein 1 (Cellular retinoic acid-binding protein I) (CRABP-I)",0.00013250298131708,0.00013250298131708
+"P11498","Pyruvate carboxylase, mitochondrial (EC 6.4.1.1) (Pyruvic carboxylase) (PCB)",0.00013250298131708,0.00013250298131708
+"Q6UW15","Regenerating islet-derived protein 3-gamma (REG-3-gamma) (Pancreatitis-associated protein 1B) (PAP-1B) (Pancreatitis-associated protein IB) (PAP IB) (Regenerating islet-derived protein III-gamma) (REG III) (Reg III-gamma) [Cleaved into: Regenerating islet-derived protein 3-gamma 16.5 kDa form; Regenerating islet-derived protein 3-gamma 15 kDa form]",0.00013250298131708,0.00013250298131708
+"P50120","Retinol-binding protein 2 (Cellular retinol-binding protein II) (CRBP-II)",0.00013250298131708,0.00013250298131708
+"Q9UGC7","Peptide chain release factor 1-like, mitochondrial (Mitochondrial translational release factor 1-like) (mtRF1a)",0.00013250298131708,0.00013250298131708
+"P11233","Ras-related protein Ral-A",0.00013250298131708,0.00013250298131708
+"Q06141","Regenerating islet-derived protein 3-alpha (REG-3-alpha) (Hepatointestinal pancreatic protein) (HIP/PAP) (Human proislet peptide) (Pancreatitis-associated protein 1) (Regenerating islet-derived protein III-alpha) (Reg III-alpha) [Cleaved into: Regenerating islet-derived protein 3-alpha 16.5 kDa form; Regenerating islet-derived protein 3-alpha 15 kDa form]",0.00013250298131708,0.00013250298131708
+"Q2PPJ7","Ral GTPase-activating protein subunit alpha-2 (250 kDa substrate of Akt) (AS250) (p220)",0.000265005962634159,0.000265005962634159
+"Q9HB21","Pleckstrin homology domain-containing family A member 1 (PH domain-containing family A member 1) (Tandem PH domain-containing protein 1) (TAPP-1)",0.000265005962634159,0.000265005962634159
+"Q96N28","PRELI domain containing protein 3A (Protein slowmo homolog 1)",0.000265005962634159,0.000265005962634159
+"Q9H4M7","Pleckstrin homology domain-containing family A member 4 (PH domain-containing family A member 4) (Phosphoinositol 3-phosphate-binding protein 1) (PEPP-1)",0.00013250298131708,0.00013250298131708
+"Q9Y2H5","Pleckstrin homology domain-containing family A member 6 (PH domain-containing family A member 6) (Phosphoinositol 3-phosphate-binding protein 3) (PEPP-3)",0.00013250298131708,0.00013250298131708
+"P12273","Prolactin-inducible protein (Gross cystic disease fluid protein 15) (GCDFP-15) (Prolactin-induced protein) (Secretory actin-binding protein) (SABP) (gp17)",0.000618347246146372,0.000618347246146372
+"Q9HB19","Pleckstrin homology domain-containing family A member 2 (PH domain-containing family A member 2) (Tandem PH domain-containing protein 2) (TAPP-2)",0.00013250298131708,0
+"Q9HAU0","Pleckstrin homology domain-containing family A member 5 (PH domain-containing family A member 5) (Phosphoinositol 3-phosphate-binding protein 2) (PEPP-2)",0.000265005962634159,0
+"O60486","Plexin-C1 (Virus-encoded semaphorin protein receptor) (CD antigen CD232)",0.00013250298131708,0.000397508943951239
+"Q9Y4D7","Plexin-D1",0.00013250298131708,0.000397508943951239
+"Q9Y255","PRELI domain-containing protein 1, mitochondrial (25 kDa protein of relevant evolutionary and lymphoid interest) (Px19-like protein)",0.000265005962634159,0
+"P22891","Vitamin K-dependent protein Z",0.000386467028841482,0.000386467028841482
+"P49683","Prolactin-releasing peptide receptor (PrRP receptor) (PrRPR) (G-protein coupled receptor 10) (hGR3)",0.000397508943951239,0.000397508943951239
+"P15151","Poliovirus receptor (Nectin-like protein 5) (NECL-5) (CD antigen CD155)",0.000386467028841482,0.000386467028841482
+"Q12923","Tyrosine-protein phosphatase non-receptor type 13 (EC 3.1.3.48) (Fas-associated protein-tyrosine phosphatase 1) (FAP-1) (PTP-BAS) (Protein-tyrosine phosphatase 1E) (PTP-E1) (hPTPE1) (Protein-tyrosine phosphatase PTPL1)",0.000375425113731726,0.000375425113731726
+"P09455","Retinol-binding protein 1 (Cellular retinol-binding protein) (CRBP) (Cellular retinol-binding protein I) (CRBP-I)",0.000265005962634159,0.000265005962634159
+"Q9Y3B7","39S ribosomal protein L11, mitochondrial (L11mt) (MRP-L11) (Mitochondrial large ribosomal subunit protein uL11m)",0.000265005962634159,0.000265005962634159
+"Q13084","39S ribosomal protein L28, mitochondrial (L28mt) (MRP-L28) (Melanoma antigen p15) (Melanoma-associated antigen recognized by T-lymphocytes) (Mitochondrial large ribosomal subunit protein bL28m)",0.000265005962634159,0.000265005962634159
+"Q9NX20","39S ribosomal protein L16, mitochondrial (L16mt) (MRP-L16) (Mitochondrial large ribosomal subunit protein uL16m)",0.000397508943951239,0.000397508943951239
+"Q9H9J2","39S ribosomal protein L44, mitochondrial (L44mt) (MRP-L44) (EC 3.1.26.-) (Mitochondrial large ribosomal subunit protein mL44)",0.000397508943951239,0.000397508943951239
+"Q9BYC8","39S ribosomal protein L32, mitochondrial (L32mt) (MRP-L32) (Mitochondrial large ribosomal subunit protein bL32m)",0.000397508943951239,0.000397508943951239
+"Q9NZE8","39S ribosomal protein L35, mitochondrial (L35mt) (MRP-L35) (Mitochondrial large ribosomal subunit protein bL35m)",0.000397508943951239,0.000397508943951239
+"Q86X10","Ral GTPase-activating protein subunit beta (p170)",0,0.000949604699439071
+"P09001","39S ribosomal protein L3, mitochondrial (L3mt) (MRP-L3) (Mitochondrial large ribosomal subunit protein uL3m)",0.00102689810520737,0.000795017887902478
+"Q86TS9","39S ribosomal protein L52, mitochondrial (L52mt) (MRP-L52) (Mitochondrial large ribosomal subunit protein mL52)",0.000949604699439071,0.000761892142573208
+"Q7Z7F7","39S ribosomal protein L55, mitochondrial (L55mt) (MRP-L55) (Mitochondrial large ribosomal subunit protein bL31m) (Mitochondrial large ribosomal subunit protein mL55)",0,0.000253964047524403
+"Q9NRX2","39S ribosomal protein L17, mitochondrial (L17mt) (MRP-L17) (LYST-interacting protein 2) (Mitochondrial large ribosomal subunit protein bL17m)",0,0.000253964047524403
+"P49406","39S ribosomal protein L19, mitochondrial (L19mt) (MRP-L19) (39S ribosomal protein L15, mitochondrial) (L15mt) (MRP-L15) (Mitochondrial large ribosomal subunit protein bL19m)",0.00013250298131708,0
+"Q9Y6G3","39S ribosomal protein L42, mitochondrial (L42mt) (MRP-L42) (39S ribosomal protein L31, mitochondrial) (L31mt) (MRP-L31) (Mitochondrial large ribosomal subunit protein mL42)",0,0.000265005962634159
+"Q96EL3","39S ribosomal protein L53, mitochondrial (L53mt) (MRP-L53) (Mitochondrial large ribosomal subunit protein mL53)",0.00013250298131708,0.00013250298131708
+"Q05823","2-5A-dependent ribonuclease (2-5A-dependent RNase) (EC 3.1.26.-) (Ribonuclease 4) (Ribonuclease L) (RNase L)",0.00013250298131708,0.00013250298131708
+"Q8TCC3","39S ribosomal protein L30, mitochondrial (L30mt) (MRP-L30) (39S ribosomal protein L28, mitochondrial) (L28mt) (MRP-L28) (Mitochondrial large ribosomal subunit protein uL30m)",0.00013250298131708,0.00013250298131708
+"Q9H2W6","39S ribosomal protein L46, mitochondrial (L46mt) (MRP-L46) (Mitochondrial large ribosomal subunit protein mL46) (P2ECSL)",0.00013250298131708,0.00013250298131708
+"Q8N5N7","39S ribosomal protein L50, mitochondrial (L50mt) (MRP-L50) (Mitochondrial large ribosomal subunit protein mL50)",0,0.000265005962634159
+"Q9BYD3","39S ribosomal protein L4, mitochondrial (L4mt) (MRP-L4) (Mitochondrial large ribosomal subunit protein uL4m)",0,0.000265005962634159
+"Q6P1L8","39S ribosomal protein L14, mitochondrial (L14mt) (MRP-L14) (39S ribosomal protein L32, mitochondrial) (L32mt) (MRP-L32) (Mitochondrial large ribosomal subunit protein uL14m)",0,0.00013250298131708
+"Q9BQ48","39S ribosomal protein L34, mitochondrial (L34mt) (MRP-L34) (Mitochondrial large ribosomal subunit protein bL34m)",0,0.00013250298131708
+"Q9NQ50","39S ribosomal protein L40, mitochondrial (L40mt) (MRP-L40) (Mitochondrial large ribosomal subunit protein mL40) (Nuclear localization signal-containing protein deleted in velocardiofacial syndrome) (Up-regulated in metastasis)",0.00013250298131708,0.00013250298131708
+"Q13405","39S ribosomal protein L49, mitochondrial (L49mt) (MRP-L49) (Mitochondrial large ribosomal subunit protein mL49) (Neighbor of FAU) (NOF) (Protein NOF1)",0.00013250298131708,0.00013250298131708
+"O75394","39S ribosomal protein L33, mitochondrial (L33mt) (MRP-L33) (Mitochondrial large ribosomal subunit protein bL33m)",0.00013250298131708,0.00013250298131708
+"Q9BYP7","Serine/threonine-protein kinase WNK3 (EC 2.7.11.1) (Protein kinase lysine-deficient 3) (Protein kinase with no lysine 3)",0.00013250298131708,0.00013250298131708
+"Q9H4A3","Serine/threonine-protein kinase WNK1 (EC 2.7.11.1) (Erythrocyte 65 kDa protein) (p65) (Kinase deficient protein) (Protein kinase lysine-deficient 1) (Protein kinase with no lysine 1) (hWNK1)",0.00013250298131708,0.00013250298131708
+"Q9Y3S1","Serine/threonine-protein kinase WNK2 (EC 2.7.11.1) (Antigen NY-CO-43) (Protein kinase lysine-deficient 2) (Protein kinase with no lysine 2) (Serologically defined colon cancer antigen 43)",0.00013250298131708,0.00013250298131708
+"P78423","Fractalkine (C-X3-C motif chemokine 1) (CX3C membrane-anchored chemokine) (Neurotactin) (Small-inducible cytokine D1) [Cleaved into: Processed fractalkine]",0.00013250298131708,0.000530011925268318
+"Q969S9","Ribosome-releasing factor 2, mitochondrial (RRF2mt) (Elongation factor G 2, mitochondrial) (EF-G2mt) (mEF-G 2) (Elongation factor G2) (hEFG2)",0.00013250298131708,0.000496886179939049
+"Q96E11","Ribosome-recycling factor, mitochondrial (RRF) (Ribosome-releasing factor, mitochondrial)",0.000872311293670774,0.000872311293670774
+"Q5T653","39S ribosomal protein L2, mitochondrial (L2mt) (MRP-L2) (Mitochondrial large ribosomal subunit protein uL2m)",0.000927520869219557,0.000927520869219557
+"Q9BYC9","39S ribosomal protein L20, mitochondrial (L20mt) (MRP-L20) (Mitochondrial large ribosomal subunit protein bL20m)",0.000905437039000044,0.000905437039000044
+"Q96A35","39S ribosomal protein L24, mitochondrial (L24mt) (MRP-L24) (Mitochondrial large ribosomal subunit protein uL24m)",0.000828143633231748,0.000817101718121991
+"Q9P0M9","39S ribosomal protein L27, mitochondrial (L27mt) (MRP-L27) (Mitochondrial large ribosomal subunit protein bL27m)",0.000883353208780531,0.000883353208780531
+"O00411","DNA-directed RNA polymerase, mitochondrial (MtRPOL) (EC 2.7.7.6)",0.000872311293670774,0.000883353208780531
+"Q9BYD2","39S ribosomal protein L9, mitochondrial (L9mt) (MRP-L9) (Mitochondrial large ribosomal subunit protein bL9m)",0.000872311293670774,0.000872311293670774
+"P52815","39S ribosomal protein L12, mitochondrial (L12mt) (MRP-L12) (5c5-2) (Mitochondrial large ribosomal subunit protein bL12m)",0.000894395123890288,0.000894395123890288
+"Q16540","39S ribosomal protein L23, mitochondrial (L23mt) (MRP-L23) (L23 mitochondrial-related protein) (Mitochondrial large ribosomal subunit protein uL23m) (Ribosomal protein L23-like)",0.000872311293670774,0.000872311293670774
+"Q9BRJ2","39S ribosomal protein L45, mitochondrial (L45mt) (MRP-L45) (Mitochondrial large ribosomal subunit protein mL45)",0.000894395123890288,0.000894395123890288
+"Q04912","Macrophage-stimulating protein receptor (MSP receptor) (EC 2.7.10.1) (CDw136) (Protein-tyrosine kinase 8) (p185-Ron) (CD antigen CD136) [Cleaved into: Macrophage-stimulating protein receptor alpha chain; Macrophage-stimulating protein receptor beta chain]",0.000894395123890288,0.000894395123890288
+"Q9BYD6","39S ribosomal protein L1, mitochondrial (L1mt) (MRP-L1) (Mitochondrial large ribosomal subunit protein uL1m)",0.000916478954109801,0.000916478954109801
+"Q9H0U6","39S ribosomal protein L18, mitochondrial (L18mt) (MRP-L18) (Mitochondrial large ribosomal subunit protein uL18m)",0.000883353208780531,0.000883353208780531
+"Q7Z2W9","39S ribosomal protein L21, mitochondrial (L21mt) (MRP-L21) (Mitochondrial large ribosomal subunit protein bL21m)",0.000883353208780531,0.000883353208780531
+"Q8N983","39S ribosomal protein L43, mitochondrial (L43mt) (MRP-L43) (Mitochondrial large ribosomal subunit protein mL43) (Mitochondrial ribosomal protein bMRP36a)",0.000883353208780531,0.000883353208780531
+"Q9HD33","39S ribosomal protein L47, mitochondrial (L47mt) (MRP-L47) (Mitochondrial large ribosomal subunit protein uL29m) (Nasopharyngeal carcinoma metastasis-related protein 1)",0.000883353208780531,0.000883353208780531
+"Q6P161","39S ribosomal protein L54, mitochondrial (L54mt) (MRP-L54) (Mitochondrial large ribosomal subunit protein mL54)",0.00013250298131708,0.00013250298131708
+"Q9BYD1","39S ribosomal protein L13, mitochondrial (L13mt) (MRP-L13) (Mitochondrial large ribosomal subunit protein uL13m)",0.00013250298131708,0.00013250298131708
+"Q9P015","39S ribosomal protein L15, mitochondrial (L15mt) (MRP-L15) (Mitochondrial large ribosomal subunit protein uL15m)",0.00101585619009761,0.000761892142573208
+"Q9BZE1","39S ribosomal protein L37, mitochondrial (L37mt) (MRP-L37) (39S ribosomal protein L2, mitochondrial) (L2mt) (MRP-L2) (Mitochondrial large ribosomal subunit protein mL37)",0.000971688529658584,0.000761892142573208
+"Q96DV4","39S ribosomal protein L38, mitochondrial (L38mt) (MRP-L38) (Mitochondrial large ribosomal subunit protein mL38)",0.00101585619009761,0.000761892142573208
+"Q8IXM3","39S ribosomal protein L41, mitochondrial (L41mt) (MRP-L41) (39S ribosomal protein L27 homolog) (Bcl-2-interacting mitochondrial ribosomal protein L41) (Cell proliferation-inducing gene 3 protein) (MRP-L27 homolog) (Mitochondrial large ribosomal subunit protein mL41)",0.000265005962634159,0
+"Q96GC5","39S ribosomal protein L48, mitochondrial (L48mt) (MRP-L48) (Mitochondrial large ribosomal subunit protein mL48)",0,0.00013250298131708
+"Q4U2R6","39S ribosomal protein L51, mitochondrial (L51mt) (MRP-L51) (Mitochondrial large ribosomal subunit protein mL51) (bMRP-64) (bMRP64)",0.000397508943951239,0.000397508943951239
+"Q7Z7H8","39S ribosomal protein L10, mitochondrial (L10mt) (MRP-L10) (39S ribosomal protein L8, mitochondrial) (L8mt) (MRP-L8) (Mitochondrial large ribosomal subunit protein uL10m)",0.000397508943951239,0.000397508943951239
+"Q9NWU5","39S ribosomal protein L22, mitochondrial (L22mt) (MRP-L22) (39S ribosomal protein L25, mitochondrial) (L25mt) (MRP-L25) (Mitochondrial large ribosomal subunit protein uL22m)",0.000397508943951239,0.000397508943951239
+"Q9P0J6","39S ribosomal protein L36, mitochondrial (L36mt) (MRP-L36) (BRCA1-interacting protein 1) (Mitochondrial large ribosomal subunit protein bL36m)",0.000397508943951239,0.000397508943951239
+"Q9NYK5","39S ribosomal protein L39, mitochondrial (L39mt) (MRP-L39) (39S ribosomal protein L5, mitochondrial) (L5mt) (MRP-L5) (Mitochondrial large ribosomal subunit protein mL39)",0.00013250298131708,0.00013250298131708
+"Q9Y2R9","28S ribosomal protein S7, mitochondrial (MRP-S7) (S7mt) (Mitochondrial small ribosomal subunit protein uS7m) (bMRP-27a) (bMRP27a)",0.00013250298131708,0.00013250298131708
+"P82921","28S ribosomal protein S21, mitochondrial (MRP-S21) (S21mt) (Mitochondrial small ribosomal subunit protein bS21m)",0.00013250298131708,0
+"P82932","28S ribosomal protein S6, mitochondrial (MRP-S6) (S6mt) (Mitochondrial small ribosomal subunit protein bS6m)",0,0.00013250298131708
+"Q9NVS2","39S ribosomal protein S18a, mitochondrial (MRP-S18-a) (Mrps18a) (S18mt-a) (39S ribosomal protein S18-3, mitochondrial) (MRP-S18-3) (Mitochondrial large ribosomal subunit protein bS18a) (Mitochondrial large ribosomal subunit protein mL66)",0.00013250298131708,0.00013250298131708
+"O15235","28S ribosomal protein S12, mitochondrial (MRP-S12) (S12mt) (MT-RPS12) (Mitochondrial small ribosomal subunit protein uS12m)",0.00013250298131708,0.00013250298131708
+"P82933","28S ribosomal protein S9, mitochondrial (MRP-S9) (S9mt) (Mitochondrial small ribosomal subunit protein uS9m)",0.00013250298131708,0.00013250298131708
+"Q9BYN8","28S ribosomal protein S26, mitochondrial (MRP-S26) (S26mt) (28S ribosomal protein S13, mitochondrial) (MRP-S13) (S13mt) (Mitochondrial small ribosomal subunit protein mS26)",0.00013250298131708,0.00013250298131708
+"Q9Y291","28S ribosomal protein S33, mitochondrial (MRP-S33) (S33mt) (Mitochondrial small ribosomal subunit protein mS33)",0.00013250298131708,0.00013250298131708
+"Q9Y3D3","28S ribosomal protein S16, mitochondrial (MRP-S16) (S16mt) (Mitochondrial small ribosomal subunit protein bS16m)",0.00013250298131708,0.00013250298131708
+"Q9Y3D5","28S ribosomal protein S18c, mitochondrial (MRP-S18-c) (Mrps18-c) (S18mt-c) (28S ribosomal protein S18-1, mitochondrial) (MRP-S18-1) (Mitochondrial small ribosomal subunit protein bS18c) (Mitochondrial small ribosomal subunit protein bS18m)",0.00013250298131708,0.00013250298131708
+"Q96EL2","28S ribosomal protein S24, mitochondrial (MRP-S24) (S24mt) (Mitochondrial small ribosomal subunit protein uS3m) (bMRP-47) (bMRP47)",0.00013250298131708,0.00013250298131708
+"Q92552","28S ribosomal protein S27, mitochondrial (MRP-S27) (S27mt) (Mitochondrial small ribosomal subunit protein mS27)",0.00013250298131708,0.00013250298131708
+"Q92665","28S ribosomal protein S31, mitochondrial (MRP-S31) (S31mt) (Imogen 38) (Mitochondrial small ribosomal subunit protein mS31)",0.00013250298131708,0.00013250298131708
+"P51398","28S ribosomal protein S29, mitochondrial (MRP-S29) (S29mt) (Death-associated protein 3) (DAP-3) (Ionizing radiation resistance conferring protein) (Mitochondrial small ribosomal subunit protein mS29)",0.000265005962634159,0.000265005962634159
+"P82673","28S ribosomal protein S35, mitochondrial (MRP-S35) (S35mt) (28S ribosomal protein S28, mitochondrial) (MRP-S28) (S28mt) (Mitochondrial small ribosomal subunit protein mS35)",0.000265005962634159,0.000265005962634159
+"P82912","28S ribosomal protein S11, mitochondrial (MRP-S11) (S11mt) (Cervical cancer proto-oncogene 2 protein) (HCC-2) (Mitochondrial small ribosomal subunit protein uS11m)",0.000265005962634159,0.000265005962634159
+"P82914","28S ribosomal protein S15, mitochondrial (MRP-S15) (S15mt) (Mitochondrial small ribosomal subunit protein uS15m)",0.00013250298131708,0
+"Q9Y2R5","28S ribosomal protein S17, mitochondrial (MRP-S17) (S17mt) (Mitochondrial small ribosomal subunit protein uS17m)",0.000397508943951239,0
+"P82930","28S ribosomal protein S34, mitochondrial (MRP-S34) (S34mt) (Mitochondrial small ribosomal subunit protein mS34)",0.00013250298131708,0
+"Q9BQC6","Ribosomal protein 63, mitochondrial (hMRP63) (Mitochondrial large ribosomal subunit protein mL63) (Mitochondrial ribosomal protein 63) (Mitochondrial ribosomal protein L57)",0,0.00013250298131708
+"P82675","28S ribosomal protein S5, mitochondrial (MRP-S5) (S5mt) (Mitochondrial small ribosomal subunit protein uS5m)",0.00013250298131708,0.00013250298131708
+"Q9NP92","39S ribosomal protein S30, mitochondrial (MRP-S30) (S30mt) (Mitochondrial large ribosomal subunit protein mL65) (Mitochondrial large ribosomal subunit protein mS30) (Programmed cell death protein 9)",0.00013250298131708,0.00013250298131708
+"Q9Y399","28S ribosomal protein S2, mitochondrial (MRP-S2) (S2mt) (Mitochondrial small ribosomal subunit protein uS2m)",0.000265005962634159,0.000265005962634159
+"Q9Y3D9","28S ribosomal protein S23, mitochondrial (MRP-S23) (S23mt) (Mitochondrial small ribosomal subunit protein mS23)",0.000265005962634159,0.000265005962634159
+"P82663","28S ribosomal protein S25, mitochondrial (MRP-S25) (S25mt) (Mitochondrial small ribosomal subunit protein mS25)",0.000265005962634159,0.000265005962634159
+"P82909","28S ribosomal protein S36, mitochondrial (MRP-S36) (S36mt)",0.00013250298131708,0
+"P82650","28S ribosomal protein S22, mitochondrial (MRP-S22) (S22mt) (Mitochondrial small ribosomal subunit protein mS22)",0,0.000397508943951239
+"Q9Y2Q9","28S ribosomal protein S28, mitochondrial (MRP-S28) (S28mt) (28S ribosomal protein S35, mitochondrial) (MRP-S35) (S35mt) (Mitochondrial small ribosomal subunit protein bS1m)",0.00013250298131708,0.00013250298131708
+"Q9NV23","S-acyl fatty acid synthase thioesterase, medium chain (EC 3.1.2.14) (Augmented in rheumatoid arthritis 1) (AURA1) (Oleoyl-ACP hydrolase) (Thioesterase II) (Thioesterase domain-containing protein 1)",0.00013250298131708,0.00013250298131708
+"P82664","28S ribosomal protein S10, mitochondrial (MRP-S10) (S10mt) (Mitochondrial small ribosomal subunit protein uS10m)",0.00013250298131708,0.00013250298131708
+"O60783","28S ribosomal protein S14, mitochondrial (MRP-S14) (S14mt) (Mitochondrial small ribosomal subunit protein uS14m)",0.00013250298131708,0.00013250298131708
+"Q9Y676","28S ribosomal protein S18b, mitochondrial (MRP-S18-b) (Mrps18-b) (S18mt-b) (28S ribosomal protein S18-2, mitochondrial) (MRP-S18-2) (Mitochondrial small ribosomal subunit protein bS18b) (Mitochondrial small ribosomal subunit protein mS40)",0.00013250298131708,0
+"Q01826","DNA-binding protein SATB1 (Special AT-rich sequence-binding protein 1)",0,0.000265005962634159
+"P31040","Succinate dehydrogenase [ubiquinone] flavoprotein subunit, mitochondrial (EC 1.3.5.1) (Flavoprotein subunit of complex II) (Fp)",0.000265005962634159,0.000265005962634159
+"O14796","SH2 domain-containing protein 1B (EWS/FLI1-activated transcript 2) (EAT-2)",0.000265005962634159,0.000265005962634159
+"O43865","S-adenosylhomocysteine hydrolase-like protein 1 (DC-expressed AHCY-like molecule) (IP(3)Rs binding protein released with IP(3)) (IRBIT) (Putative adenosylhomocysteinase 2) (S-adenosyl-L-homocysteine hydrolase 2) (AdoHcyase 2)",0.000265005962634159,0.000265005962634159
+"O75326","Semaphorin-7A (CDw108) (JMH blood group antigen) (John-Milton-Hargen human blood group Ag) (Semaphorin-K1) (Sema K1) (Semaphorin-L) (Sema L) (CD antigen CD108)",0.000265005962634159,0.000265005962634159
+"P21912","Succinate dehydrogenase [ubiquinone] iron-sulfur subunit, mitochondrial (EC 1.3.5.1) (Iron-sulfur subunit of complex II) (Ip)",0.000265005962634159,0.000265005962634159
+"O60880","SH2 domain-containing protein 1A (Duncan disease SH2-protein) (Signaling lymphocytic activation molecule-associated protein) (SLAM-associated protein) (T-cell signal transduction molecule SAP)",0.000265005962634159,0.000265005962634159
+"O15041","Semaphorin-3E",0.000265005962634159,0.000265005962634159
+"Q96BR1","Serine/threonine-protein kinase Sgk3 (EC 2.7.11.1) (Cytokine-independent survival kinase) (Serum/glucocorticoid-regulated kinase 3) (Serum/glucocorticoid-regulated kinase-like)",0.000265005962634159,0.000265005962634159
+"Q9H3S1","Semaphorin-4A (Semaphorin-B) (Sema B)",0.000265005962634159,0.000265005962634159
+"P35270","Sepiapterin reductase (SPR) (EC 1.1.1.153)",0.00013250298131708,0.00013250298131708
+"Q96DU3","SLAM family member 6 (Activating NK receptor) (NK-T-B-antigen) (NTB-A) (CD antigen CD352)",0.00013250298131708,0.00013250298131708
+"Q9HBY8","Serine/threonine-protein kinase Sgk2 (EC 2.7.11.1) (Serum/glucocorticoid-regulated kinase 2)",0.00013250298131708,0.00013250298131708
+"Q96PL1","Secretoglobin family 3A member 2 (Pneumo secretory protein 1) (PnSP-1) (Uteroglobin-related protein 1)",0.00013250298131708,0.00013250298131708
+"Q9Y6N5","Sulfide:quinone oxidoreductase, mitochondrial (SQOR) (EC 1.8.5.-) (Sulfide quinone oxidoreductase)",0.000265005962634159,0.000265005962634159
+"Q96DR4","StAR-related lipid transfer protein 4 (START domain-containing protein 4) (StARD4)",0.000253964047524403,0.000253964047524403
+"P49675","Steroidogenic acute regulatory protein, mitochondrial (StAR) (START domain-containing protein 1) (StARD1)",0.000253964047524403,0.000253964047524403
+"Q658P3","Metalloreductase STEAP3 (EC 1.16.1.-) (Dudulin-2) (Six-transmembrane epithelial antigen of prostate 3) (Tumor suppressor-activated pathway protein 6) (hTSAP6) (pHyde) (hpHyde)",0.00123669449229274,0.00123669449229274
+"Q14849","StAR-related lipid transfer protein 3 (Metastatic lymph node gene 64 protein) (MLN 64) (Protein CAB1) (START domain-containing protein 3) (StARD3)",0,0.000397508943951239
+"O95772","STARD3 N-terminal-like protein (MLN64 N-terminal domain homolog)",0.00013250298131708,0
+"Q7L0J3","Synaptic vesicle glycoprotein 2A",0.000530011925268318,0
+"Q7L1I2","Synaptic vesicle glycoprotein 2B",0.000530011925268318,0
+"P59095","StAR-related lipid transfer protein 6 (START domain-containing protein 6) (StARD6)",0.000530011925268318,0
+"Q13586","Stromal interaction molecule 1",0.000265005962634159,0.000265005962634159
+"Q496J9","Synaptic vesicle glycoprotein 2C",0.000265005962634159,0.000265005962634159
+"Q99576","TSC22 domain family protein 3 (DSIP-immunoreactive peptide) (Protein DIP) (hDIP) (Delta sleep-inducing peptide immunoreactor) (Glucocorticoid-induced leucine zipper protein) (GILZ) (TSC-22-like protein) (TSC-22-related protein) (TSC-22R)",0.000265005962634159,0.000265005962634159
+"P20062","Transcobalamin-2 (TC-2) (Transcobalamin II) (TC II) (TCII)",0.00013250298131708,0
+"P40200","T-cell surface protein tactile (Cell surface antigen CD96) (T cell-activated increased late expression protein) (CD antigen CD96)",0.000265005962634159,0.000265005962634159
+"Q9Y2W6","Tudor and KH domain-containing protein (Tudor domain-containing protein 2)",0.000265005962634159,0.000265005962634159
+"O60522","Tudor domain-containing protein 6 (Antigen NY-CO-45) (Cancer/testis antigen 41.2) (CT41.2)",0.000265005962634159,0.000265005962634159
+"Q9H5Q4","Dimethyladenosine transferase 2, mitochondrial (EC 2.1.1.-) (Hepatitis C virus NS5A-transactivated protein 5) (HCV NS5A-transactivated protein 5) (Mitochondrial 12S rRNA dimethylase 2) (Mitochondrial transcription factor B2) (h-mtTFB) (h-mtTFB2) (hTFB2M) (mtTFB2) (S-adenosylmethionine-6-N', N'-adenosyl(rRNA) dimethyltransferase 2)",0.000530011925268318,0
+"Q00059","Transcription factor A, mitochondrial (mtTFA) (Mitochondrial transcription factor 1) (MtTF1) (Transcription factor 6) (TCF-6) (Transcription factor 6-like 2)",0.000530011925268318,0
+"Q9HAV5","Tumor necrosis factor receptor superfamily member 27 (X-linked ectodysplasin-A2 receptor) (EDA-A2 receptor)",0.000530011925268318,0.000530011925268318
+"Q92748","Thyroid hormone-inducible hepatic protein (Spot 14 protein) (S14) (SPOT14)",0.000530011925268318,0.000530011925268318
+"Q99757","Thioredoxin, mitochondrial (MTRX) (Mt-Trx) (Thioredoxin-2)",0.000530011925268318,0.000530011925268318
+"Q16762","Thiosulfate sulfurtransferase (EC 2.8.1.1) (Rhodanese)",0.000530011925268318,0.000530011925268318
+"P43489","Tumor necrosis factor receptor superfamily member 4 (ACT35 antigen) (OX40L receptor) (TAX transcriptionally-activated glycoprotein 1 receptor) (CD antigen CD134)",0.000530011925268318,0.000530011925268318
+"Q9UNG2","Tumor necrosis factor ligand superfamily member 18 (Activation-inducible TNF-related ligand) (AITRL) (Glucocorticoid-induced TNF-related ligand) (hGITRL)",0.000265005962634159,0.000265005962634159
+"P28908","Tumor necrosis factor receptor superfamily member 8 (CD30L receptor) (Ki-1 antigen) (Lymphocyte activation antigen CD30) (CD antigen CD30)",0.000265005962634159,0.000265005962634159
+"Q07011","Tumor necrosis factor receptor superfamily member 9 (4-1BB ligand receptor) (CDw137) (T-cell antigen 4-1BB homolog) (T-cell antigen ILA) (CD antigen CD137)",0.000265005962634159,0.000265005962634159
+"P23510","Tumor necrosis factor ligand superfamily member 4 (Glycoprotein Gp34) (OX40 ligand) (OX40L) (TAX transcriptionally-activated glycoprotein 1) (CD antigen CD252)",0.000375425113731726,0.00118148491674396
+"P32971","Tumor necrosis factor ligand superfamily member 8 (CD30 ligand) (CD30-L) (CD antigen CD153)",0.000530011925268318,0
+"Q13507","Short transient receptor potential channel 3 (TrpC3) (Transient receptor protein 3) (TRP-3) (hTrp-3) (hTrp3)",0.00013250298131708,0
+"P41273","Tumor necrosis factor ligand superfamily member 9 (4-1BB ligand) (4-1BBL)",0.00013250298131708,0.00013250298131708
+"Q9Y5U5","Tumor necrosis factor receptor superfamily member 18 (Activation-inducible TNFR family receptor) (Glucocorticoid-induced TNFR-related protein) (CD antigen CD357)",0.00013250298131708,0.00013250298131708
+"Q12931","Heat shock protein 75 kDa, mitochondrial (HSP 75) (TNFR-associated protein 1) (Tumor necrosis factor type 1 receptor-associated protein) (TRAP-1)",0.00013250298131708,0.00013250298131708
+"P48995","Short transient receptor potential channel 1 (TrpC1) (Transient receptor protein 1) (TRP-1)",0.00013250298131708,0.00013250298131708
+"Q9HCX4","Short transient receptor potential channel 7 (TrpC7) (Transient receptor protein 7) (TRP-7) (hTRP7)",0.00013250298131708,0.00013250298131708
+"Q9Y210","Short transient receptor potential channel 6 (TrpC6) (Transient receptor protein 6) (TRP-6)",0.00013250298131708,0.00013250298131708
+"Q7RTX1","Taste receptor type 1 member 1 (G-protein coupled receptor 70)",0.00013250298131708,0.00013250298131708
+"Q7RTX0","Taste receptor type 1 member 3 (Sweet taste receptor T1R3)",0.00013250298131708,0.00013250298131708
+"A6NIH7","Protein unc-119 homolog B",0.000265005962634159,0.000265005962634159
+"O43715","TP53-regulated inhibitor of apoptosis 1 (Protein 15E1.1) (WF-1) (p53-inducible cell-survival factor) (p53CSV)",0.000265005962634159,0.000265005962634159
+"Q8TE23","Taste receptor type 1 member 2 (G-protein coupled receptor 71) (Sweet taste receptor T1R2)",0.000265005962634159,0.000265005962634159
+"Q9NNW7","Thioredoxin reductase 2, mitochondrial (EC 1.8.1.9) (Selenoprotein Z) (SelZ) (TR-beta) (Thioredoxin reductase TR3)",0.000530011925268318,0
+"O95847","Mitochondrial uncoupling protein 4 (UCP 4) (Solute carrier family 25 member 27)",0.000253964047524403,0.000253964047524403
+"P55916","Mitochondrial uncoupling protein 3 (UCP 3) (Solute carrier family 25 member 9)",0.000265005962634159,0.000265005962634159
+"O95258","Brain mitochondrial carrier protein 1 (BMCP-1) (Mitochondrial uncoupling protein 5) (UCP 5) (Solute carrier family 25 member 14)",0.000253964047524403,0.000253964047524403
+"P55851","Mitochondrial uncoupling protein 2 (UCP 2) (Solute carrier family 25 member 8) (UCPH)",0.00013250298131708,0
+"P25874","Mitochondrial brown fat uncoupling protein 1 (UCP 1) (Solute carrier family 25 member 7) (Thermogenin)",0.000530011925268318,0.000530011925268318
+"P07911","Uromodulin (Tamm-Horsfall urinary glycoprotein) (THP) [Cleaved into: Uromodulin, secreted form]",0.000530011925268318,0.000530011925268318
+"Q9BTM9","Ubiquitin-related modifier 1",0.000530011925268318,0.000530011925268318
+"O75695","Protein XRP2",0.000530011925268318,0.000530011925268318
+"Q96J92","Serine/threonine-protein kinase WNK4 (EC 2.7.11.1) (Protein kinase lysine-deficient 4) (Protein kinase with no lysine 4)",0.000530011925268318,0.000530011925268318
+"P25311","Zinc-alpha-2-glycoprotein (Zn-alpha-2-GP) (Zn-alpha-2-glycoprotein)",0.000530011925268318,0

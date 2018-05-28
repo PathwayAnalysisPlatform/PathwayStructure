@@ -1,0 +1,386 @@
+"uniprotID","proteinName","radiality","integration"
+"P35611","Alpha-adducin (Erythrocyte adducin subunit alpha)",0.000397508943951239,0.633231747714324
+"P35612","Beta-adducin (Erythrocyte adducin subunit beta)",0.000386467028841482,0.55853319199682
+"Q09428","ATP-binding cassette sub-family C member 8 (Sulfonylurea receptor 1)",0.000386467028841482,0.55853319199682
+"Q9UEY8","Gamma-adducin (Adducin-like protein 70)",0.000397508943951239,0.55854423391193
+"O00763","Acetyl-CoA carboxylase 2 (EC 6.4.1.2) (ACC-beta) [Includes: Biotin carboxylase (EC 6.3.4.14)]",0,0.619661234044433
+"Q9UKV3","Apoptotic chromatin condensation inducer in the nucleus (Acinus)",0.00013250298131708,0.663674307671923
+"P41181","Aquaporin-2 (AQP-2) (ADH water channel) (Aquaporin-CD) (AQP-CD) (Collecting duct water channel protein) (WCH-CD) (Water channel protein for renal collecting duct)",0.00013250298131708,0.663674307671923
+"O14613","Cdc42 effector protein 2 (Binder of Rho GTPases 1)",0.00013250298131708,0.669957157369374
+"Q9UKI2","Cdc42 effector protein 3 (Binder of Rho GTPases 2) (MSE55-related Cdc42-binding protein)",0.00013250298131708,0.669957157369374
+"Q6NZY7","Cdc42 effector protein 5 (Binder of Rho GTPases 3)",0,0.649386069519898
+"Q86YS7","C2 domain-containing protein 5 (C2 domain-containing phosphoprotein of 138 kDa)",0,0.656762068813215
+"Q9BXN2","C-type lectin domain family 7 member A (Beta-glucan receptor) (C-type lectin superfamily member 12) (Dendritic cell-associated C-type lectin 1) (DC-associated C-type lectin 1) (Dectin-1)",0,0.663674307671923
+"P00167","Cytochrome b5 (Microsomal cytochrome b5 type A) (MCB5)",0.0443884987412217,0.709741177509827
+"Q08495","Dematin (Dematin actin-binding protein) (Erythrocyte membrane protein band 4.9)",0.000265005962634159,0.663166379576874
+"O00418","Eukaryotic elongation factor 2 kinase (eEF-2 kinase) (eEF-2K) (EC 2.7.11.20) (Calcium/calmodulin-dependent eukaryotic elongation factor 2 kinase)",0.000265005962634159,0.663166379576874
+"Q5VWX1","KH domain-containing, RNA-binding, signal transduction-associated protein 2 (Sam68-like mammalian protein 1) (SLM-1) (hSLM-1)",0.000265005962634159,0.663166379576874
+"Q14654","ATP-sensitive inward rectifier potassium channel 11 (IKATP) (Inward rectifier K(+) channel Kir6.2) (Potassium channel, inwardly rectifying subfamily J member 11)",0,0.632834238770372
+"O75525","KH domain-containing, RNA-binding, signal transduction-associated protein 3 (RNA-binding protein T-Star) (Sam68-like mammalian protein 2) (SLM-2) (Sam68-like phosphotyrosine protein)",0,0.632834238770372
+"P15036","Protein C-ets-2",0,0.632856322600592
+"P14921","Protein C-ets-1 (p54)",0,0.632834238770372
+"P50548","ETS domain-containing transcription factor ERF (Ets2 repressor factor) (PE-2)",0.000265005962634159,0.679696126496179
+"O43903","Growth arrest-specific protein 2 (GAS-2)",0.000265005962634159,0.679696126496179
+"Q14397","Glucokinase regulatory protein (GKRP) (Glucokinase regulator)",0.000265005962634159,0.679696126496179
+"Q9H2G9","Golgin-45 (Basic leucine zipper nuclear factor 1) (JEM-1) (p45 basic leucine-zipper nuclear factor)",0,0.726259882514023
+"Q9H8Y8","Golgi reassembly-stacking protein 2 (GRS2) (Golgi phosphoprotein 6) (GOLPH6) (Golgi reassembly-stacking protein of 55 kDa) (GRASP55) (p59)",0,0.663475553199947
+"P10072","Krueppel-related zinc finger protein 1 (Protein HKR1) (Zinc finger protein 875)",0,0.664038690870545
+"P35557","Glucokinase (EC 2.7.1.2) (Hexokinase type IV) (HK IV) (Hexokinase-4) (HK4) (Hexokinase-D)",0.000265005962634159,0.706616315533766
+"P41134","DNA-binding protein inhibitor ID-1 (Class B basic helix-loop-helix protein 24) (bHLHb24) (Inhibitor of DNA binding 1) (Inhibitor of differentiation 1)",0.000253964047524403,0.706605273618656
+"A5PL33","Protein KRBA1",0.000253964047524403,0.631917759816263
+"Q9UBS0","Ribosomal protein S6 kinase beta-2 (S6K-beta-2) (S6K2) (EC 2.7.11.1) (70 kDa ribosomal protein S6 kinase 2) (P70S6K2) (p70-S6K 2) (S6 kinase-related kinase) (SRK) (Serine/threonine-protein kinase 14B) (p70 ribosomal S6 kinase beta) (S6K-beta) (p70 S6 kinase beta) (p70 S6K-beta) (p70 S6KB) (p70-beta)",0.000265005962634159,0.706616315533766
+"Q5JUW0","KRAB domain-containing protein 4 (KRAB box domain-containing protein 4)",0.000265005962634159,0.706616315533766
+"Q14693","Phosphatidate phosphatase LPIN1 (EC 3.1.3.4) (Lipin-1)",0.000265005962634159,0.706616315533766
+"Q9BQK8","Phosphatidate phosphatase LPIN3 (EC 3.1.3.4) (Lipin-3) (Lipin-3-like)",0.0443884987412217,0.635053663707433
+"Q92539","Phosphatidate phosphatase LPIN2 (EC 3.1.3.4) (Lipin-2)",0.0443884987412217,0.635053663707433
+"P29966","Myristoylated alanine-rich C-kinase substrate (MARCKS) (Protein kinase C substrate, 80 kDa protein, light chain) (80K-L protein) (PKCSL)",0.0443884987412217,0.635053663707433
+"P47712","Cytosolic phospholipase A2 (cPLA2) (Phospholipase A2 group IVA) [Includes: Phospholipase A2 (EC 3.1.1.4) (Phosphatidylcholine 2-acylhydrolase); Lysophospholipase (EC 3.1.1.5)]",0.0443884987412217,0.635053663707433
+"Q07343","cAMP-specific 3',5'-cyclic phosphodiesterase 4B (EC 3.1.4.53) (DPDE4) (PDE32)",0.0443884987412217,0.635053663707433
+"O96033","Molybdopterin synthase sulfur carrier subunit (MOCO1-A) (Molybdenum cofactor synthesis protein 2 small subunit) (Molybdenum cofactor synthesis protein 2A) (MOCS2A) (Molybdopterin-synthase small subunit) (Sulfur carrier protein MOCS2A)",0.0443884987412217,0.635053663707433
+"O96007","Molybdopterin synthase catalytic subunit (EC 2.8.1.12) (MOCO1-B) (Molybdenum cofactor synthesis protein 2 large subunit) (Molybdenum cofactor synthesis protein 2B) (MOCS2B) (Molybdopterin-synthase large subunit) (MPT synthase large subunit)",0.0443884987412217,0.635053663707433
+"O95396","Adenylyltransferase and sulfurtransferase MOCS3 (Molybdenum cofactor synthesis protein 3) (Molybdopterin synthase sulfurylase) (MPT synthase sulfurylase) [Includes: Molybdopterin-synthase adenylyltransferase (EC 2.7.7.80) (Adenylyltransferase MOCS3) (Sulfur carrier protein MOCS2A adenylyltransferase); Molybdopterin-synthase sulfurtransferase (EC 2.8.1.11) (Sulfur carrier protein MOCS2A sulfurtransferase) (Sulfurtransferase MOCS3)]",0.0443884987412217,0.635053663707433
+"P61019","Ras-related protein Rab-2A",0.0443884987412217,0.635053663707433
+"Q9NQW5","Probable histone-lysine N-methyltransferase PRDM7 (EC 2.1.1.43) (PR domain zinc finger protein 7) (PR domain-containing protein 7)",0.0443884987412217,0.635053663707433
+"P26678","Cardiac phospholamban (PLB)",0.0443884987412217,0.635053663707433
+"Q99640","Membrane-associated tyrosine- and threonine-specific cdc2-inhibitory kinase (EC 2.7.11.1) (Myt1 kinase)",0.0443884987412217,0.635053663707433
+"Q96MT3","Prickle-like protein 1 (REST/NRSF-interacting LIM domain protein 1)",0.0443884987412217,0.635053663707433
+"P51170","Amiloride-sensitive sodium channel subunit gamma (Epithelial Na(+) channel subunit gamma) (ENaCG) (Gamma-ENaC) (Gamma-NaCH) (Nonvoltage-gated sodium channel 1 subunit gamma) (SCNEG)",0.0443884987412217,0.635053663707433
+"P51168","Amiloride-sensitive sodium channel subunit beta (Beta-NaCH) (Epithelial Na(+) channel subunit beta) (Beta-ENaC) (ENaCB) (Nonvoltage-gated sodium channel 1 subunit beta) (SCNEB)",0.0443884987412217,0.635053663707433
+"P37088","Amiloride-sensitive sodium channel subunit alpha (Alpha-NaCH) (Epithelial Na(+) channel subunit alpha) (Alpha-ENaC) (ENaCA) (Nonvoltage-gated sodium channel 1 subunit alpha) (SCNEA)",0.0443884987412217,0.635053663707433
+"P51172","Amiloride-sensitive sodium channel subunit delta (Delta-NaCH) (Epithelial Na(+) channel subunit delta) (Delta-ENaC) (ENaCD) (Nonvoltage-gated sodium channel 1 subunit delta) (SCNED)",0.0443884987412217,0.635053663707433
+"P23246","Splicing factor, proline- and glutamine-rich (100 kDa DNA-pairing protein) (hPOMp100) (DNA-binding p52/p100 complex, 100 kDa subunit) (Polypyrimidine tract-binding protein-associated-splicing factor) (PSF) (PTB-associated-splicing factor)",0.0443884987412217,0.635053663707433
+"O00186","Syntaxin-binding protein 3 (Platelet Sec1 protein) (PSP) (Protein unc-18 homolog 3) (Unc18-3) (Protein unc-18 homolog C) (Unc-18C)",0.0443884987412217,0.635053663707433
+"Q9P289","Serine/threonine-protein kinase 26 (EC 2.7.11.1) (MST3 and SOK1-related kinase) (Mammalian STE20-like protein kinase 4) (MST-4) (STE20-like kinase MST4) (Serine/threonine-protein kinase MASK)",0.0443884987412217,0.635053663707433
+"P10636","Microtubule-associated protein tau (Neurofibrillary tangle protein) (Paired helical filament-tau) (PHF-tau)",0.0443884987412217,0.635053663707433
+"Q13263","Transcription intermediary factor 1-beta (TIF1-beta) (E3 SUMO-protein ligase TRIM28) (EC 2.3.2.27) (KRAB-associated protein 1) (KAP-1) (KRAB-interacting protein 1) (KRIP-1) (Nuclear corepressor KAP-1) (RING finger protein 96) (RING-type E3 ubiquitin transferase TIF1-beta) (Tripartite motif-containing protein 28)",0.0443884987412217,0.635053663707433
+"Q9HCL3","Zinc finger protein 14 homolog (Zfp-14) (Zinc finger protein 531)",0.0443884987412217,0.635053663707433
+"Q9Y2G7","Zinc finger protein 30 homolog (Zfp-30) (Zinc finger protein 745)",0.0443884987412217,0.635053663707433
+"Q9Y6Q3","Zinc finger protein 37 homolog (Zfp-37)",0.0443884987412217,0.635053663707433
+"Q8IZC7","Zinc finger protein 101 (Zinc finger protein HZF12)",0.0443884987412217,0.635053663707433
+"Q9UJU3","Zinc finger protein 112 (Zfp-112) (Zinc finger protein 228)",0.0443884987412217,0.635053663707433
+"P52736","Zinc finger protein 133 (Zinc finger protein 150)",0.0443884987412217,0.635053663707433
+"Q6AW86","Zinc finger protein 324B",0.0443884987412217,0.635053663707433
+"Q6ZN79","Zinc finger protein 705A",0.0443884987412217,0.635053663707433
+"A4D1E1","Zinc finger protein 804B",0.0443884987412217,0.635053663707433
+"Q3SY52","Zinc finger protein interacting with ribonucleoprotein K (Zinc finger protein 762)",0.0443884987412217,0.635053663707433
+"Q96PE6","Zinc finger imprinted 3 (Zinc finger protein 657)",0.0443884987412217,0.635053663707433
+"P52742","Zinc finger protein 135 (Zinc finger protein 61) (Zinc finger protein 78-like 1)",0.0443884987412217,0.635053663707433
+"Q14588","Zinc finger protein 234 (Zinc finger protein 269) (Zinc finger protein HZF4)",0.0443884987412217,0.635053663707433
+"Q9NR11","Zinc finger protein 302 (Zinc finger protein 135-like) (Zinc finger protein 140-like) (Zinc finger protein 327)",0.0443884987412217,0.635053663707433
+"Q9HCX3","Zinc finger protein 304 (KRAB-containing zinc finger protein)",0.0443884987412217,0.635053663707433
+"Q86V71","Zinc finger protein 429",0.0443884987412217,0.635053663707433
+"Q9NWS9","Zinc finger protein 446 (Zinc finger protein with KRAB and SCAN domains 20)",0.0443884987412217,0.635053663707433
+"Q8NDQ6","Zinc finger protein 540",0.0443884987412217,0.635053663707433
+"Q9H707","Zinc finger protein 552",0.0443884987412217,0.635053663707433
+"Q9BR84","Zinc finger protein 559",0.0443884987412217,0.635053663707433
+"Q8TBZ8","Zinc finger protein 564",0.0443884987412217,0.635053663707433
+"Q96SK3","Zinc finger protein 607",0.0443884987412217,0.635053663707433
+"Q52M93","Zinc finger protein 585B (zinc finger protein 41-like protein)",0.0443884987412217,0.635053663707433
+"Q4V348","Zinc finger protein 658B",0.0443884987412217,0.635053663707433
+"O75467","Zinc finger protein 324A (Zinc finger protein ZF5128)",0.0443884987412217,0.635053663707433
+"P0CH99","Zinc finger protein 705D",0.0443884987412217,0.635053663707433
+"Q9NZV7","Zinc finger imprinted 2 (Zinc finger protein 656)",0.0443884987412217,0.635053663707433
+"Q9Y2L8","Zinc finger protein with KRAB and SCAN domains 5 (Zinc finger protein 95 homolog) (Zfp-95)",0.0443884987412217,0.635053663707433
+"O14709","Zinc finger protein 197 (Zinc finger protein with KRAB and SCAN domains 9) (ZnF20) (pVHL-associated KRAB domain-containing protein)",0.0443884987412217,0.635053663707433
+"O75346","Zinc finger protein 253 (Bone marrow zinc finger 1) (BMZF-1) (Zinc finger protein 411)",0.0443884987412217,0.635053663707433
+"Q9Y2Q1","Zinc finger protein 257 (Bone marrow zinc finger 4) (BMZF-4)",0.0443884987412217,0.635053663707433
+"Q14586","Zinc finger protein 267 (Zinc finger protein HZF2)",0.0443884987412217,0.635053663707433
+"Q96GC6","Neurotrophin receptor-interacting factor homolog (Zinc finger protein 274) (Zinc finger protein HFB101) (Zinc finger protein with KRAB and SCAN domains 19) (Zinc finger protein zfp2) (Zf2)",0.0443884987412217,0.635053663707433
+"Q96NJ3","Zinc finger protein 285 (Zinc finger protein 285A)",0.0443884987412217,0.635053663707433
+"Q96PQ6","Zinc finger protein 317",0.0443884987412217,0.635053663707433
+"A2RRD8","Zinc finger protein 320",0.0443884987412217,0.635053663707433
+"Q9Y3M9","Zinc finger protein 337",0.0443884987412217,0.635053663707433
+"Q6P1L6","Zinc finger protein 343",0.0443884987412217,0.635053663707433
+"Q9GZX5","Zinc finger protein 350 (KRAB zinc finger protein ZFQR) (Zinc finger and BRCA1-interacting protein with a KRAB domain 1) (Zinc finger protein ZBRK1)",0.0443884987412217,0.635053663707433
+"Q53GI3","Zinc finger protein 394 (Zinc finger protein with KRAB and SCAN domains 14)",0.0443884987412217,0.635053663707433
+"Q8TF45","Zinc finger protein 418",0.0443884987412217,0.635053663707433
+"Q9BUY5","Zinc finger protein 426",0.0443884987412217,0.635053663707433
+"Q8N9F8","Zinc finger protein 454",0.0443884987412217,0.635053663707433
+"Q5TEC3","Zinc finger protein 697",0.0443884987412217,0.635053663707433
+"P17019","Zinc finger protein 708 (Zinc finger protein 15) (Zinc finger protein 15-like 1) (Zinc finger protein KOX8)",0.0443884987412217,0.635053663707433
+"Q3SXZ3","Zinc finger protein 718",0.0443884987412217,0.635053663707433
+"A8MTY0","Zinc finger protein 724",0.0443884987412217,0.635053663707433
+"P0CB33","Putative zinc finger protein 735 (Zinc finger protein 735 pseudogene)",0.0443884987412217,0.635053663707433
+"Q8NE65","Protein ZNF738",0.0443884987412217,0.635053663707433
+"Q6NUN9","Zinc finger protein 746 (Parkin-interacting substrate) (PARIS)",0.0443884987412217,0.635053663707433
+"Q9HBT8","Zinc finger protein 286A",0.0443884987412217,0.635053663707433
+"A8MWA4","Putative zinc finger protein 705E",0.0443884987412217,0.635053663707433
+"Q8NHY6","Zinc finger protein 28 homolog (Zfp-28) (Krueppel-like zinc finger factor X6)",0.0443884987412217,0.635053663707433
+"Q9P0L1","Zinc finger protein with KRAB and SCAN domains 7 (Zinc finger protein 167) (Zinc finger protein 448) (Zinc finger protein 64)",0.0443884987412217,0.635053663707433
+"P52737","Zinc finger protein 136",0.0443884987412217,0.635053663707433
+"Q9HCG1","Zinc finger protein 160 (Zinc finger protein HZF5) (Zinc finger protein Kr18) (HKr18)",0.0443884987412217,0.635053663707433
+"Q13398","Zinc finger protein 211 (Zinc finger protein C2H2-25)",0.0443884987412217,0.635053663707433
+"Q9UK11","Zinc finger protein 223",0.0443884987412217,0.635053663707433
+"Q9NYT6","Zinc finger protein 226",0.0443884987412217,0.635053663707433
+"O75437","Zinc finger protein 254 (Bone marrow zinc finger 5) (BMZF-5) (Hematopoietic cell-derived zinc finger protein 1) (HD-ZNF1) (Zinc finger protein 539) (Zinc finger protein 91-like)",0.0443884987412217,0.635053663707433
+"O43296","Zinc finger protein 264",0.0443884987412217,0.635053663707433
+"Q14587","Zinc finger protein 268 (Zinc finger protein HZF3)",0.0443884987412217,0.635053663707433
+"Q96RE9","Zinc finger protein 300",0.0443884987412217,0.635053663707433
+"Q9HCZ1","Zinc finger protein 334",0.0443884987412217,0.635053663707433
+"Q06732","Zinc finger protein 33B (Zinc finger protein 11B) (Zinc finger protein KOX2)",0.0443884987412217,0.635053663707433
+"P17032","Zinc finger protein 37A (Zinc finger protein KOX21)",0.0443884987412217,0.635053663707433
+"Q5HYK9","Zinc finger protein 667",0.0443884987412217,0.635053663707433
+"Q8TD23","Zinc finger protein 675 (TRAF6-binding zinc finger protein) (TRAF6-inhibitory zinc finger protein)",0.0443884987412217,0.635053663707433
+"P0C7X2","Zinc finger protein 688",0.0443884987412217,0.635053663707433
+"Q9BU19","Zinc finger protein 692",0.0443884987412217,0.635053663707433
+"A6NN14","Zinc finger protein 729",0.0443884987412217,0.635053663707433
+"B4DXR9","Zinc finger protein 732",0.0443884987412217,0.635053663707433
+"Q8NDX6","Zinc finger protein 740 (OriLyt TD-element-binding protein 7)",0.0443884987412217,0.635053663707433
+"Q96N20","Zinc finger protein 75A",0.0443884987412217,0.635053663707433
+"A8K8V0","Zinc finger protein 785",0.0443884987412217,0.635053663707433
+"A6NDX5","Putative zinc finger protein 840 (Zinc finger protein 840 pseudogene)",0.0443884987412217,0.635053663707433
+"P17017","Zinc finger protein 14 (Gonadotropin-inducible ovary transcription repressor 4) (GIOT-4) (Zinc finger protein KOX6)",0.0443884987412217,0.635053663707433
+"P17024","Zinc finger protein 20 (Zinc finger protein KOX13)",0.0443884987412217,0.635053663707433
+"Q8IZ26","Zinc finger protein 34 (Zinc finger protein KOX32)",0.0443884987412217,0.635053663707433
+"P17038","Zinc finger protein 43 (Zinc finger protein 39) (Zinc finger protein HTF6) (Zinc finger protein KOX27)",0.0443884987412217,0.635053663707433
+"Q03936","Zinc finger protein 92 (Zinc finger protein HTF12)",0.0443884987412217,0.635053663707433
+"A8MUZ8","Putative zinc finger protein 705G",0.0443884987412217,0.635053663707433
+"Q6ZN57","Zinc finger protein 2 homolog (Zfp-2) (Zinc finger protein 751)",0.0443884987412217,0.635053663707433
+"Q8NC26","Zinc finger protein 114",0.0443884987412217,0.635053663707433
+"Q15973","Zinc finger protein 124 (Zinc finger protein HZF-16)",0.0443884987412217,0.635053663707433
+"P52744","Zinc finger protein 138",0.0443884987412217,0.635053663707433
+"P51786","Zinc finger protein 157 (Zinc finger protein HZF22)",0.0443884987412217,0.635053663707433
+"A6NK53","Zinc finger protein 233",0.0443884987412217,0.635053663707433
+"P15622","Zinc finger protein 250 (Zinc finger protein 647)",0.0443884987412217,0.635053663707433
+"Q9UDV7","Zinc finger protein 282 (HTLV-I U5RE-binding protein 1) (HUB-1)",0.0443884987412217,0.635053663707433
+"Q5JNZ3","Zinc finger protein 311 (Zinc finger protein zfp-31)",0.0443884987412217,0.635053663707433
+"Q96SR6","Zinc finger protein 382 (KRAB/zinc finger suppressor protein 1) (KS1) (Multiple zinc finger and krueppel-associated box protein KS1)",0.0443884987412217,0.635053663707433
+"Q8TD17","Zinc finger protein 398 (Zinc finger DNA-binding protein p52/p71)",0.0443884987412217,0.635053663707433
+"Q8N8Z8","Zinc finger protein 441",0.0443884987412217,0.635053663707433
+"Q5JVG2","Zinc finger protein 484",0.0443884987412217,0.635053663707433
+"Q8NEK5","Zinc finger protein 548",0.0443884987412217,0.635053663707433
+"Q8N988","Zinc finger protein 557",0.0443884987412217,0.635053663707433
+"Q3ZCX4","Zinc finger protein 568",0.0443884987412217,0.635053663707433
+"Q96NG8","Zinc finger protein 582",0.0443884987412217,0.635053663707433
+"Q8WXB4","Zinc finger protein 606 (Zinc finger protein 328)",0.0443884987412217,0.635053663707433
+"Q8N2I2","Zinc finger protein 619",0.0443884987412217,0.635053663707433
+"Q6ZSS3","Zinc finger protein 621",0.0443884987412217,0.635053663707433
+"Q6AZW8","Zinc finger protein 660",0.0443884987412217,0.635053663707433
+"Q32M78","Zinc finger protein 699 (Hangover homolog)",0.0443884987412217,0.635053663707433
+"Q9Y5V0","Zinc finger protein 706",0.0443884987412217,0.635053663707433
+"Q8N1W2","Zinc finger protein 710",0.0443884987412217,0.635053663707433
+"Q8N859","Zinc finger protein 713",0.0443884987412217,0.635053663707433
+"Q6PK81","Zinc finger protein 773 (Zinc finger protein 419B)",0.0443884987412217,0.635053663707433
+"Q6ZMW2","Zinc finger protein 782",0.0443884987412217,0.635053663707433
+"Q6PG37","Zinc finger protein 790",0.0443884987412217,0.635053663707433
+"Q96GE5","Zinc finger protein 799 (Zinc finger protein 842)",0.0443884987412217,0.635053663707433
+"A8K0R7","Zinc finger protein 839 (Renal carcinoma antigen NY-REN-50)",0.0443884987412217,0.635053663707433
+"Q6NSZ9","Zinc finger and SCAN domain-containing protein 25 (Zinc finger protein 498)",0.0443884987412217,0.635053663707433
+"O60765","Zinc finger protein 354A (Transcription factor 17) (TCF-17) (Zinc finger protein eZNF)",0.0443884987412217,0.635053663707433
+"Q86Y25","Zinc finger protein 354C (Kidney, ischemia, and developmentally-regulated protein 3) (hKID3)",0.0443884987412217,0.635053663707433
+"Q6P3V2","Zinc finger protein 585A",0.0443884987412217,0.635053663707433
+"A8MVS1","Zinc finger protein 705F",0.0443884987412217,0.635053663707433
+"Q99676","Zinc finger protein 184",0.0443884987412217,0.635053663707433
+"O14628","Zinc finger protein 195",0.0443884987412217,0.635053663707433
+"O95125","Zinc finger protein 202 (Zinc finger protein with KRAB and SCAN domains 10)",0.0443884987412217,0.635053663707433
+"O43345","Zinc finger protein 208 (Zinc finger protein 91-like)",0.0443884987412217,0.635053663707433
+"Q9UL59","Zinc finger protein 214 (BWSCR2-associated zinc finger protein 1) (BAZ-1)",0.0443884987412217,0.635053663707433
+"Q9UK10","Zinc finger protein 225",0.0443884987412217,0.635053663707433
+"Q9NQX6","Zinc finger protein 331 (C2H2-like zinc finger protein rearranged in thyroid adenomas) (Zinc finger protein 361) (Zinc finger protein 463)",0.0443884987412217,0.635053663707433
+"Q96JL9","Zinc finger protein 333",0.0443884987412217,0.635053663707433
+"Q8TAU3","Zinc finger protein 417",0.0443884987412217,0.635053663707433
+"Q6IV72","Zinc finger protein 425",0.0443884987412217,0.635053663707433
+"Q9H8G1","Zinc finger protein 430",0.0443884987412217,0.635053663707433
+"Q8N7K0","Zinc finger protein 433",0.0443884987412217,0.635053663707433
+"Q8NDP4","Zinc finger protein 439",0.0443884987412217,0.635053663707433
+"P59923","Zinc finger protein 445 (Zinc finger protein 168) (Zinc finger protein with KRAB and SCAN domains 15)",0.0443884987412217,0.635053663707433
+"Q5VIY5","Zinc finger protein 468",0.0443884987412217,0.635053663707433
+"Q3MIS6","Zinc finger protein 528",0.0443884987412217,0.635053663707433
+"Q9BSK1","Zinc finger protein 577",0.0443884987412217,0.635053663707433
+"Q96SQ5","Zinc finger protein 587",0.0443884987412217,0.635053663707433
+"Q6PF04","Zinc finger protein 613",0.0443884987412217,0.635053663707433
+"Q7L945","Zinc finger protein 627",0.0443884987412217,0.635053663707433
+"Q9H7R5","Zinc finger protein 665 (Zinc finger protein 160-like)",0.0443884987412217,0.635053663707433
+"Q96BR6","Zinc finger protein 669",0.0443884987412217,0.635053663707433
+"Q8N7Q3","Zinc finger protein 676",0.0443884987412217,0.635053663707433
+"Q96N22","Zinc finger protein 681",0.0443884987412217,0.635053663707433
+"Q9Y462","Zinc finger protein 711 (Zinc finger protein 6)",0.0443884987412217,0.635053663707433
+"O43361","Zinc finger protein 749",0.0443884987412217,0.635053663707433
+"Q86XN6","Zinc finger protein 761",0.0443884987412217,0.635053663707433
+"Q96BV0","Zinc finger protein 775",0.0443884987412217,0.635053663707433
+"Q96MU6","Zinc finger protein 778",0.0443884987412217,0.635053663707433
+"P17035","Zinc finger protein 28 (Zinc finger protein KOX24)",0.0443884987412217,0.635053663707433
+"A8MXY4","Zinc finger protein 99",0.0443884987412217,0.635053663707433
+"Q9NX65","Zinc finger and SCAN domain-containing protein 32 (Human cervical cancer suppressor gene 5 protein) (HCCS-5) (Zinc finger protein 434)",0.0443884987412217,0.635053663707433
+"Q9UJL9","Zinc finger protein ZFP69B (Zinc finger protein 643)",0.0443884987412217,0.635053663707433
+"Q9UJW8","Zinc finger protein 180 (HHZ168)",0.0443884987412217,0.635053663707433
+"Q8TF39","Zinc finger protein 483 (Zinc finger protein with KRAB and SCAN domains 16)",0.0443884987412217,0.635053663707433
+"Q9P255","Zinc finger protein 492 (Zinc finger protein 115)",0.0443884987412217,0.635053663707433
+"Q96K75","Zinc finger protein 514",0.0443884987412217,0.635053663707433
+"Q08ER8","Zinc finger protein 543",0.0443884987412217,0.635053663707433
+"Q7Z340","Zinc finger protein 551 (Zinc finger protein KOX23)",0.0443884987412217,0.635053663707433
+"Q6V9R5","Zinc finger protein 562",0.0443884987412217,0.635053663707433
+"Q9NXT0","Zinc finger protein 586",0.0443884987412217,0.635053663707433
+"Q8IYB9","Zinc finger protein 595",0.0443884987412217,0.635053663707433
+"Q96LX8","Zinc finger protein 597",0.0443884987412217,0.635053663707433
+"Q6ZNG1","Zinc finger protein 600",0.0443884987412217,0.635053663707433
+"Q08AN1","Zinc finger protein 616",0.0443884987412217,0.635053663707433
+"Q96N77","Zinc finger protein 641",0.0443884987412217,0.635053663707433
+"Q75MW2","Protein ZNF767 (Zinc finger protein 767 pseudogene)",0.0443884987412217,0.635053663707433
+"Q7L3S4","Zinc finger protein 771 (Mesenchymal stem cell protein DSC43)",0.0443884987412217,0.635053663707433
+"Q6NX45","Zinc finger protein 774",0.0443884987412217,0.635053663707433
+"P17039","Zinc finger protein 30 (Zinc finger protein KOX28)",0.0443884987412217,0.635053663707433
+"P17036","Zinc finger protein 3 (Zinc finger protein HF.12) (Zinc finger protein HZF3.1) (Zinc finger protein KOX25)",0.0443884987412217,0.635053663707433
+"Q02386","Zinc finger protein 45 (BRC1744) (Zinc finger protein 13) (Zinc finger protein KOX5)",0.0443884987412217,0.635053663707433
+"Q15940","Putative zinc finger protein 726P1",0.0443884987412217,0.635053663707433
+"Q9NQZ8","Endothelial zinc finger protein induced by tumor necrosis factor alpha (Zinc finger protein 71)",0.0443884987412217,0.635053663707433
+"Q96LW1","Zinc finger protein 354B",0.0443884987412217,0.635053663707433
+"P17029","Zinc finger protein with KRAB and SCAN domains 1 (Zinc finger protein 139) (Zinc finger protein 36) (Zinc finger protein KOX18)",0.0443884987412217,0.635053663707433
+"Q15776","Zinc finger protein with KRAB and SCAN domains 8 (LD5-1) (Zinc finger protein 192)",0.0443884987412217,0.635053663707433
+"Q15928","Zinc finger protein 141",0.0443884987412217,0.635053663707433
+"Q9Y473","Zinc finger protein 175 (Zinc finger protein OTK18)",0.0443884987412217,0.635053663707433
+"Q6ECI4","Zinc finger protein 470 (Chondrogenesis zinc finger protein 1) (CZF-1)",0.0443884987412217,0.635053663707433
+"Q8TB69","Zinc finger protein 519",0.0443884987412217,0.635053663707433
+"Q86UE3","Zinc finger protein 546 (Zinc finger protein 49)",0.0443884987412217,0.635053663707433
+"Q9HAH1","Zinc finger protein 556",0.0443884987412217,0.635053663707433
+"Q96MR9","Zinc finger protein 560",0.0443884987412217,0.635053663707433
+"Q8N9K5","Zinc finger protein 565",0.0443884987412217,0.635053663707433
+"Q8N184","Zinc finger protein 567",0.0443884987412217,0.635053663707433
+"Q5MCW4","Zinc finger protein 569",0.0443884987412217,0.635053663707433
+"Q86UQ0","Zinc finger protein 589 (Stem cell zinc finger protein 1)",0.0443884987412217,0.635053663707433
+"Q8TC21","Zinc finger protein 596",0.0443884987412217,0.635053663707433
+"Q8N883","Zinc finger protein 614",0.0443884987412217,0.635053663707433
+"Q68DY1","Zinc finger protein 626",0.0443884987412217,0.635053663707433
+"Q9BS31","Zinc finger protein 649",0.0443884987412217,0.635053663707433
+"Q96N38","Zinc finger protein 714",0.0443884987412217,0.635053663707433
+"Q92670","Putative zinc finger protein 75C (Zinc finger protein 75C pseudogene)",0.0443884987412217,0.635053663707433
+"Q6P2D0","Zinc finger protein 1 homolog (Zfp-1) (Zinc finger protein 475)",0.0443884987412217,0.635053663707433
+"Q49AA0","Zinc finger protein ZFP69 (Zinc finger protein 642)",0.0443884987412217,0.635053663707433
+"Q13106","Zinc finger protein 154",0.0443884987412217,0.635053663707433
+"Q9UL58","Zinc finger protein 215 (BWSCR2-associated zinc finger protein 2) (BAZ-2) (Zinc finger protein with KRAB and SCAN domains 11)",0.0443884987412217,0.635053663707433
+"Q9UIE0","Zinc finger protein 230 (Zinc finger protein FDZF2)",0.0443884987412217,0.635053663707433
+"Q09FC8","Zinc finger protein 415",0.0443884987412217,0.635053663707433
+"Q9C0F3","Zinc finger protein 436",0.0443884987412217,0.635053663707433
+"Q14592","Zinc finger protein 460 (Zinc finger protein 272) (Zinc finger protein HZF8)",0.0443884987412217,0.635053663707433
+"Q8WTR7","Zinc finger protein 473 (Zinc finger protein 100 homolog) (Zfp-100)",0.0443884987412217,0.635053663707433
+"Q9Y2H8","Zinc finger protein 510",0.0443884987412217,0.635053663707433
+"Q6ZMY9","Zinc finger protein 517",0.0443884987412217,0.635053663707433
+"Q6P9A1","Zinc finger protein 530",0.0443884987412217,0.635053663707433
+"Q6NX49","Zinc finger protein 544",0.0443884987412217,0.635053663707433
+"Q6P9A3","Zinc finger protein 549",0.0443884987412217,0.635053663707433
+"Q86TJ5","Zinc finger protein 554",0.0443884987412217,0.635053663707433
+"Q96NG5","Zinc finger protein 558",0.0443884987412217,0.635053663707433
+"Q8TA94","Zinc finger protein 563",0.0443884987412217,0.635053663707433
+"Q96NI8","Zinc finger protein 570",0.0443884987412217,0.635053663707433
+"Q96NL3","Zinc finger protein 599",0.0443884987412217,0.635053663707433
+"Q96I27","Zinc finger protein 625",0.0443884987412217,0.635053663707433
+"Q6ZS27","Zinc finger protein 662",0.0443884987412217,0.635053663707433
+"Q8IYX0","Zinc finger protein 679",0.0443884987412217,0.635053663707433
+"Q96CS4","Zinc finger protein 689",0.0443884987412217,0.635053663707433
+"Q9H963","Putative zinc finger protein 702",0.0443884987412217,0.635053663707433
+"Q8N972","Zinc finger protein 709",0.0443884987412217,0.635053663707433
+"Q8TF20","Zinc finger protein 721",0.0443884987412217,0.635053663707433
+"Q68DY9","Zinc finger protein 772",0.0443884987412217,0.635053663707433
+"Q3KP31","Zinc finger protein 791",0.0443884987412217,0.635053663707433
+"P21506","Zinc finger protein 10 (Zinc finger protein KOX1)",0.0443884987412217,0.635053663707433
+"P17022","Zinc finger protein 18 (Heart development-specific gene 1 protein) (Zinc finger protein 535) (Zinc finger protein KOX11) (Zinc finger protein with KRAB and SCAN domains 6)",0.0443884987412217,0.635053663707433
+"P17027","Zinc finger protein 23 (Zinc finger protein 359) (Zinc finger protein 612) (Zinc finger protein KOX16)",0.0443884987412217,0.635053663707433
+"P17030","Zinc finger protein 25 (Zinc finger protein KOX19)",0.0443884987412217,0.635053663707433
+"Q9UC06","Zinc finger protein 70 (Zinc finger protein N27C7-1)",0.0443884987412217,0.635053663707433
+"Q15935","Zinc finger protein 77 (ZNFpT1)",0.0443884987412217,0.635053663707433
+"Q969J2","Zinc finger protein with KRAB and SCAN domains 4 (P373c6.1) (Zinc finger protein 307) (Zinc finger protein 427)",0.0443884987412217,0.635053663707433
+"Q9Y2A4","Zinc finger protein 443 (Krueppel-type zinc finger protein ZK1)",0.0443884987412217,0.635053663707433
+"Q8TAF7","Zinc finger protein 461 (Gonadotropin-inducible ovary transcription repressor 1) (GIOT-1)",0.0443884987412217,0.635053663707433
+"O60304","Zinc finger protein 500 (Zinc finger protein with KRAB and SCAN domains 18)",0.0443884987412217,0.635053663707433
+"Q6P280","Zinc finger protein 529",0.0443884987412217,0.635053663707433
+"Q7Z398","Zinc finger protein 550",0.0443884987412217,0.635053663707433
+"Q8NEP9","Zinc finger protein 555",0.0443884987412217,0.635053663707433
+"Q8N587","Zinc finger protein 561",0.0443884987412217,0.635053663707433
+"Q969W8","Zinc finger protein 566",0.0443884987412217,0.635053663707433
+"Q96ND8","Zinc finger protein 583 (Zinc finger protein L3-5)",0.0443884987412217,0.635053663707433
+"Q86T29","Zinc finger protein 605",0.0443884987412217,0.635053663707433
+"Q9P2J8","Zinc finger protein 624",0.0443884987412217,0.635053663707433
+"Q8TAW3","Zinc finger protein 671",0.0443884987412217,0.635053663707433
+"Q8NEM1","Zinc finger protein 680",0.0443884987412217,0.635053663707433
+"Q5T5D7","Zinc finger protein 684",0.0443884987412217,0.635053663707433
+"Q9H7X3","Zinc finger protein 696",0.0443884987412217,0.635053663707433
+"Q6ZNC4","Zinc finger protein 704",0.0443884987412217,0.635053663707433
+"Q96C28","Zinc finger protein 707",0.0443884987412217,0.635053663707433
+"Q9ULD5","Zinc finger protein 777",0.0443884987412217,0.635053663707433
+"Q8N393","Zinc finger protein 786",0.0443884987412217,0.635053663707433
+"Q6ZN11","Zinc finger protein 793",0.0443884987412217,0.635053663707433
+"A6NHJ4","Zinc finger protein 860",0.0443884987412217,0.635053663707433
+"Q9BSG1","Zinc finger protein 2 (Zinc finger protein 2.2) (Zinc finger protein 661)",0.0443884987412217,0.635053663707433
+"Q16587","Zinc finger protein 74 (Zinc finger protein 520) (hZNF7)",0.0443884987412217,0.635053663707433
+"Q8TF47","Zinc finger protein 90 homolog (Zfp-90) (Zinc finger protein 756)",0.0443884987412217,0.635053663707433
+"Q9BRR0","Zinc finger protein with KRAB and SCAN domains 3 (Zinc finger and SCAN domain-containing protein 13) (Zinc finger protein 306) (Zinc finger protein 309) (Zinc finger protein 47 homolog) (Zf47) (Zfp-47)",0.0443884987412217,0.635053663707433
+"Q8IYN0","Zinc finger protein 100",0.0443884987412217,0.635053663707433
+"Q12901","Zinc finger protein 155",0.0443884987412217,0.635053663707433
+"O75820","Zinc finger protein 189",0.0443884987412217,0.635053663707433
+"O14771","Zinc finger protein 213 (Putative transcription factor CR53) (Zinc finger protein with KRAB and SCAN domains 21)",0.0443884987412217,0.635053663707433
+"Q9UK12","Zinc finger protein 222",0.0443884987412217,0.635053663707433
+"Q14590","Zinc finger protein 235 (Zinc finger protein 270) (Zinc finger protein 93 homolog) (Zfp-93) (Zinc finger protein HZF6)",0.0443884987412217,0.635053663707433
+"Q8NDW4","Zinc finger protein 248",0.0443884987412217,0.635053663707433
+"Q14584","Zinc finger protein 266 (Zinc finger protein HZF1)",0.0443884987412217,0.635053663707433
+"Q06730","Zinc finger protein 33A (Zinc finger and ZAK-associated protein with KRAB domain) (ZZaPK) (Zinc finger protein 11A) (Zinc finger protein KOX31)",0.0443884987412217,0.635053663707433
+"Q9BWM5","Zinc finger protein 416",0.0443884987412217,0.635053663707433
+"Q8TAQ5","Zinc finger protein 420",0.0443884987412217,0.635053663707433
+"O94892","Zinc finger protein 432",0.0443884987412217,0.635053663707433
+"Q8IYI8","Zinc finger protein 440",0.0443884987412217,0.635053663707433
+"Q9BX82","Zinc finger protein 471 (EZFIT-related protein 1)",0.0443884987412217,0.635053663707433
+"Q8WV37","Zinc finger protein 480",0.0443884987412217,0.635053663707433
+"Q96H40","Zinc finger protein 486 (KRAB domain only protein 2)",0.0443884987412217,0.635053663707433
+"Q6ZR52","Zinc finger protein 493",0.0443884987412217,0.635053663707433
+"Q5TYW1","Zinc finger protein 658",0.0443884987412217,0.635053663707433
+"Q9BS34","Zinc finger protein 670",0.0443884987412217,0.635053663707433
+"Q5VV52","Zinc finger protein 691",0.0443884987412217,0.635053663707433
+"Q9H0M5","Zinc finger protein 700",0.0443884987412217,0.635053663707433
+"Q9BY31","Zinc finger protein 717 (Krueppel-like factor X17)",0.0443884987412217,0.635053663707433
+"A6NNF4","Zinc finger protein 726",0.0443884987412217,0.635053663707433
+"Q6ZMV8","Putative zinc finger protein 730",0.0443884987412217,0.635053663707433
+"O75373","Zinc finger protein 737 (Zinc finger protein 102)",0.0443884987412217,0.635053663707433
+"Q9BV97","KRAB domain-containing protein ZNF747",0.0443884987412217,0.635053663707433
+"Q6IQ21","Zinc finger protein 770",0.0443884987412217,0.635053663707433
+"Q68DI1","Zinc finger protein 776",0.0443884987412217,0.635053663707433
+"P17014","Zinc finger protein 12 (Gonadotropin-inducible ovary transcription repressor 3) (GIOT-3) (Zinc finger protein 325) (Zinc finger protein KOX3)",0.0443884987412217,0.635053663707433
+"P17021","Zinc finger protein 17 (Zinc finger protein HPF3) (Zinc finger protein KOX10)",0.0443884987412217,0.635053663707433
+"P17023","Zinc finger protein 19 (Zinc finger protein KOX12)",0.0443884987412217,0.635053663707433
+"P17031","Zinc finger protein 26 (Zinc finger protein KOX20)",0.0443884987412217,0.635053663707433
+"P51814","Zinc finger protein 41",0.0443884987412217,0.635053663707433
+"Q15937","Zinc finger protein 79 (ZNFpT7)",0.0443884987412217,0.635053663707433
+"P52738","Zinc finger protein 140",0.0443884987412217,0.635053663707433
+"Q14929","Zinc finger protein 169",0.0443884987412217,0.635053663707433
+"P98182","Zinc finger protein 200",0.0443884987412217,0.635053663707433
+"O95201","Zinc finger protein 205 (Zinc finger protein 210)",0.0443884987412217,0.635053663707433
+"Q9UDV6","Zinc finger protein 212 (Zinc finger protein C2H2-150)",0.0443884987412217,0.635053663707433
+"Q9UK13","Zinc finger protein 221",0.0443884987412217,0.635053663707433
+"Q9NZL3","Zinc finger protein 224 (Bone marrow zinc finger 2) (BMZF-2) (Zinc finger protein 233) (Zinc finger protein 255) (Zinc finger protein 27) (Zinc finger protein KOX22)",0.0443884987412217,0.635053663707433
+"Q86WZ6","Zinc finger protein 227",0.0443884987412217,0.635053663707433
+"Q9Y2P7","Zinc finger protein 256 (Bone marrow zinc finger 3) (BMZF-3)",0.0443884987412217,0.635053663707433
+"O14978","Zinc finger protein 263 (Zinc finger protein FPM315) (Zinc finger protein with KRAB and SCAN domains 12)",0.0443884987412217,0.635053663707433
+"Q14593","Zinc finger protein 273 (Zinc finger protein HZF9)",0.0443884987412217,0.635053663707433
+"Q9HBT7","Zinc finger protein 287 (Zinc finger protein with KRAB and SCAN domains 13)",0.0443884987412217,0.635053663707433
+"Q96SE7","Zinc finger protein 347 (Zinc finger protein 1111)",0.0443884987412217,0.635053663707433
+"Q8NA42","Zinc finger protein 383",0.0443884987412217,0.635053663707433
+"Q96HQ0","Zinc finger protein 419",0.0443884987412217,0.635053663707433
+"Q8TF32","Zinc finger protein 431",0.0443884987412217,0.635053663707433
+"Q9H7R0","Zinc finger protein 442",0.0443884987412217,0.635053663707433
+"Q96JC4","Zinc finger protein 479 (Zinc finger protein Kr19) (HKr19)",0.0443884987412217,0.635053663707433
+"Q8NCK3","Zinc finger protein 485",0.0443884987412217,0.635053663707433
+"Q9ULM2","Zinc finger protein 490",0.0443884987412217,0.635053663707433
+"Q96IT1","Zinc finger protein 496 (Zinc finger protein with KRAB and SCAN domains 17)",0.0443884987412217,0.635053663707433
+"Q5JVG8","Zinc finger protein 506",0.0443884987412217,0.635053663707433
+"Q8IVP9","Zinc finger protein 547",0.0443884987412217,0.635053663707433
+"Q7Z3V5","Zinc finger protein 571",0.0443884987412217,0.635053663707433
+"Q86YE8","Zinc finger protein 573",0.0443884987412217,0.635053663707433
+"Q8IVC4","Zinc finger protein 584",0.0443884987412217,0.635053663707433
+"Q8N823","Zinc finger protein 611",0.0443884987412217,0.635053663707433
+"Q8N720","Zinc finger protein 655 (Vav-interacting Krueppel-like protein)",0.0443884987412217,0.635053663707433
+"Q86XU0","Zinc finger protein 677",0,0.624519676692726
+"O95780","Zinc finger protein 682",0,0.632326310675324
+"Q9NV72","Zinc finger protein 701",0,0.632304226845104
+"Q7Z2F6","Putative protein ZNF720",0,0.705755046155205
+"P51815","Zinc finger protein 75D (Zinc finger protein 75) (Zinc finger protein 82)",0,0.706351309571132
+"Q8N9Z0","Zinc finger protein 610",0.000265005962634159,0.428216509871472
+"Q8N8J6","Zinc finger protein 615",0.000253964047524403,0.502892981758756
+"Q6ZNG0","Zinc finger protein 620",0.000253964047524403,0.353517954153968
+"Q8N3J9","Zinc finger protein 664 (Zinc finger protein 176) (Zinc finger protein from organ of Corti)",0,0.672607216995716
+"Q96K58","Zinc finger protein 668",0.000397508943951239,0.729528289386511
+"Q5SXM1","Zinc finger protein 678",0.000397508943951239,0.729528289386511
+"Q9H7S9","Zinc finger protein 703 (Zinc finger elbow-related proline domain protein 1)",0.000397508943951239,0.729528289386511
+"A6NP11","Zinc finger protein 716",0.000397508943951239,0.729528289386511
+"A8MUV8","Putative zinc finger protein 727 (Zinc finger protein 727 pseudogene)",0,0.68104324013957
+"B4DX44","Zinc finger protein 736",0,0.647696656508105
+"Q32MQ0","Zinc finger protein 750",0,0.647696656508105
+"Q96H86","Zinc finger protein 764",0,0.647696656508105
+"Q3KQV3","Zinc finger protein 792",0,0.687193586855704
