@@ -1,0 +1,57 @@
+//General configuration
+version=2
+allProteome=false
+maxNumVertices=45000
+showIsolatedVertices=false
+
+//Database access
+host=bolt://localhost
+username=neo4j
+password=
+
+verboseConsole=true
+unitType=uniprot
+
+//Vertices
+onlyNeighborsInList=false
+onlyOrderedEdges=false
+showMissingProteins=false
+
+//Horizontal Edges
+// Complex neighbour
+cn=true
+// DefinedSet neighbour
+ds=false
+// OpenSet neighbour
+os=false
+// CandidateSet neighbour
+cs=false
+// input - output
+io=true
+// catalyst - input
+ci=true
+// catalyst - output
+co=true
+// regulator - input
+ri=true
+// regulator - output
+ro=true
+RR=false
+
+//Vertical edges
+Cp=false
+Sp=false
+CC=false
+SC=false
+CS=false
+SS=false
+Rp=false
+RC=false
+RS=false
+PR=false
+PP=false
+
+//Results
+outputGraphFileType=sif
+outputGraphFilePath=.
+outputFileName=PathwayGraph

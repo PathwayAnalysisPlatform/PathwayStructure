@@ -1,0 +1,68 @@
+\documentclass[tikz,class=minimal,border=0pt]{standalone}
+
+\usetikzlibrary{shapes,arrows}
+
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{amsmath}
+\usepackage{color}
+
+\usepackage{fontspec}
+\setmainfont{Arial}
+
+\definecolor{fillcolour}{HTML}{89d0F5}
+
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+\tikzstyle{element}=[shape = ellipse,
+                     draw = fillcolour!200,
+                     fill = fillcolour,
+                     node distance = 50,
+                     thick]
+\tikzstyle{elementb}=[shape = rectangle,
+                     draw = fillcolour!200,
+                     fill = fillcolour,
+                     node distance = 50,
+                     thick, rounded corners]
+\tikzstyle{thingy}=[shape = rectangle,
+                    draw = white,
+                    draw opacity = 0,
+                    fill = white,
+                    fill opacity = 0,
+                    text opacity = 1,
+                    node distance = 40]
+
+\begin{tikzpicture}[scale=1]
+  \node[elementb] (TLP)        {Top Level Pathway};
+
+  \node[elementb] (P12)    [below of=TLP]        {Pathway};
+  \node[thingy]  (T11)    [left of=P12]         {};
+  \node[elementb] (P11)    [left of=T11]         {Pathway};
+  \node[thingy]  (T12)    [right of=P12]        {$\cdots$};
+  \node[elementb] (P13)    [right of=T12]        {Pathway};
+
+  \node[elementb] (P22)    [below of=P12]        {Pathway};
+  \node[elementb] (P21)    [left of=P22]         {Pathway};
+
+  \node[elementb] (R32)    [below of=P22]        {Reaction};
+  \node[elementb] (R31)    [left of=R32]         {Reaction};
+  \node[thingy]  (T32)    [right of=R32]        {$\cdots$};
+  \node[elementb] (R33)    [right of=T32]        {Reaction};
+%  \node[thingy]  (T33)    [right of=R33]         {};
+%  \node[elementb] (R34)    [right of=T33]        {Reaction};
+  \node[elementb] (R34)    [right of=R33]        {Reaction};
+  \draw[thick,- triangle 45] (TLP) -- (P11);
+  \draw[thick,- triangle 45] (TLP) -- (P12);
+  \draw[thick,- triangle 45] (TLP) -- (P13);
+  \draw[thick,- triangle 45] (P12) -- (P21);
+  \draw[thick,- triangle 45] (P12) -- (P22);
+  \draw[thick,- triangle 45] (P22) -- (R31);
+  \draw[thick,- triangle 45] (P22) -- (R32);
+  \draw[thick,- triangle 45] (P22) -- (R33);
+  \draw[thick,- triangle 45] (P12) -- (R34);
+  \draw[thick,- triangle 45] (P13) -- (R34);
+\end{tikzpicture}
+
+\end{document}

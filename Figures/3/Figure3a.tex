@@ -1,0 +1,55 @@
+\documentclass[tikz,class=minimal,border=0pt]{standalone}
+
+\usetikzlibrary{shapes,arrows}
+
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{amsmath}
+\usepackage{color}
+
+\usepackage{fontspec}
+\setmainfont{Arial}
+
+\definecolor{fillcolour}{HTML}{89d0F5}
+
+\setlength{\parindent}{0pt}
+
+\begin{document}
+\tikzstyle{elementb}=[shape = rectangle,
+                     draw = fillcolour!200,
+                     fill = fillcolour,
+                     node distance = 50,
+                     thick, rounded corners]
+\tikzstyle{thingy}=[shape = rectangle,
+                    draw = white,
+                    draw opacity = 0,
+                    fill = white,
+                    fill opacity = 0,
+                    text opacity = 1,
+                    node distance = 60]
+\tikzstyle{thingy2}=[shape = rectangle,
+                    draw = white,
+                    draw opacity = 0,
+                    fill = white,
+                    fill opacity = 0,
+                    text opacity = 1,
+                    node distance = 30]
+\begin{tikzpicture}[scale=1]
+  \node[thingy2]  (Middle)        {};
+  \node[elementb] (Reaction)    [left of=Middle]  {Reaction};
+  \node[elementb] (ProteinAin)  [above left of=Reaction]    {Protein A};
+  \node[elementb] (ProteinBin)  [below left of=Reaction]    {Protein B};
+  \node[elementb] (Complex)   [right of=Middle]   {Complex};
+  \node[elementb] (ProteinAout)  [above right of=Complex]    {Protein A};
+  \node[elementb] (ProteinBout)  [below right of=Complex]    {Protein B};
+  % \node[thingy] (Input)     [above of=Reaction] {Input};
+  % \node[thingy] (Output)    [above of=Complex]  {Output};
+  \draw[thick,- triangle 45] (Reaction) -- (Complex);
+  \draw[thick,- triangle 45] (ProteinAin) -- (Reaction);
+  \draw[thick,- triangle 45] (ProteinBin) -- (Reaction);
+  \draw[thick,-] (Complex) -- (ProteinAout);
+  \draw[thick,-] (Complex) -- (ProteinBout);
+\end{tikzpicture}
+
+\end{document}
+

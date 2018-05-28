@@ -1,0 +1,28 @@
+\documentclass{article}
+
+\usepackage[paperwidth=174mm, paperheight=82mm, margin=0cm]{geometry}
+\usepackage{graphicx}
+\usepackage[export]{adjustbox}
+\usepackage{array}
+
+% \renewcommand{\familydefault}{\sfdefault}
+\usepackage{fontspec}
+\setmainfont{Arial}
+\setlength\parindent{0pt}
+
+\begin{document}
+
+\begin{tabular}{m{0.32\textwidth} m{0.32\textwidth} m{0.32\textwidth}}
+  \large{A} &\large{B} &\large{C} \\
+  \includegraphics[width=0.22\textwidth]{1934TEXT.pdf}
+   &\includegraphics[clip, trim=3cm 19cm 3cm 0cm, width=0.26\textwidth]{1960NoLabel.pdf}
+   &\includegraphics[clip, trim=2cm 19cm 2cm 0cm, width=0.29\textwidth]{1970NoLabel.pdf}\\
+  \scriptsize{1934 (2 nodes, 2 edges)}&\scriptsize{1960 (15 nodes, 19 edges)}&\scriptsize{1970 (154 nodes, 2417 edges)}\\\\
+  \large{D} &\large{E} &\large{F}\\
+  \includegraphics[clip, trim=4cm 19cm 4cm 0cm, width=0.27\textwidth]{1985NoLabel.pdf}
+   & \includegraphics[clip, trim=2cm 19cm 2cm 0cm, width=0.26\textwidth]{2000NoLabel.pdf}
+   & \includegraphics[clip, trim=3.5cm 19cm 3.5cm 0cm, width=0.29\textwidth]{2017NoLabel.pdf}\\
+ \scriptsize{1985 (1041 nodes, 90 751 edges)}&\scriptsize{2000 (5621 nodes, 714 018 edges)}&\scriptsize{2017 (7548 nodes, 1 018 612 edges)}\\
+\end{tabular}
+
+\end{document}

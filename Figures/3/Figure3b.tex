@@ -1,0 +1,45 @@
+\documentclass[tikz,class=minimal,border=0pt]{standalone}
+
+\usetikzlibrary{shapes,arrows}
+
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{amsmath}
+\usepackage{color}
+
+\usepackage{fontspec}
+\setmainfont{Arial}
+
+\definecolor{fillcolour}{HTML}{89d0F5}
+
+\begin{document}
+\tikzstyle{elementb}=[shape = rectangle,
+                     draw = fillcolour!200,
+                     fill = fillcolour,
+                     node distance = 50,
+                     thick, rounded corners]
+\tikzstyle{thingy}=[shape = rectangle,
+                    draw = white,
+                    draw opacity = 0,
+                    fill = white,
+                    fill opacity = 0,
+                    text opacity = 1,
+                    node distance = 20]
+\tikzstyle{thingy1}=[shape = rectangle,
+                    draw = white,
+                    draw opacity = 0,
+                    fill = white,
+                    fill opacity = 0,
+                    text opacity = 1,
+                    node distance = -15]
+\begin{tikzpicture}[scale=1]
+  \node          (Middle)                             {};
+  \node          (TopMiddle)    [above of=Middle]     {};
+  \node          (BottomMiddle) [below of=Middle]     {};
+  \node[elementb] (ProteinA)  [left of=Middle]       {Protein A};
+  \node[elementb] (ProteinB) [right of=Middle]      {Protein B};
+  \draw[thick,- triangle 45] (ProteinA) .. controls (TopMiddle) .. (ProteinB);
+  \draw[thick,- triangle 45] (ProteinB) .. controls (BottomMiddle) .. (ProteinA);
+\end{tikzpicture}
+
+\end{document}
