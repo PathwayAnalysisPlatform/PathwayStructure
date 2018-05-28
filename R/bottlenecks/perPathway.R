@@ -10,7 +10,7 @@ topNbetweenness <- function (n) {
 }
 
 topNbetweenness(20)$Protein
-
+topNbetweenness(20)
 
 swisstonames <- read.table("../../resources/swissprot/swissHumanMapping20170823.tab",
                            stringsAsFactors=FALSE, header=TRUE, sep="\t",
@@ -18,6 +18,16 @@ swisstonames <- read.table("../../resources/swissprot/swissHumanMapping20170823.
 colnames(swisstonames)
 
 swisstonames[swisstonames$Entry %in% topNbetweenness(20)$Protein,
+             "Protein.names"]
+
+## size of largest component in 2017 is 7196
+plot(sort(centralities$Betweenness)/(7195*7194))
+plot(sort(centralities$Betweenness)/(7195*7194), log='y')
+sum(centralities$Betweenness/(7195*7194) > 0.01)
+swisstonames[which(centralities$Betweenness/(7195*7194) > 0.01),
+             "Protein.names"]
+which(centralities$Betweenness/(7195*7194) > 0.05)
+swisstonames[which(centralities$Betweenness/(7195*7194) > 0.05),
              "Protein.names"]
 
 
