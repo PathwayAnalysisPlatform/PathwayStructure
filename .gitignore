@@ -32,7 +32,6 @@ vignettes/*.pdf
 # Temporary files created by R markdown
 *.utf8.md
 *.knit.md
-/Java/PathwayQuery/target/
 
 ## Java
 
@@ -49,17 +48,25 @@ vignettes/*.pdf
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 /target/
-Java/PathwayQuery/*.sif
-*.txt
 
 #cytoscape
 *.json
 *.cys
 .idea/
 
-*.csv
-*.xml
-wikipathways/
 
 ## emacs
 *~
+
+
+/Java/PathwayQuery/target/
+wikipathways/
+Java/**/*.sif
+Java/**/*.txt
+Java/**/*.csv
+Java/**/*.xml
+Java/**/*.pdf
+Java/**/*.ps
+Java/**/*.svg
+Java/**/*.png
+Java/**/*.mf
