@@ -76,6 +76,7 @@ hs_err_pid*
 ./auto/*
 *.el
 
+/resources/centralities/*.csv
 
 /Java/PathwayQuery/target/
 wikipathways/
