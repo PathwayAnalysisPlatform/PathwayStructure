@@ -1,7 +1,7 @@
 library("ggplot2")
 library("gridExtra")
 
-path <- "../../resources/centralities/"
+path <- "../../../../../../PathwayProjectQueries/Java/PathwayQuery/"
 
 theplots <-
     lapply(c(1985, 2017), function (year) {
@@ -28,15 +28,19 @@ theplots <-
             scale_y_continuous(limits = c(0,1), name = "Radiality") +
             annotate("text", label=year,
                      x=0.125, y=1,
-                     fontface="bold")
+                     fontface="bold") +
+            theme_set(theme_bw(base_size = 11))
     })
 
 grid.arrange(theplots[[1]], theplots[[2]], ncol=2)
 
+ggsave("Figure6.pdf",
+       plot = grid.arrange(theplots[[1]], theplots[[2]], ncol=2),
+       height=4, width=8, units="in")
 
-ggsave("Figure6a.pdf",
+ggsave("Figure6aM.pdf",
        plot = theplots[[1]],
        height=8.5, width=8.5, units="cm")
-ggsave("Figure6b.pdf",
+ggsave("Figure6bM.pdf",
        plot = theplots[[2]],
        height=8.5, width=8.5, units="cm")

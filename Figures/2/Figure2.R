@@ -39,6 +39,7 @@ df2 <- data.frame(proteins = nprotPerYear, edges = nedgesPerYear)
 offset <- 500
 fig2 <-
     ggplot(df2, aes(proteins, edges)) +
+    theme_bw() +
     geom_point(col=rgb(137, 208, 245, maxColorValue=250)) +
     geom_line(col=rgb(137, 208, 245, maxColorValue=250)) +
     scale_x_continuous(name = "# Proteins",
@@ -80,6 +81,7 @@ df3 <- data.frame(year = 1934:2017,
                  degree = nedgesPerYear / nprotPerYear)
 fig3 <-
     ggplot(df3, aes(year, degree)) +
+    theme_bw() +
     geom_point(col=rgb(137, 208, 245, maxColorValue=250)) +
     geom_line(col=rgb(137, 208, 245, maxColorValue=250)) +
     scale_y_continuous(name = "# Interactions / # Proteins") +

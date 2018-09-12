@@ -32,6 +32,7 @@ df <- data.frame(nrPathways = tlpathperprot,
                   protein = tlpathperprotID)
 
 fig4b <- ggplot(df, aes(nrPathways)) +
+    theme_bw() +
     geom_bar(fill=rgb(137, 208, 245, maxColorValue=250),
              col=rgb(137/2, 208/2, 245/2, maxColorValue=250)) +
     coord_flip() +
